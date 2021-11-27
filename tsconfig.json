@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "types": [
+      "@wdio/cucumber-framework",
+      "@wdio/selenium-standalone-service",
+      "@wdio/browserstack-service",
+      "expect-webdriverio",
+      "webdriverio/async",
+      "node",
+    ],
+    "target": "ES5"
+  }
+}

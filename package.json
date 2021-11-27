@@ -10,12 +10,24 @@
     "release:first": "standard-version --first-release",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
-    "release:major": "standard-version --release-as major"
+    "release:major": "standard-version --release-as major",
+    "wdio": "wdio run wdio.conf.ts"
   },
   "keywords": [],
   "author": "iamkenos",
   "license": "ISC",
+  "dependencies": {
+    "@wdio/allure-reporter": "^7.16.10",
+    "@wdio/browserstack-service": "^7.16.10",
+    "@wdio/cucumber-framework": "^7.16.6",
+    "@wdio/junit-reporter": "^7.16.6",
+    "@wdio/local-runner": "^7.16.10",
+    "@wdio/selenium-standalone-service": "^7.16.6",
+    "@wdio/spec-reporter": "^7.16.9",
+    "wdio-image-comparison-service": "^3.0.0"
+  },
   "devDependencies": {
+    "@wdio/cli": "^7.16.10",
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
     "husky": "^7.0.0",
