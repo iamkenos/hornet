@@ -6,6 +6,9 @@ import type { Response } from "@core/commands/browser/sendRequest";
 declare global {
   namespace WebdriverIO {
     interface Browser {
+      config: Config & {
+        locale: string;
+      }
       assertArrayContains: (actual: any[], expected: any[], preferred: boolean) => Promise<void>;
       assertArrayEquals: (actual: any[], expected: any[], preferred: boolean) => Promise<void>;
       assertCookieContains: (cookie: string, expected: string, preferred: boolean) => Promise<void>;
