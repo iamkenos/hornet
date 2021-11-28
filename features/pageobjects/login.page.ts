@@ -26,7 +26,6 @@ class LoginPage extends Page {
      * e.g. to login using username and password
      */
     public async login (username: string, password: string): Promise<void> {
-        console.log(await browser.getLocalStorageItem("asdf"), "----------------------")
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.btnSubmit.click();

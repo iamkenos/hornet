@@ -232,9 +232,11 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {Object}         browser      instance of created browser/device session
    */
-  before: function (capabilities, specs) {
+  before: async function (capabilities, specs) {
     browser.addCommand("setLocalStorageItem", require("./src/core/commands/browser/setSessionStorageItem").default);
     browser.addCommand("getLocalStorageItem", require("./src/core/commands/browser/getSessionStorageItem").default);
+    browser.addCommand("focus", require("./src/core/commands/element/focus").default, true);
+    browser.addCommand("sendKeys", require("./src/core/commands/element/sendKeys").default, true);
   }
   /**
    * Runs before a WebdriverIO command gets executed.

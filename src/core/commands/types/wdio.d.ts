@@ -3,12 +3,16 @@ import type { OptionsOfTextResponseBody } from "got";
 import type { CustomConditionFunction } from "@core/conditions/types";
 import type { Response } from "@core/commands/browser/sendRequest";
 
+interface CustomConfig {
+  locale: string;
+}
+
 declare global {
   namespace WebdriverIO {
+    interface Config extends Partial<CustomConfig> {}
+
     interface Browser {
-      config: Config & {
-        locale: string;
-      }
+      config: Config & CustomConfig;
       assertArrayContains: (actual: any[], expected: any[], preferred: boolean) => Promise<void>;
       assertArrayEquals: (actual: any[], expected: any[], preferred: boolean) => Promise<void>;
       assertCookieContains: (cookie: string, expected: string, preferred: boolean) => Promise<void>;
@@ -42,6 +46,12 @@ declare global {
       setSessionStorageItem: (key: string, value: string) => Promise<void>;
       switchToLastWindow: () => Promise<void>;
       switchToParentWindow: () => Promise<void>;
+    }
+
+    interface Element {
+      focus: () => Promise<void>;
+      customCommand: () => Promise<void>;
+      sendKeys: (keys: string | string[]) => Promise<void>;
     }
   }
 }
