@@ -1,3 +1,5 @@
+import path from "path";
+
 export const config: WebdriverIO.Config = {
   //
   // ====================
@@ -55,12 +57,12 @@ export const config: WebdriverIO.Config = {
       maxInstances: 5,
       //
       browserName: "chrome",
-      acceptInsecureCerts: true,
+      acceptInsecureCerts: true
       // If outputDir is provided WebdriverIO can capture driver session logs
       // it is possible to configure which logTypes to include/exclude.
       // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
       // excludeDriverLogs: ['bugreport', 'server'],
-    },
+    }
   ],
   //
   // ===================
@@ -69,7 +71,7 @@ export const config: WebdriverIO.Config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "info",
+  logLevel: "error",
   //
   // Set specific log levels per logger
   // loggers:
@@ -114,10 +116,10 @@ export const config: WebdriverIO.Config = {
       "selenium-standalone",
       {
         installArgs: { drivers: { chrome: { version: "latest" } } },
-        args: { drivers: { chrome: { version: "latest" } } },
-      },
+        args: { drivers: { chrome: { version: "latest" } } }
+      }
     ],
-    "image-comparison",
+    "image-comparison"
   ],
 
   // Framework you want to run your specs with.
@@ -140,7 +142,19 @@ export const config: WebdriverIO.Config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec", "junit", ["allure", { outputDir: "allure-results" }]],
+  reporters: [
+    "spec",
+    ["junit", { outputDir: path.join(__dirname, ".reports", "junit") }],
+    [
+      "allure",
+      {
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+        useCucumberStepReporter: true,
+        outputDir: path.join(__dirname, ".reports", "allure")
+      }
+    ]
+  ],
 
   //
   // If you are using Cucumber you need to specify the location of your step definitions.
@@ -172,7 +186,7 @@ export const config: WebdriverIO.Config = {
     // <boolean> Enable this config to treat undefined definitions as warnings.
     ignoreUndefinedDefinitions: false,
     // <number> Specify the number of times to retry failing test cases.
-    retry: 0,
+    retry: 0
   },
 
   //
@@ -218,8 +232,10 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {Object}         browser      instance of created browser/device session
    */
-  // before: function (capabilities, specs) {
-  // },
+  before: function (capabilities, specs) {
+    browser.addCommand("setLocalStorageItem", require("./src/core/commands/browser/setSessionStorageItem").default);
+    browser.addCommand("getLocalStorageItem", require("./src/core/commands/browser/getSessionStorageItem").default);
+  }
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {String} commandName hook command name

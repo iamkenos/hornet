@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "esModuleInterop": true,
     "types": [
       "@wdio/cucumber-framework",
       "@wdio/selenium-standalone-service",
       "@wdio/browserstack-service",
       "expect-webdriverio",
       "webdriverio/async",
-      "node",
+      "node"
     ],
+    "paths": { "@core/*": ["src/core/*"] },
     "target": "ES5"
-  }
+  },
+  "include": ["./**/**.ts"]
 }
