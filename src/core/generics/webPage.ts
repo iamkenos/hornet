@@ -1,5 +1,5 @@
 import { getMetaProperties } from "@core/utils";
-import { PageMetaData, Intersect } from "./types";
+import type { PageMetaData, Intersect } from "./types";
 
 export abstract class WebPage<T extends PageMetaData> {
   protected properties: Intersect<T[keyof T]> & T[keyof T];
@@ -10,14 +10,14 @@ export abstract class WebPage<T extends PageMetaData> {
 
   protected labels: Intersect<T[keyof T]["labels"]>;
 
-  protected locators: Intersect<T[keyof T]["locators"]>;
+  protected selectors: Intersect<T[keyof T]["selectors"]>;
 
   public constructor(meta: T, locale?: string) {
     this.properties = getMetaProperties(meta, locale);
     this.url = this.properties.url || "";
     this.title = this.properties.title || "";
     this.labels = this.properties.labels as any;
-    this.locators = this.properties.locators as any;
+    this.selectors = this.properties.selectors as any;
   }
 
   public async navigate() {
@@ -33,10 +33,14 @@ export abstract class WebPage<T extends PageMetaData> {
   }
 
   public async assertTitle(preferred?: boolean) {
-    await driver.assertTitleEquals(this.title, preferred);
+    preferred
+      ? expect(browser).browserTitleToBeEqual(this.title)
+      : expect(browser).not.browserTitleToBeEqual(this.title);
   }
 
   public async assertUrl(preferred?: boolean) {
-    await driver.assertUrlEquals(this.url, preferred);
+    preferred
+      ? expect(browser).browserUrlToBeEqual(this.url)
+      : expect(browser).not.browserUrlToBeEqual(this.url);
   }
 }
