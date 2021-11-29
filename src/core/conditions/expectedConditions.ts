@@ -1,3 +1,4 @@
+import type { Selector } from "webdriverio";
 import type { ExpectedCondition } from "./types";
 import { ExpectedConditionsError } from "./expectedConditionsError";
 import { ExpectedConditionsResult } from "./expectedConditionsResult";
@@ -5,17 +6,20 @@ import { ExpectedConditionsResult } from "./expectedConditionsResult";
 export class ExpectedConditions {
   private readonly name: string;
 
+  private readonly selector?: string | Selector;
+
   private readonly result: ExpectedConditionsResult;
 
   private readonly conditions: ExpectedCondition[];
 
   private timeout: number;
 
-  public constructor(name?: string, selector?: string) {
+  public constructor(selector?: string | Selector, name?: string) {
     this.name = name || this.constructor.name;
-    this.result = new ExpectedConditionsResult(selector);
+    this.selector = selector;
     this.conditions = [];
     this.timeout = browser.config.waitforTimeout;
+    this.result = new ExpectedConditionsResult(this.name, this.timeout, this.selector);
   }
 
   public addCondition(condition: ExpectedCondition) {
@@ -25,6 +29,7 @@ export class ExpectedConditions {
 
   public setTimeout(ms: number) {
     this.timeout = ms;
+    this.result.setTimeout(ms);
     return this;
   }
 
@@ -41,7 +46,7 @@ export class ExpectedConditions {
       await browser.waitUntil(
         async () => {
           for (let i = 0; i < this.conditions.length; i++) {
-            this.result.addResult(await this.conditions[i].evaluate());
+            this.result.addResult(await this.conditions[i].evaluate(this.selector));
           }
           return this.result.isSuccess();
         },
@@ -52,7 +57,7 @@ export class ExpectedConditions {
       );
       return this.result;
     } catch (e) {
-      throw new ExpectedConditionsError(this.result.getMessage(this.name, this.conditions, this.timeout, e));
+      throw new ExpectedConditionsError(this.result.getMessage(e));
     }
   }
 }

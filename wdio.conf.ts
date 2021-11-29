@@ -237,6 +237,7 @@ export const config: WebdriverIO.Config = {
     browser.addCommand("getLocalStorageItem", require("./src/core/commands/browser/getSessionStorageItem").default);
     browser.addCommand("focus", require("./src/core/commands/element/focus").default, true);
     browser.addCommand("sendKeys", require("./src/core/commands/element/sendKeys").default, true);
+    require('./src/core/matchers').default.addCustomMatchers();
   }
   /**
    * Runs before a WebdriverIO command gets executed.
