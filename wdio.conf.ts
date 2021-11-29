@@ -1,4 +1,7 @@
+require("tsconfig-paths/register");
+
 import path from "path";
+import matchers from "@core/matchers";
 
 export const config: WebdriverIO.Config = {
   //
@@ -232,12 +235,13 @@ export const config: WebdriverIO.Config = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {Object}         browser      instance of created browser/device session
    */
-  before: async function (capabilities, specs) {
+  before: function (capabilities, specs) {
+    require("tsconfig-paths/register");
     browser.addCommand("setLocalStorageItem", require("./src/core/commands/browser/setSessionStorageItem").default);
     browser.addCommand("getLocalStorageItem", require("./src/core/commands/browser/getSessionStorageItem").default);
     browser.addCommand("focus", require("./src/core/commands/element/focus").default, true);
     browser.addCommand("sendKeys", require("./src/core/commands/element/sendKeys").default, true);
-    require('./src/core/matchers').default.addCustomMatchers();
+    matchers.addCustomMatchers();
   }
   /**
    * Runs before a WebdriverIO command gets executed.

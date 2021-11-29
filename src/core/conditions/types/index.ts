@@ -13,6 +13,6 @@ export type EvaluationResult = {
   message: string;
 };
 
-export type CustomConditionFunction = () => CustomConditionResult;
+export type CustomConditionFunction = () => Promise<CustomConditionResult>;
 
 export type CustomConditionResult = Pick<EvaluationResult, "actual" | "expected" | "isSuccess">

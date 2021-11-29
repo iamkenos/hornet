@@ -1,9 +1,6 @@
-export { ArrayContains } from "./arrayContains";
-export { ArrayEquals } from "./arrayEquals";
 export { CookieContains } from "./cookieContains";
 export { CookieEquals } from "./cookieEquals";
 export { CookieExists } from "./cookieExists";
-export { CustomCondition } from "./customCondition";
 export { DocumentReady } from "./documentReady";
 export { ModalExists } from "./modalExists";
 export { ModalTextContains } from "./modalTextContains";

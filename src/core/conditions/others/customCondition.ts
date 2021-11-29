@@ -20,7 +20,7 @@ export class CustomCondition implements ExpectedCondition {
     let expected: string;
 
     try {
-      returned = this.condition();
+      returned = await this.condition();
       actual = returned.actual;
       expected = returned.expected;
       result = this.preferred ? returned.isSuccess : !returned.isSuccess;

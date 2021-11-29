@@ -14,7 +14,7 @@ export class ExpectedConditions {
 
   private timeout: number;
 
-  public constructor(selector?: string | Selector, name?: string) {
+  public constructor(name?: string, selector?: string | Selector) {
     this.name = name || this.constructor.name;
     this.selector = selector;
     this.conditions = [];
