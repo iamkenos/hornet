@@ -1,6 +1,6 @@
-import type { DragAndDropCoordinate } from "webdriverio";
+import type { Coordinates } from "@core/commands/types";
 
-export default async function (target: DragAndDropCoordinate, dragDuration = 500) {
+export default async function (target: Coordinates, dragDuration = 500) {
   await browser.performActions([
     {
       type: "pointer",

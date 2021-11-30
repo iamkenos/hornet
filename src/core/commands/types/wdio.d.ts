@@ -1,11 +1,4 @@
-import type { DragAndDropCoordinate } from "webdriverio";
-import type { OptionsOfTextResponseBody } from "got";
-import type { CustomConditionFunction } from "@core/conditions/types";
-import type { Response } from "@core/commands/browser/sendRequest";
-
-interface CustomConfig {
-  locale: string;
-}
+import type { HttpRequestOptions, HttpResponse, ClickPointerOrigin, Coordinates, CustomConfig } from "./";
 
 declare global {
   namespace WebdriverIO {
@@ -13,15 +6,17 @@ declare global {
 
     interface Browser {
       config: Config & CustomConfig;
-      clickCoordinates: (target: DragAndDropCoordinate, origin: "pointer" | "viewport" | WebdriverIO.Element) => Promise<void>;
+      clearLocalStorage: () => Promise<void>;
+      clearSessionStorage: () => Promise<void>;
+      clickCoordinates: (target: Coordinates, origin: ClickPointerOrigin) => Promise<void>;
       closeLastWindow: () => Promise<void>;
       closeOtherWindows: () => Promise<void>;
-      dragRelativeToPointer: (target: DragAndDropCoordinate, dragDuration: number) => Promise<void>;
+      dragRelativeToPointer: (target: Coordinates, dragDuration: number) => Promise<void>;
       getLocalStorageItem: (key: string) => Promise<string>;
       getSessionStorageItem: (key: string) => Promise<string>;
-      scrollTo: (target: DragAndDropCoordinate) => Promise<void>;
+      scrollTo: (target: Coordinates) => Promise<void>;
       scrollToBottom: () => Promise<void>;
-      sendRequest: (utl: string, options?: OptionsOfTextResponseBody) => Promise<Response>;
+      sendRequest: (utl: string, options?: HttpRequestOptions) => Promise<HttpResponse>;
       setCookie: (name: string, value: string) => Promise<void>;
       setLocalStorageItem: (key: string, value: string) => Promise<void>;
       setSessionStorageItem: (key: string, value: string) => Promise<void>;

@@ -1,6 +1,6 @@
-import type { DragAndDropCoordinate } from "webdriverio";
+import type { Coordinates, ClickPointerOrigin } from "@core/commands/types";
 
-export default async function (target: DragAndDropCoordinate, origin: "pointer" | "viewport" | WebdriverIO.Element = "pointer") {
+export default async function (target: Coordinates, origin: ClickPointerOrigin = "pointer") {
   const { x, y } = target;
   await browser.performActions([
     {

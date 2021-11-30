@@ -1,19 +1,13 @@
-import got, { OptionsOfTextResponseBody, Response as R } from "got";
+import got from "got";
+import type { HttpRequestOptions, HttpResponse }  from "@core/commands/types";
 
-export type Response = R<string> & {
-  /** The time in ms taken to get the response */
-  time: number;
-  /** The request object */
-  request: R["request"] & { body?: any };
-};
-
-export default async function (url: string, options?: OptionsOfTextResponseBody, delay?: { pre: number; post: number }) {
+export default async function (url: string, options?: HttpRequestOptions, delay?: { pre: number; post: number }) {
   const opts = { throwHttpErrors: false, ...options };
-  let response: Response;
+  let response: HttpResponse;
 
   await new Promise((resolve) => setTimeout(resolve, delay.pre));
   const start = process.hrtime.bigint();
-  response = (await got(url, opts)) as any;
+  response = await got(url, opts) as HttpResponse;
   response.time = Number(process.hrtime.bigint() - start) / 1000000;
   response.request.body = options?.body;
   await new Promise((resolve) => setTimeout(resolve, delay.post));
