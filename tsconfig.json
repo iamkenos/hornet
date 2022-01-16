@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "esModuleInterop": true,
+    "downlevelIteration": true,
     "types": [
       "@wdio/cucumber-framework",
       "@wdio/selenium-standalone-service",
@@ -10,7 +11,7 @@
       "webdriverio/async",
       "node"
     ],
-    "paths": { "@core": ["src/core/"], "@core/*": ["src/core/*"] },
+    "paths": { "@hornet": ["src/"], "@core": ["src/core/"], "@core/*": ["src/core/*"] },
     "target": "ES5"
   },
   "include": ["./**/**.ts"]

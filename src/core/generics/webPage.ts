@@ -1,5 +1,6 @@
-import { getMetaProperties } from "@core/utils";
-import type { PageMetaData, Intersect } from "./types";
+import { Intersect } from "@core/common";
+import { getDataByLocale } from "@core/generics";
+import type { PageMetaData } from "./types";
 
 export abstract class WebPage<T extends PageMetaData> {
   protected properties: Intersect<T[keyof T]> & T[keyof T];
@@ -13,7 +14,7 @@ export abstract class WebPage<T extends PageMetaData> {
   protected selectors: Intersect<T[keyof T]["selectors"]>;
 
   public constructor(meta: T, locale?: string) {
-    this.properties = getMetaProperties(meta, locale);
+    this.properties = getDataByLocale(meta, locale);
     this.url = this.properties.url || "";
     this.title = this.properties.title || "";
     this.labels = this.properties.labels as any;

@@ -5,7 +5,7 @@ export class CookieEquals extends ExpectedCondition {
 
   public constructor(cookie: string, expected: string, preferred?: boolean) {
     super(preferred);
-    this.expected = expected;
+    this.expected = expected || "";
     this.cookie = cookie;
     this.messageHeader = `Cookie: ${this.cookie}`;
   }

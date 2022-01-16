@@ -57,7 +57,7 @@ export class ExpectedConditions {
     try {
       await browser.waitUntil(
         async () => {
-          this.action !== undefined && await this.action();
+          this.action !== undefined && (await this.action());
           for (let i = 0; i < this.conditions.length; i++) {
             this.result.addResult(await this.conditions[i].evaluate());
           }

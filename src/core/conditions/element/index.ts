@@ -1,5 +1,17 @@
+export { AttributeContains } from "./attributeContains";
+export { AttributeEquals } from "./attributeEquals";
+export { AttributeExists } from "./attributeExists";
+export { AxisLocationEquals } from "./axisLocationEquals";
+export { CountEquals } from "./countEquals";
+export { CountMoreThan } from "./countMoreThan";
+export { CountLessThan } from "./countLessThan";
+export { CssPropertyExists } from "./cssPropertyExists";
+export { Displayed } from "./displayed";
+export { DisplayedInViewport } from "./displayedInViewport";
+export { Enabled } from "./enabled";
 export { Existing } from "./existing";
 export { Focused } from "./focused";
+export { Selected } from "./selected";
 export { TextContains } from "./textContains";
 export { TextEquals } from "./textEquals";
 export { ValueContains } from "./valueContains";

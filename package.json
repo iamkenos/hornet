@@ -4,34 +4,45 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo 'Error: no test specified'",
     "prepare": "husky install",
     "release": "standard-version",
     "release:first": "standard-version --first-release",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
-    "wdio": "wdio run wdio.conf.ts"
+    "serve:demo": "http-server ./demo/app -s",
+    "test:demo": "start-test serve:demo 8080 wdio:demo",
+    "wdio:demo": "wdio run ./demo/test/wdio.conf.ts",
+    "wdio:samples": "wdio run ./samples/wdio.conf.ts",
+    "report:demo": "allure open ./demo/test/.reports/allure/report",
+    "report:samples": "allure open ./samples/.reports/allure/report"
   },
   "keywords": [],
   "author": "iamkenos",
   "license": "ISC",
   "dependencies": {
+    "@types/luxon": "^1.27.0",
     "@wdio/allure-reporter": "^7.16.13",
     "@wdio/browserstack-service": "^7.16.13",
+    "@wdio/cli": "^7.16.13",
     "@wdio/cucumber-framework": "^7.16.13",
     "@wdio/junit-reporter": "^7.16.13",
     "@wdio/local-runner": "^7.16.13",
     "@wdio/selenium-standalone-service": "^7.16.13",
     "@wdio/spec-reporter": "^7.16.13",
+    "allure-commandline": "^2.17.2",
+    "fs-extra": "^10.0.0",
+    "luxon": "^1.27.0",
     "tsconfig-paths": "^3.12.0",
     "wdio-image-comparison-service": "^3.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.0.2",
     "@commitlint/config-conventional": "^16.0.0",
-    "@wdio/cli": "^7.16.13",
+    "@types/glob": "^7.2.0",
+    "http-server": "^14.1.0",
     "husky": "^7.0.4",
-    "standard-version": "^9.3.2"
+    "standard-version": "^9.3.2",
+    "start-server-and-test": "^1.14.0"
   }
 }

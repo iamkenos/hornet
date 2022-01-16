@@ -6,4 +6,4 @@ export { focus } from "./focus";
 export { moveIntoView } from "./moveIntoView";
 export { sendKeys } from "./sendKeys";
 export { setAttribute } from "./setAttribute";
-export {} from "./";
+export { uploadFile } from "./uploadFile";

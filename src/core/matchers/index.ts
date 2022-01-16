@@ -26,10 +26,21 @@ export default {
     expect.extend({ browserWindowCountToBeMoreThan: b.browserWindowCountToBeMoreThan });
   },
   addElementMatchers: () => {
+    expect.extend({ elementAttributeToBeContaining: e.elementAttributeToBeContaining });
+    expect.extend({ elementAttributeToBeEqual: e.elementAttributeToBeEqual });
+    expect.extend({ elementAttributeToBeExisting: e.elementAttributeToBeExisting });
+    expect.extend({ elementAxisLocationToBeEqual: e.elementAxisLocationToBeEqual });
+    expect.extend({ elementCountToBeMoreThan: e.elementCountToBeMoreThan });
+    expect.extend({ elementCountToBeLessThan: e.elementCountToBeLessThan });
+    expect.extend({ elementCssPropertyToBeExisting: e.elementCssPropertyToBeExisting });
     expect.extend({ elementTextToBeContaining: e.elementTextToBeContaining });
     expect.extend({ elementTextToBeEqual: e.elementTextToBeEqual });
+    expect.extend({ elementToBeDisplayed: e.elementToBeDisplayed });
+    expect.extend({ elementToBeDisplayedInViewport: e.elementToBeDisplayedInViewport });
+    expect.extend({ elementToBeEnabled: e.elementToBeEnabled });
     expect.extend({ elementToBeExisting: e.elementToBeExisting });
     expect.extend({ elementToBeFocused: e.elementToBeFocused });
+    expect.extend({ elementToBeSelected: e.elementToBeSelected });
     expect.extend({ elementValueToBeContaining: e.elementValueToBeContaining });
     expect.extend({ elementValueToBeEqual: e.elementValueToBeEqual });
   },

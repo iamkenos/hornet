@@ -1,3 +1,4 @@
+import { Axis } from "@core/commands";
 declare global {
   
   namespace ExpectWebdriverIO {
@@ -19,15 +20,27 @@ declare global {
       browserWindowCountToBeLessThan(expected: number): R;
       browserWindowCountToBeMoreThan(expected: number): R;
 
+      elementAttributeToBeContaining(attribute: string, expected: string): R;
+      elementAttributeToBeEqual(attribute: string, expected: string): R;
+      elementAttributeToBeExisting(attribute: string): R;
+      elementAxisLocationToBeEqual(axis: Axis, expected: number): R;
+      elementCountToBeEqual(expected: number): R;
+      elementCountToBeLessThan(expected: number): R;
+      elementCountToBeMoreThan(expected: number): R;
+      elementCssPropertyToBeExisting(cssProperty: string): R;
       elementTextToBeContaining(expected: string): R;
       elementTextToBeEqual(expected: string): R;
+      elementToBeDisplayed(): R;
+      elementToBeDisplayedInViewport(): R;
+      elementToBeEnabled(): R;
       elementToBeExisting(): R;
       elementToBeFocused(): R;
+      elementToBeSelected(): R;
       elementValueToBeContaining(expected: string): R;
       elementValueToBeEqual(expected: string): R;
 
-      arrayToBeContaining(): R;
-      arrayToBeEquals(): R;
+      arrayToBeContaining(expected: any[]): R;
+      arrayToBeEquals(expected: any[]): R;
       customConditionToBeTrue(): R;
     }
   }

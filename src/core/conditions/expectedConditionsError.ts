@@ -1,6 +1,6 @@
 export class ExpectedConditionsError extends Error {
-  constructor(key: string) {
-    super(key);
+  constructor(message: string) {
+    super(message);
     this.name = this.constructor.name;
   }
 }

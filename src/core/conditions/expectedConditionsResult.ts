@@ -34,8 +34,7 @@ export class ExpectedConditionsResult {
     const success = results.filter((result) => result.passed === true).length;
     const total = this.results.size;
 
-    return `
-  Expected conditions not met after waiting for ${this.timeout}ms
+    return `Expected conditions not met after waiting for ${this.timeout}ms
   Expression: ${this.name}
   ${this.selector ? "Selector: " + this.selector : "Session: " + browser.sessionId}
   Conditions Summary: ${success}/${total}

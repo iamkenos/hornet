@@ -33,5 +33,6 @@ export default {
     browser.addCommand(e.executeAsync.name, e.executeAsync, true);
     browser.addCommand(e.sendKeys.name, e.sendKeys, true);
     browser.addCommand(e.setAttribute.name, e.setAttribute, true);
+    browser.addCommand(e.uploadFile.name, e.uploadFile, true);
   }
 };

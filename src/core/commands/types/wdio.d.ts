@@ -1,21 +1,21 @@
 import type { MoveToOptions } from "webdriverio";
-import type { Config as Custom } from "@core/config";
+import type { CustomConfig } from "@core/config";
 import type { ExpectedConditions } from "@core/conditions";
+import type { KVP } from "@core/common";
 import type {
   HttpRequestOptions,
   HttpResponse,
   ClickWith,
   ClickPointerOrigin,
   Coordinates,
-  KVP
 } from "./";
 
 declare global {
   namespace WebdriverIO {
-    interface Config extends Partial<Custom> {}
+    interface Config extends Partial<CustomConfig> {}
 
     interface Browser {
-      config: Config & Custom;
+      config: Config & CustomConfig;
       clearLocalStorage: () => Promise<void>;
       clearSessionStorage: () => Promise<void>;
       clickCoordinates: (target: Coordinates, origin: ClickPointerOrigin) => Promise<void>;
@@ -26,7 +26,8 @@ declare global {
       getSessionStorageItem: (key: string) => Promise<string>;
       scrollTo: (target: Coordinates) => Promise<void>;
       scrollToBottom: () => Promise<void>;
-      sendRequest: (utl: string, options?: HttpRequestOptions) => Promise<HttpResponse>;
+      scrollToTop: () => Promise<void>;
+      sendRequest: (url: string, options?: HttpRequestOptions) => Promise<HttpResponse>;
       setCookie: (name: string, value: string) => Promise<void>;
       setLocalStorageItem: (kvp: KVP) => Promise<void>;
       setSessionStorageItem: (kvp: KVP) => Promise<void>;
@@ -41,9 +42,10 @@ declare global {
       executeAsync: (name: string) => Promise<void>;
       focus: () => Promise<void>;
       getProperty: <T = string>(key: string) => Promise<T>; // type override
-      moveIntoView: (options: MoveToOptions) => Promise<void>;
+      moveIntoView: (options?: MoveToOptions) => Promise<void>;
       sendKeys: (keys: string | string[]) => Promise<void>;
       setAttribute: (kvp: KVP) => Promise<void>;
+      uploadFile: (filepath: string) => Promise<void>;
     }
   }
 }
