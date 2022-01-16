@@ -1,4 +1,4 @@
-export default async function () {
+export async function closeOtherWindows() {
   let handles = await browser.getWindowHandles();
   const parent = handles[0];
 

@@ -34,13 +34,13 @@ export abstract class WebPage<T extends PageMetaData> {
 
   public async assertTitle(preferred?: boolean) {
     preferred
-      ? expect(browser).browserTitleToBeEqual(this.title)
-      : expect(browser).not.browserTitleToBeEqual(this.title);
+      ? await expect(browser.getTitle()).toEqual(this.title)
+      : await expect(browser).not.browserTitleToBeEqual(this.title);
   }
 
   public async assertUrl(preferred?: boolean) {
     preferred
-      ? expect(browser).browserUrlToBeEqual(this.url)
-      : expect(browser).not.browserUrlToBeEqual(this.url);
+      ? await expect(browser).browserUrlToBeEqual(this.url)
+      : await expect(browser).not.browserUrlToBeEqual(this.url);
   }
 }

@@ -21,4 +21,8 @@ export type ComponentMetaData = {
   [locale: string]: ComponentProperties;
 };
 
+export type DeepPartial<T extends any> = {
+  [P in keyof T]?: DeepPartial<T[P]>;
+};
+
 export type Intersect<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never;

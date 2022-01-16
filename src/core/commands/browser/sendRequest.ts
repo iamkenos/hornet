@@ -1,7 +1,7 @@
 import got from "got";
-import type { HttpRequestOptions, HttpResponse }  from "@core/commands/types";
+import type { HttpRequestOptions, HttpResponse }  from "@core/commands";
 
-export default async function (url: string, options?: HttpRequestOptions, delay?: { pre: number; post: number }) {
+export async function sendRequest(url: string, options?: HttpRequestOptions, delay?: { pre: number; post: number }) {
   const opts = { throwHttpErrors: false, ...options };
   let response: HttpResponse;
 

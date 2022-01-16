@@ -1,12 +1,13 @@
 declare global {
+  
   namespace ExpectWebdriverIO {
     interface Matchers<R, T> {
+      browserAlertTextToBeContaining(expected: string): R;
+      browserAlertTextToBeEqual(expected: string): R;
+      browserAlertToBeExisting(): R;
       browserCookieToBeContaining(cookie: string, expected: string): R;
       browserCookieToBeEqual(cookie: string, expected: string): R;
       browserCookieToBeExisting(cookie: string): R;
-      browserModalTextToBeContaining(expected: string): R;
-      browserModalTextToBeEqual(expected: string): R;
-      browserModalToBeExisting(): R;
       browserTitleToBeContaining(expected: string): R;
       browserTitleToBeEqual(expected: string): R;
       browserToBeReady(): R;
@@ -18,8 +19,12 @@ declare global {
       browserWindowCountToBeLessThan(expected: number): R;
       browserWindowCountToBeMoreThan(expected: number): R;
 
+      elementTextToBeContaining(expected: string): R;
+      elementTextToBeEqual(expected: string): R;
       elementToBeExisting(): R;
       elementToBeFocused(): R;
+      elementValueToBeContaining(expected: string): R;
+      elementValueToBeEqual(expected: string): R;
 
       arrayToBeContaining(): R;
       arrayToBeEquals(): R;

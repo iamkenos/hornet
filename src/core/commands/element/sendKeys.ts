@@ -1,6 +1,6 @@
-export default async function (this: WebdriverIO.Element, keys: string | string[]) {
-  this.focus();
-  browser.pause(200);
-  browser.keys(keys);
-  browser.pause(200);
+export async function sendKeys(this: WebdriverIO.Element, keys: string | string[]) {
+  await this.focus();
+  await browser.pause(200);
+  await browser.keys(keys);
+  await browser.pause(200);
 };

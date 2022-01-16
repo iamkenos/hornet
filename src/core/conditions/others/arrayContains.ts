@@ -1,41 +1,25 @@
-import type { ExpectedCondition } from "@core/conditions/types";
+import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
-export class ArrayContains implements ExpectedCondition {
-  readonly name: string;
+export class ArrayContains extends ExpectedCondition {
+  readonly expected: any[];
 
-  private readonly expected: any[];
+  readonly actual: any[];
 
-  private readonly actual: any[];
-
-  private readonly preferred: boolean;
-
-  public constructor(actual: any[], expected: any[], preferred: boolean) {
-    this.name = this.constructor.name;
-    this.actual = actual;
+  public constructor(actual: any[], expected: any[], preferred?: boolean) {
+    super(preferred);
     this.expected = expected;
-    this.preferred = preferred;
+    this.actual = actual;
   }
 
   public async evaluate() {
-    let result: boolean;
-
     try {
-      result = this.preferred ? this.expected.every((item) => this.actual.includes(item)) : !this.expected.every((item) => this.actual.includes(item));
+      this.passed = this.preferred
+        ? this.expected.every((item) => this.actual.includes(item))
+        : !this.expected.every((item) => this.actual.includes(item));
     } catch (e) {
-      result = false;
+      this.passed = false;
     }
 
-    return {
-      name: this.name,
-      actual: this.actual,
-      expected: this.expected,
-      isSuccess: result,
-      message: `
-  Condition: ${this.preferred ? "" : "(Not) "}${this.name}
-  Result: ${result ? "Success" : "Failed"}
-  Expected: \n${this.expected.map((i: string) => `    ${i}`).join("\n")}
-  Actual: \n${this.actual.map((i: string) => `    ${i}`).join("\n")}
-  `,
-    };
+    return this.getResult();
   }
 }

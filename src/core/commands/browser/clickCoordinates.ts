@@ -1,6 +1,6 @@
-import type { Coordinates, ClickPointerOrigin } from "@core/commands/types";
+import type { Coordinates, ClickPointerOrigin } from "@core/commands";
 
-export default async function (target: Coordinates, origin: ClickPointerOrigin = "pointer") {
+export async function clickCoordinates(target: Coordinates, origin: ClickPointerOrigin = "pointer") {
   const { x, y } = target;
   await browser.performActions([
     {

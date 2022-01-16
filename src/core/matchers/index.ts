@@ -1,54 +1,41 @@
-import { browserCookieToBeContaining } from "./browser/browserCookieToBeContaining";
-import { browserCookieToBeEqual } from "./browser/browserCookieToBeEqual";
-import { browserCookieToBeExisting } from "./browser/browserCookieToBeExisting";
-import { browserModalTextToBeContaining } from "./browser/browserModalTextToBeContaining";
-import { browserModalTextToBeEqual } from "./browser/browserModalTextToBeEqual";
-import { browserModalToBeExisting } from "./browser/browserModalToBeExisting";
-import { browserTitleToBeContaining } from "./browser/browserTitleToBeContaining";
-import { browserTitleToBeEqual } from "./browser/browserTitleToBeEqual";
-import { browserToBeReady } from "./browser/browserToBeReady";
-import { browserUrlPathToBeContaining } from "./browser/browserUrlPathToBeContaining";
-import { browserUrlPathToBeEqual } from "./browser/browserUrlPathToBeEqual";
-import { browserUrlToBeContaining } from "./browser/browserUrlToBeContaining";
-import { browserUrlToBeEqual } from "./browser/browserUrlToBeEqual";
-import { browserWindowCountToBeEqual } from "./browser/browserWindowCountToBeEqual";
-import { browserWindowCountToBeLessThan } from "./browser/browserWindowCountToBeLessThan";
-import { browserWindowCountToBeMoreThan } from "./browser/browserWindowCountToBeMoreThan";
+import * as b from "./browser";
+import * as e from "./element";
+import * as o from "./others";
 
-import { elementToBeExisting } from "./element/elementToBeExisting";
-import { elementToBeFocused } from "./element/elementToBeFocused";
-
-import { arrayToBeContaining } from "./others/arrayToBeContaining";
-import { arrayToBeEquals } from "./others/arrayToBeEquals";
-import { customConditionToBeTrue } from "./others/customConditionToBeTrue";
+export * from "./browser";
+export * from "./element";
+export * from "./others";
 
 export default {
-  addCustomMatchers: () => {
-    // browser
-    expect.extend({ browserCookieToBeContaining });
-    expect.extend({ browserCookieToBeEqual });
-    expect.extend({ browserCookieToBeExisting });
-    expect.extend({ browserModalTextToBeContaining });
-    expect.extend({ browserModalTextToBeEqual });
-    expect.extend({ browserModalToBeExisting });
-    expect.extend({ browserTitleToBeContaining });
-    expect.extend({ browserTitleToBeEqual });
-    expect.extend({ browserToBeReady });
-    expect.extend({ browserUrlPathToBeContaining });
-    expect.extend({ browserUrlPathToBeEqual });
-    expect.extend({ browserUrlToBeContaining });
-    expect.extend({ browserUrlToBeEqual });
-    expect.extend({ browserWindowCountToBeEqual });
-    expect.extend({ browserWindowCountToBeLessThan });
-    expect.extend({ browserWindowCountToBeMoreThan });
-
-    // element
-    expect.extend({ elementToBeExisting });
-    expect.extend({ elementToBeFocused });
-
-    // others
-    expect.extend({ arrayToBeContaining });
-    expect.extend({ arrayToBeEquals });
-    expect.extend({ customConditionToBeTrue });
+  addBrowserMatchers: () => {
+    expect.extend({ browserAlertTextToBeContaining: b.browserAlertTextToBeContaining });
+    expect.extend({ browserAlertTextToBeEqual: b.browserAlertTextToBeEqual });
+    expect.extend({ browserAlertToBeExisting: b.browserAlertToBeExisting });
+    expect.extend({ browserCookieToBeContaining: b.browserCookieToBeContaining });
+    expect.extend({ browserCookieToBeEqual: b.browserCookieToBeEqual });
+    expect.extend({ browserCookieToBeExisting: b.browserCookieToBeExisting });
+    expect.extend({ browserTitleToBeContaining: b.browserTitleToBeContaining });
+    expect.extend({ browserTitleToBeEqual: b.browserTitleToBeEqual });
+    expect.extend({ browserToBeReady: b.browserToBeReady });
+    expect.extend({ browserUrlPathToBeContaining: b.browserUrlPathToBeContaining });
+    expect.extend({ browserUrlPathToBeEqual: b.browserUrlPathToBeEqual });
+    expect.extend({ browserUrlToBeContaining: b.browserUrlToBeContaining });
+    expect.extend({ browserUrlToBeEqual: b.browserUrlToBeEqual });
+    expect.extend({ browserWindowCountToBeEqual: b.browserWindowCountToBeEqual });
+    expect.extend({ browserWindowCountToBeLessThan: b.browserWindowCountToBeLessThan });
+    expect.extend({ browserWindowCountToBeMoreThan: b.browserWindowCountToBeMoreThan });
+  },
+  addElementMatchers: () => {
+    expect.extend({ elementTextToBeContaining: e.elementTextToBeContaining });
+    expect.extend({ elementTextToBeEqual: e.elementTextToBeEqual });
+    expect.extend({ elementToBeExisting: e.elementToBeExisting });
+    expect.extend({ elementToBeFocused: e.elementToBeFocused });
+    expect.extend({ elementValueToBeContaining: e.elementValueToBeContaining });
+    expect.extend({ elementValueToBeEqual: e.elementValueToBeEqual });
+  },
+  addOtherMatchers: () => {
+    expect.extend({ arrayToBeContaining: o.arrayToBeContaining });
+    expect.extend({ arrayToBeEquals: o.arrayToBeEquals });
+    expect.extend({ conditionToBeTrue: o.conditionToBeTrue });
   }
 };

@@ -1,16 +1,18 @@
-import type { Selector } from "webdriverio";
-import type { ExpectedCondition } from "./types";
 import { ExpectedConditionsError } from "./expectedConditionsError";
 import { ExpectedConditionsResult } from "./expectedConditionsResult";
+import type { Selector } from "webdriverio";
+import type { ExpectedCondition } from "./expectedCondition";
 
 export class ExpectedConditions {
-  private readonly name: string;
-
   private readonly selector?: string | Selector;
 
   private readonly result: ExpectedConditionsResult;
 
   private readonly conditions: ExpectedCondition[];
+
+  private name: string;
+
+  private action: Function;
 
   private timeout: number;
 
@@ -23,7 +25,17 @@ export class ExpectedConditions {
   }
 
   public addCondition(condition: ExpectedCondition) {
-    this.conditions.push(condition);
+    this.conditions.push(condition.setSelector(this.selector));
+    return this;
+  }
+
+  public setName(name: string) {
+    this.name = name;
+    return this;
+  }
+
+  public setAction(action: Function) {
+    this.action = action;
     return this;
   }
 
@@ -33,22 +45,23 @@ export class ExpectedConditions {
     return this;
   }
 
-  public async wait() {
+  public async evaluate() {
     try {
-      return await this.assert();
+      return await this.expect();
     } catch (e) {
       return this.result;
     }
   }
 
-  public async assert() {
+  public async expect() {
     try {
       await browser.waitUntil(
         async () => {
+          this.action !== undefined && await this.action();
           for (let i = 0; i < this.conditions.length; i++) {
-            this.result.addResult(await this.conditions[i].evaluate(this.selector));
+            this.result.addResult(await this.conditions[i].evaluate());
           }
-          return this.result.isSuccess();
+          return this.result.isPass();
         },
         {
           timeout: this.timeout,

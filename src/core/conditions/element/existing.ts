@@ -1,41 +1,20 @@
-import type { ExpectedCondition } from "@core/conditions/types";
+import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
-export class Existing implements ExpectedCondition {
-  readonly name: string;
-
-  private readonly expected: boolean;
-
-  private readonly preferred: boolean;
-
-  public constructor(preferred: boolean) {
-    this.name = this.constructor.name;
-    this.expected = !!preferred;
-    this.preferred = preferred;
+export class Existing extends ExpectedCondition {
+  public constructor(preferred?: boolean) {
+    super(preferred);
+    this.expected = this.preferred;
   }
 
-  public async evaluate(selector: string) {
-    let actual: boolean;
-    let result: boolean;
-
+  public async evaluate() {
     try {
-      actual = !!(await $(selector)).isExisting();
-      result = actual === this.expected;
+      this.actual = await $(this.selector).isExisting();
+      this.passed = this.actual === this.expected;
     } catch (e) {
-      actual = e.message;
-      result = false;
+      this.actual = e.message;
+      this.passed = false;
     }
 
-    return {
-      name: this.name,
-      actual: actual,
-      expected: this.expected,
-      isSuccess: result,
-      message: `
-  Condition: ${this.preferred ? "" : "(Not) "}${this.name}
-  Result: ${result ? "Success" : "Failed"}
-  Expected: ${this.expected}
-  Actual: ${actual}
-  `
-    };
+    return this.getResult();
   }
 }

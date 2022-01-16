@@ -46,8 +46,6 @@ export const JS_MOUSE_SCROLL_BY_XPATH = `
 })(arguments[0], arguments[1], arguments[2]);
 `;
 
-export const JS_GET_PROP = "return arguments[0][arguments[1]];";
-
 export const JS_MOUSE_CLICK = "arguments[0].click();";
 
 export const JS_GET_ABSOLUTE_XPATH = `
@@ -109,10 +107,14 @@ function absoluteXPath(element) {
 
 export const JS_WINDOW_SCROLL_TO_BOTTOM = "window.scrollTo(0, document.body.scrollHeight);";
 
-export const JS_WINDOW_GET_ENTRIES = "return window.performance.getEntries();";
+export const JS_WINDOW_PERF_GET_ENTRIES = "return window.performance.getEntries();";
 
-export const JS_IS_DOC_READY = "return document.readyState;";
+export const JS_DOCUMENT_READY_STATE = "return document.readyState;";
 
-export const JS_ELEM_EXEC_FUNC = (funcName: string, await: boolean) => `return ${await ? "await " : ""}arguments[0]['${funcName}']();`;
+export const JS_ELEM_GET_PROP = "return arguments[0][arguments[1]];";
 
-export const JS_ELEM_SET_ATTRIB = (key: string, value: string) => `arguments[0].setAttribute('${key}','${value}');`;
+export const JS_ELEM_EXEC_FUNC = "return arguments[0][arguments[1]]();";
+
+export const JS_ELEM_EXEC_ASYNC_FUNC = "return arguments[0][arguments[1]]();";
+
+export const JS_ELEM_SET_ATTRIBUTE = "arguments[0].setAttribute(arguments[1], arguments[2]);";

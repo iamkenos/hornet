@@ -1,45 +1,24 @@
-import type { ExpectedCondition } from "@core/conditions/types";
+import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
-export class CookieExists implements ExpectedCondition {
-  readonly name: string;
-
+export class CookieExists extends ExpectedCondition {
   private readonly cookie: string;
 
-  private readonly expected: boolean;
-
-  private readonly preferred: boolean;
-
-  public constructor(cookie: string, preferred: boolean) {
-    this.name = this.constructor.name;
+  public constructor(cookie: string, preferred?: boolean) {
+    super(preferred);
+    this.expected = this.preferred;
     this.cookie = cookie;
-    this.expected = preferred;
-    this.preferred = preferred;
+    this.messageHeader = `Cookie: ${this.cookie}`;
   }
 
   public async evaluate() {
-    let actual: boolean;
-    let result: boolean;
-
     try {
-      actual = !!(await browser.getCookies([this.cookie])[0]);
-      result = actual === this.expected;
+      this.actual = !!(await browser.getCookies([this.cookie])[0]);
+      this.passed = this.actual === this.expected;
     } catch (e) {
-      actual = e.message;
-      result = false;
+      this.actual = e.message;
+      this.passed = false;
     }
 
-    return {
-      name: this.name,
-      actual: actual,
-      expected: this.expected,
-      isSuccess: result,
-      message: `
-  Condition: ${this.preferred ? "" : "(Not) "}${this.name}
-  Cookie: ${this.cookie}
-  Result: ${result ? "Success" : "Failed"}
-  Expected: ${this.expected}
-  Actual: ${actual}
-  `,
-    };
+    return this.getResult();
   }
 }

@@ -1,5 +1,5 @@
 import type { Selector } from "webdriverio";
-import type { ExpectedCondition, EvaluationResult } from "./types";
+import type { EvaluationResult } from "./types";
 
 export class ExpectedConditionsResult {
   private results: Map<string, EvaluationResult>;
@@ -25,19 +25,19 @@ export class ExpectedConditionsResult {
     this.results.set(result.name, result);
   }
 
-  public isSuccess() {
-    return Array.from(this.results.values()).every((result) => result.isSuccess && true);
+  public isPass() {
+    return Array.from(this.results.values()).every((result) => result.passed && true);
   }
 
   public getMessage(e?: Error) {
     const results = Array.from(this.results.values());
-    const success = results.filter((result) => result.isSuccess === true).length;
+    const success = results.filter((result) => result.passed === true).length;
     const total = this.results.size;
 
     return `
   Expected conditions not met after waiting for ${this.timeout}ms
   Expression: ${this.name}
-  ${this.selector ? "Selector: " + this.selector : "Selector: " + browser.sessionId}
+  ${this.selector ? "Selector: " + this.selector : "Session: " + browser.sessionId}
   Conditions Summary: ${success}/${total}
   ${total === 0 ? e.message : results.map((result) => result.message).join("------------------------------")}`;
   }

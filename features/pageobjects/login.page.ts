@@ -34,8 +34,8 @@ class LoginPage extends Page {
     /**
      * overwrite specific options to adapt it to page object
      */
-    public open(): Promise<string> {
-        return super.open('login');
+    public async open() {
+        await super.open('login');
     }
 }
 

@@ -10,7 +10,7 @@
       "webdriverio/async",
       "node"
     ],
-    "paths": { "@core/*": ["src/core/*"] },
+    "paths": { "@core": ["src/core/"], "@core/*": ["src/core/*"] },
     "target": "ES5"
   },
   "include": ["./**/**.ts"]

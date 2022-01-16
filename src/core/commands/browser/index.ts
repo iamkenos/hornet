@@ -1,0 +1,17 @@
+export { clearLocalStorage } from "./clearLocalStorage";
+export { clearSessionStorage } from "./clearSessionStorage";
+export { clickCoordinates } from "./clickCoordinates";
+export { closeLastWindow } from "./closeLastWindow";
+export { closeOtherWindows } from "./closeOtherWindows";
+export { dragRelativeToPointer } from "./dragRelativeToPointer";
+export { getLocalStorageItem } from "./getLocalStorageItem";
+export { getSessionStorageItem } from "./getSessionStorageItem";
+export { scrollTo } from "./scrollTo";
+export { scrollToBottom } from "./scrollToBottom";
+export { scrollToTop } from "./scrollToTop";
+export { sendRequest } from "./sendRequest";
+export { setCookie } from "./setCookie";
+export { setLocalStorageItem } from "./setLocalStorageItem";
+export { setSessionStorageItem } from "./setSessionStorageItem";
+export { switchToLastWindow } from "./switchToLastWindow";
+export { switchToParentWindow } from "./switchToParentWindow";

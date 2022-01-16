@@ -1,42 +1,21 @@
-import type { ExpectedCondition } from "@core/conditions/types";
-import { JS_IS_DOC_READY } from "@core/utils";
+import { JS_DOCUMENT_READY_STATE } from "@core/commands";
+import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
-export class DocumentReady implements ExpectedCondition {
-  readonly name: string;
-
-  private readonly expected: string;
-
-  private readonly preferred: boolean;
-
-  public constructor(preferred: boolean) {
-    this.name = this.constructor.name;
+export class DocumentReady extends ExpectedCondition {
+  public constructor(preferred?: boolean) {
+    super(preferred);
     this.expected = "complete";
-    this.preferred = preferred;
   }
 
   public async evaluate() {
-    let actual: string;
-    let result: boolean;
-
     try {
-      actual = await browser.execute(JS_IS_DOC_READY);
-      result = this.preferred ? actual === this.expected : actual !== this.expected;
+      this.actual = await browser.execute(JS_DOCUMENT_READY_STATE);
+      this.passed = this.preferred ? this.actual === this.expected : this.actual !== this.expected;
     } catch (e) {
-      actual = e.message;
-      result = false;
+      this.actual = e.message;
+      this.passed = false;
     }
 
-    return {
-      name: this.name,
-      actual: actual,
-      expected: this.expected,
-      isSuccess: result,
-      message: `
-  Condition: ${this.preferred ? "" : "(Not) "}${this.name}
-  Result: ${result ? "Success" : "Failed"}
-  Expected: ${this.expected}
-  Actual: ${actual}
-  `,
-    };
+    return this.getResult();
   }
 }

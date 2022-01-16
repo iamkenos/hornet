@@ -4,10 +4,10 @@ export async function elementToBeFocused(this: any, actual: Promise<WebdriverIO.
   const selector = (await actual).selector;
   const result = await new ExpectedConditions(elementToBeFocused.name, selector)
     .addCondition(new Focused(!this.isNot))
-    .wait();
+    .evaluate();
 
   return {
     message: () => result.getMessage(),
-    pass: this.isNot ? !result.isSuccess() : result.isSuccess()
+    pass: this.isNot ? !result.isPass() : result.isPass()
   };
 }

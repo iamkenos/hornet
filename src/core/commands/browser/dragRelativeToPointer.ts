@@ -1,6 +1,6 @@
-import type { Coordinates } from "@core/commands/types";
+import type { Coordinates } from "@core/commands";
 
-export default async function (target: Coordinates, dragDuration = 500) {
+export async function dragRelativeToPointer(target: Coordinates, dragDuration = 500) {
   await browser.performActions([
     {
       type: "pointer",

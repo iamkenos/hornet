@@ -1,5 +1,5 @@
-import type { Coordinates } from "@core/commands/types";
+import type { Coordinates } from "@core/commands";
 
-export default async function (target: Coordinates) {
+export async function scrollTo(target: Coordinates) {
   await browser.execute((x, y) => window.scrollTo(x, y), target.x, target.y);
 };

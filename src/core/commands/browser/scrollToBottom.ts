@@ -1,5 +1,5 @@
-import { JS_WINDOW_SCROLL_TO_BOTTOM } from "@core/utils/constants";
+import { JS_WINDOW_SCROLL_TO_BOTTOM } from "@core/commands";
 
-export default async function () {
+export async function scrollToBottom() {
   await browser.execute(JS_WINDOW_SCROLL_TO_BOTTOM);
 };
