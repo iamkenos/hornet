@@ -1,7 +1,7 @@
 import { Given, When, Then } from '@wdio/cucumber-framework';
 
-import LoginPage from '../pageobjects/login.page';
-import SecurePage from '../pageobjects/secure.page';
+import LoginPage from './login.page';
+import SecurePage from './secure.page';
 
 const pages = {
     login: LoginPage
@@ -20,7 +20,7 @@ Then(/^I should see a flash message saying (.*)$/, async (message) => {
     await expect(SecurePage.flashAlert).toHaveTextContaining(message);
 
     // sandbox
-    await expect(SecurePage.flashAlert).elementToBeExisting();
+    await expect(SecurePage.flashAlert).not.elementToBeExisting();
     await expect(SecurePage.flashAlert).elementTextToBeContaining(message)
 });
 

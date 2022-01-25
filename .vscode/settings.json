@@ -1,0 +1,19 @@
+{
+  "cucumberautocomplete.steps": [
+    "./src/core/gherkin/**/*.def.ts",
+    "./demo/**/*.def.ts",
+    "./samples/**/*.def.ts",
+  ],
+  "cucumberautocomplete.formatConfOverride": { "And": 3, "But": 3 },
+  "cucumberautocomplete.onTypeFormat": true,
+  "cucumberautocomplete.stepsInvariants": true,
+  "cucumberautocomplete.smartSnippets": true,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.validate": ["javascript", "typescript"],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[feature]": { "editor.defaultFormatter": "alexkrechik.cucumberautocomplete", "editor.formatOnSave": true },
+  "[javascript]": { "editor.formatOnSave": false },
+  "[typescript]": { "editor.formatOnSave": false }
+}
