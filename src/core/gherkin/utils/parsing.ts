@@ -1,3 +1,4 @@
+import type { DataTable } from "@cucumber/cucumber";
 import { DateTime } from "luxon";
 
 const GHERKIN_TOKENS = {
@@ -35,4 +36,37 @@ export function parseToken(token: string) {
     }
   }
   return token;
+}
+
+
+export function getDataTableRows(table: DataTable, column?: number): string[];
+
+export function getDataTableRows(table: DataTable, column: "all"): string[][];
+
+export function getDataTableRows(table: DataTable, column?: number | "all") {
+  column = column || 1;
+  if (isNaN(column as any)) {
+    return table.rows() as string[][];
+  } else {
+    const rows = column > Object.keys(table.raw()[0]).length
+      ? [] // return empty if column number asked is non-existing
+      : table.raw().map(i => i[(column as number) - 1]).slice(1) as string[]; // slice removes headers
+    return rows;
+  }
+}
+
+export function getDataTableHashes(table: DataTable, toLower = true) {
+  const lowercaseKeys = <T>(object: { [key: string]: T }): { [key: string]: T } => {
+    const result: { [key: string]: T } = {};
+    for (const [key, value] of Object.entries(object)) {
+      result[key.toLowerCase()] = value;
+    }
+    return result;
+  };
+
+  if (toLower) {
+    return table.hashes().map(hash => lowercaseKeys(hash));
+  } else {
+    return table.hashes();
+  }
 }

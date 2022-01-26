@@ -1,17 +1,18 @@
-import { DataTable } from "@cucumber/cucumber";
+import type { DataTable } from "@cucumber/cucumber";
 import {
   AnchorAttributes,
   Axis,
+  ClickAction,
   Count,
   HrefScheme,
   HrefSchemeContext,
   HrefTarget,
   HrefTargetContext,
   ElementType,
-  MouseButton,
   SelectAction,
   SelectOptionContext,
-  SetValueAction
+  SetValueAction,
+  SizeContext
 } from "@core/commands";
 import { ExpectedConditions, Selected, isURL } from "@core/conditions";
 import { WebElement, getSelector, getLabel, getUrl } from "@core/generics";
@@ -25,7 +26,7 @@ export async function whenClear(meta: string, key: string) {
   await element.clearValue();
 }
 
-export async function whenClick(button: MouseButton, meta: string, key: string, type: string) {
+export async function whenClick(button: ClickAction, meta: string, key: string, type: string) {
   const selector = getSelector(meta, key);
   const webelement = new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector);
   const element = await webelement.$;
@@ -60,12 +61,12 @@ export async function whenFocus(meta: string, key: string) {
   await element.focus();
 }
 
-export async function whenMoveTo(meta: string, key: string, x: string, y: string) {
+export async function whenMoveTo(meta: string, key: string, x: number, y: number) {
   const selector = getSelector(meta, key);
   const webelement = new WebElement(selector);
   const element = await webelement.$;
-  const xOffset = parseInt(x, 10) || undefined;
-  const yOffset = parseInt(y, 10) || undefined;
+  const xOffset = x || undefined;
+  const yOffset = y || undefined;
 
   await element.moveIntoView({ xOffset, yOffset });
 }
@@ -232,7 +233,7 @@ export async function thenEnabled(meta: string, key: string, not: string) {
   const element = await webelement.$;
   const then = not ? expect(element).not : expect(element);
 
-  await then.toBeEnabled();
+  await then.elementToBeEnabled();
 }
 
 export async function thenExisting(meta: string, key: string, not: string) {
@@ -316,7 +317,7 @@ export async function thenHrefOpensPointsToPage(meta: string, key: string, type:
   await then.elementAttributeToBeEqual(AnchorAttributes.HREF, new URL(value).pathname);
 }
 
-export async function thenMatchesSnapshot(meta: string, key: string, not: string, file: string) {
+export async function thenSnapshotMatch(meta: string, key: string, not: string, file: string) {
   const selector = getSelector(meta, key);
   const webelement = new WebElement(selector);
   const element = await webelement.$;
@@ -367,7 +368,7 @@ export async function thenTextArrayEqual(meta: string, key: string, not: string,
   const actual = await webelement.toTextArray();
   const then = not ? expect(actual).not : expect(actual);
 
-  await then.arrayToBeEquals([].concat(...values.rows()));
+  await then.arrayToBeEqual([].concat(...values.rows()));
 }
 
 export async function thenSelected(meta: string, key: string, not: string) {
@@ -379,22 +380,22 @@ export async function thenSelected(meta: string, key: string, not: string) {
   await then.elementToBeSelected();
 }
 
-export async function thenSizeEquals(meta: string, key: string, not: string) {
+export async function thenSizeEqual(meta: string, key: string, not: string, width: number, height: number) {
   const selector = getSelector(meta, key);
   const webelement = new WebElement(selector);
   const element = await webelement.$;
   const then = not ? expect(element).not : expect(element);
 
-  throw new Error('pending');
+  await then.elementSizeToBeEqual(width, height);
 }
 
-export async function thenSizeSideEquals(meta: string, key: string, not: string) {
+export async function thenSizeSideEqual(meta: string, key: string, not: string, size: number, side: SizeContext) {
   const selector = getSelector(meta, key);
   const webelement = new WebElement(selector);
   const element = await webelement.$;
   const then = not ? expect(element).not : expect(element);
 
-  throw new Error('pending');
+  await then.elementSizeSideToBeEqual(side, size);
 }
 
 export async function thenTextContaining(meta: string, key: string, not: string, value: string) {

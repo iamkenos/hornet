@@ -1,3 +1,3 @@
 export { arrayToBeContaining } from "./arrayToBeContaining";
-export { arrayToBeEquals } from "./arrayToBeEquals";
+export { arrayToBeEqual } from "./arrayToBeEqual";
 export { conditionToBeTrue } from "./conditionToBeTrue";

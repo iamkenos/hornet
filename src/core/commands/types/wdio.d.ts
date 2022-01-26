@@ -2,13 +2,7 @@ import type { MoveToOptions } from "webdriverio";
 import type { CustomConfig } from "@core/config";
 import type { ExpectedConditions } from "@core/conditions";
 import type { KVP } from "@core/common";
-import type {
-  HttpRequestOptions,
-  HttpResponse,
-  ClickWith,
-  ClickPointerOrigin,
-  Coordinates,
-} from "./";
+import type { HttpRequestOptions, HttpResponse, ClickWith, ClickPointerOrigin, Coordinates } from "./";
 
 declare global {
   namespace WebdriverIO {
@@ -16,6 +10,7 @@ declare global {
 
     interface Browser {
       config: Config & CustomConfig;
+      clean: () => Promise<void>;
       clearLocalStorage: () => Promise<void>;
       clearSessionStorage: () => Promise<void>;
       clickCoordinates: (target: Coordinates, origin: ClickPointerOrigin) => Promise<void>;
@@ -24,6 +19,7 @@ declare global {
       dragRelativeToPointer: (target: Coordinates, dragDuration: number) => Promise<void>;
       getLocalStorageItem: (key: string) => Promise<string>;
       getSessionStorageItem: (key: string) => Promise<string>;
+      restoreWindowSize: () => Promise<void>;
       scrollTo: (target: Coordinates) => Promise<void>;
       scrollToBottom: () => Promise<void>;
       scrollToTop: () => Promise<void>;
@@ -31,6 +27,7 @@ declare global {
       setCookie: (name: string, value: string) => Promise<void>;
       setLocalStorageItem: (kvp: KVP) => Promise<void>;
       setSessionStorageItem: (kvp: KVP) => Promise<void>;
+      storeWindowSize: () => Promise<void>;
       switchToLastWindow: () => Promise<void>;
       switchToParentWindow: () => Promise<void>;
     }

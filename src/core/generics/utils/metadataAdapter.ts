@@ -23,20 +23,20 @@ export function getProperty<T extends any = string>(basename: string, ...propTre
 }
 
 export function getUrl(basename: string) {
-  const { config } = browser;
-  const metafile = basename || config.activeMeta;
+  const { runtime } = browser.config;
+  const metafile = basename || runtime.activeMeta;
   return getProperty(metafile, "url");
 }
 
 export function getTitle(basename: string) {
-  const { config } = browser;
-  const metafile = basename || config.activeMeta;
+  const { runtime } = browser.config;
+  const metafile = basename || runtime.activeMeta;
   return getProperty(metafile, "title");
 }
 
 export function getLabels(basename: string) {
-  const { config } = browser;
-  const metafile = basename || config.activeMeta;
+  const { runtime } = browser.config;
+  const metafile = basename || runtime.activeMeta;
   return getProperty<Object>(metafile, "labels");
 }
 
@@ -49,9 +49,9 @@ export function getLabel(basename: string, label: string) {
 }
 
 export function getSelector(basename: string, selectorKey: string): string {
-  const { config } = browser;
-  const metafile = basename || config.activeMeta;
-  const metafileSelectorKey = selectorKey || config.activeMetaSelectorKey;
+  const { runtime } = browser.config;
+  const metafile = basename || runtime.activeMeta;
+  const metafileSelectorKey = selectorKey || runtime.activeMetaSelectorKey;
   const stitch = (file: string, selectorKey: string) => {
     try {
       const root = "selectors";

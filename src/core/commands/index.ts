@@ -8,6 +8,7 @@ export * from "./utils";
 
 export default {
   addBrowserCommands: () => {
+    browser.addCommand(b.clean.name, b.clean);
     browser.addCommand(b.clearLocalStorage.name, b.clearLocalStorage);
     browser.addCommand(b.clearSessionStorage.name, b.clearSessionStorage);
     browser.addCommand(b.clickCoordinates.name, b.clickCoordinates);
@@ -16,11 +17,13 @@ export default {
     browser.addCommand(b.dragRelativeToPointer.name, b.dragRelativeToPointer);
     browser.addCommand(b.getLocalStorageItem.name, b.getLocalStorageItem);
     browser.addCommand(b.getSessionStorageItem.name, b.getSessionStorageItem);
+    browser.addCommand(b.restoreWindowSize.name, b.restoreWindowSize);
     browser.addCommand(b.scrollTo.name, b.scrollTo);
     browser.addCommand(b.scrollToBottom.name, b.scrollToBottom);
     browser.addCommand(b.scrollToTop.name, b.scrollToTop);
     browser.addCommand(b.setLocalStorageItem.name, b.setLocalStorageItem);
     browser.addCommand(b.setSessionStorageItem.name, b.setSessionStorageItem);
+    browser.addCommand(b.storeWindowSize.name, b.storeWindowSize);
     browser.addCommand(b.switchToLastWindow.name, b.switchToLastWindow);
     browser.addCommand(b.switchToParentWindow.name, b.switchToParentWindow);
   },

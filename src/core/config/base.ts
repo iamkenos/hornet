@@ -1,22 +1,19 @@
 import "tsconfig-paths/register";
 
-import path from "path";
-import fs from "fs-extra";
 import allure from "@wdio/allure-reporter";
 import allureCli from "allure-commandline";
+import chalk from "chalk";
+import fs from "fs-extra";
+import path from "path";
 import commands from "@core/commands";
 import matchers from "@core/matchers";
 
 import { merge } from "lodash";
-import { filesFromGlob } from "@core/common";
+import { filesFromGlob, logger, MimeType } from "@core/common";
 import { ConfigArgs } from "@core/config";
 
-enum ReporterDirectories {
-  ALLURE = "allure",
-  JUNIT = "junit",
-  HTML = "report"
-}
-
+const reporters = { spec: "spec", allure: "allure", junit: "junit" };
+const outputDirectories = { reports: ".reports", html: "report" };
 const defaults = (directory: ConfigArgs["directory"]): ConfigArgs => ({
   directory: directory,
   debug: false,
@@ -26,9 +23,25 @@ const defaults = (directory: ConfigArgs["directory"]): ConfigArgs => ({
   stepRetries: 0,
   stepTimeout: 30000,
   tags: "",
-  reportOutDir: ".reports",
+  reportOutDir: outputDirectories.reports,
   reportIssueLink: undefined,
-  hooks: {}
+  hooks: {
+    onPrepare: () => {},
+    beforeSession: () => {},
+    before: () => {},
+    beforeCommand: () => {},
+    beforeFeature: () => {},
+    beforeScenario: () => {},
+    beforeStep: () => {},
+    afterStep: () => {},
+    afterFeature: () => {},
+    afterScenario: () => {},
+    afterCommand: () => {},
+    after: () => {},
+    afterSession: () => {},
+    onComplete: () => {},
+    onReload: () => {}
+  }
 });
 
 export const base = (custom: ConfigArgs): WebdriverIO.Config => {
@@ -40,6 +53,7 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
     // ====================
     //
     ...merged,
+    runtime: {},
     //
     // ====================
     // Runner Configuration
@@ -61,7 +75,7 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
     // then the current working directory is where your `package.json` resides, so `wdio`
     // will be called from there.
     //
-    specs: filesFromGlob(["./features/**/*.feature"], merged.directory),
+    specs: [],
     // Patterns to exclude.
     exclude: [
       // 'path/to/excluded/files'
@@ -96,6 +110,7 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
         maxInstances: 5,
         browserName: "chrome",
         acceptInsecureCerts: true,
+        unhandledPromptBehavior: "ignore",
         "goog:chromeOptions": {
           args: [
             "--disable-gpu",
@@ -189,21 +204,21 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: [
-      "spec",
+      reporters.spec,
       [
-        ReporterDirectories.JUNIT,
+        reporters.junit,
         {
-          outputDir: path.join(merged.directory, merged.reportOutDir, ReporterDirectories.JUNIT),
+          outputDir: path.join(merged.directory, merged.reportOutDir, reporters.junit),
           outputFileFormat: (options: any) => `wdio-${options.cid}-junit-reporter.xml`
         }
       ],
       [
-        ReporterDirectories.ALLURE,
+        reporters.allure,
         {
           disableWebdriverStepsReporting: true,
           disableWebdriverScreenshotsReporting: false,
           useCucumberStepReporter: true,
-          outputDir: path.join(merged.directory, merged.reportOutDir, ReporterDirectories.ALLURE),
+          outputDir: path.join(merged.directory, merged.reportOutDir, reporters.allure),
           issueLinkTemplate: merged.reportIssueLink
         }
       ]
@@ -258,8 +273,11 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
      * @param {Object}         config       wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    onPrepare: function (config, capabilities) {
+    onPrepare: async function (config, capabilities) {
       fs.removeSync(path.join(merged.directory, merged.reportOutDir));
+
+      const { onPrepare } = merged.hooks as any;
+      await onPrepare(config, capabilities);
     },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
@@ -280,9 +298,12 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {String}         cid          worker id (e.g. 0-0)
      */
-    beforeSession: function (config: WebdriverIO.Config, capabilities, specs, cid) {
+    beforeSession: async function (config: WebdriverIO.Config, capabilities, specs, cid) {
       config.cucumberOpts.tagExpression = config.tags;
       config.cucumberOpts.timeout = config.debug ? 24 * 60 * 60 * 1000 : config.stepTimeout * (config.stepRetries || 1);
+
+      const { beforeSession } = merged.hooks as any;
+      await beforeSession(config, capabilities, specs, cid);
     },
     /**
      * Gets executed before test execution begins. At this point you can access to all global
@@ -291,20 +312,25 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    before: function (capabilities, specs) {
+    before: async function (capabilities, specs) {
       commands.addBrowserCommands();
       commands.addElementCommands();
       matchers.addBrowserMatchers();
       matchers.addElementMatchers();
       matchers.addOtherMatchers();
+
+      const { before } = merged.hooks as any;
+      await before(capabilities, specs);
     },
     /**
      * Runs before a WebdriverIO command gets executed.
-     * @param {String} commandName hook command name
-     * @param {Array} args arguments that command would receive
+     * @param {String} commandName  hook command name
+     * @param {Array}  args         arguments that command would receive
      */
-    // beforeCommand: function (commandName, args) {
-    // },
+    beforeCommand: async function (commandName, args) {
+      const { beforeCommand } = merged.hooks as any;
+      await beforeCommand(commandName, args);
+    },
     /**
      * Cucumber Hooks
      *
@@ -312,15 +338,16 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
      * @param {String}                   uri      path to feature file
      * @param {GherkinDocument.IFeature} feature  Cucumber feature object
      */
-    // beforeFeature: function (uri, feature) {
-    // },
+    beforeFeature: async function (uri, feature) {
+      const { beforeFeature } = merged.hooks as any;
+      await beforeFeature(uri, feature);
+    },
     /**
-     *
      * Runs before a Cucumber Scenario.
      * @param {ITestCaseHookParameter} world    world object containing information on pickle and test step
      * @param {Object}                 context  Cucumber World object
      */
-    beforeScenario: function (world, context) {
+    beforeScenario: async function (world, context) {
       const tags = world.pickle.tags || [];
       tags.forEach((i) => {
         const tag = i.name.replace(/[@]/, "");
@@ -334,22 +361,27 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
           allure.addLabel("tag", tag);
         }
       });
+
+      const { beforeScenario } = merged.hooks as any;
+      await beforeScenario(world, context);
     },
     /**
-     *
      * Runs before a Cucumber Step.
      * @param {Pickle.IPickleStep} step     step data
      * @param {IPickle}            scenario scenario pickle
      * @param {Object}             context  Cucumber World object
      */
-    beforeStep: function (step, scenario, context) {
-      const { argument } = step;
+    beforeStep: async function (step, scenario, context) {
+      const { argument, keyword, text } = step as any;
+      logger.debug(`${chalk.yellow("GHERKIN")} ${chalk.green.dim.bold(keyword)}${chalk.green.dim(text)}`);
       if (argument?.docString?.content) {
-        allure.addAttachment("DocString", argument?.docString?.content, "text/plain");
+        allure.addAttachment("DocString", argument?.docString?.content, MimeType.TEXT_PLAIN);
       }
+
+      const { beforeStep } = merged.hooks as any;
+      await beforeStep(step, scenario, context);
     },
     /**
-     *
      * Runs after a Cucumber Step.
      * @param {Pickle.IPickleStep} step             step data
      * @param {IPickle}            scenario         scenario pickle
@@ -363,9 +395,11 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
       if (result.error) {
         await browser.takeScreenshot();
       }
+
+      const { afterStep } = merged.hooks as any;
+      await afterStep(step, scenario, result, context);
     },
     /**
-     *
      * Runs after a Cucumber Scenario.
      * @param {ITestCaseHookParameter} world            world object containing information on pickle and test step
      * @param {Object}                 result           results object containing scenario results
@@ -376,17 +410,21 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
      */
     afterScenario: async function (world, result, context) {
       await browser.deleteCookies();
-      browser.config.activeMeta = undefined;
-      browser.config.activeMetaSelectorKey = undefined;
+      browser.config.runtime.activeMeta = undefined;
+      browser.config.runtime.activeMetaSelectorKey = undefined;
+
+      const { afterScenario } = merged.hooks as any;
+      await afterScenario(world, result, context);
     },
     /**
-     *
      * Runs after a Cucumber Feature.
      * @param {String}                   uri      path to feature file
      * @param {GherkinDocument.IFeature} feature  Cucumber feature object
      */
-    // afterFeature: function (uri, feature) {
-    // },
+    afterFeature: async function (uri, feature) {
+      const { afterFeature } = merged.hooks as any;
+      await afterFeature(uri, feature);
+    },
 
     /**
      * Runs after a WebdriverIO command gets executed
@@ -395,8 +433,10 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
      * @param {Number} result      0 - command success, 1 - command error
      * @param {Object} error       error object if any
      */
-    // afterCommand: function (commandName, args, result, error) {
-    // },
+    afterCommand: async function (commandName, args, result, error) {
+      const { afterCommand } = merged.hooks as any;
+      await afterCommand(commandName, args, result, error);
+    },
     /**
      * Gets executed after all tests are done. You still have access to all global variables from
      * the test.
@@ -404,16 +444,20 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs        List of spec file paths that ran
      */
-    // after: function (result, capabilities, specs) {
-    // },
+    after: async function (result, capabilities, specs) {
+      const { after } = merged.hooks as any;
+      await after(result, capabilities, specs);
+    },
     /**
      * Gets executed right after terminating the webdriver session.
      * @param {Object}         config       wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs        List of spec file paths that ran
      */
-    // afterSession: function (config, capabilities, specs) {
-    // },
+    afterSession: async function (config, capabilities, specs) {
+      const { afterSession } = merged.hooks as any;
+      await afterSession(config, capabilities, specs);
+    },
     /**
      * Gets executed after all workers got shut down and the process is about to exit. An error
      * thrown in the onComplete hook will result in the test run failing.
@@ -424,16 +468,21 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
      */
     onComplete: async function (exitCode, config, capabilities, results) {
       let resolved: WebdriverIO.Config = config as any;
-      const raw = path.join(resolved.directory, resolved.reportOutDir, ReporterDirectories.ALLURE);
-      const html = path.join(raw, ReporterDirectories.HTML);
+      const raw = path.join(resolved.directory, resolved.reportOutDir, reporters.allure);
+      const html = path.join(raw, outputDirectories.html);
       await allureCli(["-q", "generate", raw, "-c", "-o", html]);
-    }
+
+      const { onComplete } = merged.hooks as any;
+      await onComplete(exitCode, config, capabilities, results);
+    },
     /**
      * Gets executed when a refresh happens.
      * @param {String} oldSessionId session ID of the old session
      * @param {String} newSessionId session ID of the new session
      */
-    //onReload: function(oldSessionId, newSessionId) {
-    //}
+    onReload: async function (oldSessionId, newSessionId) {
+      const { onReload } = merged.hooks as any;
+      await onReload(oldSessionId, newSessionId);
+    }
   };
 };

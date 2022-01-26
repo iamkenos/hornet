@@ -12,6 +12,8 @@ export { Enabled } from "./enabled";
 export { Existing } from "./existing";
 export { Focused } from "./focused";
 export { Selected } from "./selected";
+export { SizeEquals } from "./sizeEquals";
+export { SizeSideEquals } from "./sizeSideEquals";
 export { TextContains } from "./textContains";
 export { TextEquals } from "./textEquals";
 export { ValueContains } from "./valueContains";

@@ -35,9 +35,9 @@ export class ExpectedConditionsResult {
     const total = this.results.size;
 
     return `Expected conditions not met after waiting for ${this.timeout}ms
-  Expression: ${this.name}
-  ${this.selector ? "Selector: " + this.selector : "Session: " + browser.sessionId}
-  Conditions Summary: ${success}/${total}
-  ${total === 0 ? e.message : results.map((result) => result.message).join("------------------------------")}`;
+Expression: ${this.name}
+${this.selector ? `Selector: ${this.selector}` : `Session: ${browser.sessionId}`}
+Conditions Summary: ${success}/${total}
+${total === 0 ? e.message : results.map((result) => result.message).join("------------------------------")}`;
   }
 }

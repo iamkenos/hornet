@@ -1,4 +1,4 @@
-import { Axis } from "@core/commands";
+import { Axis, BrowserStorage, SizeContext } from "@core/commands";
 declare global {
   
   namespace ExpectWebdriverIO {
@@ -9,6 +9,9 @@ declare global {
       browserCookieToBeContaining(cookie: string, expected: string): R;
       browserCookieToBeEqual(cookie: string, expected: string): R;
       browserCookieToBeExisting(cookie: string): R;
+      browserStorageItemToBeContaining(context: BrowserStorage, key: string, expected: string): R;
+      browserStorageItemToBeEqual(context: BrowserStorage, key: string, expected: string): R;
+      browserStorageItemToBeExisting(context: BrowserStorage, key: string): R;
       browserTitleToBeContaining(expected: string): R;
       browserTitleToBeEqual(expected: string): R;
       browserToBeReady(): R;
@@ -28,6 +31,8 @@ declare global {
       elementCountToBeLessThan(expected: number): R;
       elementCountToBeMoreThan(expected: number): R;
       elementCssPropertyToBeExisting(cssProperty: string): R;
+      elementSizeSideToBeEqual(side: SizeContext, expected: number): R;
+      elementSizeToBeEqual(width: number, height: number): R;
       elementTextToBeContaining(expected: string): R;
       elementTextToBeEqual(expected: string): R;
       elementToBeDisplayed(): R;
@@ -40,7 +45,7 @@ declare global {
       elementValueToBeEqual(expected: string): R;
 
       arrayToBeContaining(expected: any[]): R;
-      arrayToBeEquals(expected: any[]): R;
+      arrayToBeEqual(expected: any[]): R;
       customConditionToBeTrue(): R;
     }
   }

@@ -6,6 +6,8 @@ export { elementCountToBeMoreThan } from "./elementCountToBeMoreThan";
 export { elementCountToBeLessThan } from "./elementCountToBeLessThan";
 export { elementAxisLocationToBeEqual } from "./elementAxisLocationToBeEqual";
 export { elementCssPropertyToBeExisting } from "./elementCssPropertyToBeExisting";
+export { elementSizeSideToBeEqual } from "./elementSizeSideToBeEqual";
+export { elementSizeToBeEqual } from "./elementSizeToBeEqual";
 export { elementTextToBeContaining } from "./elementTextToBeContaining";
 export { elementTextToBeEqual } from "./elementTextToBeEqual";
 export { elementToBeDisplayed } from "./elementToBeDisplayed";

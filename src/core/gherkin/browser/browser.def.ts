@@ -1,7 +1,52 @@
-import { When, Then } from "@cucumber/cucumber";
+import { Given, When, Then } from "@cucumber/cucumber";
 
 import { RETRY } from "@core/gherkin";
 import * as fn from "./browser.glue";
+
+Given(
+  /^I am on the "([^"]*)?" page$/, RETRY(),
+  fn.givenOnPage
+);
+
+When(
+  /^I clean the browser session$/, RETRY(),
+  fn.whenClean
+);
+
+When(
+  /^I close the last opened (?:window|tab)$/, RETRY(),
+  fn.whenCloseLastWindow
+);
+
+When(
+  /^I close all (?:except the parent|other) (?:window|tab)(?:s)?$/, RETRY(),
+  fn.whenCloseOtherWindows
+);
+
+When(
+  /^I delete the "([^"]*)?" site cookie$/, RETRY(),
+  fn.whenCookieDeleted
+);
+
+When(
+  /^I delete the site cookies$/, RETRY(),
+  fn.whenCookiesDeleted
+);
+
+When(
+  /^I set the "([^"]*)?" site cookie value to "([^"]*)?"$/, RETRY(),
+  fn.whenCookieSet
+);
+
+When(
+  /^I navigate (back|forward) from the current page(?: (\d+) times)?$/, RETRY(),
+  fn.whenNavigate
+);
+
+When(
+  /^I start (?:to intercept|observing the) (?:ajax|xhr|network|api) (?:requests|calls)$/, RETRY(),
+  fn.whenObserveNetwork
+);
 
 When(
  /^I open the (?:"([^"]*)?" page's url|url "([^"]*)?")$/, RETRY(),
@@ -13,75 +58,15 @@ When(
   fn.whenOpenNewWindow
 );
 
-// When(
-//   /^I start (?:to intercept|observing the) (?:ajax|xhr|network|api) (?:requests|calls)$/, RETRY(),
-//   windowAjaxIntercept
-// );
+When(
+  /^I press the "([^"]*)?" key(?: (\d+) times)?$/, RETRY(),
+  fn.whenPressKey
+);
 
-// When(
-//   /^I close all except the parent (?:window|tab)$/, RETRY(),
-//   windowChildrenClose
-// );
-
-// When(
-//   /^I delete the "([^"]*)?" site cookie$/, RETRY(),
-//   windowCookieDelete
-// );
-
-// When(
-//   /^I delete the site cookies$/, RETRY(),
-//   windowCookiesDelete
-// );
-
-// When(
-//   /^I set the "([^"]*)?" site cookie value to "([^"]*)?"$/, RETRY(),
-//   windowCookieSet
-// );
-
-// When(
-//   /^I press the "([^"]*)?" key(?: (\d+) times)?$/, RETRY(),
-//   windowKeyPress
-// );
-
-// When(
-//   /^I close the last opened (?:window|tab)$/, RETRY(),
-//   windowLastClose
-// );
-
-// When(
-//   /^I focus on the last opened (?:window|tab)$/, RETRY(),
-//   windowLastFocus
-// );
-
-// When(
-//   /^I (accept|dismiss) the (?:alert|confirm box|prompt)$/, RETRY(),
-//   windowModalHandle
-// );
-
-// When(
-//   /^I type "([^"]*)?" on the prompt$/, RETRY(),
-//   windowModalTextSet
-// );
-
-// When(
-//   /^I navigate (back|forward) from the current page(?: (\d+) times)?$/, RETRY(),
-//   windowPageNavigate
-// );
-
-// When(
-//   /^I pause for (\d+)ms$/, RETRY(),
-//   windowPause
-// );
-
-// When(
-//   /^I focus on the parent (?:window|tab)$/, RETRY(),
-//   windowParentFocus
-// );
-
-// When(
-//   /^I refresh the page$/, RETRY(),
-//   windowRefresh
-// );
+When(
+  /^I refresh the page$/, RETRY(),
+  fn.whenRefresh
+);
 
 When(
   /^I scroll to the (top|bottom) of the page$/, RETRY(),
@@ -94,116 +79,181 @@ When(
 );
 
 When(
-  /^I have a screen that is maximized$/, RETRY(),
-  fn.whenSizeMaximize
+  /^I (accept|dismiss) the (?:alert|confirm box|prompt)$/, RETRY(),
+  fn.whenSetAlertAction
 );
 
 When(
-  /^I have a screen that is ([\d]+) by ([\d]+) pixels$/, RETRY(),
-  fn.whenSize
+  /^I type "([^"]*)?" on the prompt$/, RETRY(),
+  fn.whenSetAlertText
 );
 
-// When(
-//   /^I focus on the(?: "([^"]*)?" page's)? (?:"([^"]*)?" iframe|parent context)$/, RETRY(),
-//   windowSwitchFrame
-// );
+When(
+  /^I have a screen that is maximized$/, RETRY(),
+  fn.whenSetMaximize
+);
 
-// Then(
-//   /^I expect the (?:ajax|xhr|network|api) (?:requests|calls) to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
-//   windowAjaxRequestsMatch
-// );
+When(
+  /^I have a screen that is (\d+) by (\d+) pixels$/, RETRY(),
+  fn.whenSetSize
+);
 
-// Then(
-//   /^I expect the (?:ajax|xhr|network|api) (?:requests|calls) to( not)? match the (?:reference|snapshot) "([^"]*)?" with expressions:$/, RETRY(),
-//   windowAjaxRequestsMatchExp
-// );
+When(
+  /^I set the "([^"]*)?" site (local|session) storage item value to "([^"]*)?"$/, RETRY(),
+  fn.whenSetSize
+);
 
-// Then(
-//   /^I expect the (?:ajax|xhr|network|api) (?:requests|calls) to the following paths to( not)? match the (?:reference|snapshot) "([^"]*)?":$/, RETRY(),
-//   windowAjaxRequestsMatchPaths
-// );
+When(
+  /^I (?:focus on|switch to) the(?: "([^"]*)?" page's)? (?:"([^"]*)?" iframe|parent context)$/, RETRY(),
+  fn.whenSwitchToFrameOrParent
+);
 
-// Then(
-//   /^I expect the "([^"]*)?" site cookie value to( not)? be containing "([^"]*)?"$/, RETRY(),
-//   windowCookieContains
-// );
+When(
+  /^I (?:focus on|switch to) the parent (?:window|tab)$/, RETRY(),
+  fn.whenSwitchToParentWindow
+);
 
-// Then(
-//   /^I expect the "([^"]*)?" site cookie value to( not)? be "([^"]*)?"$/, RETRY(),
-//   windowCookieEquals
-// );
+When(
+  /^I (?:focus on|switch to) the last opened (?:window|tab)$/, RETRY(),
+  fn.whenSwitchToLastWindow
+);
 
-// Then(
-//   /^I expect the "([^"]*)?" site cookie to( not)? be existing$/, RETRY(),
-//   windowCookieExists
-// );
+When(
+  /^I (?:pause|wait|stay idle) for (\d+)ms$/, RETRY(),
+  fn.whenWait
+);
 
-// Then(
-//   /^I expect the (?:window|tab) count to( not)? be "([^"]*)?"$/, RETRY(),
-//   windowCountEquals
-// );
+When(
+  /^I (?:save|store) the current (?:window|screen) size$/, RETRY(),
+  fn.whenWindowSizeStored
+);
 
-// Then(
-//   /^I expect the (?:window|tab) count to( not)? be (greater|less) than "([^"]*)?"$/, RETRY(),
-//   windowCountGreaterLess
-// );
-
-// Then(
-//   /^I expect the captured google analytics(?: event "([^"]*)?" )? to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
-//   windowGAEntriesMatch
-// );
-
-// Then(
-//   /^I expect the response to the following request to( not)? match the (?:reference|snapshot) "([^"]*)?":$/, RETRY(),
-//   windowHttpResponseMatch
-// );
-
-// Then(
-//   /^I expect the (viewport|page) image to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
-//   windowImageMatch
-// );
-
-// Then(
-//   /^I expect (?:a|an) (?:alert|confirm box|prompt) to( not)? be opened$/, RETRY(),
-//   windowModalExists
-// );
-
-// Then(
-//   /^I expect the (?:alert|confirm box|prompt) text to( not)? be containing "([^"]*)?"$/, RETRY(),
-//   windowModalTextContains
-// );
-
-// Then(
-//   /^I expect the (?:alert|confirm box|prompt) text to( not)? be "([^"]*)?"$/, RETRY(),
-//   windowModalTextEquals
-// );
+When(
+  /^I restore the (?:window|screen) size$/, RETRY(),
+  fn.whenWindowSizeRestored
+);
 
 Then(
-  /^I expect the (?:window|page) title to( not)? be containing (?:"([^"]*)?"|the "([^"]*)?" page's title)$/, RETRY(),
+  /^I expect (?:a|an) (?:alert|confirm box|prompt) to( not)? be opened$/, RETRY(),
+  fn.thenAlertExisting
+);
+
+Then(
+  /^I expect the (?:alert|confirm box|prompt) text to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
+  fn.thenAlertTextContaining
+);
+
+Then(
+  /^I expect the (?:alert|confirm box|prompt) text to( not)? be "([^"]*)?"$/, RETRY(),
+  fn.thenAlertTextEqual
+);
+
+Then(
+  /^I expect the "([^"]*)?" site cookie value to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
+  fn.thenCookieContaining
+);
+
+Then(
+  /^I expect the "([^"]*)?" site cookie to( not)? (?:be existing|exist)$/, RETRY(),
+  fn.thenCookieExisting
+);
+
+Then(
+  /^I expect the "([^"]*)?" site cookie value to( not)? be "([^"]*)?"$/, RETRY(),
+  fn.thenCookieEqual
+);
+
+Then(
+  /^I expect the (?:window|tab) count to( not)? be (\d+)$/, RETRY(),
+  fn.thenCountEqual
+);
+
+Then(
+  /^I expect the (?:window|tab) count to( not)? be (less|more) than (\d+)$/, RETRY(),
+  fn.thenCountLessOrMore
+);
+
+Then(
+  /^I expect the captured google analytics(?: event "([^"]*)?" )? to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
+  fn.thenGAEntriesSnapshotMatch
+);
+
+Then(
+  /^I expect the response to the following request to( not)? match the (?:reference|snapshot) "([^"]*)?":$/, RETRY(),
+  fn.thenHttpResponseSnapshotMatch
+);
+
+Then(
+  /^I expect the (?:ajax|xhr|network|api) (?:requests|calls)( with headers)? to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
+  fn.thenNetworkCallsSnapshotMatch
+);
+
+Then(
+  /^I expect the (?:ajax|xhr|network|api) (?:requests|calls)( with headers)? to the following paths to( not)? match the (?:reference|snapshot) "([^"]*)?":$/, RETRY(),
+  fn.thenNetworkCallsOnPathsSnapshotMatch
+);
+
+Then(
+  /^I expect the (?:ajax|xhr|network|api) (?:requests|calls)( with headers)? to( not)? match the (?:reference|snapshot) "([^"]*)?" with expressions:$/, RETRY(),
+  fn.thenNetworkCallsOnPathsSnapshotMatchExpressions
+);
+
+Then(
+  /^I expect to(?: still)? be(?: back)? (?:redirected to|on) the "([^"]*)?" (?:page|portal|site)$/, RETRY(),
+  fn.thenOnPage
+);
+
+Then(
+  /^I expect the site to be ready$/, RETRY(),
+  fn.thenSiteReady
+);
+
+Then(
+  /^I expect the (viewport|page) image to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
+  fn.thenSnapshotMatch
+);
+
+Then(
+  /^I expect the "([^"]*)?" site (local|session) storage item value to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
+  fn.thenStorageItemContaining
+);
+
+Then(
+  /^I expect the "([^"]*)?" site (local|session) storage item to( not)? (?:be existing|exist)$/, RETRY(),
+  fn.thenStorageItemExisting
+);
+
+Then(
+  /^I expect the "([^"]*)?" site (local|session) storage item value to( not)? be "([^"]*)?"$/, RETRY(),
+  fn.thenStorageItemEqual
+);
+
+Then(
+  /^I expect the (?:window|page) title to( not)? (?:be containing|contain) (?:the "([^"]*)?" page's title|"([^"]*)?")$/, RETRY(),
   fn.thenTitleContaining
 );
 
 Then(
-  /^I expect the (?:window|page) title to( not)? (?:be|match) (?:"([^"]*)?"|the "([^"]*)?" page's title)$/, RETRY(),
-  fn.thenTitleContaining
+  /^I expect the (?:window|page) title to( not)? (?:be|match) (?:the "([^"]*)?" page's title|"([^"]*)?")$/, RETRY(),
+  fn.thenTitleEqual
 );
 
-// Then(
-//   /^I expect the url to( not)? be containing (?:"([^"]*)?"|the "([^"]*)?" page's url|the base url)$/, RETRY(),
-//   windowUrlContains
-// );
+Then(
+  /^I expect the url to( not)? (?:be containing|contain) (?:the "([^"]*)?" page's url|"([^"]*)?"|the base url)$/, RETRY(),
+  fn.thenUrlContaining
+);
 
-// Then(
-//   /^I expect the url to( not)? (?:be|match) (?:"([^"]*)?"|the "([^"]*)?" page's url|the base url)$/, RETRY(),
-//   windowUrlEquals
-// );
+Then(
+  /^I expect the url to( not)? (?:be|match) (?:the "([^"]*)?" page's url|"([^"]*)?"|the base url)$/, RETRY(),
+  fn.thenUrlEqual
+);
 
-// Then(
-//   /^I expect the url path to( not)? be containing "([^"]*)?"$/, RETRY(),
-//   windowUrlPathContains
-// );
+Then(
+  /^I expect the url path to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
+  fn.thenUrlPathContaining
+);
 
-// Then(
-//   /^I expect the url path to( not)? be "([^"]*)?"$/, RETRY(),
-//   windowUrlPathEquals
-// );
+Then(
+  /^I expect the url path to( not)? be "([^"]*)?"$/, RETRY(),
+  fn.thenUrlPathEqual
+);

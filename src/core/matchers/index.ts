@@ -14,6 +14,9 @@ export default {
     expect.extend({ browserCookieToBeContaining: b.browserCookieToBeContaining });
     expect.extend({ browserCookieToBeEqual: b.browserCookieToBeEqual });
     expect.extend({ browserCookieToBeExisting: b.browserCookieToBeExisting });
+    expect.extend({ browserStorageItemToBeContaining: b.browserStorageItemToBeContaining });
+    expect.extend({ browserStorageItemToBeEqual: b.browserStorageItemToBeEqual });
+    expect.extend({ browserStorageItemToBeExisting: b.browserStorageItemToBeExisting });
     expect.extend({ browserTitleToBeContaining: b.browserTitleToBeContaining });
     expect.extend({ browserTitleToBeEqual: b.browserTitleToBeEqual });
     expect.extend({ browserToBeReady: b.browserToBeReady });
@@ -30,9 +33,12 @@ export default {
     expect.extend({ elementAttributeToBeEqual: e.elementAttributeToBeEqual });
     expect.extend({ elementAttributeToBeExisting: e.elementAttributeToBeExisting });
     expect.extend({ elementAxisLocationToBeEqual: e.elementAxisLocationToBeEqual });
+    expect.extend({ elementCountToBeEqual: e.elementCountToBeEqual });
     expect.extend({ elementCountToBeMoreThan: e.elementCountToBeMoreThan });
     expect.extend({ elementCountToBeLessThan: e.elementCountToBeLessThan });
     expect.extend({ elementCssPropertyToBeExisting: e.elementCssPropertyToBeExisting });
+    expect.extend({ elementSizeSideToBeEqual: e.elementSizeSideToBeEqual });
+    expect.extend({ elementSizeToBeEqual: e.elementSizeToBeEqual });
     expect.extend({ elementTextToBeContaining: e.elementTextToBeContaining });
     expect.extend({ elementTextToBeEqual: e.elementTextToBeEqual });
     expect.extend({ elementToBeDisplayed: e.elementToBeDisplayed });
@@ -46,7 +52,7 @@ export default {
   },
   addOtherMatchers: () => {
     expect.extend({ arrayToBeContaining: o.arrayToBeContaining });
-    expect.extend({ arrayToBeEquals: o.arrayToBeEquals });
+    expect.extend({ arrayToBeEqual: o.arrayToBeEqual });
     expect.extend({ conditionToBeTrue: o.conditionToBeTrue });
   }
 };

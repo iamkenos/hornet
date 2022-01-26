@@ -9,7 +9,7 @@ export class CookieExists extends ExpectedCondition {
     this.cookie = cookie;
     this.messageHeader = `Cookie: ${this.cookie}`;
   }
-
+ 
   public async evaluate() {
     try {
       this.actual = !!(await browser.getCookies([this.cookie])[0]);

@@ -1,5 +1,4 @@
-import { JS_MOUSE_CLICK, ClickWith, MouseButton } from "@core/commands";
-import _ from "lodash";
+import { JS_MOUSE_CLICK, ClickWith, ClickAction } from "@core/commands";
 
 export async function clickWith(this: WebdriverIO.Element, options?: ClickWith) {
   if (options?.move) {
@@ -7,16 +6,16 @@ export async function clickWith(this: WebdriverIO.Element, options?: ClickWith) 
   }
 
   switch (options?.button) {
-    case MouseButton.SCRIPT: {
+    case ClickAction.SCRIPT: {
       await browser.execute(JS_MOUSE_CLICK, this);
       break;
     }
-    case MouseButton.DOUBLE: {
+    case ClickAction.DOUBLE: {
       await this.doubleClick();
       break;
     }
     case null: {
-      await this.click({ ...options, button: "left" });
+      await this.click({ ...options, button: ClickAction.LEFT });
       break;
     }
     default: {

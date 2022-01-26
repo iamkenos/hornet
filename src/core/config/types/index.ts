@@ -28,15 +28,22 @@ export interface ConfigArgs {
 }
 
 interface ConfigRuntimeProps {
-  /** The active metadata as of execution. Used for reading generics' properties on built-in gherkin steps */
-  activeMeta?: string;
-  /** The active selector key as of execution. Used for stitching selectors given on built-in gherkin steps */
-  activeMetaSelectorKey?: string;
+  /** Used for storing and reading runtime properties */
+  runtime: {
+    /** The active metadata as of execution. Used for reading generics' properties on built-in gherkin steps */
+    activeMeta?: string;
+    /** The active selector key as of execution. Used for stitching selectors given on built-in gherkin steps */
+    activeMetaSelectorKey?: string;
+    /** The currently stored window size */
+    windowSize?: { width: number; height: number };
+    [key: string]: any;
+  };
 }
 
 export interface CustomConfig extends ConfigArgs, ConfigRuntimeProps {}
 
-interface NoOverrides extends CustomConfig, HookFunctions, HookFunctionExtension, CucumberOptions {
+interface NoOverrides extends CustomConfig, HookFunctions, HookFunctionExtension {
+  cucumberOpts: CucumberOptions;
 }
 
 export type Config = Omit<RecursivePartial<WebdriverIO.Config>, keyof NoOverrides>;
