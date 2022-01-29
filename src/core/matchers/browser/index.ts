@@ -4,6 +4,7 @@ export { browserAlertToBeExisting } from "./browserAlertToBeExisting";
 export { browserCookieToBeContaining } from "./browserCookieToBeContaining";
 export { browserCookieToBeEqual } from "./browserCookieToBeEqual";
 export { browserCookieToBeExisting } from "./browserCookieToBeExisting";
+export { browserSnapshotToMatch } from "./browserSnapshotToMatch";
 export { browserStorageItemToBeContaining } from "./browserStorageItemToBeContaining";
 export { browserStorageItemToBeEqual } from "./browserStorageItemToBeEqual";
 export { browserStorageItemToBeExisting } from "./browserStorageItemToBeExisting";

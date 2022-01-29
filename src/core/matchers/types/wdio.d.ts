@@ -1,4 +1,5 @@
-import { Axis, BrowserStorage, SizeContext } from "@core/commands";
+import { Axis, BrowserStorage, SizeContext, ImageCompareContext } from "@core/commands";
+import { ImageSnapshotOptions } from "@core/conditions";
 declare global {
   
   namespace ExpectWebdriverIO {
@@ -9,6 +10,7 @@ declare global {
       browserCookieToBeContaining(cookie: string, expected: string): R;
       browserCookieToBeEqual(cookie: string, expected: string): R;
       browserCookieToBeExisting(cookie: string): R;
+      browserSnapshotToMatch(context: ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT, filename: string, options?: ImageSnapshotOptions[ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT]): R;
       browserStorageItemToBeContaining(context: BrowserStorage, key: string, expected: string): R;
       browserStorageItemToBeEqual(context: BrowserStorage, key: string, expected: string): R;
       browserStorageItemToBeExisting(context: BrowserStorage, key: string): R;
@@ -33,6 +35,7 @@ declare global {
       elementCssPropertyToBeExisting(cssProperty: string): R;
       elementSizeSideToBeEqual(side: SizeContext, expected: number): R;
       elementSizeToBeEqual(width: number, height: number): R;
+      elementSnapshotToMatch(filename: string, options?: ImageSnapshotOptions[ImageCompareContext.ELEMENT]): R;
       elementTextToBeContaining(expected: string): R;
       elementTextToBeEqual(expected: string): R;
       elementToBeDisplayed(): R;

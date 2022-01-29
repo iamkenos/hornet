@@ -14,6 +14,7 @@ export default {
     expect.extend({ browserCookieToBeContaining: b.browserCookieToBeContaining });
     expect.extend({ browserCookieToBeEqual: b.browserCookieToBeEqual });
     expect.extend({ browserCookieToBeExisting: b.browserCookieToBeExisting });
+    expect.extend({ browserSnapshotToMatch: b.browserSnapshotToMatch });
     expect.extend({ browserStorageItemToBeContaining: b.browserStorageItemToBeContaining });
     expect.extend({ browserStorageItemToBeEqual: b.browserStorageItemToBeEqual });
     expect.extend({ browserStorageItemToBeExisting: b.browserStorageItemToBeExisting });
@@ -39,6 +40,7 @@ export default {
     expect.extend({ elementCssPropertyToBeExisting: e.elementCssPropertyToBeExisting });
     expect.extend({ elementSizeSideToBeEqual: e.elementSizeSideToBeEqual });
     expect.extend({ elementSizeToBeEqual: e.elementSizeToBeEqual });
+    expect.extend({ elementSnapshotToMatch: e.elementSnapshotToMatch });
     expect.extend({ elementTextToBeContaining: e.elementTextToBeContaining });
     expect.extend({ elementTextToBeEqual: e.elementTextToBeEqual });
     expect.extend({ elementToBeDisplayed: e.elementToBeDisplayed });

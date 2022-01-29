@@ -5,6 +5,7 @@ export { CookieContains } from "./cookieContains";
 export { CookieEquals } from "./cookieEquals";
 export { CookieExists } from "./cookieExists";
 export { DocumentReady } from "./documentReady";
+export { SnapshotMatch } from "./snapshotMatch";
 export { StorageItemContains } from "./storageItemContains";
 export { StorageItemEquals } from "./storageItemEquals";
 export { StorageItemExists } from "./storageItemExists";

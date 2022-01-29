@@ -13,18 +13,39 @@ import { filesFromGlob, logger, MimeType } from "@core/common";
 import { ConfigArgs } from "@core/config";
 
 const reporters = { spec: "spec", allure: "allure", junit: "junit" };
-const outputDirectories = { reports: ".reports", html: "report" };
-const defaults = (directory: ConfigArgs["directory"]): ConfigArgs => ({
-  directory: directory,
+
+const outputDirs = {
+  reports: { root: ".reports", html: "report" },
+  snapshots: { root: ".snapshots", baseline: "baseline", actual: "actual", diff: "diff" }
+};
+
+const defaults: ConfigArgs = {
+  baseDir: process.cwd(),
   debug: false,
   locale: "default",
-  metadata: filesFromGlob(["./fixtures/**/*.meta.ts"], directory),
+  metadata: ["./fixtures/**/*.meta.ts"],
+  reportOutDir: outputDirs.reports.root,
+  reportIssueLink: undefined,
   steps: [],
   stepRetries: 0,
   stepTimeout: 30000,
+  snapshots: {
+    requests: {
+      outDir: "json",
+      skipCompare: false
+    },
+    responses: {
+      outDir: "json",
+      skipCompare: false
+    },
+    images: {
+      outDir: "images",
+      usePlatformDir: false,
+      skipCompare: false,
+      options: { ignoreAntialiasing: true, returnAllCompareData: true, saveAboveTolerance: 0 }
+    }
+  },
   tags: "",
-  reportOutDir: outputDirectories.reports,
-  reportIssueLink: undefined,
   hooks: {
     onPrepare: () => {},
     beforeSession: () => {},
@@ -42,10 +63,30 @@ const defaults = (directory: ConfigArgs["directory"]): ConfigArgs => ({
     onComplete: () => {},
     onReload: () => {}
   }
-});
+};
 
-export const base = (custom: ConfigArgs): WebdriverIO.Config => {
-  const merged = merge<ConfigArgs, ConfigArgs>(defaults(custom.directory), custom);
+const getResolvedDir = (...paths: string[]) => path.join(global.baseDir, ...paths);
+
+const mergeWithDefaults = (args: ConfigArgs): Pick<WebdriverIO.Config, keyof ConfigArgs> => {
+  const merged: Pick<WebdriverIO.Config, keyof ConfigArgs> = merge<any, ConfigArgs, ConfigArgs>({}, defaults, args);
+  const { actual, baseline, diff, root } = outputDirs.snapshots;
+
+  // resolve directories
+  merged.metadata = filesFromGlob(merged.metadata, args.baseDir);
+  merged.reportOutDir = getResolvedDir(merged.reportOutDir);
+  merged.steps = filesFromGlob(merged.steps, args.baseDir);
+  Object.keys(merged.snapshots).forEach((key: keyof typeof merged.snapshots) => {
+    merged.snapshots[key].outDir = getResolvedDir(root, merged.snapshots[key].outDir);
+    merged.snapshots[key].actualDir = path.join(merged.snapshots[key].outDir, actual);
+    merged.snapshots[key].baselineDir = path.join(merged.snapshots[key].outDir, baseline);
+    merged.snapshots[key].diffDir = path.join(merged.snapshots[key].outDir, diff);
+  });
+  return merged;
+};
+
+export const base = (args: ConfigArgs): WebdriverIO.Config => {
+  global.baseDir = args.baseDir;
+  const merged = mergeWithDefaults(args);
   return {
     //
     // ====================
@@ -75,11 +116,9 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
     // then the current working directory is where your `package.json` resides, so `wdio`
     // will be called from there.
     //
-    specs: [],
+    // specs: [],
     // Patterns to exclude.
-    exclude: [
-      // 'path/to/excluded/files'
-    ],
+    // exclude: [],
     //
     // ============
     // Capabilities
@@ -121,7 +160,7 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
             "--enable-speech-dispatcher",
             "--incognito"
           ],
-          binary: process.env.CI ? process.env.CHROMIUM_BIN : undefined
+          binary: process.env.CHROMIUM_BIN
         }
       }
     ],
@@ -180,7 +219,16 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
           args: { drivers: { chrome: { version: "latest" } } }
         }
       ],
-      "image-comparison"
+      [
+        "image-comparison",
+        {
+          screenshotPath: merged.snapshots.images.outDir,
+          actualFolder: merged.snapshots.images.actualDir,
+          baselineFolder: merged.snapshots.images.baselineDir,
+          diffFolder: merged.snapshots.images.diffDir,
+          formatImageName: "{tag}"
+        }
+      ]
     ],
 
     // Framework you want to run your specs with.
@@ -208,7 +256,7 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
       [
         reporters.junit,
         {
-          outputDir: path.join(merged.directory, merged.reportOutDir, reporters.junit),
+          outputDir: path.join(merged.reportOutDir, reporters.junit),
           outputFileFormat: (options: any) => `wdio-${options.cid}-junit-reporter.xml`
         }
       ],
@@ -218,7 +266,7 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
           disableWebdriverStepsReporting: true,
           disableWebdriverScreenshotsReporting: false,
           useCucumberStepReporter: true,
-          outputDir: path.join(merged.directory, merged.reportOutDir, reporters.allure),
+          outputDir: path.join(merged.reportOutDir, reporters.allure),
           issueLinkTemplate: merged.reportIssueLink
         }
       ]
@@ -229,8 +277,8 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
       // <string[]> (file/dir) require files before executing features
       require: [
         ...filesFromGlob(["../gherkin/**/*.def.ts"], __dirname, true),
-        ...filesFromGlob(["./fixtures/**/*.def.ts"], merged.directory),
-        ...filesFromGlob(merged.steps, merged.directory)
+        ...filesFromGlob(["./fixtures/**/*.def.ts"], merged.baseDir),
+        ...merged.steps
       ],
       // <boolean> show full backtrace for errors
       backtrace: false,
@@ -273,8 +321,14 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
      * @param {Object}         config       wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    onPrepare: async function (config, capabilities) {
-      fs.removeSync(path.join(merged.directory, merged.reportOutDir));
+    onPrepare: async function (config: WebdriverIO.Config, capabilities) {
+      const { reportOutDir, snapshots } = config;
+      fs.removeSync(reportOutDir);
+      Object.keys(snapshots).forEach((key: keyof typeof snapshots) => {
+        fs.removeSync(snapshots[key].actualDir);
+        fs.removeSync(snapshots[key].diffDir);
+        fs.mkdirsSync(snapshots[key].baselineDir);
+      });
 
       const { onPrepare } = merged.hooks as any;
       await onPrepare(config, capabilities);
@@ -466,10 +520,9 @@ export const base = (custom: ConfigArgs): WebdriverIO.Config => {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>}       results      object containing test results
      */
-    onComplete: async function (exitCode, config, capabilities, results) {
-      let resolved: WebdriverIO.Config = config as any;
-      const raw = path.join(resolved.directory, resolved.reportOutDir, reporters.allure);
-      const html = path.join(raw, outputDirectories.html);
+    onComplete: async function (exitCode, config: WebdriverIO.Config, capabilities, results) {
+      const raw = path.join(config.reportOutDir, reporters.allure);
+      const html = path.join(raw, outputDirs.reports.html);
       await allureCli(["-q", "generate", raw, "-c", "-o", html]);
 
       const { onComplete } = merged.hooks as any;

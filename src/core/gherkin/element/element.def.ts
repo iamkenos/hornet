@@ -139,7 +139,7 @@ Then(
 );
 
 Then(
-  /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" element image to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
+  /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" element(?: image)? to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
   fn.thenSnapshotMatch
 );
 

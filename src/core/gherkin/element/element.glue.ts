@@ -317,13 +317,13 @@ export async function thenHrefOpensPointsToPage(meta: string, key: string, type:
   await then.elementAttributeToBeEqual(AnchorAttributes.HREF, new URL(value).pathname);
 }
 
-export async function thenSnapshotMatch(meta: string, key: string, not: string, file: string) {
+export async function thenSnapshotMatch(meta: string, key: string, not: string, filename: string) {
   const selector = getSelector(meta, key);
   const webelement = new WebElement(selector);
   const element = await webelement.$;
   const then = not ? expect(element).not : expect(element);
 
-  throw new Error('pending');
+  await then.elementSnapshotToMatch(filename);
 }
 
 export async function thenOptionSelected(option: string, context: SelectOptionContext, value: string, meta: string, key: string, not: string) {

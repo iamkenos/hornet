@@ -8,6 +8,7 @@ export { elementAxisLocationToBeEqual } from "./elementAxisLocationToBeEqual";
 export { elementCssPropertyToBeExisting } from "./elementCssPropertyToBeExisting";
 export { elementSizeSideToBeEqual } from "./elementSizeSideToBeEqual";
 export { elementSizeToBeEqual } from "./elementSizeToBeEqual";
+export { elementSnapshotToMatch } from "./elementSnapshotToMatch";
 export { elementTextToBeContaining } from "./elementTextToBeContaining";
 export { elementTextToBeEqual } from "./elementTextToBeEqual";
 export { elementToBeDisplayed } from "./elementToBeDisplayed";

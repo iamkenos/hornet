@@ -1,5 +1,5 @@
-import { filesFromGlob } from "@core/common";
+import path from "path";
 
 export async function uploadFile(this: WebdriverIO.Element, filepath: string) {
-  await this.setValue(filesFromGlob([filepath], browser.config.directory));
+  await this.setValue(path.join(browser.config.baseDir, filepath));
 }

@@ -22,9 +22,9 @@ export abstract class ExpectedCondition {
 
   private getMessage() {
     return `
-  Condition: ${this.preferred ? "" : "(Not) "}${this.name}${this.messageHeader ? `\n  ${this.messageHeader}` : ``}
+  Condition: ${this.name}${this.messageHeader ? `\n  ${this.messageHeader}` : ``}
   Result: ${this.passed ? "Success" : "Failed"}
-  Expected: ${this.expected instanceof Array ? `\n${this.expected.map((i: string) => `    ${i}`).join("\n")}` : this.expected}
+  Expected${this.preferred ? "" : " (Not)"}: ${this.expected instanceof Array ? `\n${this.expected.map((i: string) => `    ${i}`).join("\n")}` : this.expected}
   Actual: ${this.actual instanceof Array ? `\n${this.actual.map((i: string) => `    ${i}`).join("\n")}` : this.actual}`;
   }
 

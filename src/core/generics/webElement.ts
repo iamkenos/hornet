@@ -29,11 +29,12 @@ export class WebElement {
     return new WebElement(selector);
   }
 
-  public async byMatchingAttribute(kvp: KVP) {
+  public async byMatchingAttribute(kvp: KVP, partial = false) {
     const webelements = await this.all;
     const webelement = await arrayFind(webelements, async (webelement) => {
       const element = await webelement.$;
-      return (await element.getAttribute(kvp.key)) === kvp.value;
+      const result = await element.getAttribute(kvp.key);
+      return partial ? result.includes(kvp.value) : result === kvp.value;
     });
 
     if (!webelement) {
@@ -42,43 +43,24 @@ export class WebElement {
     return webelement;
   }
 
-  public async byMatchingText(text: string) {
+  public async byMatchingId(value: string, partial = false) {
+    return await this.byMatchingAttribute({ key: "id", value }, partial);
+  }
+
+  public async byMatchingName(value: string, partial = false) {
+    return await this.byMatchingAttribute({ key: "name", value }, partial);
+  }
+
+  public async byMatchingText(text: string, partial = false) {
     const webelements = await this.all;
     const webelement = await arrayFind(webelements, async (webelement) => {
       const element = await webelement.$;
-      return (await element.getText()) === text;
+      const result = await element.getText();
+      return partial ? result.includes(text) : result === text;
     });
 
     if (!webelement) {
       throw new Error(`WebElement matching the text "${text}" not found on ${this.selector}`);
-    }
-    return webelement;
-  }
-
-  public async byMatchingPartialAttribute(kvp: KVP) {
-    const webelements = await this.all;
-    const webelement = await arrayFind(webelements, async (webelement) => {
-      const element = await webelement.$;
-      return (await element.getAttribute(kvp.key)).includes(kvp.value);
-    });
-
-    if (!webelement) {
-      throw new Error(
-        `WebElement partially matching the attribute "${kvp.key}" as "${kvp.value}" not found on ${this.selector}`
-      );
-    }
-    return webelement;
-  }
-
-  public async byMatchingPartialText(text: string) {
-    const webelements = await this.all;
-    const webelement = await arrayFind(webelements, async (webelement) => {
-      const element = await webelement.$;
-      return (await element.getText()).includes(text);
-    });
-
-    if (!webelement) {
-      throw new Error(`WebElement partiallymatching the text "${text}" not found on ${this.selector}`);
     }
     return webelement;
   }

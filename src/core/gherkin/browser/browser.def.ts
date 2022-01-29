@@ -209,7 +209,7 @@ Then(
 );
 
 Then(
-  /^I expect the (viewport|page) image to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
+  /^I expect the (viewport|page)(?: image)? to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
   fn.thenSnapshotMatch
 );
 

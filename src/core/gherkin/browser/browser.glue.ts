@@ -285,9 +285,10 @@ export async function thenSiteReady() {
   await then.browserToBeReady();
 }
 
-export async function thenSnapshotMatch(context: ImageCompareContext, not: string, filename: string) {
+export async function thenSnapshotMatch(context: ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT, not: string, filename: string) {
   const then = not ? expect(browser).not : expect(browser);
-  throw new Error("pending");
+
+  await then.browserSnapshotToMatch(context, filename);
 }
 
 export async function thenStorageItemContaining(context: BrowserStorage, key: string, not: string, value: string) {

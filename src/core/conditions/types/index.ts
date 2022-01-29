@@ -1,3 +1,17 @@
+import type {
+  WdioCheckFullPageMethodOptions,
+  WdioCheckScreenMethodOptions,
+  WdioCheckElementMethodOptions
+} from "wdio-image-comparison-service";
+
+export type { ImageCompareResult } from "webdriver-image-comparison";
+
+export interface ImageSnapshotOptions {
+  page: WdioCheckFullPageMethodOptions;
+  viewport: WdioCheckScreenMethodOptions;
+  element: WdioCheckElementMethodOptions;
+};
+
 export type EvaluationResult = {
   name: string;
   actual: any;
@@ -8,4 +22,4 @@ export type EvaluationResult = {
 
 export type CustomConditionFunction = () => Promise<CustomConditionResult>;
 
-export type CustomConditionResult = Pick<EvaluationResult, "actual" | "expected" | "passed">
+export type CustomConditionResult = Pick<EvaluationResult, "actual" | "expected" | "passed">;
