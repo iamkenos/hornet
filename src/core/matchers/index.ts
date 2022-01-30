@@ -14,6 +14,9 @@ export default {
     expect.extend({ browserCookieToBeContaining: b.browserCookieToBeContaining });
     expect.extend({ browserCookieToBeEqual: b.browserCookieToBeEqual });
     expect.extend({ browserCookieToBeExisting: b.browserCookieToBeExisting });
+    expect.extend({ browserGoogleAnalyticsToMatch: b.browserGoogleAnalyticsToMatch });
+    expect.extend({ browserHttpResponseToMatch: b.browserHttpResponseToMatch });
+    expect.extend({ browserNetworkRequestsToMatch: b.browserNetworkRequestsToMatch });
     expect.extend({ browserSnapshotToMatch: b.browserSnapshotToMatch });
     expect.extend({ browserStorageItemToBeContaining: b.browserStorageItemToBeContaining });
     expect.extend({ browserStorageItemToBeEqual: b.browserStorageItemToBeEqual });
@@ -56,5 +59,6 @@ export default {
     expect.extend({ arrayToBeContaining: o.arrayToBeContaining });
     expect.extend({ arrayToBeEqual: o.arrayToBeEqual });
     expect.extend({ conditionToBeTrue: o.conditionToBeTrue });
+    expect.extend({ jsonSnapshotToMatch: o.jsonSnapshotToMatch });
   }
 };

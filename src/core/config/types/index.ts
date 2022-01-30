@@ -5,6 +5,7 @@ import type {
 } from "wdio-image-comparison-service";
 import type { Hooks, HookFunctions } from "@wdio/types/build/Services";
 import type { HookFunctionExtension, CucumberOptions } from "@wdio/cucumber-framework/build/types";
+import type { PreFilterFunction } from "deep-diff";
 import type { RecursivePartial } from "@core/common";
 
 type SnapshotDirectories = {
@@ -27,9 +28,9 @@ type Snapshots = {
   /** Object containing properties of comparable files */
   snapshots?: {
     /** Options used for comparing intercepted network requests */
-    requests?: SnapshotOptions;
+    requests?: NetworkRequestSnapshotOptions;
     /** Options used for comparing http responses */
-    responses?: SnapshotOptions;
+    responses?: JsonSnapshotOptions;
     /** Options used for comparing images */
     images?: ImageSnapshotOptions;
   };
@@ -39,19 +40,40 @@ type RestrictedSnapshots = {
   /** Object containing properties of comparable files */
   snapshots?: {
     /** Options used for comparing intercepted network requests */
-    requests?: Omit<SnapshotOptions, keyof SnapshotDirectories>;
+    requests?: Omit<NetworkRequestSnapshotOptions, keyof SnapshotDirectories>;
     /** Options used for comparing http responses */
-    responses?: Omit<SnapshotOptions, keyof SnapshotDirectories>;
+    responses?: Omit<JsonSnapshotOptions, keyof SnapshotDirectories>;
     /** Options used for comparing images */
     images?: Omit<ImageSnapshotOptions, keyof SnapshotDirectories>;
   };
 };
 
-export type ImageSnapshotOptions = SnapshotOptions & {
+export type ImageSnapshotOptions = SnapshotOptions & WdioCheckElementMethodOptions & WdioCheckFullPageMethodOptions & WdioCheckScreenMethodOptions & {
   /** If true, adds platform e.g. mac, lin, win on the snapshot output directory */
   usePlatformDir?: boolean;
-  /** Global options to use when comparing images */
-  options?: WdioCheckElementMethodOptions | WdioCheckFullPageMethodOptions | WdioCheckScreenMethodOptions;
+};
+
+export type JsonSnapshotOptions = SnapshotOptions & {
+  /** Conditional diffing based on [jsonpath](https://www.npmjs.com/package/jsonpath) and regex  */
+  regex?: {
+    paths: string[],
+    expressions: string[]
+  };
+  /** Same as `deep-diff`'s [prefilter](https://www.npmjs.com/package/deep-diff#pre-filtering-object-properties) function */
+  prefilter?: PreFilterFunction;
+};
+
+export type NetworkRequestsIncludedProps = {
+  [key in Exclude<keyof WdioInterceptorService.CompletedRequest, "pending" | "response">]?: boolean;
+}
+
+export type NetworkRequestSnapshotOptions = JsonSnapshotOptions & {
+  /** Whether to apply sort before diffing */
+  sort?: boolean;
+  /** Request props to include in the captured snapshot */
+  include?: NetworkRequestsIncludedProps
+  /** Filter only the requests to following paths when doing the diff */
+  paths?: string[];
 };
 
 export interface ConfigArgs extends RestrictedSnapshots {

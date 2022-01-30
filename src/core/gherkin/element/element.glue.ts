@@ -14,7 +14,8 @@ import {
   SetValueAction,
   SizeContext
 } from "@core/commands";
-import { ExpectedConditions, Selected, isURL } from "@core/conditions";
+import { isURL }  from "@core/common";
+import { ExpectedConditions, Selected } from "@core/conditions";
 import { WebElement, getSelector, getLabel, getUrl } from "@core/generics";
 import { BY_LINK_TEXT, parseToken } from "@core/gherkin";
 

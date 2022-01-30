@@ -21,6 +21,8 @@ export default {
     browser.addCommand(b.scrollTo.name, b.scrollTo);
     browser.addCommand(b.scrollToBottom.name, b.scrollToBottom);
     browser.addCommand(b.scrollToTop.name, b.scrollToTop);
+    browser.addCommand(b.sendRequest.name, b.sendRequest);
+    browser.addCommand(b.setCookie.name, b.setCookie);
     browser.addCommand(b.setLocalStorageItem.name, b.setLocalStorageItem);
     browser.addCommand(b.setSessionStorageItem.name, b.setSessionStorageItem);
     browser.addCommand(b.storeWindowSize.name, b.storeWindowSize);

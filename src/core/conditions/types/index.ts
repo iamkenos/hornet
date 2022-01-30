@@ -6,7 +6,7 @@ import type {
 
 export type { ImageCompareResult } from "webdriver-image-comparison";
 
-export interface ImageSnapshotOptions {
+export type ImageSnapshotContextOptions = {
   page: WdioCheckFullPageMethodOptions;
   viewport: WdioCheckScreenMethodOptions;
   element: WdioCheckElementMethodOptions;

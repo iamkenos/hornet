@@ -32,17 +32,31 @@ const defaults: ConfigArgs = {
   snapshots: {
     requests: {
       outDir: "json",
-      skipCompare: false
+      skipCompare: false,
+      sort: true,
+      regex: undefined,
+      prefilter: undefined,
+      paths: [],
+      include: {
+        url: true,
+        method: true,
+        headers: false,
+        body: true,
+      }
     },
     responses: {
       outDir: "json",
-      skipCompare: false
+      skipCompare: false,
+      regex: undefined,
+      prefilter: undefined,
     },
     images: {
       outDir: "images",
       usePlatformDir: false,
       skipCompare: false,
-      options: { ignoreAntialiasing: true, returnAllCompareData: true, saveAboveTolerance: 0 }
+      ignoreAntialiasing: true,
+      returnAllCompareData: true,
+      saveAboveTolerance: 0
     }
   },
   tags: "",
@@ -212,6 +226,8 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: [
+      "devtools",
+      "intercept",
       [
         "selenium-standalone",
         {

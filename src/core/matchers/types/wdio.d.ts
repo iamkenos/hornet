@@ -1,5 +1,6 @@
-import { Axis, BrowserStorage, SizeContext, ImageCompareContext } from "@core/commands";
-import { ImageSnapshotOptions } from "@core/conditions";
+import { Axis, BrowserStorage, SizeContext, ImageCompareContext, HttpRequestOptions } from "@core/commands";
+import { NetworkRequestSnapshotOptions, JsonSnapshotOptions } from "@core/config";
+import { ImageSnapshotContextOptions } from "@core/conditions";
 declare global {
   
   namespace ExpectWebdriverIO {
@@ -10,7 +11,10 @@ declare global {
       browserCookieToBeContaining(cookie: string, expected: string): R;
       browserCookieToBeEqual(cookie: string, expected: string): R;
       browserCookieToBeExisting(cookie: string): R;
-      browserSnapshotToMatch(context: ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT, filename: string, options?: ImageSnapshotOptions[ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT]): R;
+      browserGoogleAnalyticsToMatch(filename: string, event?: string, options?: NetworkRequestSnapshotOptions): R;
+      browserHttpResponseToMatch(filename: string, request: HttpRequestOptions, options?: JsonSnapshotOptions): R;
+      browserNetworkRequestsToMatch(filename: string, options?: NetworkRequestSnapshotOptions): R;
+      browserSnapshotToMatch(context: ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT, filename: string, options?: ImageSnapshotContextOptions[ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT]): R;
       browserStorageItemToBeContaining(context: BrowserStorage, key: string, expected: string): R;
       browserStorageItemToBeEqual(context: BrowserStorage, key: string, expected: string): R;
       browserStorageItemToBeExisting(context: BrowserStorage, key: string): R;
@@ -35,7 +39,7 @@ declare global {
       elementCssPropertyToBeExisting(cssProperty: string): R;
       elementSizeSideToBeEqual(side: SizeContext, expected: number): R;
       elementSizeToBeEqual(width: number, height: number): R;
-      elementSnapshotToMatch(filename: string, options?: ImageSnapshotOptions[ImageCompareContext.ELEMENT]): R;
+      elementSnapshotToMatch(filename: string, options?: ImageSnapshotContextOptions[ImageCompareContext.ELEMENT]): R;
       elementTextToBeContaining(expected: string): R;
       elementTextToBeEqual(expected: string): R;
       elementToBeDisplayed(): R;
@@ -49,6 +53,7 @@ declare global {
 
       arrayToBeContaining(expected: any[]): R;
       arrayToBeEqual(expected: any[]): R;
+      jsonSnapshotToMatch(filename: string, options: JsonSnapshotOptions): R;
       customConditionToBeTrue(): R;
     }
   }

@@ -38,6 +38,6 @@ export class ExpectedConditionsResult {
 Expression: ${this.name}
 ${this.selector ? `Selector: ${this.selector}` : `Session: ${browser.sessionId}`}
 Conditions Summary: ${success}/${total}
-${total === 0 ? e.message : results.map((result) => result.message).join("------------------------------")}`;
+${total === 0 ? e.message : results.map((result) => result.message).join("\n  ------------------------------")}`;
   }
 }

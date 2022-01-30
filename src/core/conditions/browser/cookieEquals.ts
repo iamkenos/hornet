@@ -12,7 +12,8 @@ export class CookieEquals extends ExpectedCondition {
 
   public async evaluate() {
     try {
-      this.actual = await browser.getCookies([this.cookie])[0].value;
+      const [ cookie ] = await browser.getCookies([this.cookie]);
+      this.actual = cookie?.value;
       this.passed = this.preferred ? this.actual === this.expected : this.actual !== this.expected;
     } catch (e) {
       this.actual = e.message;

@@ -1,5 +1,6 @@
 import glob from "glob";
 import path from "path";
+import fs from "fs-extra";
 
 import { logger } from "@core/common";
 
@@ -22,4 +23,8 @@ export function filesFromGlob(fileGlob: string[], baseDir: string = process.cwd(
   }
 
   return [...resolved];
+}
+
+export function readFileSync(path: string): string {
+  return fs.readFileSync(path, "utf8");
 }

@@ -49,7 +49,7 @@ export async function whenNavigate(navigate: WindowNavigation, count: string) {
 }
 
 export async function whenObserveNetwork() {
-  throw new Error("pending");
+  await browser.setupInterceptor();
 }
 
 export async function whenOpen(meta: string, url?: string) {
@@ -243,12 +243,14 @@ export async function thenCountLessOrMore(not: string, count: Count, value: numb
 /** @see  [GA > Dev Guides > Parameters](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters)*/
 export async function thenGAEntriesSnapshotMatch(event: string, not: string, filename: string) {
   const then = not ? expect(browser).not : expect(browser);
-  throw new Error("pending");
+
+  await then.browserGoogleAnalyticsToMatch(filename, event);
 }
 
-export async function thenHttpResponseSnapshotMatch(not: string, filename: string, opts: string) {
+export async function thenHttpResponseSnapshotMatch(not: string, filename: string, request: string) {
   const then = not ? expect(browser).not : expect(browser);
-  throw new Error("pending");
+  
+  await then.browserHttpResponseToMatch(filename, JSON.parse(request));
 }
 
 export async function thenOnPage(meta: string) {
@@ -260,23 +262,26 @@ export async function thenOnPage(meta: string) {
 }
 
 export async function thenNetworkCallsSnapshotMatch(header: string, not: string, filename: string) {
-  const then = not ? expect(browser).not : expect(browser);
   const headers = !!header;
-  throw new Error("pending");
+  const then = not ? expect(browser).not : expect(browser);
+
+  await then.browserNetworkRequestsToMatch(filename, { include: { headers } })
 }
 
 export async function thenNetworkCallsOnPathsSnapshotMatch(header: string, not: string, filename: string, table: DataTable) {
   const paths = getDataTableRows(table, 1);
   const headers = !!header;
   const then = not ? expect(browser).not : expect(browser);
-  throw new Error("pending");
+
+  await then.browserNetworkRequestsToMatch(filename, { paths, include: { headers } })
 }
 
 export async function thenNetworkCallsOnPathsSnapshotMatchExpressions(header: string, not: string, filename: string, table: DataTable) {
   const regex = { paths: getDataTableRows(table, 1), expressions: getDataTableRows(table, 2) };
   const headers = !!header;
   const then = not ? expect(browser).not : expect(browser);
-  throw new Error("pending");
+  
+  await then.browserNetworkRequestsToMatch(filename, { regex, include: { headers } })
 }
 
 export async function thenSiteReady() {

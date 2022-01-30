@@ -5,6 +5,8 @@ export { CookieContains } from "./cookieContains";
 export { CookieEquals } from "./cookieEquals";
 export { CookieExists } from "./cookieExists";
 export { DocumentReady } from "./documentReady";
+export { GoogleAnalyticsMatch } from "./googleAnalyticsMatch";
+export { NetworkRequestsMatch } from "./networkRequestsMatch";
 export { SnapshotMatch } from "./snapshotMatch";
 export { StorageItemContains } from "./storageItemContains";
 export { StorageItemEquals } from "./storageItemEquals";
