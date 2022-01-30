@@ -6,4 +6,6 @@ logs
 node_modules/
 
 # Misc
-.reports
+**/.reports
+**/.snapshots/**/actual
+**/.snapshots/**/diff

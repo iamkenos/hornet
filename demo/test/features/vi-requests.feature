@@ -6,7 +6,7 @@ Feature: VI. Requests
       And I expect the section header "VI. Requests" to be existing
 
   Scenario: Send HTTP request by providing a path relative to the base url
-    Then I expect the response to the following request to match the snapshot "06-requests/01-get-iframe":
+    Then I expect the response to the following request to match the snapshot "06-requests/get-iframe":
       """
       {
         "url": "/iframe.html"
@@ -14,7 +14,7 @@ Feature: VI. Requests
       """
 
   Scenario: Send HTTP requests to a completely external url
-    Then I expect the response to the following request to not match the snapshot "06-requests/02-get-reqres-users":
+    Then I expect the response to the following request to not match the snapshot "06-requests/get-reqres-users":
       """
       {
         "url": "https://reqres.in/api/users",
@@ -23,7 +23,7 @@ Feature: VI. Requests
         }
       }
       """
-      And I expect the response to the following request to match the snapshot "06-requests/02-post-reqres-register":
+      And I expect the response to the following request to match the snapshot "06-requests/post-reqres-register":
       """
       {
         "url": "https://reqres.in/api/register",
@@ -39,12 +39,12 @@ Feature: VI. Requests
   Scenario: Intercept AJAX requests sent on button click
     When I start observing the network requests
       And I click the "#ajaxSubmitBtn" button
-    Then I expect the network requests with headers to match the snapshot "06-requests/03-post-reqres-login"
+    Then I expect the network requests with headers to match the snapshot "06-requests/reqres-login"
 
   Scenario: Intercept AJAX requests sent on button click and match dynamically
     When I start observing the api calls
       And I click the "#ajaxSubmitBtn" button
-    Then I expect the api calls to match the snapshot "06-requests/04-post-reqres-login" with expressions:
+    Then I expect the api calls to match the snapshot "06-requests/reqres-login-filtered" with expressions:
       | JSON Path   | Expression |
       | $[0].method | POST       |
       | $[0].body   | ^.+$       |
@@ -52,7 +52,7 @@ Feature: VI. Requests
   Scenario: Intercept AJAX requests sent on button click and match with filtered paths
     When I start to intercept ajax requests
       And I click the "#ajaxSubmitBtn" button
-    Then I expect the ajax requests with headers to the following paths to match the snapshot "06-requests/03-post-reqres-login":
+    Then I expect the ajax requests with headers to the following paths to match the snapshot "06-requests/reqres-login":
       | URL Path   |
       | /api/login |
 
@@ -89,4 +89,4 @@ Feature: VI. Requests
   Scenario: Check google analytics tracking
     When I start to intercept ajax requests
       And I refresh the page
-    Then I expect the captured google analytics to not match the snapshot "06-requests/05-ga-tracking"
+    Then I expect the captured google analytics to not match the snapshot "06-requests/ga-tracking"

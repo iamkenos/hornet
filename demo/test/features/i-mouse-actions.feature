@@ -92,17 +92,17 @@ Feature: I. Mouse Actions
     Then I expect the "#draggableBoxDest" element text to be "This text is changed by [draggableBox]..."
       And I expect the "#draggableBoxDest" element location at x axis to be 532.5
       And I expect the "#draggableBoxDest" element location at x axis to not be 255.5
-      And I expect the "#draggableBoxDest" element location at y axis to be 2429
+      And I expect the "#draggableBoxDest" element location at y axis to be 2409
       And I expect the "#draggableBoxDest" element location at y axis to not be 255.5
       And I expect the page title to contain "emo Pag"
       And I expect the page title to contain the "demo" page's title
 
   Scenario: Move to be existing element
     When I move to the "#moveToElementBox" element
-    Then I expect the "#moveToElementBoxDest" element text to be "X: 540 | Y: 2752"
+    Then I expect the "#moveToElementBoxDest" element text to be "X: 540 | Y: 2732"
       But I move to the "h3=Move To" element
       And I move to the "#moveToElementBox" element with an offset of 5,10
-    Then I expect the "#moveToElementBoxDest" element text to be "X: 477 | Y: 2739"
+    Then I expect the "#moveToElementBoxDest" element text to be "X: 477 | Y: 2719"
 
   Scenario: Scroll to be existing element
     When I scroll to the "#scrollToElementBox" element
