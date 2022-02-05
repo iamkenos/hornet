@@ -15,5 +15,10 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "[feature]": { "editor.defaultFormatter": "alexkrechik.cucumberautocomplete", "editor.formatOnSave": true },
   "[javascript]": { "editor.formatOnSave": false },
-  "[typescript]": { "editor.formatOnSave": false }
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  }
 }
