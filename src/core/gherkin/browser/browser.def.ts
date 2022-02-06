@@ -4,7 +4,7 @@ import { RETRY } from "@core/gherkin";
 import * as fn from "./browser.glue";
 
 Given(
-  /^I am on the "([^"]*)?" page$/, RETRY(),
+  /^I am on the "([^"]*)?" (?:page|site|portal)$/, RETRY(),
   fn.givenOnPage
 );
 

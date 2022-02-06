@@ -216,7 +216,7 @@ export async function thenDisplayed(meta: string, key: string, not: string) {
   const element = await webelement.$;
   const then = not ? expect(element).not : expect(element);
 
-  await then.toBeDisplayed();
+  await then.elementToBeDisplayed();
 }
 
 export async function thenDisplayedInViewport(meta: string, key: string, not: string) {
@@ -225,7 +225,7 @@ export async function thenDisplayedInViewport(meta: string, key: string, not: st
   const element = await webelement.$;
   const then = not ? expect(element).not : expect(element);
 
-  await then.toBeDisplayedInViewport();
+  await then.elementToBeDisplayedInViewport();
 }
 
 export async function thenEnabled(meta: string, key: string, not: string) {
