@@ -1,6 +1,0 @@
-{
-  "statusCode": 400,
-  "body": {
-    "error": "Note: Only defined users succeed registration"
-  }
-}

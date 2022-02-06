@@ -1,9 +1,9 @@
 export default {
   default: {
-    url: "/",
-    title: "Demo Page",
+    url: "/demo.html",
+    title: "Demo Site",
     selectors: {
-      "section-header": "//h2[text()='##LABEL##']"
+      "section-header": "//h5[text()='##LABEL##']"
     }
   }
 };

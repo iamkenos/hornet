@@ -140,6 +140,20 @@ function handleAction(state, $source, $target, action, val, event) {
       break;
     }
 
+    case "key-chord": {
+      $target.bind("contentchanged", function () {
+        $source.val($target.text());
+      });
+      if (event.type === "keydown") {
+        const value = $target.text() === "" ? event.key : `${$target.text()}+${event.key}`;
+        $target.text(value);
+        $target.trigger("contentchanged");
+      } else if (event.type === "keyup") {
+        $target.text("");
+      }
+      break;
+    }
+
     case "show-cookies": {
       const cookies = JSON.stringify(_get_cookies(), null, 2).trim();
       $target.html(_code_wrap(cookies));
@@ -164,8 +178,8 @@ function handleAction(state, $source, $target, action, val, event) {
           url: "https://reqres.in/api/login",
           type: "POST",
           data: {
-            email: 'eve.holt@reqres.in',
-            password: 'cityslicka'
+            email: "eve.holt@reqres.in",
+            password: "cityslicka"
           },
           success: function (response) {
             const parsed = JSON.stringify(response, null, 2).trim();

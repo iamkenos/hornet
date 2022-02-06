@@ -12,7 +12,7 @@ export async function thenNavItemSelected(label: string, not: string) {
   const element = await demoPage.navigationBar.getNavigationItem(label);
   const then = not ? expect(element).not : expect(element);
 
-  await then.elementToBeSelected();
+  await then.elementAttributeToBeEqual("class", "active")
 }
 
 export async function thenSectionHeaderExisting(label: string, not: string) {

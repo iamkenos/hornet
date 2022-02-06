@@ -1,17 +1,13 @@
-import { WebComponent, getMergedMetaData } from "@hornet";
-import navBar, { TAG } from "./navigation-bar.meta";
-import navItem from "./navigation-item.meta";
-import navTitle from "./navigation-title.meta";
-
-const meta = getMergedMetaData(navBar, navItem, navTitle);
-
+import { WebComponent, WebElement } from "@hornet";
+import meta, { TAG } from "./navigation-bar.meta";
 export class NavigationBar extends WebComponent<typeof meta> {
   constructor() {
     super(TAG, meta);
   }
 
   public async getNavigationItem(label: string) {
-    const selector = this.selectors["navigation-items"] + this.selectors["navigation-links"].replace("##LABEL##", label);
-    return await this.$.$(selector);
+    const selector = this.selector + this.selectors["nav-items"];
+    const webelement = await new WebElement(selector).byMatchingText(label);
+    return webelement.$;
   }
 }

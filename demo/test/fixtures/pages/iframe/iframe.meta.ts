@@ -2,11 +2,10 @@ import type { PageMetaData } from "@hornet";
 
 const meta: PageMetaData = {
   default: {
-    url: "http://localhost:8080/iframe.html",
-    title: "Demo iFrame",
+    url: "/iframe.html",
+    title: "Demo Iframe",
     selectors: {
-      "Level 1 List Items": "//ol[@id='orderList']/li",
-      "Level 2 List Items": "//ol[@id='orderList']/ol/li"
+      tabs: "//ul//li[@class='tab']"
     }
   }
 };

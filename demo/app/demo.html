@@ -293,7 +293,7 @@
                       <div class="file-field input-field">
                         <div class="btn">
                           <span>File</span>
-                          <input type="file">
+                          <input id="input-file" type="file">
                         </div>
                         <div class="file-path-wrapper">
                           <input class="file-path validate" type="text">
@@ -317,7 +317,7 @@
                     <p class="grey-text">Choose an option</p>
                   </div>
                   <div class="card-panel">
-                    <select>
+                    <select id="input-select">
                       <option value="" disabled selected>Choose one</option>
                       <option value="1">Option 1</option>
                       <option value="2">Option 2</option>
@@ -333,7 +333,7 @@
                     <p class="grey-text">Choose multiple options</p>
                   </div>
                   <div class="card-panel">
-                    <select multiple>
+                    <select id="input-select-multi" multiple>
                       <option value="" disabled selected>Choose many</option>
                       <option value="1">Option 1</option>
                       <option value="2">Option 2</option>
@@ -349,7 +349,7 @@
                     <p class="grey-text">Choose from groups</p>
                   </div>
                   <div class="card-panel">
-                    <select>
+                    <select id="input-select-groups">
                       <optgroup label="Group 1">
                         <option value="1">Option 1</option>
                         <option value="2">Option 2</option>
@@ -376,31 +376,31 @@
               <div class="card-content">
                 <p>
                   <label>
-                    <input type="checkbox" />
+                    <input id="input-checkbox-1" type="checkbox" />
                     <span>Red</span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" checked="checked" />
+                    <input id="input-checkbox-2" type="checkbox" checked="checked" />
                     <span>Yellow</span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" class="filled-in" checked="checked" />
+                    <input id="input-checkbox-3" type="checkbox" class="filled-in" checked="checked" />
                     <span>Filled in</span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" checked="checked" disabled="disabled" />
+                    <input id="input-checkbox-4" type="checkbox" checked="checked" disabled="disabled" />
                     <span>Green</span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input type="checkbox" disabled="disabled" />
+                    <input id="input-checkbox-5" type="checkbox" disabled="disabled" />
                     <span>Brown</span>
                   </label>
                 </p>
@@ -419,25 +419,25 @@
               <div class="card-content">
                 <p>
                   <label>
-                    <input name="group1" type="radio" checked />
+                    <input id="input-radio-1" name="group1" type="radio" checked />
                     <span>Red</span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input name="group1" type="radio" />
+                    <input id="input-radio-2" name="group1" type="radio" />
                     <span>Yellow</span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input class="with-gap" name="group1" type="radio" />
+                    <input id="input-radio-3" class="with-gap" name="group1" type="radio" />
                     <span>Green</span>
                   </label>
                 </p>
                 <p>
                   <label>
-                    <input name="group1" type="radio" disabled="disabled" />
+                    <input id="input-radio-4" name="group1" type="radio" disabled="disabled" />
                     <span>Brown</span>
                   </label>
                 </p>
@@ -538,8 +538,10 @@
                     <p class="grey-text">Use keyboard chords</p>
                   </div>
                   <div class="card-content">
-                    <textarea id="key-chords" class="materialize-textarea"></textarea>
-                    <span class="teal-text">&nbsp;</span>
+                    <input id="key-chords" type="text" data-target="#key-chords-result"
+                      data-actions='[{"key-chord": true }]'>
+                    <span class="teal-text">Key chords result: </span><span class="teal-text"
+                      id="key-chords-result"></span>
                   </div>
                 </div>
               </div>
@@ -556,8 +558,11 @@
                     <span class="card-title">Show alert prompt</span>
                     <p class="grey-text">Show an alert prompt on click</p>
                   </div>
+                  <div class="card-content">
+                    <span class="teal-text">Result: </span><span id="show-alert-prompt-result" class="teal-text"></span>
+                  </div>
                   <div class="card-action right-align">
-                    <a id="show-alert-prompt" data-target="#create-wrapper" data-actions='[
+                    <a id="show-alert-prompt" data-target="#show-alert-prompt-result" data-actions='[
                     {"show-alert-prompt": "Show alert prompt result"}
                   ]' class="waves-effect waves-light btn">Show</a>
                   </div>
@@ -569,8 +574,11 @@
                     <span class="card-title">Show confirm prompt</span>
                     <p class="grey-text">Show a confirm prompt on click</p>
                   </div>
+                  <div class="card-content">
+                    <span class="teal-text">Result: </span><span id="show-confirm-prompt-result" class="teal-text"></span>
+                  </div>
                   <div class="card-action right-align">
-                    <a id="show-confirm-prompt" data-target="#create-wrapper" data-actions='[
+                    <a id="show-confirm-prompt" data-target="#show-confirm-prompt-result" data-actions='[
                     {"show-confirm-prompt": "Show confirm prompt result"}
                   ]' class="waves-effect waves-light btn">Show</a>
                   </div>
@@ -582,8 +590,11 @@
                     <span class="card-title">Show input prompt</span>
                     <p class="grey-text">Show an input prompt on click</p>
                   </div>
+                  <div class="card-content">
+                    <span class="teal-text">Result: </span><span id="show-input-prompt-result" class="teal-text"></span>
+                  </div>
                   <div class="card-action right-align">
-                    <a id="show-input-prompt" data-target="#create-wrapper" data-actions='[
+                    <a id="show-input-prompt" data-target="#show-input-prompt-result" data-actions='[
                     {"show-input-prompt": "Show input prompt result"}
                   ]' class="waves-effect waves-light btn">Show</a>
                   </div>
@@ -668,7 +679,7 @@
                     <p class="grey-text">Open link on the new window on click</p>
                   </div>
                   <div class="card-action right-align">
-                    <a id="open-same-window" href="./iframe.html" target="_blank"
+                    <a id="open-new-window" href="./iframe.html" target="_blank"
                       class="waves-effect waves-light btn">Show</a>
                   </div>
                 </div>

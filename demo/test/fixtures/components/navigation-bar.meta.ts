@@ -1,8 +1,9 @@
-export const TAG = "navigation-bar";
+export const TAG = "nav";
 export default {
   default: {
     selectors: {
-      [TAG]: `//${TAG}`
+      [TAG]: `//${TAG}`,
+      'nav-items': "//ul/li"
     }
   }
 };
