@@ -8,7 +8,7 @@ export class Enabled extends ExpectedCondition {
 
   public async evaluate() {
     try {
-      this.actual = await $(this.selector).isEnabled();
+      this.actual = await $(this.selector).isEnabled() && !(await $(this.selector).getAttribute("disabled"));
       this.passed = this.actual === this.expected;
     } catch (e) {
       this.actual = e.message;
