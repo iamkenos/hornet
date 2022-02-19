@@ -17,7 +17,7 @@ import {
 import { isURL }  from "@core/common";
 import { ExpectedConditions, Selected } from "@core/conditions";
 import { WebElement, getSelector, getLabel, getUrl } from "@core/generics";
-import { BY_LINK_TEXT, parseToken } from "@core/gherkin";
+import { BY_LINK_TEXT, parseToken, getDataTableRows } from "@core/gherkin";
 
 export async function whenClear(meta: string, key: string) {
   const selector = getSelector(meta, key);
@@ -122,6 +122,15 @@ export async function whenSetValue(action: SetValueAction, value: string, meta: 
 
 export async function whenSetValueMultiLine(action: SetValueAction, meta: string, key: string, value: string) {
   await whenSetValue(action, value, meta, key);
+}
+
+export async function whenSetValues(action: SetValueAction, meta: string, key: string, table: DataTable) {
+  const labels = getDataTableRows(table, 1);
+  const values = getDataTableRows(table, 2);
+
+  for (let i = 0; i < labels.length; i++) {
+    await whenSetValue(action, values[i], meta, key);
+  }
 }
 
 export async function whenToggle(action: SelectAction, meta: string, key: string) {

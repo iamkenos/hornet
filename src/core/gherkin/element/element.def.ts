@@ -54,6 +54,11 @@ When(
 );
 
 When(
+  /^I (type|append) on the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (?:fields|elements):$/, RETRY(),
+  fn.whenSetValues
+);
+
+When(
   /^I (select|deselect) the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (?:element|option|check box|toggle item|radio button)$/, RETRY(),
   fn.whenToggle
 );

@@ -7,7 +7,7 @@ export class StorageItemExists extends ExpectedCondition {
 
   public constructor(context: BrowserStorage, key: string, preferred?: boolean) {
     super(preferred);
-    this.expected = this.preferred;
+    this.expected = true;
     this.key = key;
     this.isLocal = context === BrowserStorage.LOCAL;
     this.messageHeader = `Storage Item (${context}): ${this.key}`;
@@ -16,7 +16,7 @@ export class StorageItemExists extends ExpectedCondition {
   public async evaluate() {
     try {
       this.actual = !!(this.isLocal ? await browser.getLocalStorageItem(this.key) : await browser.getSessionStorageItem(this.key));
-      this.passed = this.actual === this.expected;
+      this.passed = this.preferred ? this.actual === this.expected : this.actual !== this.expected;
     } catch (e) {
       this.actual = e.message;
       this.passed = false;
