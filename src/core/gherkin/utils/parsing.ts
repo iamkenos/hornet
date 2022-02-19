@@ -3,11 +3,12 @@ import { DateTime } from "luxon";
 
 const GHERKIN_TOKENS = {
   /**
-   * ```
-   * This group gives you a date string relative to the current date
-   * Syntax: (optional)any$DATE{format(optional)¦offset¦offset on};(optional)any
+   * Returns a string relative to the current date
+   * 
    * Samples:
-   *  Given: current day is Jan 02, 2021
+   * 
+   * Given: current day is Jan 02, 2021
+   * ```
    *  - $DATE{dd¦2¦days};          ------> 04
    *  - $DATE{dd-M-yyyy¦-2¦years}; ------> 02-1-2019
    *  - $DATE{dd-M-yyyy}; foobar   ------> 02-1-2021 foobar
@@ -15,7 +16,38 @@ const GHERKIN_TOKENS = {
    *  - foo$DATE{dd-M-yyyy};bar    ------> foo02-1-2021bar
    * ```
    **/
-  date: /(?<date>(?<date_misc_start>.+)?\$DATE\{(?<date_format>[^¦]+)(?<date_offset>¦(?<date_offset_val>-?\d+)¦(?<date_offset_on>.+))?};(?<date_misc_end>.+)?)/
+  date: /(?<date>(?<date_misc_start>.+)?\$DATE\{(?<date_format>[^¦]+)(?<date_offset>¦(?<date_offset_val>-?\d+)¦(?<date_offset_on>.+))?};(?<date_misc_end>.+)?)/,
+  /**
+   * Returns a string coming from environment variables
+   * 
+   * Samples:
+   * 
+   * ```
+   *  - $ENV{PUBLIC_URL};          ------> /
+   *  - foo$ENV{PUBLIC_URL};bar    ------> foo/bar
+   * ```
+   **/
+  env: /(?<env>(?<env_misc_start>.+)?\$ENV\{(?<env_var>[a-zA-Z0-9_]+)};(?<env_misc_end>.+)?)/,
+  /**
+   * TODO
+   * Returns a random string of a specified format and length
+   * 
+   * Samples:
+   * 
+   * ```
+   * ```
+   **/
+  rand: /(?<rand>(?<rand_misc_start>.+)?\$RAND\{(?<rand_format>[a-zA-Z0-9_]+)};(?<rand_misc_end>.+)?)/,
+  /**
+   * TODO
+   * Returns a value from the browser config
+   * 
+   * Samples:
+   * 
+   * ```
+   * ```
+   **/
+  conf: /(?<conf>(?<conf_misc_start>.+)?\$CONF\{(?<conf_path>[a-zA-Z0-9_]+)};(?<conf_misc_end>.+)?)/,
 };
 
 /**
@@ -24,7 +56,8 @@ const GHERKIN_TOKENS = {
  * @returns the transformed data if it matches any tokens or the same string if it doesnt
  */
 export function parseToken(token: string) {
-  const rex = new RegExp(GHERKIN_TOKENS.date.source);
+  const empty = "";
+  const rex = new RegExp(GHERKIN_TOKENS.date.source + "|" + GHERKIN_TOKENS.env.source);
   const matches = rex.exec(token);
   if (matches && matches.groups) {
     const { groups } = matches;
@@ -32,12 +65,14 @@ export function parseToken(token: string) {
       const offset: any = {};
       offset[groups.date_offset_on || "days"] = groups.date_offset_val || 0;
       const date = DateTime.local().plus(offset).toFormat(groups.date_format);
-      return `${groups.date_misc_start || ""}${date}${groups.date_misc_end || ""}`;
+      return `${groups.date_misc_start || empty}${date}${groups.date_misc_end || empty}`;
+    }
+    if (groups.env) {
+      return `${groups.env_misc_start || empty}${process.env[groups.env_var] || empty}${groups.env_misc_end || empty}`;
     }
   }
   return token;
 }
-
 
 export function getDataTableRows(table: DataTable, column?: number): string[];
 
