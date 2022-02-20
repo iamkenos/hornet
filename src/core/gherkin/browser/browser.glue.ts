@@ -87,6 +87,10 @@ export async function whenPressKey(key: string, count: string) {
   }
 }
 
+export async function whenPressKeys(keys: string) {
+  await browser.keys(keys.split('+'));
+}
+
 export async function whenRefresh() {
   await browser.refresh();
 }
@@ -133,7 +137,7 @@ export async function whenSetSize(width: number, height: number) {
   await browser.setWindowSize(width, height);
 }
 
-export async function whenSetStorageItem(key: string, context: BrowserStorage, value: string) {
+export async function whenStorageItemSet(key: string, context: BrowserStorage, value: string) {
   switch (context) {
     case BrowserStorage.LOCAL: {
       await browser.setLocalStorageItem({ key, value });
@@ -141,6 +145,19 @@ export async function whenSetStorageItem(key: string, context: BrowserStorage, v
     }
     default: {
       await browser.setSessionStorageItem({ key, value });
+      break;
+    }
+  }
+}
+
+export async function whenStorageItemsCleared(context: BrowserStorage) {
+  switch (context) {
+    case BrowserStorage.LOCAL: {
+      await browser.clearLocalStorage();
+      break;
+    }
+    default: {
+      await browser.clearSessionStorage();
       break;
     }
   }

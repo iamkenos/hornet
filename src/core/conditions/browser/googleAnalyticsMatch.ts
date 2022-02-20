@@ -59,7 +59,7 @@ export class GoogleAnalyticsMatch extends JsonSnapshotMatch {
         query: e.query
       }));
     if (this.event) {
-      return filtered.filter((e) => e.query.ec === this.event);
+      return filtered.filter((e) => (e.query.ec === this.event || e.query.en === this.event));
     }
     return filtered;
   }

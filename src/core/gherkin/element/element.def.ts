@@ -174,7 +174,7 @@ Then(
 );
 
 Then(
-  /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" elements text array to( not)? match:$/, RETRY(),
+  /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" elements text array to( not)? be:$/, RETRY(),
   fn.thenTextArrayEqual
 );
 

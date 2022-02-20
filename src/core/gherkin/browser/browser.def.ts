@@ -64,6 +64,11 @@ When(
 );
 
 When(
+  /^I press the "([^"]*)?" keys$/, RETRY(),
+  fn.whenPressKeys
+);
+
+When(
   /^I refresh the page$/, RETRY(),
   fn.whenRefresh
 );
@@ -99,8 +104,13 @@ When(
 );
 
 When(
-  /^I set the "([^"]*)?" site (local|session) storage item value to "([^"]*)?"$/, RETRY(),
-  fn.whenSetSize
+  /^I set the "([^"]*)?" (local|session) storage item value to "([^"]*)?"$/, RETRY(),
+  fn.whenStorageItemSet
+);
+
+When(
+  /^I clear the (local|session) storage$/, RETRY(),
+  fn.whenStorageItemsCleared
 );
 
 When(
@@ -134,7 +144,7 @@ When(
 );
 
 Then(
-  /^I expect (?:a|an) (?:alert|confirm box|prompt) to( not)? be opened$/, RETRY(),
+  /^I expect (?:a|an|the) (?:alert|confirm box|prompt) to( not)? be opened$/, RETRY(),
   fn.thenAlertExisting
 );
 
@@ -174,7 +184,7 @@ Then(
 );
 
 Then(
-  /^I expect the captured google analytics(?: event "([^"]*)?" )? to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
+  /^I expect the captured google analytics(?: "([^"]*)?" event)? to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
   fn.thenGAEntriesSnapshotMatch
 );
 
