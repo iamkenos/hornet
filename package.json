@@ -13,9 +13,7 @@
     "serve:demo": "http-server ./demo/app -s",
     "test:demo": "start-test serve:demo 8080 wdio:demo",
     "wdio:demo": "wdio run ./demo/test/wdio.conf.ts",
-    "wdio:samples": "wdio run ./samples/wdio.conf.ts",
-    "report:demo": "allure open ./demo/test/.reports/allure/report",
-    "report:samples": "allure open ./samples/.reports/allure/report"
+    "report:demo": "allure open ./demo/test/.reports/allure/report"
   },
   "keywords": [],
   "author": "iamkenos",

@@ -1,6 +1,6 @@
 export default {
   default: {
-    url: "/demo.html",
+    url: "/index.html",
     title: "Demo Site",
     selectors: {
       "section-header": "//h5[text()='##LABEL##']"
