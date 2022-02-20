@@ -9,6 +9,7 @@
 - support config overrides
 - .env support
 - docs
+- cli
 - UTs
 - use cases for diffing: 
   // 1. success, exact                 -- OK(image)
@@ -21,3 +22,5 @@
   // 8. fails, unhandled error         -- OK(image)
   // - element not found
   // - browser error
+- npm pack & install
+- publish & install
