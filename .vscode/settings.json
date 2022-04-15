@@ -1,9 +1,5 @@
 {
-  "cucumberautocomplete.steps": [
-    "./src/core/gherkin/**/*.def.ts",
-    "./demo/**/*.def.ts",
-    "./samples/**/*.def.ts",
-  ],
+  "cucumberautocomplete.steps": [ "./src/core/gherkin/**/*.def.ts", "./demo/**/*.def.ts" ],
   "cucumberautocomplete.formatConfOverride": { "And": 3, "But": 3 },
   "cucumberautocomplete.onTypeFormat": true,
   "cucumberautocomplete.stepsInvariants": true,
@@ -15,10 +11,6 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "[feature]": { "editor.defaultFormatter": "alexkrechik.cucumberautocomplete", "editor.formatOnSave": true },
   "[javascript]": { "editor.formatOnSave": false },
-  "[typescript]": {
-    "editor.formatOnSave": false
-  },
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  }
+  "[typescript]": { "editor.formatOnSave": false },
+  "[html]": { "editor.defaultFormatter": "vscode.html-language-features" },
 }

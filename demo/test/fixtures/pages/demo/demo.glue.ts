@@ -1,23 +1,24 @@
 import { ClickAction } from "@hornet";
 import { DemoPage } from "./demo.page";
-
 const demoPage = new DemoPage();
 
 export async function whenClickNavItem(label: string) {
-  const element = await demoPage.navigationBar.getNavigationItem(label);
-  await element.clickWith({ button: ClickAction.SCRIPT })
+  const webelement = await demoPage.navigationBar.getNavigationItem(label);
+  const element =  await webelement.$;
+
+  await element.clickWith({ button: ClickAction.SCRIPT });
 }
 
-export async function thenNavItemSelected(label: string, not: string) {
-  const element = await demoPage.navigationBar.getNavigationItem(label);
-  const then = not ? expect(element).not : expect(element);
+export async function thenNavItemSelected(label: string, not: boolean) {
+  const webelement = await demoPage.navigationBar.getNavigationItem(label);
+  const then = await webelement.conditions();
 
-  await then.elementAttributeToBeEqual("class", "active")
+  await then.attributeEquals("class", "active", not).expect();
 }
 
-export async function thenSectionHeaderExisting(label: string, not: string) {
-  const element = await demoPage.getSectionHeader(label).$;
-  const then = not ? expect(element).not : expect(element);
+export async function thenSectionHeaderExists(label: string, not: boolean) {
+  const webelement = await demoPage.getSectionHeader(label);
+  const then = await webelement.conditions();
 
-  await then.elementToBeExisting();
+  await then.exists(not).expect();
 }

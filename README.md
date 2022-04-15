@@ -5,13 +5,17 @@
 - ~~finish element matchers~~
 - ~~add all glue and def files~~
 - ~~build config~~
+- ~~remove expect; refactor expected conditions~~
+- refactor gherkin
+  - add element index
+  - destructure format???
 - samples
 - support config overrides
 - .env support
 - docs
 - cli
 - UTs
-- use cases for diffing: 
+- use cases for diffing:
   // 1. success, exact                 -- OK(image)
   // 2. success, within threshold      -- OK(image)
   // 3. success, skip matching         -- OK(image)

@@ -65,27 +65,27 @@ When(
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (?:field|element) "([^"]*)?" attribute to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
-  fn.thenAttributeContaining
+  fn.thenAttributeContains
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (?:field|element) "([^"]*)?" attribute to( not)? be "([^"]*)?"$/, RETRY(),
-  fn.thenAttributeEqual
+  fn.thenAttributeEquals
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (?:field|element) "([^"]*)?" attribute to( not)? (?:be existing|exist)$/, RETRY(),
-  fn.thenAttributeExisting
+  fn.thenAttributeExists
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" element location at (x|y) axis to( not)? be (\d+.?\d*)$/, RETRY(),
-  fn.thenAxisLocationEqual
+  fn.thenAxisLocationEquals
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" element count to( not)? be (\d+)$/, RETRY(),
-  fn.thenCountEqual
+  fn.thenCountEquals
 );
 
 Then(
@@ -95,7 +95,7 @@ Then(
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (?:field|element) "([^"]*)?" css property to( not)? (?:be existing|exist)$/, RETRY(),
-  fn.thenCssPropertyExisting
+  fn.thenCssPropertyExists
 );
 
 Then(
@@ -115,7 +115,7 @@ Then(
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" element to( not)? (?:be existing|exist)$/, RETRY(),
-  fn.thenExisting
+  fn.thenExists
 );
 
 Then(
@@ -135,12 +135,12 @@ Then(
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (element|link) to( not)? point (?:to (?:a|an)? |to )?(?:(path|section|absolute url|mail|tel)? )?"([^"]*)?"$/, RETRY(),
-  fn.thenHrefOpensPointsTo
+  fn.thenHrefPointsTo
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (element|link) to( not)? point to the "([^"]*)?" page$/, RETRY(),
-  fn.thenHrefOpensPointsToPage
+  fn.thenHrefPointsToPage
 );
 
 Then(
@@ -160,32 +160,32 @@ Then(
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" element to( not)? be (\d+)px in width and (\d+)px in height$/, RETRY(),
-  fn.thenSizeEqual
+  fn.thenSizeEquals
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" element to( not)? be (\d+)px in (width|height)$/, RETRY(),
-  fn.thenSizeSideEqual
+  fn.thenSizeSideEquals
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" elements text array to( not)? (?:be containing|contain):$/, RETRY(),
-  fn.thenTextArrayContaining
+  fn.thenTextArrayContains
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" elements text array to( not)? be:$/, RETRY(),
-  fn.thenTextArrayEqual
+  fn.thenTextArrayEquals
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" element text to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
-  fn.thenTextContaining
+  fn.thenTextContains
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" element text to( not)? (?:be containing|contain):$/, RETRY(),
-  fn.thenTextContaining
+  fn.thenTextContains
 );
 
 Then(
@@ -195,22 +195,22 @@ Then(
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" element text to( not)? be "([^"]*)?"$/, RETRY(),
-  fn.thenTextEqual
+  fn.thenTextEquals
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" element text to( not)? be:$/, RETRY(),
-  fn.thenTextEqual
+  fn.thenTextEquals
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (?:field|element) value to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
-  fn.thenValueContaining
+  fn.thenValueContains
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (?:field|element) value to( not)? (?:be containing|contain):$/, RETRY(),
-  fn.thenValueContaining
+  fn.thenValueContains
 );
 
 Then(
@@ -220,10 +220,10 @@ Then(
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (?:field|element) value to( not)? be "([^"]*)?"$/, RETRY(),
-  fn.thenValueEqual
+  fn.thenValueEquals
 );
 
 Then(
   /^I expect the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (?:field|element) value to( not)? be:$/, RETRY(),
-  fn.thenValueEqual
+  fn.thenValueEquals
 );

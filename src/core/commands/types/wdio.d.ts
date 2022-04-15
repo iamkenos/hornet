@@ -1,7 +1,7 @@
 import type { MoveToOptions } from "webdriverio";
-import type { CustomConfig } from "@core/config";
-import type { ExpectedConditions } from "@core/conditions";
 import type { KVP } from "@core/common";
+import type { BrowserConditions, ExpectedConditions } from "@core/conditions";
+import type { CustomConfig } from "@core/config";
 import type { HttpRequestOptions, HttpResponse, ClickWith, ClickPointerOrigin, Coordinates } from "./";
 
 declare global {
@@ -16,6 +16,7 @@ declare global {
       clickCoordinates: (target: Coordinates, origin: ClickPointerOrigin) => Promise<void>;
       closeLastWindow: () => Promise<void>;
       closeOtherWindows: () => Promise<void>;
+      conditions: () => Promise<BrowserConditions>;
       dragRelativeToPointer: (target: Coordinates, dragDuration: number) => Promise<void>;
       getLocalStorageItem: (key: string) => Promise<string>;
       getSessionStorageItem: (key: string) => Promise<string>;

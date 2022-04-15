@@ -9,8 +9,8 @@ Feature: II. Form Elements - Select
     When I click the "<SELECT>" element
       And I script click the "<SELECT><OPTION>" element
     Then I expect the "<SELECT><OPTION>" field "class" attribute to contain "selected"
-      And I expect the option with index "0" from the "#input-select" dropdown to be selected
-      And I expect the option with index "1" from the "#input-select" dropdown to not be selected
+      And I expect the option with index "0" from the "#input-select" dropdown to not be selected
+      And I expect the option with index "1" from the "#input-select" dropdown to be selected
 
     Examples:
       | SELECT                                 | OPTION                       |
@@ -23,8 +23,9 @@ Feature: II. Form Elements - Select
     Then I expect the "<SELECT><OPTION_1>" field "class" attribute to contain "selected"
     Then I expect the "<SELECT><OPTION_2>" field "class" attribute to contain "selected"
       And I expect the option with index "0" from the "#input-select-multi" dropdown to be selected
-      And I expect the option with index "1" from the "#input-select-multi" dropdown to not be selected
-      And I expect the option with index "2" from the "#input-select-multi" dropdown to not be selected
+      And I expect the option with index "1" from the "#input-select-multi" dropdown to be selected
+      And I expect the option with index "2" from the "#input-select-multi" dropdown to be selected
+      And I expect the option with index "3" from the "#input-select-multi" dropdown to not be selected
 
     Examples:
       | SELECT                                       | OPTION_1                     | OPTION_2                     |
@@ -34,7 +35,8 @@ Feature: II. Form Elements - Select
     When I click the "<SELECT>" element
       And I script click the "<SELECT><OPTION>" element
     Then I expect the "<SELECT><OPTION>" field "class" attribute to contain "selected"
-      And I expect the option with value "1" from the "#input-select-groups" dropdown to not be selected
+      And I expect the option with value "1" from the "#input-select-groups" dropdown to be selected
+      And I expect the option with value "2" from the "#input-select-groups" dropdown to not be selected
 
     Examples:
       | SELECT                                        | OPTION                       |

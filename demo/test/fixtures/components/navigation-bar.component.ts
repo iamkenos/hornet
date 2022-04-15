@@ -7,7 +7,6 @@ export class NavigationBar extends WebComponent<typeof meta> {
 
   public async getNavigationItem(label: string) {
     const selector = this.selector + this.selectors["nav-items"];
-    const webelement = await new WebElement(selector).byMatchingText(label);
-    return webelement.$;
+    return await new WebElement(selector).byText(label);
   }
 }

@@ -10,7 +10,7 @@ export class DemoPage extends WebPage<typeof meta> {
     this.navigationBar = new NavigationBar();
   }
 
-  public getSectionHeader(label: string) {
+  public async getSectionHeader(label: string) {
     return new WebElement(this.selectors["section-header"].replace("##LABEL##", label));
   }
 }

@@ -1,6 +1,6 @@
 import { UseAction, ElementType } from "@core/commands";
 
-export async function setActiveMetadata(action: string, key: string, type: string) {
+export async function whenSetActiveMetadata(action: string, key: string, type: string) {
   const { config } = browser;
   const toStop = action.includes(UseAction.STOP);
   config.runtime.activeMeta = toStop ? undefined : key;
@@ -10,7 +10,7 @@ export async function setActiveMetadata(action: string, key: string, type: strin
   }
 }
 
-export async function setActiveMetadataSelectorKey(action: string, key: string) {
+export async function whenSetActiveSelector(action: string, key: string) {
   const { config } = browser;
   const toStop = action.includes(UseAction.STOP);
   config.runtime.activeMetaSelectorKey = toStop ? undefined : key;

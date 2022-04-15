@@ -6,7 +6,6 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import path from "path";
 import commands from "@core/commands";
-import matchers from "@core/matchers";
 
 import { merge } from "lodash";
 import { filesFromGlob, logger, MimeType } from "@core/common";
@@ -385,9 +384,6 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
     before: async function (capabilities, specs) {
       commands.addBrowserCommands();
       commands.addElementCommands();
-      matchers.addBrowserMatchers();
-      matchers.addElementMatchers();
-      matchers.addOtherMatchers();
 
       const { before } = merged.hooks as any;
       await before(capabilities, specs);
@@ -409,6 +405,8 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
      * @param {GherkinDocument.IFeature} feature  Cucumber feature object
      */
     beforeFeature: async function (uri, feature) {
+      await browser.storeWindowSize();
+
       const { beforeFeature } = merged.hooks as any;
       await beforeFeature(uri, feature);
     },
@@ -479,7 +477,8 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
      * @param {Object}                 context          Cucumber World object
      */
     afterScenario: async function (world, result, context) {
-      await browser.deleteCookies();
+      await browser.restoreWindowSize();
+      await browser.clean();
       browser.config.runtime.activeMeta = undefined;
       browser.config.runtime.activeMetaSelectorKey = undefined;
 

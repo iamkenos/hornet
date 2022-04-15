@@ -4,6 +4,7 @@ export { clearSessionStorage } from "./clearSessionStorage";
 export { clickCoordinates } from "./clickCoordinates";
 export { closeLastWindow } from "./closeLastWindow";
 export { closeOtherWindows } from "./closeOtherWindows";
+export { conditions } from "./conditions";
 export { dragRelativeToPointer } from "./dragRelativeToPointer";
 export { getLocalStorageItem } from "./getLocalStorageItem";
 export { getSessionStorageItem } from "./getSessionStorageItem";

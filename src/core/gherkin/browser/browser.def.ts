@@ -145,37 +145,37 @@ When(
 
 Then(
   /^I expect (?:a|an|the) (?:alert|confirm box|prompt) to( not)? be opened$/, RETRY(),
-  fn.thenAlertExisting
+  fn.thenAlertExists
 );
 
 Then(
   /^I expect the (?:alert|confirm box|prompt) text to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
-  fn.thenAlertTextContaining
+  fn.thenAlertTextContains
 );
 
 Then(
   /^I expect the (?:alert|confirm box|prompt) text to( not)? be "([^"]*)?"$/, RETRY(),
-  fn.thenAlertTextEqual
+  fn.thenAlertTextEquals
 );
 
 Then(
   /^I expect the "([^"]*)?" site cookie value to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
-  fn.thenCookieContaining
-);
-
-Then(
-  /^I expect the "([^"]*)?" site cookie to( not)? (?:be existing|exist)$/, RETRY(),
-  fn.thenCookieExisting
+  fn.thenCookieContains
 );
 
 Then(
   /^I expect the "([^"]*)?" site cookie value to( not)? be "([^"]*)?"$/, RETRY(),
-  fn.thenCookieEqual
+  fn.thenCookieEquals
+);
+
+Then(
+  /^I expect the "([^"]*)?" site cookie to( not)? (?:be existing|exist)$/, RETRY(),
+  fn.thenCookieExists
 );
 
 Then(
   /^I expect the (?:window|tab) count to( not)? be (\d+)$/, RETRY(),
-  fn.thenCountEqual
+  fn.thenCountEquals
 );
 
 Then(
@@ -225,45 +225,45 @@ Then(
 
 Then(
   /^I expect the "([^"]*)?" site (local|session) storage item value to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
-  fn.thenStorageItemContaining
-);
-
-Then(
-  /^I expect the "([^"]*)?" site (local|session) storage item to( not)? (?:be existing|exist)$/, RETRY(),
-  fn.thenStorageItemExisting
+  fn.thenStorageItemContains
 );
 
 Then(
   /^I expect the "([^"]*)?" site (local|session) storage item value to( not)? be "([^"]*)?"$/, RETRY(),
-  fn.thenStorageItemEqual
+  fn.thenStorageItemEquals
+);
+
+Then(
+  /^I expect the "([^"]*)?" site (local|session) storage item to( not)? (?:be existing|exist)$/, RETRY(),
+  fn.thenStorageItemExists
 );
 
 Then(
   /^I expect the (?:window|page) title to( not)? (?:be containing|contain) (?:the "([^"]*)?" page's title|"([^"]*)?")$/, RETRY(),
-  fn.thenTitleContaining
+  fn.thenTitleContains
 );
 
 Then(
   /^I expect the (?:window|page) title to( not)? (?:be|match) (?:the "([^"]*)?" page's title|"([^"]*)?")$/, RETRY(),
-  fn.thenTitleEqual
+  fn.thenTitleEquals
 );
 
 Then(
   /^I expect the url to( not)? (?:be containing|contain) (?:the "([^"]*)?" page's url|"([^"]*)?"|the base url)$/, RETRY(),
-  fn.thenUrlContaining
+  fn.thenUrlContains
 );
 
 Then(
   /^I expect the url to( not)? (?:be|match) (?:the "([^"]*)?" page's url|"([^"]*)?"|the base url)$/, RETRY(),
-  fn.thenUrlEqual
+  fn.thenUrlEquals
 );
 
 Then(
   /^I expect the url path to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
-  fn.thenUrlPathContaining
+  fn.thenUrlPathContains
 );
 
 Then(
   /^I expect the url path to( not)? be "([^"]*)?"$/, RETRY(),
-  fn.thenUrlPathEqual
+  fn.thenUrlPathEquals
 );

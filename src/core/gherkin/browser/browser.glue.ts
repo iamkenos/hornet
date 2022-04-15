@@ -1,5 +1,9 @@
 import type { DataTable } from "@cucumber/cucumber";
+import type { HttpRequestOptions }  from "@core/commands";
+
+import { merge }  from "lodash";
 import { AlertAction, BrowserStorage, Count, ImageCompareContext, WindowDirection, WindowNavigation } from "@core/commands";
+import { isJSON } from "@core/common";
 import { WebElement, getSelector, getUrl, getTitle } from "@core/generics";
 import { parseToken, getDataTableRows } from "@core/gherkin";
 
@@ -200,215 +204,217 @@ export async function whenWindowSizeRestored() {
   await browser.restoreWindowSize();
 }
 
-export async function thenAlertExisting(not: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenAlertExists(not: boolean) {
+  const then = await browser.conditions();
 
-  await then.browserAlertToBeExisting();
+  await then.alertExists(not).expect();
 }
 
-export async function thenAlertTextContaining(not: string, value: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenAlertTextContains(not: boolean, value: string) {
+  const then = await browser.conditions();
 
-  await then.browserAlertTextToBeContaining(parseToken(value));
+  await then.alertTextContains(parseToken(value), not).expect();
 }
 
-export async function thenAlertTextEqual(not: string, value: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenAlertTextEquals(not: boolean, value: string) {
+  const then = await browser.conditions();
 
-  await then.browserAlertTextToBeEqual(parseToken(value));
+  await then.alertTextEquals(parseToken(value), not).expect();
 }
 
-export async function thenCookieContaining(cookie: string, not: string, value: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenCookieContains(cookie: string, not: boolean, value: string) {
+  const then = await browser.conditions();
 
-  await then.browserCookieToBeContaining(cookie, parseToken(value));
+  await then.cookieContains(parseToken(cookie), parseToken(value), not).expect();
 }
 
-export async function thenCookieExisting(cookie: string, not: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenCookieEquals(cookie: string, not: boolean, value: string) {
+  const then = await browser.conditions();
 
-  await then.browserCookieToBeExisting(cookie);
+  await then.cookieEquals(parseToken(cookie), parseToken(value), not).expect();
 }
 
-export async function thenCookieEqual(cookie: string, not: string, value: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenCookieExists(cookie: string, not: boolean) {
+  const then = await browser.conditions();
 
-  await then.browserCookieToBeEqual(cookie, parseToken(value));
+  await then.cookieExists(parseToken(cookie), not).expect();
 }
 
-export async function thenCountEqual(not: string, value: number) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenCountEquals(not: boolean, value: number) {
+  const then = await browser.conditions();
 
-  await then.browserWindowCountToBeEqual(value);
+  await then.windowCountEquals(value, not).expect();
 }
 
-export async function thenCountLessOrMore(not: string, count: Count, value: number) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenCountLessOrMore(not: boolean, count: Count, value: number) {
+  const then = await browser.conditions();
 
   switch (count) {
     case Count.LESS: {
-      await then.browserWindowCountToBeLessThan(value);
+      await then.windowCountLessThan(value, not).expect();
       break;
     }
     default: {
-      await then.browserWindowCountToBeMoreThan(value);
+      await then.windowCountMoreThan(value, not).expect();
       break;
     }
   }
 }
 
 /** @see  [GA > Dev Guides > Parameters](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters)*/
-export async function thenGAEntriesSnapshotMatch(event: string, not: string, filename: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenGAEntriesSnapshotMatch(event: string, not: boolean, filename: string) {
+  const then = await browser.conditions();
 
-  await then.browserGoogleAnalyticsToMatch(filename, event);
+  await then.googleAnalyticsMatch(filename, event, undefined, not).expect();
 }
 
-export async function thenHttpResponseSnapshotMatch(not: string, filename: string, request: string) {
-  const then = not ? expect(browser).not : expect(browser);
-  
-  await then.browserHttpResponseToMatch(filename, JSON.parse(request));
+export async function thenHttpResponseSnapshotMatch(not: boolean, filename: string, request: HttpRequestOptions) {
+  const response = await browser.sendRequest(request.url as string, request);
+  const comparable = { statusCode: response.statusCode, body: isJSON(response.body) ? JSON.parse(response.body) : response.body };
+  const then = await browser.conditions();
+
+  await then.jsonSnapshotMatch(filename, comparable, browser.config.snapshots.responses, not).expect();
 }
 
 export async function thenOnPage(meta: string) {
   const { config } = browser;
   await thenSiteReady();
-  await thenUrlEqual(undefined, meta);
-  await thenTitleEqual(undefined, meta);
+  await thenUrlEquals(undefined, meta);
+  await thenTitleEquals(undefined, meta);
   config.runtime.activeMeta = meta;
 }
 
-export async function thenNetworkCallsSnapshotMatch(header: string, not: string, filename: string) {
+export async function thenNetworkCallsSnapshotMatch(header: string, not: boolean, filename: string) {
   const headers = !!header;
-  const then = not ? expect(browser).not : expect(browser);
+  const then = await browser.conditions();
 
-  await then.browserNetworkRequestsToMatch(filename, { include: { headers } })
+  await then.networkRequestsMatch(filename, { include: { headers } }, not).expect();
 }
 
-export async function thenNetworkCallsOnPathsSnapshotMatch(header: string, not: string, filename: string, table: DataTable) {
+export async function thenNetworkCallsOnPathsSnapshotMatch(header: string, not: boolean, filename: string, table: DataTable) {
   const paths = getDataTableRows(table, 1);
   const headers = !!header;
-  const then = not ? expect(browser).not : expect(browser);
+  const then = await browser.conditions();
 
-  await then.browserNetworkRequestsToMatch(filename, { paths, include: { headers } })
+  await then.networkRequestsMatch(filename, { paths, include: { headers } }, not).expect();
 }
 
-export async function thenNetworkCallsOnPathsSnapshotMatchExpressions(header: string, not: string, filename: string, table: DataTable) {
+export async function thenNetworkCallsOnPathsSnapshotMatchExpressions(header: string, not: boolean, filename: string, table: DataTable) {
   const regex = { paths: getDataTableRows(table, 1), expressions: getDataTableRows(table, 2) };
   const headers = !!header;
-  const then = not ? expect(browser).not : expect(browser);
+  const then = await browser.conditions();
   
-  await then.browserNetworkRequestsToMatch(filename, { regex, include: { headers } })
+  await then.networkRequestsMatch(filename, { regex, include: { headers } }, not).expect();
 }
 
 export async function thenSiteReady() {
-  const then = expect(browser);
+  const then = await browser.conditions();
  
-  await then.browserToBeReady();
+  await then.ready().expect();
 }
 
-export async function thenSnapshotMatch(context: ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT, not: string, filename: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenSnapshotMatch(context: ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT, not: boolean, filename: string) {
+  const then = await browser.conditions();
 
-  await then.browserSnapshotToMatch(context, filename);
+  await then.snapshotMatch(context, filename, undefined, not).expect();
 }
 
-export async function thenStorageItemContaining(context: BrowserStorage, key: string, not: string, value: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenStorageItemContains(context: BrowserStorage, key: string, not: boolean, value: string) {
+  const then = await browser.conditions();
 
-  await then.browserStorageItemToBeContaining(context, key, parseToken(value));
+  await then.storageItemContains(context, key, value, not).expect();
 }
 
-export async function thenStorageItemExisting(context: BrowserStorage, key: string, not: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenStorageItemEquals(context: BrowserStorage, key: string, not: boolean, value: string) {
+  const then = await browser.conditions();
 
-  await then.browserStorageItemToBeExisting(context, key);
+  await then.storageItemEquals(context, key, value, not).expect();
 }
 
-export async function thenStorageItemEqual(context: BrowserStorage, key: string, not: string, value: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenStorageItemExists(context: BrowserStorage, key: string, not: boolean) {
+  const then = await browser.conditions();
 
-  await then.browserStorageItemToBeEqual(context, key, parseToken(value));
+  await then.storageItemExists(context, key, not).expect();
 }
 
-export async function thenTitleContaining(not: string, meta: string, value?: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenTitleContains(not: boolean, meta: string, value?: string) {
+  const then = await browser.conditions();
 
   switch (value) {
     case undefined:
     case null: {
-      await then.browserTitleToBeContaining(getTitle(meta))
+      await then.titleContains(getTitle(meta), not).expect();
       break;
     }
     default: {
-      await then.browserTitleToBeContaining(parseToken(value))
+      await then.titleContains(parseToken(value), not).expect();
       break;
     }
   }
 }
 
-export async function thenTitleEqual(not: string, meta: string, value?: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenTitleEquals(not: boolean, meta: string, value?: string) {
+  const then = await browser.conditions();
 
   switch (value) {
     case undefined:
     case null: {
-      await then.browserTitleToBeEqual(getTitle(meta))
+      await then.titleEquals(getTitle(meta), not).expect();
       break;
     }
     default: {
-      await then.browserTitleToBeEqual(parseToken(value))
+      await then.titleEquals(parseToken(value), not).expect();
       break;
     }
   }
 }
 
-export async function thenUrlContaining(not: string, meta: string, value?: string) {
-  const then = not ? expect(browser).not : expect(browser);
-
-  switch (value) {
-    case undefined:
-    case null: {
-      if (meta) {
-        await then.browserUrlToBeContaining(getUrl(meta))
-      } else {
-        await then.browserUrlToBeContaining(browser.config.baseUrl)
-      }
-      break;
-    }
-    default: {
-      await then.browserUrlToBeContaining(parseToken(value))
-    }
-  }
-}
-
-export async function thenUrlEqual(not: string, meta: string, value?: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenUrlContains(not: boolean, meta: string, value?: string) {
+  const then = await browser.conditions();
 
   switch (value) {
     case undefined:
     case null: {
       if (meta) {
-        await then.browserUrlToBeEqual(getUrl(meta))
+        await then.urlContains(getUrl(meta), not).expect();
       } else {
-        await then.browserUrlToBeEqual(browser.config.baseUrl)
+        await then.urlContains(browser.config.baseUrl, not).expect();
       }
       break;
     }
     default: {
-      await then.browserUrlToBeEqual(parseToken(value))
+      await then.urlContains(parseToken(value), not).expect();
     }
   }
 }
 
-export async function thenUrlPathContaining(not: string, value: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenUrlEquals(not: boolean, meta: string, value?: string) {
+  const then = await browser.conditions();
 
-  await then.browserUrlPathToBeContaining(parseToken(value))
+  switch (value) {
+    case undefined:
+    case null: {
+      if (meta) {
+        await then.urlEquals(getUrl(meta), not).expect();
+      } else {
+        await then.urlEquals(browser.config.baseUrl, not).expect();
+      }
+      break;
+    }
+    default: {
+      await then.urlEquals(parseToken(value), not).expect();
+    }
+  }
 }
 
-export async function thenUrlPathEqual(not: string, value: string) {
-  const then = not ? expect(browser).not : expect(browser);
+export async function thenUrlPathContains(not: boolean, value: string) {
+  const then = await browser.conditions();
 
-  await then.browserUrlPathToBeEqual(parseToken(value))
+  await then.urlPathContains(parseToken(value), not).expect();
+}
+
+export async function thenUrlPathEquals(not: boolean, value: string) {
+  const then = await browser.conditions();
+
+  await then.urlPathEquals(parseToken(value), not).expect();
 }

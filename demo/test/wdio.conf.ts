@@ -6,19 +6,10 @@ const args: ConfigArgs = {
   baseDir: __dirname,
   snapshots: {
     images: {
-      saveAboveTolerance: 0.25,
+      saveAboveTolerance: 0.15,
       disableCSSAnimation: true,
-      hideScrollBars: true
-    }
-  },
-  hooks: {
-    beforeScenario: async () => {
-      await browser.storeWindowSize();
+      hideScrollBars: true,
     },
-    afterScenario: async () => {
-      await browser.restoreWindowSize();
-      await browser.clean();
-    }
   }
 };
 
@@ -26,7 +17,6 @@ export const config = merge<Config, Config>(base(args), {
   specs: ['demo/**/features/**/*.feature'],
   capabilities: [
     {
-      maxInstances: 5,
       browserName: "chrome",
       acceptInsecureCerts: true,
       unhandledPromptBehavior: "ignore",

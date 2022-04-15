@@ -12,7 +12,7 @@ export type ImageSnapshotContextOptions = {
   element: WdioCheckElementMethodOptions;
 };
 
-export type EvaluationResult = {
+export type ExpectedConditionResult = {
   name: string;
   actual: any;
   expected: any;
@@ -20,6 +20,8 @@ export type EvaluationResult = {
   message: string;
 };
 
-export type CustomConditionFunction = () => Promise<CustomConditionResult>;
-
-export type CustomConditionResult = Pick<EvaluationResult, "actual" | "expected" | "passed">;
+export type ExpectedConditionsResult = {
+  evaluations: ExpectedConditionResult[];
+  message: string;
+  passed: boolean;
+};

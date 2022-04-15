@@ -17,7 +17,7 @@ export function isURL(str: string) {
   }
 }
 
-export function isJson(str: string) {
+export function isJSON(str: string) {
   if (typeof str !== "string") return false;
   try {
     const result = JSON.parse(str);

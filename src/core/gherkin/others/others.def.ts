@@ -8,10 +8,10 @@ Before({ tags: "@SKIP" }, () => "skipped");
 
 When(
   /^I (land on|start using|stop using) the "([^"]*)?" (page|component|widget)$/, RETRY(),
-  fn.setActiveMetadata
+  fn.whenSetActiveMetadata
 );
 
 When(
   /^I (start using|stop using) the (?:page|component|widget)'s "([^"]*)?"(?: child)? element$/, RETRY(),
-  fn.setActiveMetadataSelectorKey
+  fn.whenSetActiveSelector
 );

@@ -14,6 +14,7 @@ export default {
     browser.addCommand(b.clickCoordinates.name, b.clickCoordinates);
     browser.addCommand(b.closeLastWindow.name, b.closeLastWindow);
     browser.addCommand(b.closeOtherWindows.name, b.closeOtherWindows);
+    browser.addCommand(b.conditions.name, b.conditions);
     browser.addCommand(b.dragRelativeToPointer.name, b.dragRelativeToPointer);
     browser.addCommand(b.getLocalStorageItem.name, b.getLocalStorageItem);
     browser.addCommand(b.getSessionStorageItem.name, b.getSessionStorageItem);

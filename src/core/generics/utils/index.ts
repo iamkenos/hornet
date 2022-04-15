@@ -1,2 +1,2 @@
 export * from "./metadataAdapter";
-export * from "./selectorBuilder";
+export * from "./SelectorBuilder";

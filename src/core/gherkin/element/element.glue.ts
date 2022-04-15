@@ -15,22 +15,19 @@ import {
   SizeContext
 } from "@core/commands";
 import { isURL }  from "@core/common";
-import { ExpectedConditions, Selected } from "@core/conditions";
 import { WebElement, getSelector, getLabel, getUrl } from "@core/generics";
 import { BY_LINK_TEXT, parseToken, getDataTableRows } from "@core/gherkin";
 
 export async function whenClear(meta: string, key: string) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
+  const element = await new WebElement(selector).$;
 
   await element.clearValue();
 }
 
 export async function whenClick(button: ClickAction, meta: string, key: string, type: string) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector);
-  const element = await webelement.$;
+  const element = await new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector).$;
 
   await element.clickWith({ button });
 }
@@ -38,34 +35,29 @@ export async function whenClick(button: ClickAction, meta: string, key: string, 
 export async function whenDrag(meta: string, sourceKey: string, targetKey: string) {
   const sourceSelector = getSelector(meta, sourceKey);
   const targetSelector = getSelector(meta, targetKey);
-  const sourceWe = new WebElement(sourceSelector);
-  const targetWe = new WebElement(targetSelector);
-  const source = await sourceWe.$;
-  const target = await targetWe.$;
+  const source = await new WebElement(sourceSelector).$;
+  const target = await new WebElement(targetSelector).$;
 
   await source.dragAndDrop(target);
 }
 
 export async function whenFileUpload(filepath: string, meta: string, key: string) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
+  const element = await new WebElement(selector).$;
 
   await element.uploadFile(filepath);
 }
 
 export async function whenFocus(meta: string, key: string) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
+  const element = await new WebElement(selector).$;
 
   await element.focus();
 }
 
 export async function whenMoveTo(meta: string, key: string, x: number, y: number) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
+  const element = await new WebElement(selector).$;
   const xOffset = x || undefined;
   const yOffset = y || undefined;
 
@@ -74,47 +66,44 @@ export async function whenMoveTo(meta: string, key: string, x: number, y: number
 
 export async function whenScrollTo(meta: string, key: string) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
+  const element = await new WebElement(selector).$;
 
   await element.moveIntoView({ xOffset: 0, yOffset: 0 });
 }
 
 export async function whenSelectDropdownOption(context: SelectOptionContext, value: string, meta: string, key: string) {
-  value = parseToken(getLabel(meta, value));
+  const parsed = parseToken(getLabel(meta, value));
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
+  const element = await new WebElement(selector).$;
 
   switch (context) {
     case SelectOptionContext.INDEX: {
-      await element.selectByIndex(parseInt(value));
+      await element.selectByIndex(parseInt(parsed));
       break;
     }
     case SelectOptionContext.LABEL: {
-      await element.selectByVisibleText(value);
+      await element.selectByVisibleText(parsed);
       break;
     }
     default: {
-      await element.selectByAttribute(SelectOptionContext.VALUE, value);
+      await element.selectByAttribute(SelectOptionContext.VALUE, parsed);
       break;
     }
   }
 }
 
 export async function whenSetValue(action: SetValueAction, value: string, meta: string, key: string) {
-  value = parseToken(getLabel(meta, value));
+  const parsed = parseToken(value);
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
+  const element = await new WebElement(selector).$;
 
   switch (action) {
     case SetValueAction.APPEND: {
-      await element.addValue(value);
+      await element.addValue(parsed);
       break;
     }
     default: {
-      await element.setValue(value);
+      await element.setValue(parsed);
       break;
     }
   }
@@ -137,138 +126,109 @@ export async function whenToggle(action: SelectAction, meta: string, key: string
   const selector = getSelector(meta, key);
   const webelement = new WebElement(selector);
   const element = await webelement.$;
-  const options = { move: { xOffset: 0, yOffset: 0 } };
-  const condition = new ExpectedConditions(whenToggle.name, selector).addCondition(
-    new Selected(action === SelectAction.SELECT)
-  );
+  const conditions = await webelement.conditions();
 
-  await element.clickUntil(condition, options);
+  await element.clickUntil(conditions.selected(action === SelectAction.DESELECT), { move: { xOffset: 0, yOffset: 0 } });
 }
 
-export async function thenAttributeContaining(meta: string, key: string, attribute: string, not: string, value: string) {
-  value = parseToken(getLabel(meta, value));
+export async function thenAttributeContains(meta: string, key: string, attribute: string, not: boolean, value: string) {
+  const parsed = parseToken(getLabel(meta, value));
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementAttributeToBeContaining(attribute, value);
+  await then.attributeContains(attribute, parsed, not).expect();
 }
 
-export async function thenAttributeEqual(meta: string, key: string, attribute: string, not: string, value: string) {
-  value = parseToken(getLabel(meta, value));
+export async function thenAttributeEquals(meta: string, key: string, attribute: string, not: boolean, value: string) {
+  const parsed = parseToken(getLabel(meta, value));
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementAttributeToBeEqual(attribute, value);
+  await then.attributeEquals(attribute, parsed, not).expect();
 }
 
-export async function thenAttributeExisting(meta: string, key: string, attribute: string, not: string) {
+export async function thenAttributeExists(meta: string, key: string, attribute: string, not: boolean) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementAttributeToBeExisting(attribute);
+  await then.attributeExists(attribute, not).expect();
 }
 
-export async function thenAxisLocationEqual(meta: string, key: string, axis: Axis, not: string, value: string) {
+export async function thenAxisLocationEquals(meta: string, key: string, axis: Axis, not: boolean, value: string) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementAxisLocationToBeEqual(axis, parseFloat(value));
+  await then.axisLocationEquals(axis, parseFloat(value), not).expect();
 }
 
-export async function thenCountEqual(meta: string, key: string, not: string, value: number) {
+export async function thenCountEquals(meta: string, key: string, not: boolean, value: number) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementCountToBeEqual(value);
+  await then.countEquals(value, not).expect();
 }
 
-export async function thenCountLessOrMore(meta: string, key: string, not: string, count: Count, value: number) {
+export async function thenCountLessOrMore(meta: string, key: string, not: boolean, count: Count, value: number) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
   switch (count) {
     case Count.LESS: {
-      await then.elementCountToBeLessThan(value);
+      await then.countLessThan(value, not).expect();
       break;
     }
     default: {
-      await then.elementCountToBeMoreThan(value);
+      await then.countMoreThan(value, not).expect();
       break;
     }
   }
 }
 
-export async function thenCssPropertyExisting(meta: string, key: string, property: string, not: string) {
+export async function thenCssPropertyExists(meta: string, key: string, property: string, not: boolean) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementCssPropertyToBeExisting(property);
+  await then.cssPropertyExists(property, not).expect();
 }
 
-export async function thenDisplayed(meta: string, key: string, not: string) {
+export async function thenDisplayed(meta: string, key: string, not: boolean) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementToBeDisplayed();
+  await then.displayed(not).expect();
 }
 
-export async function thenDisplayedInViewport(meta: string, key: string, not: string) {
+export async function thenDisplayedInViewport(meta: string, key: string, not: boolean) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementToBeDisplayedInViewport();
+  await then.displayedInViewport(not).expect();
 }
 
-export async function thenEnabled(meta: string, key: string, not: string) {
+export async function thenEnabled(meta: string, key: string, not: boolean) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementToBeEnabled();
+  await then.enabled(not).expect();
 }
 
-export async function thenExisting(meta: string, key: string, not: string) {
+export async function thenExists(meta: string, key: string, not: boolean) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementToBeExisting();
+  await then.exists(not).expect();
 }
 
-export async function thenFocused(meta: string, key: string, not: string) {
+export async function thenFocused(meta: string, key: string, not: boolean) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementToBeFocused();
+  await then.focused(not).expect();
 }
 
-export async function thenHrefOpensOn(meta: string, key: string, type: ElementType, not: string, target: HrefTargetContext) {
+export async function thenHrefOpensOn(meta: string, key: string, type: ElementType, not: boolean, target: HrefTargetContext) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector).conditions();
 
   switch (target) {
     case HrefTargetContext.BLANK:
@@ -276,67 +236,58 @@ export async function thenHrefOpensOn(meta: string, key: string, type: ElementTy
     case HrefTargetContext.PARENT:
     case HrefTargetContext.TOP: {
       const member = Object.entries(HrefTargetContext).find(([key, value]) => value === target)[0];
-      await then.elementAttributeToBeEqual(AnchorAttributes.TARGET, HrefTarget[member]);
+      await then.attributeEquals(AnchorAttributes.TARGET, HrefTarget[member], not).expect();
       break;
     }
     default: {
-      const reversed = not ? expect(element) : expect(element).not;
-      await reversed.elementAttributeToBeExisting(AnchorAttributes.TARGET);
+      await then.attributeExists(AnchorAttributes.TARGET, !not).expect();
       break;
     }
   }
 }
 
-export async function thenHrefOpensOnNamedFrame(meta: string, key: string, type: ElementType, not: string, target: string) {
+export async function thenHrefOpensOnNamedFrame(meta: string, key: string, type: ElementType, not: boolean, target: string) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector).conditions();
 
-  await then.elementAttributeToBeEqual(AnchorAttributes.TARGET, target);
+  await then.attributeEquals(AnchorAttributes.TARGET, target, not).expect()
 }
 
-export async function thenHrefOpensPointsTo(meta: string, key: string, type: ElementType, not: string, scheme: HrefSchemeContext, value: string) {
+export async function thenHrefPointsTo(meta: string, key: string, type: ElementType, not: boolean, scheme: HrefSchemeContext, value: string) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector).conditions();
 
   switch (scheme) {
     case HrefSchemeContext.MAIL:
     case HrefSchemeContext.TEL: {
       const member = Object.entries(HrefSchemeContext).find(([key, value]) => value === scheme)[0];
-      await then.elementAttributeToBeEqual(AnchorAttributes.HREF, `${HrefScheme[member]}${value}`);
+      await then.attributeEquals(AnchorAttributes.HREF, `${HrefScheme[member]}${value}`, not).expect();
       break;
     }
     default: {
-      await then.elementAttributeToBeEqual(AnchorAttributes.HREF, value);
+      await then.attributeEquals(AnchorAttributes.HREF, value, not).expect();
       break;
     }
   }
 }
 
-export async function thenHrefOpensPointsToPage(meta: string, key: string, type: ElementType, not: string, page: string) {
+export async function thenHrefPointsToPage(meta: string, key: string, type: ElementType, not: boolean, page: string) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector).conditions();
   const target = getUrl(page);
   const value = isURL(target) ? target : new URL(browser.config.baseUrl + target).href;
 
-  await then.elementAttributeToBeEqual(AnchorAttributes.HREF, new URL(value).pathname);
+  await then.attributeEquals(AnchorAttributes.HREF, new URL(value).pathname, not).expect();
 }
 
-export async function thenSnapshotMatch(meta: string, key: string, not: string, filename: string) {
+export async function thenSnapshotMatch(meta: string, key: string, not: boolean, filename: string) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementSnapshotToMatch(filename);
+  await then.snapshotMatch(filename, undefined, not).expect();
 }
 
-export async function thenOptionSelected(option: string, context: SelectOptionContext, value: string, meta: string, key: string, not: string) {
+export async function thenOptionSelected(option: string, context: SelectOptionContext, value: string, meta: string, key: string, not: boolean) {
   const selector = getSelector(meta, key);
   const webelement = await new WebElement(selector).byAbsoluteXpath(option);
   const webelements = await webelement.all;
@@ -348,116 +299,101 @@ export async function thenOptionSelected(option: string, context: SelectOptionCo
       break;
     }
     case SelectOptionContext.LABEL: {
-      const match = await webelement.byMatchingText(value);
+      const match = await webelement.byText(value);
       element = await match.$;
       break;
     }
     default: {
-      const match = await webelement.byMatchingAttribute({ key: SelectOptionContext.VALUE, value });
+      const match = await webelement.byAttribute({ key: SelectOptionContext.VALUE, value });
       element = await match.$;
       break;
     }
   }
-
-  const then = not ? expect(element).not : expect(element);
-  then.elementToBeSelected();
+  const then = await new WebElement(element.selector).conditions();
+  await then.selected(not).expect();
 }
 
-export async function thenTextArrayContaining(meta: string, key: string, not: string, values: DataTable) {
+export async function thenTextArrayContains(meta: string, key: string, not: boolean, values: DataTable) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const actual = await webelement.toTextArray();
-  const then = not ? expect(actual).not : expect(actual);
+  const actual = await new WebElement(selector).toTextArray();
+  const expected = [].concat(...values.rows());
+  const then = await browser.conditions();
 
-  await then.arrayToBeContaining([].concat(...values.rows()));
+  await then.arrayContains(actual, expected, not).expect();
 }
 
-export async function thenTextArrayEqual(meta: string, key: string, not: string, values: DataTable) {
+export async function thenTextArrayEquals(meta: string, key: string, not: boolean, values: DataTable) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const actual = await webelement.toTextArray();
-  const then = not ? expect(actual).not : expect(actual);
+  const actual = await new WebElement(selector).toTextArray();
+  const expected = [].concat(...values.rows());
+  const then = await browser.conditions();
 
-  await then.arrayToBeEqual([].concat(...values.rows()));
+  await then.arrayEquals(actual, expected, not).expect();
 }
 
-export async function thenSelected(meta: string, key: string, not: string) {
+export async function thenSelected(meta: string, key: string, not: boolean) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementToBeSelected();
+  await then.selected(not).expect();
 }
 
-export async function thenSizeEqual(meta: string, key: string, not: string, width: number, height: number) {
+export async function thenSizeEquals(meta: string, key: string, not: boolean, width: number, height: number) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementSizeToBeEqual(width, height);
+  await then.sizeEquals(width, height, not).expect();
 }
 
-export async function thenSizeSideEqual(meta: string, key: string, not: string, size: number, side: SizeContext) {
+export async function thenSizeSideEquals(meta: string, key: string, not: boolean, size: number, side: SizeContext) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementSizeSideToBeEqual(side, size);
+  await then.sizeSideEquals(side, size, not).expect();
 }
 
-export async function thenTextContaining(meta: string, key: string, not: string, value: string) {
+export async function thenTextContains(meta: string, key: string, not: boolean, value: string) {
+  const parsed = parseToken(getLabel(meta, value));
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementTextToBeContaining(value);
+  await then.textContains(parsed, not).expect();
 }
 
-export async function thenTextEmpty(meta: string, key: string, not: string) {
+export async function thenTextEmpty(meta: string, key: string, not: boolean) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementTextToBeEqual('');
+  await then.textEquals("", not).expect();
 }
 
-export async function thenTextEqual(meta: string, key: string, not: string, value: string) {
+export async function thenTextEquals(meta: string, key: string, not: boolean, value: string) {
+  const parsed = parseToken(getLabel(meta, value));
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementTextToBeEqual(value);
+  await then.textEquals(parsed, not).expect();
 }
 
-export async function thenValueContaining(meta: string, key: string, not: string, value: string) {
+export async function thenValueContains(meta: string, key: string, not: boolean, value: string) {
+  const parsed = parseToken(getLabel(meta, value));
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementValueToBeContaining(value);
+  await then.valueContains(parsed, not).expect();
 }
 
-export async function thenValueEmpty(meta: string, key: string, not: string) {
+export async function thenValueEmpty(meta: string, key: string, not: boolean) {
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementValueToBeEqual('');
+  await then.valueEquals("", not).expect();
 }
 
-export async function thenValueEqual(meta: string, key: string, not: string, value: string) {
+export async function thenValueEquals(meta: string, key: string, not: boolean, value: string) {
+  const parsed = parseToken(getLabel(meta, value));
   const selector = getSelector(meta, key);
-  const webelement = new WebElement(selector);
-  const element = await webelement.$;
-  const then = not ? expect(element).not : expect(element);
+  const then = await new WebElement(selector).conditions();
 
-  await then.elementValueToBeEqual(value);
+  await then.valueEquals(parsed, not).expect();
 }

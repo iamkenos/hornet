@@ -14,5 +14,5 @@ Then(
 
 Then(
   /^I expect the section header "([^"]*)?" to( not)? (?:be existing|exist)$/, RETRY(),
-  fn.thenSectionHeaderExisting
+  fn.thenSectionHeaderExists
 );
