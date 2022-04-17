@@ -1,3 +1,3 @@
 export async function clearSessionStorage() {
-  await browser.execute(function (this: any) { return this.sessionStorage.clear(); });
-};
+  await browser.execute(function(this: Window) { return this.sessionStorage.clear(); });
+}

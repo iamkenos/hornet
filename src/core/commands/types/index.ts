@@ -1,6 +1,6 @@
 import type { Response as R } from "got";
 import type { ClickOptions, MoveToOptions } from "webdriverio";
-import { ClickAction } from "@core/commands"
+import { ClickAction } from "@core/commands";
 
 export type { OptionsOfTextResponseBody as HttpRequestOptions } from "got";
 

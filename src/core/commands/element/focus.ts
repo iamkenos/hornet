@@ -1,3 +1,3 @@
 export async function focus(this: WebdriverIO.Element) {
-  await browser.execute((element: any) => element.focus(), this);
-};
+  await browser.execute((element: WebdriverIO.Element) => element.focus(), this);
+}

@@ -1,7 +1,7 @@
 import type {
+  WdioCheckElementMethodOptions,
   WdioCheckFullPageMethodOptions,
-  WdioCheckScreenMethodOptions,
-  WdioCheckElementMethodOptions
+  WdioCheckScreenMethodOptions
 } from "wdio-image-comparison-service";
 
 export type { ImageCompareResult } from "webdriver-image-comparison";

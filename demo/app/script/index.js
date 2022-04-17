@@ -1,8 +1,8 @@
 function handleActions(event) {
   const $source = $(this);
-  const $target = $($(this).data("target"));
-  const actions = $(this).data("actions");
-  const state = !~~$(this).data("state");
+  const $target = $($(this).data('target'));
+  const actions = $(this).data('actions');
+  const state = !~~$(this).data('state');
 
   for (let i = 0; i < actions.length; i++) {
     const entry = actions[i];
@@ -10,22 +10,22 @@ function handleActions(event) {
 
     setTimeout(event.preventDefault(), 500);
     setTimeout(handleAction(state, $source, $target, action, entry[action], event), 500);
-    $(this).data("state", state);
+    $(this).data('state', state);
   }
 }
 
 function handleAction(state, $source, $target, action, val, event) {
   switch (action) {
-    case "navigate": {
+    case 'navigate': {
       window.scrollTo(0, 0);
-      $source.closest("ul").find("li").removeClass("active");
-      $source.addClass("active");
-      $target.children().addClass("hidden");
-      $(val).removeClass("hidden");
+      $source.closest('ul').find('li').removeClass('active');
+      $source.addClass('active');
+      $target.children().addClass('hidden');
+      $(val).removeClass('hidden');
       break;
     }
 
-    case "create": {
+    case 'create': {
       if (state) {
         $(val).appendTo($target);
       } else {
@@ -34,80 +34,80 @@ function handleAction(state, $source, $target, action, val, event) {
       break;
     }
 
-    case "show": {
+    case 'show': {
       const timeout = val || 0;
 
       setTimeout(() => {
-        if ($target.attr("hidden")) {
-          $target.removeAttr("hidden");
+        if ($target.attr('hidden')) {
+          $target.removeAttr('hidden');
         } else {
-          $target.attr("hidden", true);
+          $target.attr('hidden', true);
         }
       }, timeout);
       break;
     }
 
-    case "enable": {
+    case 'enable': {
       const timeout = val || 0;
 
       setTimeout(() => {
-        if ($target.attr("disabled")) {
-          $target.removeAttr("disabled");
+        if ($target.attr('disabled')) {
+          $target.removeAttr('disabled');
         } else {
-          $target.attr("disabled", true);
+          $target.attr('disabled', true);
         }
       }, timeout);
       break;
     }
 
-    case "resize": {
+    case 'resize': {
       const timeout = val || 0;
 
       setTimeout(() => {
-        if ($target.attr("styled")) {
-          $target.removeAttr("styled");
-          $target.attr("style", "");
-          $target.removeClass("btn-large");
+        if ($target.attr('styled')) {
+          $target.removeAttr('styled');
+          $target.attr('style', '');
+          $target.removeClass('btn-large');
         } else {
-          $target.attr("styled", true);
-          $target.attr("style", "width: 100%");
-          $target.addClass("btn-large");
+          $target.attr('styled', true);
+          $target.attr('style', 'width: 100%');
+          $target.addClass('btn-large');
         }
       }, timeout);
       break;
     }
 
-    case "set-text": {
+    case 'set-text': {
       if (state) {
         $target.text(val);
       } else {
-        $target.text("");
+        $target.text('');
       }
       break;
     }
 
-    case "set-value": {
+    case 'set-value': {
       if (state) {
         $target.val(val);
       } else {
-        $target.val("");
+        $target.val('');
       }
       break;
     }
 
-    case "set-inner-html": {
+    case 'set-inner-html': {
       if (state) {
         $target.html(val);
       } else {
-        $target.html("");
+        $target.html('');
       }
       break;
     }
 
-    case "add-attr": {
+    case 'add-attr': {
       const attr = val.attr;
       const value = val.value;
-      let dest = val.child ? $target.find(`> ${val.child}`) : $target;
+      const dest = val.child ? $target.find(`> ${val.child}`) : $target;
 
       if (dest.attr(attr) !== value) {
         dest.attr(attr, value);
@@ -117,77 +117,77 @@ function handleAction(state, $source, $target, action, val, event) {
       break;
     }
 
-    case "show-alert-prompt": {
+    case 'show-alert-prompt': {
       window.alert(val);
       break;
     }
 
-    case "show-confirm-prompt": {
+    case 'show-confirm-prompt': {
       const result = window.confirm(val);
       $target.text(result);
       break;
     }
 
-    case "show-input-prompt": {
+    case 'show-input-prompt': {
       const result = window.prompt(val);
       $target.text(result);
       break;
     }
 
-    case "key-press": {
+    case 'key-press': {
       $source.val(event.key);
       $target.text(event.keyCode);
       break;
     }
 
-    case "key-chord": {
-      $target.bind("contentchanged", function () {
+    case 'key-chord': {
+      $target.bind('contentchanged', function() {
         $source.val($target.text());
       });
-      if (event.type === "keydown") {
-        const value = $target.text() === "" ? event.key : `${$target.text()}+${event.key}`;
+      if (event.type === 'keydown') {
+        const value = $target.text() === '' ? event.key : `${$target.text()}+${event.key}`;
         $target.text(value);
-        $target.trigger("contentchanged");
-      } else if (event.type === "keyup") {
-        $target.text("");
+        $target.trigger('contentchanged');
+      } else if (event.type === 'keyup') {
+        $target.text('');
       }
       break;
     }
 
-    case "show-cookies": {
+    case 'show-cookies': {
       const cookies = JSON.stringify(_get_cookies(), null, 2).trim();
       $target.html(_code_wrap(cookies));
       break;
     }
 
-    case "show-lstorage": {
+    case 'show-lstorage': {
       const content = JSON.stringify(window.localStorage, null, 2).trim();
       $target.html(_code_wrap(content));
       break;
     }
 
-    case "show-sstorage": {
+    case 'show-sstorage': {
       const content = JSON.stringify(window.sessionStorage, null, 2).trim();
       $target.html(_code_wrap(content));
       break;
     }
 
-    case "submit": {
+    case 'submit': {
       if (state === true) {
         $.ajax({
-          url: "https://reqres.in/api/login",
-          type: "POST",
+          url: 'https://reqres.in/api/login',
+          type: 'POST',
           data: {
-            email: "eve.holt@reqres.in",
-            password: "cityslicka"
+            email: 'eve.holt@reqres.in',
+            password: 'cityslicka'
           },
-          success: function (response) {
+          success: function(response) {
             const parsed = JSON.stringify(response, null, 2).trim();
             $target.html(_code_wrap(parsed));
           }
         });
       } else {
-        $target.text("");
+        $target.text('');
       }
 
       break;
@@ -195,9 +195,9 @@ function handleAction(state, $source, $target, action, val, event) {
 
     default: {
       if (state) {
-        $target.prop(action, val === "true");
+        $target.prop(action, val === 'true');
       } else {
-        $target.prop(action, val === "false");
+        $target.prop(action, val === 'false');
       }
       break;
     }
@@ -205,11 +205,11 @@ function handleAction(state, $source, $target, action, val, event) {
 }
 
 function _get_cookies() {
-  const pairs = document.cookie.split(";");
+  const pairs = document.cookie.split(';');
   const cookies = {};
   for (let i = 0; i < pairs.length; i++) {
-    const pair = pairs[i].split("=");
-    cookies[(pair[0] + "").trim()] = unescape(pair.slice(1).join("="));
+    const pair = pairs[i].split('=');
+    cookies[(pair[0] + '').trim()] = unescape(pair.slice(1).join('='));
   }
   return cookies;
 }
@@ -220,35 +220,35 @@ function _code_wrap(content) {
 
 $(() => {
   // materialize init
-  M.Collapsible.init($(".collapsible.expandable"), { accordion: false });
-  $(document).ready(() => $("select").formSelect());
-  $(document).ready(() => $(".materialboxed").materialbox());
-  $(document).ready(() => $(".tabs").tabs());
+  M.Collapsible.init($('.collapsible.expandable'), { accordion: false });
+  $(document).ready(() => $('select').formSelect());
+  $(document).ready(() => $('.materialboxed').materialbox());
+  $(document).ready(() => $('.tabs').tabs());
 
   // app handlers
   function _select_first_tab() {
-    const action = "navigate";
+    const action = 'navigate';
     const state = true;
-    const $source = $("#nav-mobile").find("li").first();
-    const $target = $("#container");
-    const val = "#i-mouse-actions";
+    const $source = $('#nav-mobile').find('li').first();
+    const $target = $('#container');
+    const val = '#i-mouse-actions';
 
     handleAction(state, $source, $target, action, val);
   }
 
-  $(window).on("beforeunload", () => window.scrollTo(0, 0));
-  $(window).on("load", _select_first_tab);
-  $("[data-actions]").on("click", handleActions).on("keydown", handleActions).on("keyup", handleActions);
+  $(window).on('beforeunload', () => window.scrollTo(0, 0));
+  $(window).on('load', _select_first_tab);
+  $('[data-actions]').on('click', handleActions).on('keydown', handleActions).on('keyup', handleActions);
 
   function _change_inner_html_fn(event) {
     const $source = $(this);
-    const $target = $($(this).data("target"));
-    const state = !~~$(this).data("state");
+    const $target = $($(this).data('target'));
+    const state = !~~$(this).data('state');
 
     event.preventDefault();
     if (state) {
-      $target.css("color", "#009688");
-      $source.attr("class", $source[0].className + " disabled");
+      $target.css('color', '#009688');
+      $source.attr('class', $source[0].className + ' disabled');
       $target.html(
         "<p>Change inner html result</p><br /><p class='grey-text'>Double click this element<br />to revert the changes made by #change-inner-html</p>"
       );
@@ -257,14 +257,14 @@ $(() => {
 
   function _change_inner_html_result_fn(event) {
     const $source = $(this);
-    const $target = $($(this).data("target"));
-    const state = !~~$(this).data("state");
+    const $target = $($(this).data('target'));
+    const state = !~~$(this).data('state');
 
     event.preventDefault();
 
     if (state) {
-      $target.attr("class", $target[0].className.replace("disabled", ""));
-      $source.html("");
+      $target.attr('class', $target[0].className.replace('disabled', ''));
+      $source.html('');
     }
   }
 
@@ -277,8 +277,8 @@ $(() => {
     };
 
     function _detect_drop($el) {
-      const $dropZone = $($el.data("dropzone"));
-      const $dropZoneText = $($el.data("dropzone-text"));
+      const $dropZone = $($el.data('dropzone'));
+      const $dropZoneText = $($el.data('dropzone-text'));
       const dragOffset = $el.offset();
       const dropOffset = $dropZone.offset();
       const dragTop = dragOffset.top;
@@ -291,9 +291,9 @@ $(() => {
       const dropLeft = dropOffset.left;
 
       if (dragBottom > dropTop && dragTop < dropBottom && dragRight > dropLeft && dragLeft < dropRight) {
-        $dropZoneText.text("This is changed by #drag-drop-source");
+        $dropZoneText.text('This is changed by #drag-drop-source');
       } else {
-        $dropZoneText.text("This will be changed by #drag-drop-source");
+        $dropZoneText.text('This will be changed by #drag-drop-source');
       }
     }
 
@@ -310,14 +310,14 @@ $(() => {
     }
 
     function _handle_mouse_up(event) {
-      $("body").off("mousemove", _handle_drag).off("mouseup", _handle_mouse_up);
+      $('body').off('mousemove', _handle_drag).off('mouseup', _handle_mouse_up);
     }
 
-    $("body").on("mouseup", _handle_mouse_up).on("mousemove", _handle_drag);
+    $('body').on('mouseup', _handle_mouse_up).on('mousemove', _handle_drag);
   }
 
   function _move_to_fn(event) {
-    const $target = $($(this).data("target"));
+    const $target = $($(this).data('target'));
     const x = event.pageX;
     const y = event.pageY;
 
@@ -325,8 +325,8 @@ $(() => {
   }
 
   function _scroll_to_fn(event) {
-    const $source = $("#scroll-to");
-    const $target = $("#scroll-to-result");
+    const $source = $('#scroll-to');
+    const $target = $('#scroll-to-result');
 
     function _get_viewport_offset($elem) {
       const $window = $(window);
@@ -356,20 +356,20 @@ $(() => {
       const rect = _get_viewport_offset($target);
       $target.text(`Left: ${rect.left} | Top: ${rect.top}`);
     } else {
-      $target.text("");
+      $target.text('');
     }
   }
 
-  $("#change-txt").on("contextmenu", handleActions);
-  $("#change-txt").off("click");
-  $("#change-val").on("auxclick", handleActions);
-  $("#change-val").off("click");
-  $("#change-inner-html").off("click");
-  $("#change-inner-html-result").off("click");
-  $("#change-inner-html").on("dblclick", _change_inner_html_fn);
-  $("#change-inner-html-result").on("dblclick", _change_inner_html_result_fn);
-  $("#drag-drop-source").on("mousedown", _drag_source_fn);
-  $("#move-to").on("mouseenter", _move_to_fn);
-  $("#move-to").on("mouseleave", () => $($(this).data("target")).text(""));
-  document.addEventListener("scroll", _scroll_to_fn, true);
+  $('#change-txt').on('contextmenu', handleActions);
+  $('#change-txt').off('click');
+  $('#change-val').on('auxclick', handleActions);
+  $('#change-val').off('click');
+  $('#change-inner-html').off('click');
+  $('#change-inner-html-result').off('click');
+  $('#change-inner-html').on('dblclick', _change_inner_html_fn);
+  $('#change-inner-html-result').on('dblclick', _change_inner_html_result_fn);
+  $('#drag-drop-source').on('mousedown', _drag_source_fn);
+  $('#move-to').on('mouseenter', _move_to_fn);
+  $('#move-to').on('mouseleave', () => $($(this).data('target')).text(''));
+  document.addEventListener('scroll', _scroll_to_fn, true);
 });

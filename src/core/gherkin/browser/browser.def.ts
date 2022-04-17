@@ -1,4 +1,4 @@
-import { Given, When, Then } from "@cucumber/cucumber";
+import { Given, Then, When } from "@cucumber/cucumber";
 
 import { RETRY } from "@core/gherkin";
 import * as fn from "./browser.glue";
@@ -49,7 +49,7 @@ When(
 );
 
 When(
- /^I open the (?:"([^"]*)?" page's url|url "([^"]*)?")$/, RETRY(),
+  /^I open the (?:"([^"]*)?" page's url|url "([^"]*)?")$/, RETRY(),
   fn.whenOpen
 );
 

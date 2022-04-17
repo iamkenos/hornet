@@ -6,4 +6,4 @@ export async function closeLastWindow() {
   await browser.switchToWindow(last);
   await browser.closeWindow();
   await browser.switchToWindow(parent);
-};
+}

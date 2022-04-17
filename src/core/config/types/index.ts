@@ -3,8 +3,8 @@ import type {
   WdioCheckFullPageMethodOptions,
   WdioCheckScreenMethodOptions
 } from "wdio-image-comparison-service";
-import type { Hooks, HookFunctions } from "@wdio/types/build/Services";
-import type { HookFunctionExtension, CucumberOptions } from "@wdio/cucumber-framework/build/types";
+import type { HookFunctions, Hooks } from "@wdio/types/build/Services";
+import type { CucumberOptions, HookFunctionExtension } from "@wdio/cucumber-framework/build/types";
 import type { PreFilterFunction } from "deep-diff";
 import type { RecursivePartial } from "@core/common";
 

@@ -1,11 +1,17 @@
 import type { DataTable } from "@cucumber/cucumber";
-import type { HttpRequestOptions }  from "@core/commands";
+import type { HttpRequestOptions } from "@core/commands";
 
-import { merge }  from "lodash";
-import { AlertAction, BrowserStorage, Count, ImageCompareContext, WindowDirection, WindowNavigation } from "@core/commands";
+import {
+  AlertAction,
+  BrowserStorage,
+  Count,
+  ImageCompareContext,
+  WindowDirection,
+  WindowNavigation
+} from "@core/commands";
 import { isJSON } from "@core/common";
-import { WebElement, getSelector, getUrl, getTitle } from "@core/generics";
-import { parseToken, getDataTableRows } from "@core/gherkin";
+import { getSelector, getTitle, getUrl, WebElement } from "@core/generics";
+import { getDataTableRows, parseToken } from "@core/gherkin";
 
 export async function givenOnPage(meta: string) {
   await whenOpen(meta);

@@ -13,7 +13,7 @@ export class JSONSnapshotMatch extends ExpectedCondition {
   protected readonly filename: string;
   protected options: JsonSnapshotOptions;
   protected sortkey: string;
-  private comparable: any
+  private comparable: any;
 
   public constructor(filename: string, comparable: any, options?: JsonSnapshotOptions, not?: boolean) {
     super(not);

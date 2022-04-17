@@ -1,4 +1,4 @@
-import { isURL }  from "@core/common";
+import { isURL } from "@core/common";
 import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
 export class UrlEquals extends ExpectedCondition {

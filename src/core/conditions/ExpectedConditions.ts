@@ -65,7 +65,7 @@ ${evaluations.map((result) => result.message).join("\n  ------------------------
   public async expect() {
     try {
       await browser.waitUntil(
-        async () => {
+        async() => {
           this.action !== undefined && (await this.action());
           for (let i = 0; i < this.conditions.length; i++) {
             const evaluation = await this.conditions[i].evaluate();

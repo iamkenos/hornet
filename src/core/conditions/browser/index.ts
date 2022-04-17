@@ -1,6 +1,6 @@
 import type { ImageSnapshotContextOptions } from "@core/conditions";
 import type { NetworkRequestSnapshotOptions } from "@core/config";
-import { ImageCompareContext, BrowserStorage } from "@core/commands";
+import { BrowserStorage, ImageCompareContext } from "@core/commands";
 import { OtherConditions } from "@core/conditions/others";
 
 import { AlertExists } from "./AlertExists";

@@ -13,11 +13,11 @@ export class OtherConditions extends ExpectedConditions {
   }
 
   public arrayContains<T>(actual: Array<T>, expected: Array<T>, not?: boolean) {
-   return this.addCondition(new ArrayContains(actual, expected, not));
+    return this.addCondition(new ArrayContains(actual, expected, not));
   }
 
   public arrayEquals<T>(actual: Array<T>, expected: Array<T>, not?: boolean) {
-   return this.addCondition(new ArrayEquals(actual, expected, not));
+    return this.addCondition(new ArrayEquals(actual, expected, not));
   }
 
   public jsonSnapshotMatch(filename: string, comparable: any, options?: JsonSnapshotOptions, not?: boolean) {
@@ -25,10 +25,10 @@ export class OtherConditions extends ExpectedConditions {
   }
 
   public objectEquals(actual: any, expected: any, not?: boolean) {
-   return this.addCondition(new ObjectEquals(actual, expected, not));
+    return this.addCondition(new ObjectEquals(actual, expected, not));
   }
 
   public objectPropEquals(object: any, property: string, expected: any, not?: boolean) {
-   return this.addCondition(new ObjectPropEquals(object, property, expected, not));
+    return this.addCondition(new ObjectPropEquals(object, property, expected, not));
   }
 }

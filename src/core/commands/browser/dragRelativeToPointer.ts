@@ -20,4 +20,4 @@ export async function dragRelativeToPointer(target: Coordinates, dragDuration = 
     }
   ]);
   await browser.releaseActions();
-};
+}

@@ -4,19 +4,19 @@ import {
   Axis,
   ClickAction,
   Count,
+  ElementType,
   HrefScheme,
   HrefSchemeContext,
   HrefTarget,
   HrefTargetContext,
-  ElementType,
   SelectAction,
   SelectOptionContext,
   SetValueAction,
   SizeContext
 } from "@core/commands";
-import { isURL }  from "@core/common";
-import { WebElement, getSelector, getLabel, getUrl } from "@core/generics";
-import { BY_LINK_TEXT, parseToken, getDataTableRows } from "@core/gherkin";
+import { isURL } from "@core/common";
+import { getLabel, getSelector, getUrl, WebElement } from "@core/generics";
+import { BY_LINK_TEXT, getDataTableRows, parseToken } from "@core/gherkin";
 
 export async function whenClear(meta: string, key: string) {
   const selector = getSelector(meta, key);
@@ -235,7 +235,7 @@ export async function thenHrefOpensOn(meta: string, key: string, type: ElementTy
     case HrefTargetContext.SELF:
     case HrefTargetContext.PARENT:
     case HrefTargetContext.TOP: {
-      const member = Object.entries(HrefTargetContext).find(([key, value]) => value === target)[0];
+      const member = Object.entries(HrefTargetContext).find(([, value]) => value === target)[0];
       await then.attributeEquals(AnchorAttributes.TARGET, HrefTarget[member], not).expect();
       break;
     }
@@ -250,7 +250,7 @@ export async function thenHrefOpensOnNamedFrame(meta: string, key: string, type:
   const selector = getSelector(meta, key);
   const then = await new WebElement(type === ElementType.LINK ? BY_LINK_TEXT(key) : selector).conditions();
 
-  await then.attributeEquals(AnchorAttributes.TARGET, target, not).expect()
+  await then.attributeEquals(AnchorAttributes.TARGET, target, not).expect();
 }
 
 export async function thenHrefPointsTo(meta: string, key: string, type: ElementType, not: boolean, scheme: HrefSchemeContext, value: string) {
@@ -260,7 +260,7 @@ export async function thenHrefPointsTo(meta: string, key: string, type: ElementT
   switch (scheme) {
     case HrefSchemeContext.MAIL:
     case HrefSchemeContext.TEL: {
-      const member = Object.entries(HrefSchemeContext).find(([key, value]) => value === scheme)[0];
+      const member = Object.entries(HrefSchemeContext).find(([, value]) => value === scheme)[0];
       await then.attributeEquals(AnchorAttributes.HREF, `${HrefScheme[member]}${value}`, not).expect();
       break;
     }

@@ -11,13 +11,13 @@ export function attachFile(title: string, filename: string, attachment: any, mim
 export function attachImage(title: string, filename: string) {
   if (fs.existsSync(filename)) {
     const content = Buffer.from(fs.readFileSync(filename) as any, "base64");
-    attachFile(title, filename, content, MimeType.IMG_PNG)
+    attachFile(title, filename, content, MimeType.IMG_PNG);
   } 
 }
 
 export function attachJson(title: string, filename: string) {
   if (fs.existsSync(filename)) {
     const content = readFileSync(filename);
-    attachFile(title, filename, isJSON(content) ? JSON.parse(content) : content, MimeType.APP_JSON)
+    attachFile(title, filename, isJSON(content) ? JSON.parse(content) : content, MimeType.APP_JSON);
   } 
 }

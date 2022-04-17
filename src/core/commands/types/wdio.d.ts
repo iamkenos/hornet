@@ -2,11 +2,12 @@ import type { MoveToOptions } from "webdriverio";
 import type { KVP } from "@core/common";
 import type { BrowserConditions, ExpectedConditions } from "@core/conditions";
 import type { CustomConfig } from "@core/config";
-import type { HttpRequestOptions, HttpResponse, ClickWith, ClickPointerOrigin, Coordinates } from "./";
+import type { ClickPointerOrigin, ClickWith, Coordinates, HttpRequestOptions, HttpResponse } from "./";
 
 declare global {
   namespace WebdriverIO {
-    interface Config extends Partial<CustomConfig> {}
+    // @ts-ignore
+    type Config = Partial<CustomConfig>
 
     interface Browser {
       config: Config & CustomConfig;

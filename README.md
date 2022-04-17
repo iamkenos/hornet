@@ -6,24 +6,26 @@
 - ~~add all glue and def files~~
 - ~~build config~~
 - ~~remove expect; refactor expected conditions~~
+- ~~linting~~
 - refactor gherkin
   - add element index
   - destructure format???
-- samples
-- support config overrides
 - .env support
+- gherkin tokens
+- support config overrides
+- samples
 - docs
 - cli
 - UTs
 - use cases for diffing:
-  // 1. success, exact                 -- OK(image)
-  // 2. success, within threshold      -- OK(image)
-  // 3. success, skip matching         -- OK(image)
-  // 4. success, not within threshold  -- OK(image)
-  // 5. fails, missing baseline        -- OK(image)
-  // 6. fails, beyond threshold        -- OK(image)
-  // 7. fails, not beyond threshold    -- OK(image)
-  // 8. fails, unhandled error         -- OK(image)
+  // 1. success, exact -- OK(image)
+  // 2. success, within threshold -- OK(image)
+  // 3. success, skip matching -- OK(image)
+  // 4. success, not within threshold -- OK(image)
+  // 5. fails, missing baseline -- OK(image)
+  // 6. fails, beyond threshold -- OK(image)
+  // 7. fails, not beyond threshold -- OK(image)
+  // 8. fails, unhandled error -- OK(image)
   // - element not found
   // - browser error
 - npm pack & install

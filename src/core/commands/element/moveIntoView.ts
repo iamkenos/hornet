@@ -5,5 +5,6 @@ export async function moveIntoView(this: WebdriverIO.Element, options?: MoveToOp
     await this.scrollIntoView({ block: "center" });
     await this.moveTo(options);
   } catch (e) {
+    // melt e
   }
 }

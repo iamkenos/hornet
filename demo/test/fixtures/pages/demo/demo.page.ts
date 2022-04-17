@@ -1,4 +1,4 @@
-import { WebPage, WebElement } from "@hornet";
+import { WebElement, WebPage } from "@hornet";
 import { NavigationBar } from "../../components/navigation-bar.component";
 import meta from "./demo.meta";
 

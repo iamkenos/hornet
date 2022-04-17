@@ -3,4 +3,4 @@ export async function setCookie(name: string, value: string) {
     name: name,
     value: value
   });
-};
+}

@@ -1,4 +1,4 @@
-import { When, Then } from "@cucumber/cucumber";
+import { Then, When } from "@cucumber/cucumber";
 
 import { RETRY } from "@core/gherkin";
 import * as fn from "./element.glue";

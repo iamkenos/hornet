@@ -8,7 +8,7 @@ export class CountEquals extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      this.actual = await $$(this.selector).length
+      this.actual = await $$(this.selector).length;
       this.passed = this.actual === this.expected;
     } catch (e) {
       this.actual = e.message;

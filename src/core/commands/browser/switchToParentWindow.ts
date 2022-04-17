@@ -3,4 +3,4 @@ export async function switchToParentWindow() {
   const parent = handles[0];
 
   await browser.switchToWindow(parent);
-};
+}

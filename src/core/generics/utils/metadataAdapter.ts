@@ -2,14 +2,14 @@ import path from "path";
 
 import { merge } from "lodash";
 import { Intersect, logger } from "@core/common";
-import { PageMetaData, ComponentMetaData } from "@core/generics";
+import { ComponentMetaData, PageMetaData } from "@core/generics";
 
 export function getDataByLocale<T extends PageMetaData | ComponentMetaData>(meta: T, locale?: string) {
   const data = merge({}, meta["default"], meta[locale || browser.config.locale]);
   return data as Intersect<T[keyof T]> & T[keyof T];
 }
 
-export function getProperty<T extends any = string>(basename: string, ...propTree: string[]) {
+export function getProperty<T = string>(basename: string, ...propTree: string[]) {
   const { config } = browser;
   const file = config.metadata.find((file) => path.basename(file).split(".")[0].toLowerCase() === basename.toLowerCase());
 
@@ -18,7 +18,7 @@ export function getProperty<T extends any = string>(basename: string, ...propTre
     ${config.metadata.map((i) => i).join(",\n")}`);
   }
 
-  const metadata = getDataByLocale(require(file).default);
+  const metadata = getDataByLocale(require(file).default); // eslint-disable-line
   return propTree.reduce((i, j): object => (i && i[j] ? i[j] : null), metadata) as T;
 }
 

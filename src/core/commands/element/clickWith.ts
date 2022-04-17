@@ -1,4 +1,4 @@
-import { JS_MOUSE_CLICK, ClickWith, ClickAction } from "@core/commands";
+import { ClickAction, ClickWith, JS_MOUSE_CLICK } from "@core/commands";
 
 export async function clickWith(this: WebdriverIO.Element, options?: ClickWith) {
   if (options?.move) {

@@ -1,4 +1,4 @@
-import type { Coordinates, ClickPointerOrigin } from "@core/commands";
+import type { ClickPointerOrigin, Coordinates } from "@core/commands";
 
 export async function clickCoordinates(target: Coordinates, origin: ClickPointerOrigin = "pointer") {
   const { x, y } = target;
@@ -15,4 +15,4 @@ export async function clickCoordinates(target: Coordinates, origin: ClickPointer
     }
   ]);
   await browser.releaseActions();
-};
+}

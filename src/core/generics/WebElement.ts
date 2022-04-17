@@ -37,7 +37,7 @@ export class WebElement {
 
   public async byAttribute(kvp: KVP, partial = false) {
     const webelements = await this.all;
-    const webelement = await arrayFind(webelements, async (webelement) => {
+    const webelement = await arrayFind(webelements, async(webelement) => {
       const element = await webelement.$;
       const result = await element.getAttribute(kvp.key);
       return partial ? result.includes(kvp.value) : result === kvp.value;
@@ -59,7 +59,7 @@ export class WebElement {
 
   public async byText(text: string, partial = false) {
     const webelements = await this.all;
-    const webelement = await arrayFind(webelements, async (webelement) => {
+    const webelement = await arrayFind(webelements, async(webelement) => {
       const element = await webelement.$;
       const result = await element.getText();
       return partial ? result.includes(text) : result === text;
@@ -73,7 +73,7 @@ export class WebElement {
 
   public async toTextArray() {
     const webelements = await this.all;
-    const getText = async (webelement: WebElement) => {
+    const getText = async(webelement: WebElement) => {
       const element = await webelement.$;
       return await element.getText();
     };

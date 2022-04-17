@@ -10,4 +10,4 @@ export async function closeOtherWindows() {
     await browser.switchToWindow(parent);
     handles = await browser.getWindowHandles();
   }
-};
+}

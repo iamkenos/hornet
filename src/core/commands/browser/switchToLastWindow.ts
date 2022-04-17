@@ -3,4 +3,4 @@ export async function switchToLastWindow() {
   const last = handles.slice(-1)[0];
 
   await browser.switchToWindow(last);
-};
+}

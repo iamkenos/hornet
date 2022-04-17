@@ -4,7 +4,7 @@ const demoPage = new DemoPage();
 
 export async function whenClickNavItem(label: string) {
   const webelement = await demoPage.navigationBar.getNavigationItem(label);
-  const element =  await webelement.$;
+  const element = await webelement.$;
 
   await element.clickWith({ button: ClickAction.SCRIPT });
 }
