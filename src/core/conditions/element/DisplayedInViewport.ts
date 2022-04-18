@@ -8,7 +8,7 @@ export class DisplayedInViewport extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      this.actual = await $(this.selector).isDisplayedInViewport();
+      this.actual = await this.element.isDisplayedInViewport();
       this.passed = this.actual === this.expected;
     } catch (e) {
       this.actual = e.message;

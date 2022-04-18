@@ -8,7 +8,7 @@ export class Clickable extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      this.actual = await $(this.selector).isClickable();
+      this.actual = await this.element.isClickable();
       this.passed = this.actual === this.expected;
     } catch (e) {
       this.actual = e.message;

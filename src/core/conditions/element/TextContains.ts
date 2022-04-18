@@ -8,7 +8,7 @@ export class TextContains extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      this.actual = await $(this.selector).getText();
+      this.actual = await this.element.getText();
       this.passed = this.actual.includes(this.expected);
     } catch (e) {
       this.actual = e.message;

@@ -8,10 +8,10 @@ export class Exists extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      this.actual = await $(this.selector).isExisting();
+      this.actual = await this.element.isExisting();
       this.passed = this.actual === this.expected;
     } catch (e) {
-      this.actual = e.message;
+      this.actual = `${false} - ${e.message}`;
       this.passed = false;
     }
 

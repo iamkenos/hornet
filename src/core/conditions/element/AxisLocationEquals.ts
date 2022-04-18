@@ -10,7 +10,7 @@ export class AxisLocationEquals extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      this.actual = await $(this.selector).getLocation(this.on as Axis);
+      this.actual = await this.element.getLocation(this.on as Axis);
       this.passed = this.actual === this.expected;
     } catch (e) {
       this.actual = e.message;

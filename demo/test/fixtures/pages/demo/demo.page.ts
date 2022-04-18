@@ -1,4 +1,4 @@
-import { WebElement, WebPage } from "@hornet";
+import { WebPage, XPathBuilder } from "@hornet";
 import { NavigationBar } from "../../components/navigation-bar.component";
 import meta from "./demo.meta";
 
@@ -10,7 +10,8 @@ export class DemoPage extends WebPage<typeof meta> {
     this.navigationBar = new NavigationBar();
   }
 
-  public async getSectionHeader(label: string) {
-    return new WebElement(this.selectors["section-header"].replace("##LABEL##", label));
+  public getSectionHeader(label: string) {
+    const selector = this.selectors["section-header"];
+    return new XPathBuilder(selector).textEquals(label).toWebElement();
   }
 }

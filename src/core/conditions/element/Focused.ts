@@ -8,7 +8,7 @@ export class Focused extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      this.actual = await $(this.selector).isFocused();
+      this.actual = await this.element.isFocused();
       this.passed = this.actual === this.expected;
     } catch (e) {
       this.actual = e.message;

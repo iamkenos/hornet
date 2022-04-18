@@ -8,7 +8,7 @@ export class ValueEquals extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      this.actual = await $(this.selector).getValue();
+      this.actual = await this.element.getValue();
       this.passed = this.actual === this.expected;
     } catch (e) {
       this.actual = e.message;

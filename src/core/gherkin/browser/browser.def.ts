@@ -149,7 +149,7 @@ Then(
 );
 
 Then(
-  /^I expect the (?:alert|confirm box|prompt) text to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
+  /^I expect the (?:alert|confirm box|prompt) text to( not)? contain "([^"]*)?"$/, RETRY(),
   fn.thenAlertTextContains
 );
 
@@ -159,7 +159,7 @@ Then(
 );
 
 Then(
-  /^I expect the "([^"]*)?" site cookie value to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
+  /^I expect the "([^"]*)?" site cookie value to( not)? contain "([^"]*)?"$/, RETRY(),
   fn.thenCookieContains
 );
 
@@ -169,7 +169,7 @@ Then(
 );
 
 Then(
-  /^I expect the "([^"]*)?" site cookie to( not)? (?:be existing|exist)$/, RETRY(),
+  /^I expect the "([^"]*)?" site cookie to( not)? exist$/, RETRY(),
   fn.thenCookieExists
 );
 
@@ -184,27 +184,27 @@ Then(
 );
 
 Then(
-  /^I expect the captured google analytics(?: "([^"]*)?" event)? to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
+  /^I expect the captured google analytics(?: "([^"]*)?" event)? to( not)? match the snapshot "([^"]*)?"$/, RETRY(),
   fn.thenGAEntriesSnapshotMatch
 );
 
 Then(
-  /^I expect the response to the following request to( not)? match the (?:reference|snapshot) "([^"]*)?":$/, RETRY(),
+  /^I expect the response to the following request to( not)? match the snapshot "([^"]*)?":$/, RETRY(),
   fn.thenHttpResponseSnapshotMatch
 );
 
 Then(
-  /^I expect the (?:ajax|xhr|network|api) (?:requests|calls)( with headers)? to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
+  /^I expect the (?:ajax|xhr|network|api) (?:requests|calls)( with headers)? to( not)? match the snapshot "([^"]*)?"$/, RETRY(),
   fn.thenNetworkCallsSnapshotMatch
 );
 
 Then(
-  /^I expect the (?:ajax|xhr|network|api) (?:requests|calls)( with headers)? to the following paths to( not)? match the (?:reference|snapshot) "([^"]*)?":$/, RETRY(),
+  /^I expect the (?:ajax|xhr|network|api) (?:requests|calls)( with headers)? to the following paths to( not)? match the snapshot "([^"]*)?":$/, RETRY(),
   fn.thenNetworkCallsOnPathsSnapshotMatch
 );
 
 Then(
-  /^I expect the (?:ajax|xhr|network|api) (?:requests|calls)( with headers)? to( not)? match the (?:reference|snapshot) "([^"]*)?" with expressions:$/, RETRY(),
+  /^I expect the (?:ajax|xhr|network|api) (?:requests|calls)( with headers)? to( not)? match the snapshot "([^"]*)?" with expressions:$/, RETRY(),
   fn.thenNetworkCallsOnPathsSnapshotMatchExpressions
 );
 
@@ -219,12 +219,12 @@ Then(
 );
 
 Then(
-  /^I expect the (viewport|page)(?: image)? to( not)? match the (?:reference|snapshot) "([^"]*)?"$/, RETRY(),
+  /^I expect the (viewport|page)(?: image)? to( not)? match the snapshot "([^"]*)?"$/, RETRY(),
   fn.thenSnapshotMatch
 );
 
 Then(
-  /^I expect the "([^"]*)?" site (local|session) storage item value to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
+  /^I expect the "([^"]*)?" site (local|session) storage item value to( not)? contain "([^"]*)?"$/, RETRY(),
   fn.thenStorageItemContains
 );
 
@@ -234,12 +234,12 @@ Then(
 );
 
 Then(
-  /^I expect the "([^"]*)?" site (local|session) storage item to( not)? (?:be existing|exist)$/, RETRY(),
+  /^I expect the "([^"]*)?" site (local|session) storage item to( not)? exist$/, RETRY(),
   fn.thenStorageItemExists
 );
 
 Then(
-  /^I expect the (?:window|page) title to( not)? (?:be containing|contain) (?:the "([^"]*)?" page's title|"([^"]*)?")$/, RETRY(),
+  /^I expect the (?:window|page) title to( not)? contain (?:the "([^"]*)?" page's title|"([^"]*)?")$/, RETRY(),
   fn.thenTitleContains
 );
 
@@ -249,7 +249,7 @@ Then(
 );
 
 Then(
-  /^I expect the url to( not)? (?:be containing|contain) (?:the "([^"]*)?" page's url|"([^"]*)?"|the base url)$/, RETRY(),
+  /^I expect the url to( not)? contain (?:the "([^"]*)?" page's url|"([^"]*)?"|the base url)$/, RETRY(),
   fn.thenUrlContains
 );
 
@@ -259,7 +259,7 @@ Then(
 );
 
 Then(
-  /^I expect the url path to( not)? (?:be containing|contain) "([^"]*)?"$/, RETRY(),
+  /^I expect the url path to( not)? contain "([^"]*)?"$/, RETRY(),
   fn.thenUrlPathContains
 );
 

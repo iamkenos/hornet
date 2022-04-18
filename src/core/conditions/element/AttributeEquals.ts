@@ -9,7 +9,7 @@ export class AttributeEquals extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      this.actual = await $(this.selector).getAttribute(this.on);
+      this.actual = await this.element.getAttribute(this.on);
       this.passed = this.actual === this.expected;
     } catch (e) {
       this.actual = e.message;

@@ -14,7 +14,7 @@ export class SizeSideEquals extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      const size = await $(this.selector).getSize(this.on as SizeContext) as any;
+      const size = await this.element.getSize(this.on as SizeContext) as any;
       this.actual = this.toString(size);
       this.passed = this.actual === this.expected;
     } catch (e) {

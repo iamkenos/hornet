@@ -77,9 +77,9 @@ export enum SelectAction {
 }
 
 export enum SelectOptionContext {
-  INDEX = "index",
   LABEL = "label",
-  VALUE = "value"
+  VALUE = "value",
+  INDEX = "index",
 }
 
 export enum SetValueAction {

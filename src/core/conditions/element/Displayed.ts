@@ -8,7 +8,7 @@ export class Displayed extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      this.actual = await $(this.selector).isDisplayed();
+      this.actual = await this.element.isDisplayed();
       this.passed = this.actual === this.expected;
     } catch (e) {
       this.actual = e.message;

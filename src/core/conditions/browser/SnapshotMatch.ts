@@ -77,8 +77,7 @@ export class SnapshotMatch extends ExpectedCondition {
   protected async getResult() {
     try {
       const skipCompare = this.options.skipCompare;
-      const element = this.selector ? await $(this.selector) : undefined;
-      const diff = await this.compare(this.filename, this.options, this.context, element);
+      const diff = await this.compare(this.filename, this.options, this.context, this.element);
       const same = diff.error ? false : this.options.saveAboveTolerance > diff.misMatchPercentage;
       this.actual = diff.error || `${diff.misMatchPercentage}% difference`;
       this.passed = skipCompare ? true : same;

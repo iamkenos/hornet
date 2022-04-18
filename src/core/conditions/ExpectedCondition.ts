@@ -1,4 +1,3 @@
-import type { Selector } from "webdriverio";
 import type { ExpectedConditionResult } from "./types";
 
 export abstract class ExpectedCondition {
@@ -18,7 +17,7 @@ export abstract class ExpectedCondition {
 
   protected on?: string;
 
-  protected selector?: Selector;
+  protected element?: WebdriverIO.Element;
 
   protected constructor(not = false) {
     this.name = this.constructor.name;
@@ -26,8 +25,8 @@ export abstract class ExpectedCondition {
     this.not = not;
   }
 
-  public setSelector(selector: Selector) {
-    this.selector = selector;
+  public setElement(element: WebdriverIO.Element) {
+    this.element = element;
     return this;
   }
 
@@ -43,7 +42,7 @@ export abstract class ExpectedCondition {
       expected,
       passed,
       message: `
-  Condition: ${name} ${this.on ? `[${this.on}] ` : ``}${this.selector ? `\n  Selector: ${this.selector}` : ``}
+  Condition: ${name} ${this.on ? `[${this.on}] ` : ``}${this.element ? `\n  Selector: ${this.element.selector}` : ``}${this.element?.index ? `\n  Index: ${this.element.index}` : ``}
   Result: ${passed ? "Success" : "Failed"}
   Expected${this.not ? " (Not)" : ""}: ${expected instanceof Array ? `\n${expected.map((i: string) => `    ${i}`).join("\n")}` : expected}
   Actual: ${actual instanceof Array ? `\n${actual.map((i: string) => `    ${i}`).join("\n")}` : actual}`

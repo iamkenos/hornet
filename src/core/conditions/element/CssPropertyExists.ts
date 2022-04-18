@@ -9,7 +9,7 @@ export class CssPropertyExists extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      const prop = (await $(this.selector).getCSSProperty(this.on));
+      const prop = await this.element.getCSSProperty(this.on);
       this.actual = prop.value !== "" && prop.parsed !== {};
       this.passed = this.actual === this.expected;
     } catch (e) {

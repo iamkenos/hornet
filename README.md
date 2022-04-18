@@ -7,9 +7,7 @@
 - ~~build config~~
 - ~~remove expect; refactor expected conditions~~
 - ~~linting~~
-- refactor gherkin
-  - add element index
-  - destructure format???
+- ~~refactor gherkin: add element index~~
 - .env support
 - gherkin tokens
 - support config overrides

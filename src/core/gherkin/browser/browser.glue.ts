@@ -183,7 +183,7 @@ export async function whenSwitchToFrameOrParent(meta: string, key?: string) {
     default: {
       const selector = getSelector(meta, key);
       const webelement = new WebElement(selector);
-      const element = await webelement.$;
+      const element = await webelement.$();
       await browser.switchToFrame(element);
       break;
     }

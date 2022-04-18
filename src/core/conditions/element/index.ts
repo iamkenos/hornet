@@ -1,4 +1,3 @@
-import type { Selector } from "webdriverio";
 import type { Axis } from "@core/commands";
 import type { SizeContext } from "@core/commands";
 import type { ImageSnapshotContextOptions } from "@core/conditions";
@@ -29,98 +28,98 @@ import { ValueContains } from "./ValueContains";
 import { ValueEquals } from "./ValueEquals";
 
 export class ElementConditions extends ExpectedConditions {
-  private readonly selector: Selector;
+  private readonly element: WebdriverIO.Element;
 
-  public constructor(selector: Selector) {
+  public constructor(element: WebdriverIO.Element) {
     super();
-    this.selector = selector;
+    this.element = element;
   }
 
   public attributeContains(attribute: string, expected: string, not?: boolean) {
-    return this.addCondition(new AttributeContains(attribute, expected, not).setSelector(this.selector));
+    return this.addCondition(new AttributeContains(attribute, expected, not).setElement(this.element));
   }
 
   public attributeEquals(attribute: string, expected: string, not?: boolean) {
-    return this.addCondition(new AttributeEquals(attribute, expected, not).setSelector(this.selector));
+    return this.addCondition(new AttributeEquals(attribute, expected, not).setElement(this.element));
   }
 
   public attributeExists(attribute: string, not?: boolean) {
-    return this.addCondition(new AttributeExists(attribute, not).setSelector(this.selector));
+    return this.addCondition(new AttributeExists(attribute, not).setElement(this.element));
   }
 
   public axisLocationEquals(axis: Axis, expected: number, not?: boolean) {
-    return this.addCondition(new AxisLocationEquals(axis, expected, not).setSelector(this.selector));
+    return this.addCondition(new AxisLocationEquals(axis, expected, not).setElement(this.element));
   }
 
   public clickable(not?: boolean) {
-    return this.addCondition(new Clickable(not).setSelector(this.selector));
+    return this.addCondition(new Clickable(not).setElement(this.element));
   }
 
   public countEquals(expected: number, not?: boolean) {
-    return this.addCondition(new CountEquals(expected, not).setSelector(this.selector));
+    return this.addCondition(new CountEquals(expected, not).setElement(this.element));
   }
 
   public countLessThan(expected: number, not?: boolean) {
-    return this.addCondition(new CountLessThan(expected, not).setSelector(this.selector));
+    return this.addCondition(new CountLessThan(expected, not).setElement(this.element));
   }
 
   public countMoreThan(expected: number, not?: boolean) {
-    return this.addCondition(new CountMoreThan(expected, not).setSelector(this.selector));
+    return this.addCondition(new CountMoreThan(expected, not).setElement(this.element));
   }
 
   public cssPropertyExists(property: string, not?: boolean) {
-    return this.addCondition(new CssPropertyExists(property, not).setSelector(this.selector));
+    return this.addCondition(new CssPropertyExists(property, not).setElement(this.element));
   }
 
   public displayed(not?: boolean) {
-    return this.addCondition(new Displayed(not).setSelector(this.selector));
+    return this.addCondition(new Displayed(not).setElement(this.element));
   }
 
   public displayedInViewport(not?: boolean) {
-    return this.addCondition(new DisplayedInViewport(not).setSelector(this.selector));
+    return this.addCondition(new DisplayedInViewport(not).setElement(this.element));
   }
 
   public enabled(not?: boolean) {
-    return this.addCondition(new Enabled(not).setSelector(this.selector));
+    return this.addCondition(new Enabled(not).setElement(this.element));
   }
 
   public exists(not?: boolean) {
-    return this.addCondition(new Exists(not).setSelector(this.selector));
+    return this.addCondition(new Exists(not).setElement(this.element));
   }
 
   public focused(not?: boolean) {
-    return this.addCondition(new Focused(not).setSelector(this.selector));
+    return this.addCondition(new Focused(not).setElement(this.element));
   }
 
   public selected(not?: boolean) {
-    return this.addCondition(new Selected(not).setSelector(this.selector));
+    return this.addCondition(new Selected(not).setElement(this.element));
   }
 
   public sizeEquals(width: number, height: number, not?: boolean) {
-    return this.addCondition(new SizeEquals(width, height, not).setSelector(this.selector));
+    return this.addCondition(new SizeEquals(width, height, not).setElement(this.element));
   }
 
   public sizeSideEquals(side: SizeContext, expeced: number, not?: boolean) {
-    return this.addCondition(new SizeSideEquals(side, expeced, not).setSelector(this.selector));
+    return this.addCondition(new SizeSideEquals(side, expeced, not).setElement(this.element));
   }
 
   public snapshotMatch(filename: string, options?: ImageSnapshotContextOptions[ImageCompareContext.ELEMENT], not?: boolean) {
-    return this.addCondition(new SnapshotMatch(ImageCompareContext.ELEMENT, filename, options, not).setSelector(this.selector));
+    return this.addCondition(new SnapshotMatch(ImageCompareContext.ELEMENT, filename, options, not).setElement(this.element));
   }
 
   public textContains(expected: string, not?: boolean) {
-    return this.addCondition(new TextContains(expected, not).setSelector(this.selector));
+    return this.addCondition(new TextContains(expected, not).setElement(this.element));
   }
 
   public textEquals(expected: string, not?: boolean) {
-    return this.addCondition(new TextEquals(expected, not).setSelector(this.selector));
+    return this.addCondition(new TextEquals(expected, not).setElement(this.element));
   }
 
   public valueContains(expected: string, not?: boolean) {
-    return this.addCondition(new ValueContains(expected, not).setSelector(this.selector));
+    return this.addCondition(new ValueContains(expected, not).setElement(this.element));
   }
 
   public valueEquals(expected: string, not?: boolean) {
-    return this.addCondition(new ValueEquals(expected, not).setSelector(this.selector));
+    return this.addCondition(new ValueEquals(expected, not).setElement(this.element));
   }
 }
