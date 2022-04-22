@@ -8,7 +8,6 @@
       "@wdio/selenium-standalone-service",
       "@wdio/browserstack-service",
       "@wdio/devtools-service",
-      "expect-webdriverio",
       "wdio-intercept-service",
       "webdriverio/async",
       "node"

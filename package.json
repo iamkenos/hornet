@@ -38,6 +38,7 @@
     "luxon": "2.3.1",
     "query-string": "7.1.1",
     "tsconfig-paths": "3.14.1",
+    "ts-node": "10.7.0",
     "wdio-image-comparison-service": "3.1.1",
     "wdio-intercept-service": "4.2.2"
   },
