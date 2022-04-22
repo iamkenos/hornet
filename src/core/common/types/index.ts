@@ -9,4 +9,4 @@ export type RecursivePartial<T> = {
 
 export type Intersect<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never;
 
-export type KVP = { key: string; value: string };
+export type KeyValuePair = { key: string; value: string };

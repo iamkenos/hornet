@@ -1,4 +1,4 @@
-import { WebPage, XPathBuilder } from "@hornet";
+import { WebPage, XPathBuilder } from "@hornet/core/generics";
 import { NavigationBar } from "../../components/navigation-bar.component";
 import meta from "./demo.meta";
 

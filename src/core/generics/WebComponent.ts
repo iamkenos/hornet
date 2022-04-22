@@ -1,9 +1,9 @@
 import { Intersect } from "@core/common";
-import { getDataByLocale } from "@core/generics";
+import { MetaAdapter } from "@core/generics";
 import { WebElement } from "./WebElement";
-import type { ComponentMetaData } from "./types";
+import type { ComponentMetadata } from "./types";
 
-export abstract class WebComponent<T extends ComponentMetaData> extends WebElement {
+export abstract class WebComponent<T extends ComponentMetadata> extends WebElement {
   public readonly properties: Intersect<T[keyof T]> & T[keyof T];
 
   public readonly labels: Intersect<T[keyof T]["labels"]>;
@@ -18,12 +18,12 @@ export abstract class WebComponent<T extends ComponentMetaData> extends WebEleme
 
   public constructor(tag: keyof Intersect<T[keyof T]["selectors"]>, meta: T, parent = "", locale?: string) {
     super(parent);
-    this.properties = getDataByLocale(meta, locale);
-    this.root = getDataByLocale<any>(meta, locale).selectors[tag];
     this.tag = tag as string;
     this.parent = parent;
-    this.selector = this.selector as string + this.root;
-    this.labels = this.properties.labels;
+    this.properties = MetaAdapter.getProperties(meta, locale);
     this.selectors = this.properties.selectors as any;
+    this.labels = this.properties.labels;
+    this.root = this.selectors[tag] as any;
+    this.selector = this.selector as string + this.root;
   }
 }

@@ -13,7 +13,7 @@
       "webdriverio/async",
       "node"
     ],
-    "paths": { "@hornet": ["src/"], "@core": ["src/core/"], "@core/*": ["src/core/*"] },
+    "paths": { "@hornet": ["src/"], "@hornet/*": ["src/*"], "@core": ["src/core/"], "@core/*": ["src/core/*"] },
     "target": "ES5"
   },
   "include": ["./**/**.ts"]

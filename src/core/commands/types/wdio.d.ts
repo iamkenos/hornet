@@ -1,5 +1,5 @@
 import type { MoveToOptions } from "webdriverio";
-import type { KVP } from "@core/common";
+import type { KeyValuePair } from "@core/common";
 import type { BrowserConditions, ExpectedConditions } from "@core/conditions";
 import type { CustomConfig } from "@core/config";
 import type { ClickPointerOrigin, ClickWith, Coordinates, HttpRequestOptions, HttpResponse } from "./";
@@ -27,8 +27,8 @@ declare global {
       scrollToTop: () => Promise<void>;
       sendRequest: (url: string, options?: HttpRequestOptions) => Promise<HttpResponse>;
       setCookie: (name: string, value: string) => Promise<void>;
-      setLocalStorageItem: (kvp: KVP) => Promise<void>;
-      setSessionStorageItem: (kvp: KVP) => Promise<void>;
+      setLocalStorageItem: (kvp: KeyValuePair) => Promise<void>;
+      setSessionStorageItem: (kvp: KeyValuePair) => Promise<void>;
       storeWindowSize: () => Promise<void>;
       switchToLastWindow: () => Promise<void>;
       switchToParentWindow: () => Promise<void>;
@@ -43,7 +43,7 @@ declare global {
       getProperty: <T = string>(key: string) => Promise<T>; // type override
       moveIntoView: (options?: MoveToOptions) => Promise<void>;
       sendKeys: (keys: string | string[]) => Promise<void>;
-      setAttribute: (kvp: KVP) => Promise<void>;
+      setAttribute: (kvp: KeyValuePair) => Promise<void>;
       uploadFile: (filepath: string) => Promise<void>;
     }
   }

@@ -1,2 +1,2 @@
-export * from "./metadataAdapter";
+export * from "./MetaAdapter";
 export * from "./XPathBuilder";

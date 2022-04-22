@@ -10,8 +10,8 @@ import {
   WindowNavigation
 } from "@core/commands";
 import { isJSON } from "@core/common";
-import { getSelector, getTitle, getUrl, WebElement } from "@core/generics";
-import { getDataTableRows, parseToken } from "@core/gherkin";
+import { MetaAdapter, WebElement } from "@core/generics";
+import { GherkinAdapter } from "@core/gherkin";
 
 export async function givenOnPage(meta: string) {
   await whenOpen(meta);
@@ -39,7 +39,7 @@ export async function whenCookiesDeleted() {
 }
 
 export async function whenCookieSet(cookie: string, value: string) {
-  await browser.setCookie(cookie, parseToken(value));
+  await browser.setCookie(cookie, GherkinAdapter.parseToken(value));
 }
 
 export async function whenNavigate(navigate: WindowNavigation, count: string) {
@@ -66,7 +66,7 @@ export async function whenOpen(meta: string, url?: string) {
   switch (url) {
     case undefined:
     case null: {
-      await browser.url(getUrl(meta));
+      await browser.url(MetaAdapter.getUrl(meta));
       break;
     }
     default: {
@@ -80,7 +80,7 @@ export async function whenOpenNewWindow(meta: string, url?: string) {
   switch (url) {
     case undefined:
     case null: {
-      await browser.newWindow(getUrl(meta));
+      await browser.newWindow(MetaAdapter.getUrl(meta));
       break;
     }
     default: {
@@ -136,7 +136,7 @@ export async function whenSetAlertAction(action: AlertAction) {
 }
 
 export async function whenSetAlertText(value: string) {
-  await browser.sendAlertText(parseToken(value));
+  await browser.sendAlertText(GherkinAdapter.parseToken(value));
 }
 
 export async function whenSetMaximize() {
@@ -181,7 +181,7 @@ export async function whenSwitchToFrameOrParent(meta: string, key?: string) {
       break;
     }
     default: {
-      const selector = getSelector(meta, key);
+      const selector = MetaAdapter.getSelector(meta, key);
       const webelement = new WebElement(selector);
       const element = await webelement.$();
       await browser.switchToFrame(element);
@@ -219,31 +219,31 @@ export async function thenAlertExists(not: boolean) {
 export async function thenAlertTextContains(not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.alertTextContains(parseToken(value), not).expect();
+  await then.alertTextContains(GherkinAdapter.parseToken(value), not).expect();
 }
 
 export async function thenAlertTextEquals(not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.alertTextEquals(parseToken(value), not).expect();
+  await then.alertTextEquals(GherkinAdapter.parseToken(value), not).expect();
 }
 
 export async function thenCookieContains(cookie: string, not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.cookieContains(parseToken(cookie), parseToken(value), not).expect();
+  await then.cookieContains(GherkinAdapter.parseToken(cookie), GherkinAdapter.parseToken(value), not).expect();
 }
 
 export async function thenCookieEquals(cookie: string, not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.cookieEquals(parseToken(cookie), parseToken(value), not).expect();
+  await then.cookieEquals(GherkinAdapter.parseToken(cookie), GherkinAdapter.parseToken(value), not).expect();
 }
 
 export async function thenCookieExists(cookie: string, not: boolean) {
   const then = await browser.conditions();
 
-  await then.cookieExists(parseToken(cookie), not).expect();
+  await then.cookieExists(GherkinAdapter.parseToken(cookie), not).expect();
 }
 
 export async function thenCountEquals(not: boolean, value: number) {
@@ -298,7 +298,7 @@ export async function thenNetworkCallsSnapshotMatch(header: string, not: boolean
 }
 
 export async function thenNetworkCallsOnPathsSnapshotMatch(header: string, not: boolean, filename: string, table: DataTable) {
-  const paths = getDataTableRows(table, 1);
+  const paths = GherkinAdapter.getDataTableRows(table, 1);
   const headers = !!header;
   const then = await browser.conditions();
 
@@ -306,7 +306,7 @@ export async function thenNetworkCallsOnPathsSnapshotMatch(header: string, not: 
 }
 
 export async function thenNetworkCallsOnPathsSnapshotMatchExpressions(header: string, not: boolean, filename: string, table: DataTable) {
-  const regex = { paths: getDataTableRows(table, 1), expressions: getDataTableRows(table, 2) };
+  const regex = { paths: GherkinAdapter.getDataTableRows(table, 1), expressions: GherkinAdapter.getDataTableRows(table, 2) };
   const headers = !!header;
   const then = await browser.conditions();
   
@@ -349,11 +349,11 @@ export async function thenTitleContains(not: boolean, meta: string, value?: stri
   switch (value) {
     case undefined:
     case null: {
-      await then.titleContains(getTitle(meta), not).expect();
+      await then.titleContains(MetaAdapter.getTitle(meta), not).expect();
       break;
     }
     default: {
-      await then.titleContains(parseToken(value), not).expect();
+      await then.titleContains(GherkinAdapter.parseToken(value), not).expect();
       break;
     }
   }
@@ -365,11 +365,11 @@ export async function thenTitleEquals(not: boolean, meta: string, value?: string
   switch (value) {
     case undefined:
     case null: {
-      await then.titleEquals(getTitle(meta), not).expect();
+      await then.titleEquals(MetaAdapter.getTitle(meta), not).expect();
       break;
     }
     default: {
-      await then.titleEquals(parseToken(value), not).expect();
+      await then.titleEquals(GherkinAdapter.parseToken(value), not).expect();
       break;
     }
   }
@@ -382,14 +382,14 @@ export async function thenUrlContains(not: boolean, meta: string, value?: string
     case undefined:
     case null: {
       if (meta) {
-        await then.urlContains(getUrl(meta), not).expect();
+        await then.urlContains(MetaAdapter.getUrl(meta), not).expect();
       } else {
         await then.urlContains(browser.config.baseUrl, not).expect();
       }
       break;
     }
     default: {
-      await then.urlContains(parseToken(value), not).expect();
+      await then.urlContains(GherkinAdapter.parseToken(value), not).expect();
     }
   }
 }
@@ -401,14 +401,14 @@ export async function thenUrlEquals(not: boolean, meta: string, value?: string) 
     case undefined:
     case null: {
       if (meta) {
-        await then.urlEquals(getUrl(meta), not).expect();
+        await then.urlEquals(MetaAdapter.getUrl(meta), not).expect();
       } else {
         await then.urlEquals(browser.config.baseUrl, not).expect();
       }
       break;
     }
     default: {
-      await then.urlEquals(parseToken(value), not).expect();
+      await then.urlEquals(GherkinAdapter.parseToken(value), not).expect();
     }
   }
 }
@@ -416,11 +416,11 @@ export async function thenUrlEquals(not: boolean, meta: string, value?: string) 
 export async function thenUrlPathContains(not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.urlPathContains(parseToken(value), not).expect();
+  await then.urlPathContains(GherkinAdapter.parseToken(value), not).expect();
 }
 
 export async function thenUrlPathEquals(not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.urlPathEquals(parseToken(value), not).expect();
+  await then.urlPathEquals(GherkinAdapter.parseToken(value), not).expect();
 }

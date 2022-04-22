@@ -1,6 +1,6 @@
 import "tsconfig-paths/register";
 import { merge } from "lodash";
-import { base, Config, ConfigArgs } from "@hornet";
+import { base, Config, ConfigArgs } from "@hornet/core/config";
 
 const args: ConfigArgs = {
   baseDir: __dirname,

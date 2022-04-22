@@ -1,6 +1,6 @@
-import type { PageMetaData } from "@hornet";
+import { PageMetadata } from "@hornet/core/generics";
 
-const meta: PageMetaData = {
+const meta: PageMetadata = {
   default: {
     url: "/iframe.html",
     title: "Demo Iframe",

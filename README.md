@@ -8,12 +8,14 @@
 - ~~remove expect; refactor expected conditions~~
 - ~~linting~~
 - ~~refactor gherkin: add element index~~
+- ~~refactor:~~
+  - ~~remove unecessary types~~
+  - ~~convert meta utils to static class~~
 - .env support
+- support config overrides / refactor for cleaner config
 - gherkin tokens
-- support config overrides
-- samples
+- samples / cli?
 - docs
-- cli
 - UTs
 - use cases for diffing:
   // 1. success, exact -- OK(image)
