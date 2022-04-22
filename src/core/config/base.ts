@@ -5,11 +5,11 @@ import allureCli from "allure-commandline";
 import chalk from "chalk";
 import fs from "fs-extra";
 import path from "path";
-import commands from "@core/commands";
+import commands from "@hornet/core/commands";
 
 import { merge } from "lodash";
-import { filesFromGlob, logger, MimeType } from "@core/common";
-import { ConfigArgs } from "@core/config";
+import { filesFromGlob, logger, MimeType } from "@hornet/core/common";
+import { ConfigArgs } from "@hornet/core/config";
 
 const reporters = { spec: "spec", allure: "allure", junit: "junit" };
 

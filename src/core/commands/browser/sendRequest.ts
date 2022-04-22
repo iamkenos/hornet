@@ -1,7 +1,7 @@
-import type { HttpRequestOptions, HttpResponse } from "@core/commands";
+import type { HttpRequestOptions, HttpResponse } from "@hornet/core/commands";
 
 import got from "got";
-import { isURL } from "@core/common";
+import { isURL } from "@hornet/core/common";
 
 export async function sendRequest(url: string, options?: HttpRequestOptions, delay?: { pre: number; post: number }) {
   url = isURL(url) ? url : new URL(url, browser.config.baseUrl).href;

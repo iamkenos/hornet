@@ -1,8 +1,8 @@
 import type { MoveToOptions } from "webdriverio";
-import type { KeyValuePair } from "@core/common";
-import type { BrowserConditions, ExpectedConditions } from "@core/conditions";
-import type { CustomConfig } from "@core/config";
-import type { ClickPointerOrigin, ClickWith, Coordinates, HttpRequestOptions, HttpResponse } from "./";
+import type { ClickPointerOrigin, ClickWith, Coordinates, HttpRequestOptions, HttpResponse } from "./core/commands";
+import type { KeyValuePair } from "./core/common";
+import type { BrowserConditions, ExpectedConditions } from "./core/conditions";
+import type { CustomConfig } from "./core/config";
 
 declare global {
   namespace WebdriverIO {

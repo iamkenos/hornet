@@ -1,13 +1,13 @@
 import type { PathComponent } from "jsonpath";
-import type { JsonSnapshotOptions } from "@core/config";
+import type { JsonSnapshotOptions } from "@hornet/core/config";
 
 import fs from "fs-extra";
 import path from "path";
 import jsonpath from "jsonpath";
 import { diff } from "deep-diff";
 import { orderBy } from "lodash";
-import { attachJson, readFileSync } from "@core/common";
-import { ExpectedCondition } from "@core/conditions/expectedCondition";
+import { attachJson, readFileSync } from "@hornet/core/common";
+import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
 
 export class JSONSnapshotMatch extends ExpectedCondition {
   protected readonly filename: string;

@@ -6,7 +6,7 @@ import type {
 import type { HookFunctions, Hooks } from "@wdio/types/build/Services";
 import type { CucumberOptions, HookFunctionExtension } from "@wdio/cucumber-framework/build/types";
 import type { PreFilterFunction } from "deep-diff";
-import type { RecursivePartial } from "@core/common";
+import type { RecursivePartial } from "@hornet/core/common";
 
 type SnapshotDirectories = {
   /** Directory under `outDir` where actual files are stored for comparison */

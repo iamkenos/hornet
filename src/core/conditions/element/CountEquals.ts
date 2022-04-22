@@ -1,4 +1,4 @@
-import { ExpectedCondition } from "@core/conditions/expectedCondition";
+import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
 
 export class CountEquals extends ExpectedCondition {
   public constructor(expected: number, not?: boolean) {

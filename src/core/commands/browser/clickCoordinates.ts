@@ -1,4 +1,4 @@
-import type { ClickPointerOrigin, Coordinates } from "@core/commands";
+import type { ClickPointerOrigin, Coordinates } from "@hornet/core/commands";
 
 export async function clickCoordinates(target: Coordinates, origin: ClickPointerOrigin = "pointer") {
   const { x, y } = target;

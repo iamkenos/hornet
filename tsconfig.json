@@ -10,10 +10,12 @@
       "@wdio/devtools-service",
       "wdio-intercept-service",
       "webdriverio/async",
+      "@iamkenos/hornet",
       "node"
     ],
-    "paths": { "@hornet": ["src/"], "@hornet/*": ["src/*"], "@core": ["src/core/"], "@core/*": ["src/core/*"] },
-    "target": "ES5"
+    "moduleResolution": "node",
+    "paths": { "@hornet": ["src/"], "@hornet/*": ["src/*"] },
+    "target": "ES2016"
   },
   "include": ["./**/**.ts"]
 }

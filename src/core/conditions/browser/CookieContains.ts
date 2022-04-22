@@ -1,4 +1,4 @@
-import { ExpectedCondition } from "@core/conditions/expectedCondition";
+import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
 
 export class CookieContains extends ExpectedCondition {
   public constructor(cookie: string, expected: string, not?: boolean) {

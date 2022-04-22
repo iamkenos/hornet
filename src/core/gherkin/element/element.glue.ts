@@ -13,10 +13,10 @@ import {
   SelectOptionContext,
   SetValueAction,
   SizeContext
-} from "@core/commands";
-import { isURL } from "@core/common";
-import { MetaAdapter, WebElement, XPathBuilder } from "@core/generics";
-import { BY_LINK_TEXT, GherkinAdapter } from "@core/gherkin";
+} from "@hornet/core/commands";
+import { isURL } from "@hornet/core/common";
+import { MetaAdapter, WebElement, XPathBuilder } from "@hornet/core/generics";
+import { BY_LINK_TEXT, GherkinAdapter } from "@hornet/core/gherkin";
 
 export async function whenClear(meta: string, index: number, key: string) {
   const selector = MetaAdapter.getSelector(meta, key);

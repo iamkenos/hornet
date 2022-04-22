@@ -1,5 +1,5 @@
 import type { Selector } from "webdriverio";
-import { WebElement } from "@core/generics";
+import { WebElement } from "@hornet/core/generics";
 
 export class XPathBuilder {
   private readonly ANY = "*";

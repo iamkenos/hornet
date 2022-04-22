@@ -1,4 +1,4 @@
-import { ElementType, UseAction } from "@core/commands";
+import { ElementType, UseAction } from "@hornet/core/commands";
 
 export async function whenSetActiveMetadata(action: string, key: string, type: string) {
   const { config } = browser;

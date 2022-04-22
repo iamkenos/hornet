@@ -1,5 +1,5 @@
-import { BrowserStorage } from "@core/commands";
-import { ExpectedCondition } from "@core/conditions/expectedCondition";
+import { BrowserStorage } from "@hornet/core/commands";
+import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
 
 export class StorageItemContains extends ExpectedCondition {
   private readonly key: string;

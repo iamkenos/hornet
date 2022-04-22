@@ -1,7 +1,10 @@
 {
-  "name": "hornet",
+  "name": "@iamkenos/hornet",
   "version": "0.0.1",
   "description": "",
+  "author": "iamkenos",
+  "license": "ISC",
+  "keywords": [],
   "scripts": {
     "prepare": "husky install",
     "release": "standard-version",
@@ -15,9 +18,7 @@
     "wdio:demo": "wdio run ./demo/test/wdio.conf.ts",
     "report:demo": "allure open ./demo/test/.reports/allure/report"
   },
-  "keywords": [],
-  "author": "iamkenos",
-  "license": "ISC",
+  "types": "./src/index.d.ts",
   "dependencies": {
     "@types/deep-diff": "1.0.1",
     "@types/jsonpath": "0.2.0",

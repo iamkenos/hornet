@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import glob from "glob";
 import path from "path";
 
-import { logger } from "@core/common";
+import { logger } from "@hornet/core/common";
 
 export function filesFromGlob(fileGlob: string[], baseDir: string = process.cwd(), isStrict = false): string[] {
   const resolved = new Set<string>();

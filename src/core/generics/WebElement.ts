@@ -1,6 +1,6 @@
 import type { Selector } from "webdriverio";
-import { JS_GET_ABSOLUTE_XPATH } from "@core/commands";
-import { ElementConditions } from "@core/conditions";
+import { JS_GET_ABSOLUTE_XPATH } from "@hornet/core/commands";
+import { ElementConditions } from "@hornet/core/conditions";
 export class WebElement {
   public readonly parent: string;
   public selector: Selector;

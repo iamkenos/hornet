@@ -1,4 +1,4 @@
-import type { JsonSnapshotOptions } from "@core/config";
+import type { JsonSnapshotOptions } from "@hornet/core/config";
 
 import { ExpectedConditions } from "../ExpectedConditions";
 import { ArrayContains } from "./ArrayContains";

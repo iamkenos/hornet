@@ -1,12 +1,12 @@
-import type { ImageCompareResult } from "@core/conditions";
-import type { ImageSnapshotOptions } from "@core/config";
+import type { ImageCompareResult } from "@hornet/core/conditions";
+import type { ImageSnapshotOptions } from "@hornet/core/config";
 import type { Capabilities } from "@wdio/types";
 
 import path from "path";
 import { merge } from "lodash";
-import { ImageCompareContext } from "@core/commands";
-import { attachImage } from "@core/common";
-import { ExpectedCondition } from "@core/conditions/expectedCondition";
+import { ImageCompareContext } from "@hornet/core/commands";
+import { attachImage } from "@hornet/core/common";
+import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
 
 export class SnapshotMatch extends ExpectedCondition {
   private readonly filename: string;

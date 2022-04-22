@@ -1,5 +1,5 @@
-import type { ExpectedConditions } from "@core/conditions";
-import type { ClickWith } from "@core/commands";
+import type { ExpectedConditions } from "@hornet/core/conditions";
+import type { ClickWith } from "@hornet/core/commands";
 
 export async function clickUntil(this: WebdriverIO.Element, conditions: ExpectedConditions, options?: ClickWith) {
   const action = () => this.clickWith(options);

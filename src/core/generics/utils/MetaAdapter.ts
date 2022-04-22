@@ -1,8 +1,8 @@
 import path from "path";
 
 import { merge } from "lodash";
-import { Intersect, logger } from "@core/common";
-import { ComponentMetadata, PageMetadata } from "@core/generics";
+import { Intersect, logger } from "@hornet/core/common";
+import { ComponentMetadata, PageMetadata } from "@hornet/core/generics";
 
 export abstract class MetaAdapter {
  

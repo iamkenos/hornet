@@ -1,6 +1,6 @@
 import { Given, Then, When } from "@cucumber/cucumber";
 
-import { RETRY } from "@core/gherkin";
+import { RETRY } from "@hornet/core/gherkin";
 import * as fn from "./browser.glue";
 
 Given(
