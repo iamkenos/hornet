@@ -4,17 +4,17 @@
     "esModuleInterop": true,
     "downlevelIteration": true,
     "types": [
-      "./src",
       "@wdio/cucumber-framework",
       "@wdio/selenium-standalone-service",
       "@wdio/browserstack-service",
       "@wdio/devtools-service",
       "wdio-intercept-service",
       "webdriverio/async",
+      "@iamkenos/hornet",
       "node"
     ],
     "moduleResolution": "node",
-    "paths": { "@hornet": ["src/"], "@hornet/*": ["src/*"] }
+    "target": "ES2016"
   },
   "include": ["./**/**.ts"]
 }

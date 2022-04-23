@@ -5,7 +5,7 @@ import type { Capabilities } from "@wdio/types";
 import path from "path";
 import { merge } from "lodash";
 import { ImageCompareContext } from "@hornet/core/commands";
-import { attachImage } from "@hornet/core/common";
+import { AllureAdapter } from "@hornet/core/common";
 import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
 
 export class SnapshotMatch extends ExpectedCondition {
@@ -67,9 +67,9 @@ export class SnapshotMatch extends ExpectedCondition {
       result.error = e;
     } finally {
       result = { misMatchPercentage: 0, ...result };
-      attachImage("Actual", actualFile);
-      !skipCompare && attachImage("Expected", baselineFile);
-      !skipCompare && attachImage("Differences", diffFile);
+      AllureAdapter.attachImage("Actual", actualFile);
+      !skipCompare && AllureAdapter.attachImage("Expected", baselineFile);
+      !skipCompare && AllureAdapter.attachImage("Differences", diffFile);
       return result;
     }
   }

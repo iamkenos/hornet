@@ -1,14 +1,12 @@
 import "tsconfig-paths/register";
 
-import allure from "@wdio/allure-reporter";
-import allureCli from "allure-commandline";
 import chalk from "chalk";
 import fs from "fs-extra";
 import path from "path";
 import commands from "@hornet/core/commands";
 
 import { merge } from "lodash";
-import { filesFromGlob, logger, MimeType } from "@hornet/core/common";
+import { AllureAdapter, FilesAdapter, logger } from "@hornet/core/common";
 import { ConfigArgs } from "@hornet/core/config";
 
 const reporters = { spec: "spec", allure: "allure", junit: "junit" };
@@ -85,9 +83,9 @@ const mergeWithDefaults = (args: ConfigArgs): Pick<WebdriverIO.Config, keyof Con
   const { actual, baseline, diff, root } = outputDirs.snapshots;
 
   // resolve directories
-  merged.metadata = filesFromGlob(merged.metadata, args.baseDir);
+  merged.metadata = FilesAdapter.resolveGlob(merged.metadata, args.baseDir);
   merged.reportOutDir = getResolvedDir(merged.reportOutDir);
-  merged.steps = filesFromGlob(merged.steps, args.baseDir);
+  merged.steps = FilesAdapter.resolveGlob(merged.steps, args.baseDir);
   Object.keys(merged.snapshots).forEach((key: keyof typeof merged.snapshots) => {
     merged.snapshots[key].outDir = getResolvedDir(root, merged.snapshots[key].outDir);
     merged.snapshots[key].actualDir = path.join(merged.snapshots[key].outDir, actual);
@@ -291,8 +289,8 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
     cucumberOpts: {
       // <string[]> (file/dir) require files before executing features
       require: [
-        ...filesFromGlob(["../gherkin/**/*.def.ts"], __dirname, true),
-        ...filesFromGlob(["./fixtures/**/*.def.ts"], merged.baseDir),
+        ...FilesAdapter.resolveGlob(["../gherkin/**/*.def.ts"], __dirname, true),
+        ...FilesAdapter.resolveGlob(["./fixtures/**/*.def.ts"], merged.baseDir),
         ...merged.steps
       ],
       // <boolean> show full backtrace for errors
@@ -420,13 +418,13 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
       tags.forEach((i) => {
         const tag = i.name.replace(/[@]/, "");
         if (tag.endsWith("-RELEASE")) {
-          allure.addLabel("epic", tag);
+          AllureAdapter.reporter().addLabel("epic", tag);
         } else if (tag.startsWith("ISSUE-")) {
-          allure.addIssue(tag.replace("ISSUE-", ""));
+          AllureAdapter.reporter().addIssue(tag.replace("ISSUE-", ""));
         } else if (tag.startsWith("ID-")) {
-          allure.addTestId(tag.replace("ID-", ""));
+          AllureAdapter.reporter().addTestId(tag.replace("ID-", ""));
         } else {
-          allure.addLabel("tag", tag);
+          AllureAdapter.reporter().addLabel("tag", tag);
         }
       });
 
@@ -443,7 +441,7 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
       const { argument, keyword, text } = step as any;
       logger.debug(`${chalk.yellow("GHERKIN")} ${chalk.green.dim.bold(keyword)}${chalk.green.dim(text)}`);
       if (argument?.docString?.content) {
-        allure.addAttachment("DocString", argument?.docString?.content, MimeType.TEXT_PLAIN);
+        AllureAdapter.reporter().addAttachment("DocString", argument?.docString?.content, "text/plain");
       }
 
       const { beforeStep } = merged.hooks as any;
@@ -538,7 +536,7 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
     onComplete: async function(exitCode, config: WebdriverIO.Config, capabilities, results) {
       const raw = path.join(config.reportOutDir, reporters.allure);
       const html = path.join(raw, outputDirs.reports.html);
-      await allureCli(["-q", "generate", raw, "-c", "-o", html]);
+      await AllureAdapter.cli(["-q", "generate", raw, "-c", "-o", html]);
 
       const { onComplete } = merged.hooks as any;
       await onComplete(exitCode, config, capabilities, results);

@@ -26,11 +26,3 @@ export function isJSON(str: string) {
     return false;
   }
 }
-
-export function kvpToObject(toParse: string, entrySeparator = ";", kvpSeparator = ":"): any {
-  return (toParse || "").split(entrySeparator)
-    .reduce((i, j) => {
-      const kvp = j.split(kvpSeparator).map(i => i.trim());
-      return { ...i, [kvp[0]]: kvp[1] };
-    }, {});
-}

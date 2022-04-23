@@ -6,7 +6,7 @@ import path from "path";
 import jsonpath from "jsonpath";
 import { diff } from "deep-diff";
 import { orderBy } from "lodash";
-import { attachJson, readFileSync } from "@hornet/core/common";
+import { AllureAdapter, BufferEncoding } from "@hornet/core/common";
 import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
 
 export class JSONSnapshotMatch extends ExpectedCondition {
@@ -59,8 +59,8 @@ export class JSONSnapshotMatch extends ExpectedCondition {
   
     try {
       fs.outputFileSync(actualFile, JSON.stringify(object, null, 2));
-      let actual = JSON.parse(readFileSync(actualFile));
-      let baseline = JSON.parse(readFileSync(baselineFile));
+      let actual = JSON.parse(fs.readFileSync(actualFile, BufferEncoding.UTF8));
+      let baseline = JSON.parse(fs.readFileSync(baselineFile, BufferEncoding.UTF8));
   
       if (sortKey) {
         actual = orderBy(actual, [sortKey]);
@@ -95,9 +95,9 @@ export class JSONSnapshotMatch extends ExpectedCondition {
       result.error = e;
     } finally {
       result = { differences: "", ...result };
-      attachJson("Actual", actualFile);
-      !skipCompare && attachJson("Expected", baselineFile);
-      !skipCompare && attachJson("Differences", diffFile);
+      AllureAdapter.attachJson("Actual", actualFile);
+      !skipCompare && AllureAdapter.attachJson("Expected", baselineFile);
+      !skipCompare && AllureAdapter.attachJson("Differences", diffFile);
       return result;
     }
   }
