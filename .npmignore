@@ -1,5 +1,8 @@
 *.*
 !build/**/*
+!demo/test/features/**/*
+!demo/test/fixtures/**/*
+!demo/test/wdio.conf.ts
 !src/**/*
 !tsconfig**
 !package-lock.json
