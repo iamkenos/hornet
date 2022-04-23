@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "esModuleInterop": true,
     "downlevelIteration": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "paths": { "@hornet": ["src/"], "@hornet/*": ["src/*"] },
     "types": [
       "./src",
       "@wdio/cucumber-framework",
@@ -12,9 +14,7 @@
       "wdio-intercept-service",
       "webdriverio/async",
       "node"
-    ],
-    "moduleResolution": "node",
-    "paths": { "@hornet": ["src/"], "@hornet/*": ["src/*"] }
+    ]
   },
   "include": ["./**/**.ts"]
 }

@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "esModuleInterop": true,
     "downlevelIteration": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "target": "ES2016",
     "types": [
       "@wdio/cucumber-framework",
       "@wdio/selenium-standalone-service",
@@ -12,9 +15,7 @@
       "webdriverio/async",
       "@iamkenos/hornet",
       "node"
-    ],
-    "moduleResolution": "node",
-    "target": "ES2016"
+    ]
   },
-  "include": ["./**/**.ts"]
+  "include": ["./src/**.ts"]
 }
