@@ -14,7 +14,7 @@ When(
 );
 
 When(
-  /^I drag the(?: "([^"]*)?" (?:page|component)'s)?(?: (\d+)(?:st|nd|rd|th))? "([^"]*)?" element to the (?: (\d+)(?:st|nd|rd|th))? "([^"]*)?" element$/, RETRY(),
+  /^I drag the(?: "([^"]*)?" (?:page|component)'s)?(?: (\d+)(?:st|nd|rd|th))? "([^"]*)?" element to the(?: (\d+)(?:st|nd|rd|th))? "([^"]*)?" element$/, RETRY(),
   fn.whenDrag
 );
 

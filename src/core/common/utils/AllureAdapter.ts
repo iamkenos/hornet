@@ -15,7 +15,7 @@ export abstract class AllureAdapter {
 
   public static attachImage(title: string, filename: string) {
     if (fs.existsSync(filename)) {
-      const content = Buffer.from(fs.readFileSync(filename, BufferEncoding.BASE64));
+      const content = Buffer.from(fs.readFileSync(filename) as any, BufferEncoding.BASE64);
       this.attachFile(title, filename, content, MimeType.IMG_PNG);
     }
   }
