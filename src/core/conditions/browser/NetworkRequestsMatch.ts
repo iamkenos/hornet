@@ -5,7 +5,7 @@ import { JSONSnapshotMatch } from "@hornet/core/conditions/others/JSONSnapshotMa
 
 export class NetworkRequestsMatch extends JSONSnapshotMatch {
   private readonly props: Array<keyof NetworkRequestsIncludedProps>;
-  protected options: NetworkRequestSnapshotOptions;
+  protected declare options: NetworkRequestSnapshotOptions;
   
   public constructor(filename: string, options?: NetworkRequestSnapshotOptions, not?: boolean) {
     super(filename, undefined, options, not);

@@ -33,7 +33,7 @@ type BrowserPerformanceEntry = {
 };
 
 export class GoogleAnalyticsMatch extends JSONSnapshotMatch {
-  protected options: NetworkRequestSnapshotOptions;
+  protected declare options: NetworkRequestSnapshotOptions;
   private readonly url: string;
   private readonly initiatorTypes: string[];
   private readonly event: string;

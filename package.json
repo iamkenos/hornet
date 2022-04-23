@@ -12,13 +12,14 @@
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
+    "build": "tsc --build tsconfig.build.json && resolve-tspaths",
     "lint": "eslint ./",
     "serve:demo": "http-server ./demo/app -s",
     "test:demo": "start-test serve:demo 8080 wdio:demo",
     "wdio:demo": "wdio run ./demo/test/wdio.conf.ts",
     "report:demo": "allure open ./demo/test/.reports/allure/report"
   },
-  "types": "./src/index.d.ts",
+  "types": "./src/wdio.d.ts",
   "dependencies": {
     "@types/deep-diff": "1.0.1",
     "@types/jsonpath": "0.2.0",
@@ -38,8 +39,8 @@
     "jsonpath": "1.1.1",
     "luxon": "2.3.1",
     "query-string": "7.1.1",
-    "tsconfig-paths": "3.14.1",
     "ts-node": "10.7.0",
+    "tsconfig-paths": "3.14.1",
     "wdio-image-comparison-service": "3.1.1",
     "wdio-intercept-service": "4.2.2"
   },
@@ -53,6 +54,7 @@
     "eslint-config-standard": "16.0.3",
     "http-server": "14.1.0",
     "husky": "7.0.0",
+    "resolve-tspaths": "0.3.0",
     "standard-version": "9.3.2",
     "start-server-and-test": "1.14.0"
   }

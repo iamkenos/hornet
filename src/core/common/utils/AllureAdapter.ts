@@ -9,6 +9,10 @@ export abstract class AllureAdapter {
     await cli(args);
   }
 
+  public static reporter() {
+    return reporter;
+  }
+
   public static attachFile(title: string, filename: string, attachment: any, mimetype: string) {
     reporter.addAttachment(`${title}: ${filename}`, attachment, mimetype);
   }

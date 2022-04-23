@@ -1,0 +1,5 @@
+*.*
+!build/**/*
+!src/**/*
+!tsconfig**
+!package-lock.json

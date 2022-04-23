@@ -1,21 +1,4 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./",
-    "downlevelIteration": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "target": "ES2016",
-    "types": [
-      "@wdio/cucumber-framework",
-      "@wdio/selenium-standalone-service",
-      "@wdio/browserstack-service",
-      "@wdio/devtools-service",
-      "wdio-intercept-service",
-      "webdriverio/async",
-      "@iamkenos/hornet",
-      "node"
-    ]
-  },
-  "include": ["./src/**.ts"]
+  "extends": "./tsconfig.json",
+  "include": ["./src/**/**.ts"]
 }

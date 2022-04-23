@@ -2,11 +2,16 @@
   "compilerOptions": {
     "baseUrl": "./",
     "downlevelIteration": true,
+    "declaration": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
+    "outDir": "build",
     "paths": { "@hornet": ["src/"], "@hornet/*": ["src/*"] },
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "removeComments": false,
+    "target": "ES5",
     "types": [
-      "./src",
       "@wdio/cucumber-framework",
       "@wdio/selenium-standalone-service",
       "@wdio/browserstack-service",

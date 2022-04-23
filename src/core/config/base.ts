@@ -78,8 +78,8 @@ const defaults: ConfigArgs = {
 
 const getResolvedDir = (...paths: string[]) => path.join(global.baseDir, ...paths);
 
-const mergeWithDefaults = (args: ConfigArgs): Pick<WebdriverIO.Config, keyof ConfigArgs> => {
-  const merged: Pick<WebdriverIO.Config, keyof ConfigArgs> = merge<any, ConfigArgs, ConfigArgs>({}, defaults, args);
+const mergeWithDefaults = (args: ConfigArgs): Pick<WebdriverIO.Config, any> => {
+  const merged: any = merge<any, ConfigArgs, ConfigArgs>({}, defaults, args);
   const { actual, baseline, diff, root } = outputDirs.snapshots;
 
   // resolve directories
@@ -97,7 +97,7 @@ const mergeWithDefaults = (args: ConfigArgs): Pick<WebdriverIO.Config, keyof Con
 
 export const base = (args: ConfigArgs): WebdriverIO.Config => {
   global.baseDir = args.baseDir;
-  const merged = mergeWithDefaults(args);
+  const merged: any = mergeWithDefaults(args);
   return {
     //
     // ====================
@@ -287,8 +287,8 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
     cucumberOpts: {
       // <string[]> (file/dir) require files before executing features
       require: [
-        ...FilesAdapter.resolveGlob(["../gherkin/**/*.def.ts"], __dirname, true),
-        ...FilesAdapter.resolveGlob(["./fixtures/**/*.def.ts"], merged.baseDir),
+        ...FilesAdapter.resolveGlob(["../gherkin/**/*.def.{ts,js}"], __dirname, true),
+        ...FilesAdapter.resolveGlob(["./fixtures/**/*.def.{ts,js}"], merged.baseDir),
         ...merged.steps
       ],
       // <boolean> show full backtrace for errors
@@ -332,7 +332,7 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
      * @param {Object}         config       wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    onPrepare: async function(config: WebdriverIO.Config, capabilities) {
+    onPrepare: async function(config: any, capabilities) {
       const { reportOutDir, snapshots } = config;
       fs.removeSync(reportOutDir);
       Object.keys(snapshots).forEach((key: keyof typeof snapshots) => {
@@ -363,7 +363,7 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {String}         cid          worker id (e.g. 0-0)
      */
-    beforeSession: async function(config: WebdriverIO.Config, capabilities, specs, cid) {
+    beforeSession: async function(config: any, capabilities, specs, cid) {
       config.cucumberOpts.tagExpression = config.tags;
       config.cucumberOpts.timeout = config.debug ? 24 * 60 * 60 * 1000 : config.stepTimeout * (config.stepRetries || 1);
 
@@ -531,7 +531,7 @@ export const base = (args: ConfigArgs): WebdriverIO.Config => {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>}       results      object containing test results
      */
-    onComplete: async function(exitCode, config: WebdriverIO.Config, capabilities, results) {
+    onComplete: async function(exitCode, config: any, capabilities, results) {
       const raw = path.join(config.reportOutDir, reporters.allure);
       const html = path.join(raw, outputDirs.reports.html);
       await AllureAdapter.cli(["-q", "generate", raw, "-c", "-o", html]);

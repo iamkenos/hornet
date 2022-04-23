@@ -3,9 +3,10 @@ logs
 *.log
 
 # Dependency directories
-node_modules/
+node_modules
 
 # Misc
+build
 **/.reports
 **/.snapshots/**/actual
 **/.snapshots/**/diff

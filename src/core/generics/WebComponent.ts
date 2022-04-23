@@ -14,7 +14,7 @@ export abstract class WebComponent<T extends ComponentMetadata> extends WebEleme
 
   public readonly tag: string;
 
-  public readonly parent: string;
+  public readonly declare parent: string;
 
   public constructor(tag: keyof Intersect<T[keyof T]["selectors"]>, meta: T, parent = "", locale?: string) {
     super(parent);
