@@ -1,5 +1,5 @@
-import { JS_DOCUMENT_READY_STATE } from "@hornet/core/commands";
-import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
+import { JS_DOCUMENT_READY_STATE } from "@core/commands";
+import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
 export class DocumentReady extends ExpectedCondition {
   public constructor(not?: boolean) {

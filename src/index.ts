@@ -47,9 +47,9 @@ declare global {
   }
 }
 
-export * from "@hornet/core/commands";
-export * from "@hornet/core/common";
-export * from "@hornet/core/conditions";
-export * from "@hornet/core/config";
-export * from "@hornet/core/generics";
-export * from "@hornet/core/gherkin";
+export * from "@core/commands";
+export * from "@core/common";
+export * from "@core/conditions";
+export * from "@core/config";
+export * from "@core/generics";
+export * from "@core/gherkin";

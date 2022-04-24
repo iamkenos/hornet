@@ -1,4 +1,4 @@
-import type { Coordinates } from "@hornet/core/commands";
+import type { Coordinates } from "@core/commands";
 
 export async function dragRelativeToPointer(target: Coordinates, dragDuration = 500) {
   await browser.performActions([

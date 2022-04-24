@@ -1,4 +1,4 @@
-import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
+import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
 export class SizeEquals extends ExpectedCondition {
   public constructor(width: number, height: number, not?: boolean) {

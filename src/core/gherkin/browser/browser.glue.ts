@@ -1,5 +1,5 @@
 import type { DataTable } from "@cucumber/cucumber";
-import type { HttpRequestOptions } from "@hornet/core/commands";
+import type { HttpRequestOptions } from "@core/commands";
 
 import {
   AlertAction,
@@ -8,10 +8,10 @@ import {
   ImageCompareContext,
   WindowDirection,
   WindowNavigation
-} from "@hornet/core/commands";
-import { isJSON } from "@hornet/core/common";
-import { MetaAdapter, WebElement } from "@hornet/core/generics";
-import { GherkinAdapter } from "@hornet/core/gherkin";
+} from "@core/commands";
+import { isJSON } from "@core/common";
+import { MetaAdapter, WebElement } from "@core/generics";
+import { GherkinAdapter } from "@core/gherkin";
 
 export async function givenOnPage(meta: string) {
   await whenOpen(meta);

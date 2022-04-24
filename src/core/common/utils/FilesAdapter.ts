@@ -1,7 +1,7 @@
 import glob from "glob";
 import path from "path";
 
-import { logger } from "@hornet/core/common";
+import { logger } from "@core/common";
 
 export abstract class FilesAdapter {
   public static resolveGlob(fileGlob: string[], baseDir: string = process.cwd(), isStrict = false): string[] {

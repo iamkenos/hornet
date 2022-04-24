@@ -1,9 +1,9 @@
-import type { NetworkRequestSnapshotOptions } from "@hornet/core/config";
+import type { NetworkRequestSnapshotOptions } from "@core/config";
 
 import qs from "query-string";
 import { merge } from "lodash";
-import { JS_WINDOW_PERF_GET_ENTRIES } from "@hornet/core/commands";
-import { JSONSnapshotMatch } from "@hornet/core/conditions/others/JSONSnapshotMatch";
+import { JS_WINDOW_PERF_GET_ENTRIES } from "@core/commands";
+import { JSONSnapshotMatch } from "@core/conditions/others/JSONSnapshotMatch";
 
 type BrowserPerformanceEntry = {
   cancelable?: boolean;

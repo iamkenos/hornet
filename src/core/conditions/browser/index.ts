@@ -1,7 +1,7 @@
-import type { ImageSnapshotContextOptions } from "@hornet/core/conditions";
-import type { NetworkRequestSnapshotOptions } from "@hornet/core/config";
-import { BrowserStorage, ImageCompareContext } from "@hornet/core/commands";
-import { OtherConditions } from "@hornet/core/conditions/others";
+import type { ImageSnapshotContextOptions } from "@core/conditions";
+import type { NetworkRequestSnapshotOptions } from "@core/config";
+import { BrowserStorage, ImageCompareContext } from "@core/commands";
+import { OtherConditions } from "@core/conditions/others";
 
 import { AlertExists } from "./AlertExists";
 import { AlertTextContains } from "./AlertTextContains";

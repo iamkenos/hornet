@@ -1,5 +1,5 @@
-import type { SizeContext } from "@hornet/core/commands";
-import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
+import type { SizeContext } from "@core/commands";
+import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
 export class SizeSideEquals extends ExpectedCondition {
   public constructor(side: SizeContext, expected: number, not?: boolean) {

@@ -1,5 +1,5 @@
 import { Then, When } from "@cucumber/cucumber";
-import { RETRY } from "@hornet/core/gherkin";
+import { RETRY } from "@iamkenos/hornet";
 import * as fn from "./demo.glue";
 
 When(

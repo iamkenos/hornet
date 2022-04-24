@@ -1,6 +1,6 @@
 import { Before, When } from "@cucumber/cucumber";
 
-import { RETRY } from "@hornet/core/gherkin";
+import { RETRY } from "@core/gherkin";
 import * as fn from "./others.glue";
 
 /** @see: [Show skipped tests in the reporter](https://github.com/webdriverio/webdriverio/issues/7327#issuecomment-905285512) */

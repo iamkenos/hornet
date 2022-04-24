@@ -1,8 +1,8 @@
-import type { Axis } from "@hornet/core/commands";
-import type { SizeContext } from "@hornet/core/commands";
-import type { ImageSnapshotContextOptions } from "@hornet/core/conditions";
-import { ImageCompareContext } from "@hornet/core/commands";
-import { SnapshotMatch } from "@hornet/core/conditions/browser/SnapshotMatch";
+import type { Axis } from "@core/commands";
+import type { SizeContext } from "@core/commands";
+import type { ImageSnapshotContextOptions } from "@core/conditions";
+import { ImageCompareContext } from "@core/commands";
+import { SnapshotMatch } from "@core/conditions/browser/SnapshotMatch";
 
 import { ExpectedConditions } from "../ExpectedConditions";
 import { AttributeContains } from "./AttributeContains";

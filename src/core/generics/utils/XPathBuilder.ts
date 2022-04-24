@@ -1,5 +1,5 @@
 import type { Selector } from "webdriverio";
-import { WebElement } from "@hornet/core/generics";
+import { WebElement } from "@core/generics";
 
 export class XPathBuilder {
   private readonly ANY = "*";
@@ -129,7 +129,7 @@ export class XPathBuilder {
 
   public textEquals(value: string, not?: boolean) {
     value = this.xpathConcat(value);
-    this.conditionals.push(this.wrap(`text()=${value}`, not));
+    this.conditionals.push(this.wrap(`text()=${value} or normalize-space()=${value}`, not));
     return this;
   }
 

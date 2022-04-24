@@ -3,11 +3,11 @@ import "tsconfig-paths/register";
 import chalk from "chalk";
 import fs from "fs-extra";
 import path from "path";
-import commands from "@hornet/core/commands";
+import commands from "@core/commands";
 
 import { merge } from "lodash";
-import { AllureAdapter, FilesAdapter, logger } from "@hornet/core/common";
-import { ConfigArgs } from "@hornet/core/config";
+import { AllureAdapter, FilesAdapter, logger } from "@core/common";
+import { ConfigArgs } from "@core/config";
 
 const reporters = { spec: "spec", allure: "allure", junit: "junit" };
 

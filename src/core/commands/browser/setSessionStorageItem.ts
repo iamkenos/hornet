@@ -1,4 +1,4 @@
-import type { KeyValuePair } from "@hornet/core/common";
+import type { KeyValuePair } from "@core/common";
 
 export async function setSessionStorageItem(kvp: KeyValuePair) {
   await browser.execute(function(this: Window, key: string, value: string) {

@@ -1,6 +1,8 @@
 *.*
 !build/**/*
-!demo/test/features/**/*
+!demo/test/.files/**/*
+!demo/test/.snapshots/**/baseline/**/*
+!demo/test/fixtures/**/*
 !demo/test/fixtures/**/*
 !demo/test/wdio.conf.ts
 !src/**/*

@@ -1,4 +1,4 @@
-import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
+import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
 export class CssPropertyExists extends ExpectedCondition {
   public constructor(property: string, not?: boolean) {

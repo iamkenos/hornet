@@ -1,5 +1,5 @@
-import { Intersect } from "@hornet/core/common";
-import { MetaAdapter } from "@hornet/core/generics";
+import { Intersect } from "@core/common";
+import { MetaAdapter } from "@core/generics";
 import { WebElement } from "./WebElement";
 import type { ComponentMetadata } from "./types";
 

@@ -1,5 +1,5 @@
-import { isURL } from "@hornet/core/common";
-import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
+import { isURL } from "@core/common";
+import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
 export class UrlContains extends ExpectedCondition {
   public constructor(expected: string, not?: boolean) {

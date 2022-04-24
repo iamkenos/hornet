@@ -1,5 +1,5 @@
-import type { Axis } from "@hornet/core/commands";
-import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
+import type { Axis } from "@core/commands";
+import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
 export class AxisLocationEquals extends ExpectedCondition {
   public constructor(axis: Axis, expected?: number, not?: boolean) {

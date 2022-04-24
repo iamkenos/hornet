@@ -1,4 +1,4 @@
-import { ExpectedCondition } from "@hornet/core/conditions/expectedCondition";
+import { ExpectedCondition } from "@core/conditions/expectedCondition";
 
 export class ObjectPropEquals extends ExpectedCondition {
   public constructor(object: any, property: string, expected: any, not?: boolean) {

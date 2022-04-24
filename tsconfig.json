@@ -6,7 +6,14 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "outDir": "build",
-    "paths": { "@hornet": ["src/"], "@hornet/*": ["src/*"] },
+    "paths": {
+      "@iamkenos/hornet": ["src/"],
+      "@iamkenos/hornet/*": ["src/*"],
+      "@cli": ["src/cli/*"],
+      "@cli/*": ["src/cli/*"],
+      "@core": ["src/core/*"],
+      "@core/*": ["src/core/*"]
+    },
     "skipLibCheck": true,
     "sourceMap": true,
     "removeComments": false,
