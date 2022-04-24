@@ -5,7 +5,7 @@ import fs from "fs-extra";
 import path from "path";
 import commands from "@core/commands";
 
-import { merge } from "lodash";
+import merge from "lodash/merge";
 import { AllureAdapter, FilesAdapter, logger } from "@core/common";
 import { ConfigArgs } from "@core/config";
 

@@ -1,5 +1,5 @@
 import "tsconfig-paths/register";
-import { merge } from "lodash";
+import merge from "lodash/merge";
 import { base, Config, ConfigArgs } from "@iamkenos/hornet";
 
 const args: ConfigArgs = {

@@ -1,6 +1,6 @@
 import path from "path";
 
-import { merge } from "lodash";
+import merge from "lodash/merge";
 import { Intersect, logger } from "@core/common";
 import { ComponentMetadata, PageMetadata } from "@core/generics";
 

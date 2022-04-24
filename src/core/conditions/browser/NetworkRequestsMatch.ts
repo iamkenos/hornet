@@ -1,6 +1,6 @@
 import type { NetworkRequestsIncludedProps, NetworkRequestSnapshotOptions } from "@core/config";
 
-import { merge } from "lodash";
+import merge from "lodash/merge";
 import { JSONSnapshotMatch } from "@core/conditions/others/JSONSnapshotMatch";
 
 export class NetworkRequestsMatch extends JSONSnapshotMatch {

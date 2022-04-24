@@ -4,8 +4,8 @@ import type { JsonSnapshotOptions } from "@core/config";
 import fs from "fs-extra";
 import path from "path";
 import jsonpath from "jsonpath";
+import orderBy from "lodash/orderBy";
 import { diff } from "deep-diff";
-import { orderBy } from "lodash";
 import { AllureAdapter, BufferEncoding } from "@core/common";
 import { ExpectedCondition } from "@core/conditions/expectedCondition";
 

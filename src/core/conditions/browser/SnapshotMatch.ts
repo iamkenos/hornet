@@ -3,7 +3,7 @@ import type { ImageSnapshotOptions } from "@core/config";
 import type { Capabilities } from "@wdio/types";
 
 import path from "path";
-import { merge } from "lodash";
+import merge from "lodash/merge";
 import { ImageCompareContext } from "@core/commands";
 import { AllureAdapter } from "@core/common";
 import { ExpectedCondition } from "@core/conditions/expectedCondition";

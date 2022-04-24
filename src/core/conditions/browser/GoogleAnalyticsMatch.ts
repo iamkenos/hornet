@@ -1,7 +1,7 @@
 import type { NetworkRequestSnapshotOptions } from "@core/config";
 
 import qs from "query-string";
-import { merge } from "lodash";
+import merge from "lodash/merge";
 import { JS_WINDOW_PERF_GET_ENTRIES } from "@core/commands";
 import { JSONSnapshotMatch } from "@core/conditions/others/JSONSnapshotMatch";
 
