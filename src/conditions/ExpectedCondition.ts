@@ -42,7 +42,7 @@ export abstract class ExpectedCondition {
       expected,
       passed,
       message: `
-  Condition: ${name} ${this.on ? `[${this.on}] ` : ``}${this.element ? `\n  Selector: ${this.element.selector}` : ``}${this.element?.index ? `\n  Index: ${this.element.index}` : ``}
+  Condition: ${name} ${this.on ? `[${this.on}] ` : ""}${this.element ? `\n  Selector: ${this.element.selector}` : ""}${this.element?.index ? `\n  Index: ${this.element.index}` : ""}
   Result: ${passed ? "Success" : "Failed"}
   Expected${this.not ? " (Not)" : ""}: ${expected instanceof Array ? `\n${expected.map((i: string) => `    ${i}`).join("\n")}` : expected}
   Actual: ${actual instanceof Array ? `\n${actual.map((i: string) => `    ${i}`).join("\n")}` : actual}`

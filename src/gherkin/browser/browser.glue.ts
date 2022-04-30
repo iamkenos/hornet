@@ -98,7 +98,7 @@ export async function whenPressKey(key: string, count: string) {
 }
 
 export async function whenPressKeys(keys: string) {
-  await browser.keys(keys.split('+'));
+  await browser.keys(keys.split("+"));
 }
 
 export async function whenRefresh() {

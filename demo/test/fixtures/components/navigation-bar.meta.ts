@@ -3,7 +3,7 @@ export default {
   default: {
     selectors: {
       [TAG]: `//${TAG}`,
-      'nav-items': "//ul/li"
+      "nav-items": "//ul/li"
     }
   }
 };

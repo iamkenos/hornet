@@ -15,8 +15,8 @@
 - ~~support config overrides / refactor for cleaner config~~
 - ~~remove core~~
 - ~~fix commit linting~~
-- gherkin tokens
-- samples / cli?
+- ~~gherkin tokens~~
 - docs
-- UTs
 - publish & install
+- UTs
+- samples / cli?
