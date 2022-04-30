@@ -14,8 +14,8 @@
 - ~~npm pack & install~~
 - ~~support config overrides / refactor for cleaner config~~
 - ~~remove core~~
+- ~~fix commit linting~~
 - gherkin tokens
-- fix commit linting
 - samples / cli?
 - docs
 - UTs
