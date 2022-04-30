@@ -13,8 +13,8 @@ export abstract class WebPage<T extends PageMetadata> {
 
   protected selectors: Intersect<T[keyof T]["selectors"]>;
 
-  public constructor(meta: T, locale?: string) {
-    this.properties = MetaAdapter.getProperties(meta, locale);
+  public constructor(meta: T, locale?: keyof T) {
+    this.properties = MetaAdapter.getProperties(meta, locale as string);
     this.url = this.properties.url || "";
     this.title = this.properties.title || "";
     this.labels = this.properties.labels as any;

@@ -3,7 +3,7 @@ import { PageMetadata, WebPage, XPathBuilder } from "@iamkenos/hornet";
 import { NavigationBar } from "../components/navigation-bar.component";
 import meta from "./demo.meta";
 
-export class DemoPage<T extends PageMetadata> extends WebPage<T & typeof meta> {
+export class DemoPage<T extends PageMetadata> extends WebPage<typeof meta> {
   public navigationBar: NavigationBar;
 
   constructor(m?: T) {

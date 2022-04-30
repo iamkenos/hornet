@@ -16,11 +16,11 @@ export abstract class WebComponent<T extends ComponentMetadata> extends WebEleme
 
   public readonly declare parent: string;
 
-  public constructor(tag: keyof Intersect<T[keyof T]["selectors"]>, meta: T, parent = "", locale?: string) {
+  public constructor(tag: keyof Intersect<T[keyof T]["selectors"]>, meta: T, parent = "", locale?: keyof T) {
     super(parent);
     this.tag = tag as string;
     this.parent = parent;
-    this.properties = MetaAdapter.getProperties(meta, locale);
+    this.properties = MetaAdapter.getProperties(meta, locale as string);
     this.selectors = this.properties.selectors as any;
     this.labels = this.properties.labels;
     this.root = this.selectors[tag] as any;
