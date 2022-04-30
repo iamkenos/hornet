@@ -2,13 +2,13 @@ import type { MoveToOptions } from "webdriverio";
 import type { ClickPointerOrigin, ClickWith, Coordinates, HttpRequestOptions, HttpResponse } from "./core/commands";
 import type { KeyValuePair } from "./core/common";
 import type { BrowserConditions, ExpectedConditions } from "./core/conditions";
-import type { CustomConfig } from "./core/config";
+import type { Config as Custom } from "./core/config";
 
 declare global {
   // eslint-disable-next-line
   namespace WebdriverIO {
     interface Browser {
-      config: Partial<CustomConfig> & Config;
+      config: Custom;
       clean: () => Promise<void>;
       clearLocalStorage: () => Promise<void>;
       clearSessionStorage: () => Promise<void>;

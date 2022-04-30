@@ -17,92 +17,88 @@ type SnapshotDirectories = {
   diffDir?: string;
 };
 
-type SnapshotOptions = SnapshotDirectories & {
+type SnapshotOptions = {
   /** Directory to store the output of this comparable object in, relative to the config file */
   outDir?: string;
   /** Skip comparison, just save the actual files */
   skipCompare?: boolean;
-};
+} & SnapshotDirectories;
 
-type Snapshots = {
-  /** Object containing properties of comparable files */
-  snapshots?: {
-    /** Options used for comparing intercepted network requests */
-    requests?: NetworkRequestSnapshotOptions;
-    /** Options used for comparing http responses */
-    responses?: JsonSnapshotOptions;
-    /** Options used for comparing images */
-    images?: ImageSnapshotOptions;
-  };
-};
+export type WdioImageCheckOptions = WdioCheckElementMethodOptions &
+  WdioCheckFullPageMethodOptions &
+  WdioCheckScreenMethodOptions;
 
-type RestrictedSnapshots = {
-  /** Object containing properties of comparable files */
-  snapshots?: {
-    /** Options used for comparing intercepted network requests */
-    requests?: Omit<NetworkRequestSnapshotOptions, keyof SnapshotDirectories>;
-    /** Options used for comparing http responses */
-    responses?: Omit<JsonSnapshotOptions, keyof SnapshotDirectories>;
-    /** Options used for comparing images */
-    images?: Omit<ImageSnapshotOptions, keyof SnapshotDirectories>;
-  };
-};
-
-export type ImageSnapshotOptions = SnapshotOptions & WdioCheckElementMethodOptions & WdioCheckFullPageMethodOptions & WdioCheckScreenMethodOptions & {
+export type ImageSnapshotOptions = {
   /** If true, adds platform e.g. mac, lin, win on the snapshot output directory */
   usePlatformDir?: boolean;
-};
+} & SnapshotOptions &
+  WdioImageCheckOptions;
 
-export type JsonSnapshotOptions = SnapshotOptions & {
+export type JsonSnapshotOptions = {
   /** Conditional diffing based on [jsonpath](https://www.npmjs.com/package/jsonpath) and regex  */
   regex?: {
-    paths: string[],
-    expressions: string[]
+    paths: string[];
+    expressions: string[];
   };
   /** Same as `deep-diff`'s [prefilter](https://www.npmjs.com/package/deep-diff#pre-filtering-object-properties) function */
   prefilter?: PreFilterFunction;
+} & SnapshotOptions;
+
+export type NetworkRequestsIncludeProps = {
+  [key in Exclude<keyof WdioInterceptorService.CompletedRequest, "pending" | "response">]?: boolean;
 };
 
-export type NetworkRequestsIncludedProps = {
-  [key in Exclude<keyof WdioInterceptorService.CompletedRequest, "pending" | "response">]?: boolean;
-}
-
-export type NetworkRequestSnapshotOptions = JsonSnapshotOptions & {
+export type NetworkRequestSnapshotOptions = {
   /** Whether to apply sort before diffing */
   sort?: boolean;
   /** Request props to include in the captured snapshot */
-  include?: NetworkRequestsIncludedProps
+  include?: NetworkRequestsIncludeProps;
   /** Filter only the requests to following paths when doing the diff */
   paths?: string[];
+} & JsonSnapshotOptions;
+
+type Snapshots = {
+  /** Options used for comparing intercepted network requests */
+  requests?: NetworkRequestSnapshotOptions;
+  /** Options used for comparing http responses */
+  responses?: JsonSnapshotOptions;
+  /** Options used for comparing images */
+  images?: ImageSnapshotOptions;
 };
 
-export interface ConfigArgs extends RestrictedSnapshots {
-  /** The base directory where most of the files will be resolved from; for simplicity, you can use __dirname */
-  baseDir: string;
-  /** Whether to run in debug mode or not */
-  debug?: boolean;
-  /** The active locale. Used as primary context for reading generics' metadata */
-  locale?: string;
-  /** Array of globs pointing to your meta files, relative to the `directory` */
-  metadata?: string[];
-  /** Directory to store the reports in, relative to the `directory` */
-  reportOutDir?: string;
-  /** See `issueLinkTemplate` in [wdio allure reporter](https://webdriver.io/docs/allure-reporter/#configuration) */
-  reportIssueLink?: string;
-  /** Array of globs pointing to your gherkin definition files, relative to the `directory` */
-  steps?: string[];
-  /** The number of retries to perform for a failed gherkin statement*/
-  stepRetries?: number;
-  /** Default timeout for WebdriverIO to wait for a single test step to finish in milliseconds */
-  stepTimeout?: number;
-  /** Only execute the features or scenarios with tags matching the expression */
-  tags?: string;
-  /** Object containing keys that correspond to supported hooks */
-  hooks?: Hooks & HookFunctionExtension;
-}
+type RestrictedSnapshots = {
+  /** Options used for comparing intercepted network requests */
+  requests?: Omit<NetworkRequestSnapshotOptions, keyof SnapshotDirectories>;
+  /** Options used for comparing http responses */
+  responses?: Omit<JsonSnapshotOptions, keyof SnapshotDirectories>;
+  /** Options used for comparing images */
+  images?: Omit<ImageSnapshotOptions, keyof SnapshotDirectories>;
+};
 
-interface ConfigRuntimeProps {
-  /** Used for storing and reading runtime properties */
+type RestrictedWdioConfig = {
+  specs: string[];
+  cucumberOpts: CucumberOptions;
+  framework: string;
+} & HookFunctions &
+  HookFunctionExtension;
+
+export type CustomConfig = {
+  /** Custom: The base directory where most config paths will be resolved from */
+  baseDir: string;
+  /** Custom: Whether to run in debug mode or not */
+  debug: boolean;
+  /** Custom: The active locale. Used as primary context for reading generics' metadata */
+  locale: string;
+  /** Custom: Array of globs pointing to your meta files, relative to process.cwd() */
+  metadata: string[];
+  /** Custom: Reporter configurations */
+  reports: {
+    /** Directory to store the reports in, relative to process.cwd() */
+    outDir: string;
+    /** See `issueLinkTemplate` in [wdio allure reporter](https://webdriver.io/docs/allure-reporter/#configuration) */
+    reportIssueLink: string;
+  };
+  /** Custom: Used for storing and reading properties that are dynamically set on runtime; See [Custom Configurations](https://webdriver.io/docs/browserobject#custom-configurations) */
   runtime: {
     /** The active metadata as of execution. Used for reading generics' properties on built-in gherkin steps */
     activeMeta?: string;
@@ -112,12 +108,35 @@ interface ConfigRuntimeProps {
     windowSize?: { width: number; height: number };
     [key: string]: any;
   };
-}
+  /** Custom: The selenium standalone service install and runtime arguments */
+  selenium: {
+    /** Use driver version that fits your current browser version;
+     * @see [W3C Capabilities](https://www.browserstack.com/automate/capabilities?tag=selenium-4)
+     * */
+    drivers?: {};
+  };
+  /** Custom: Object containing properties of comparable files */
+  snapshots: Snapshots;
+  /** Override: Array of globs pointing to your spec files, relative to process.cwd() */
+  specs: string[];
+  /** Override: Array of globs pointing to spec files you want to exclude, relative to process.cwd() */
+  exclude: string[];
+  /** Custom: Array of globs pointing to your gherkin definition files, relative to process.cwd() */
+  steps: string[];
+  /** Custom: The number of retries to perform for a failed gherkin statement*/
+  stepRetries: number;
+  /** Custom: Default timeout for WebdriverIO to wait for a single test step to finish in milliseconds */
+  stepTimeout: number;
+  /** Custom: Only execute the features or scenarios with tags matching the expression */
+  tags: string;
+  /** Custom: Object containing keys that correspond to supported hooks */
+  hooks: Hooks & HookFunctionExtension;
+};
 
-export interface CustomConfig extends Omit<ConfigArgs, keyof RestrictedSnapshots>, ConfigRuntimeProps, Snapshots {}
+export type RestrictedCustomConfig = {
+  /** Custom: Object containing properties of comparable files */
+  snapshots?: RestrictedSnapshots;
+} & Omit<RecursivePartial<CustomConfig>, "runtime" | "snapshots"> &
+  Omit<RecursivePartial<WebdriverIO.Config>, keyof RestrictedWdioConfig>;
 
-interface NoOverrides extends CustomConfig, HookFunctions, HookFunctionExtension {
-  cucumberOpts: CucumberOptions;
-}
-
-export type Config = Omit<RecursivePartial<WebdriverIO.Config>, keyof NoOverrides>;
+export type Config = Partial<CustomConfig> & WebdriverIO.Config;

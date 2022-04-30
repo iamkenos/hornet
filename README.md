@@ -12,9 +12,10 @@
   - ~~remove unecessary types~~
   - ~~convert meta utils to static class~~
 - ~~npm pack & install~~
-- support config overrides / refactor for cleaner config
-- .env support
+- ~~support config overrides / refactor for cleaner config~~
+- remove core
 - gherkin tokens
+- fix commit linting
 - samples / cli?
 - docs
 - UTs

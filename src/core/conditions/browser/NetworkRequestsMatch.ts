@@ -1,10 +1,10 @@
-import type { NetworkRequestsIncludedProps, NetworkRequestSnapshotOptions } from "@core/config";
+import type { NetworkRequestsIncludeProps, NetworkRequestSnapshotOptions } from "@core/config";
 
 import merge from "lodash/merge";
 import { JSONSnapshotMatch } from "@core/conditions/others/JSONSnapshotMatch";
 
 export class NetworkRequestsMatch extends JSONSnapshotMatch {
-  private readonly props: Array<keyof NetworkRequestsIncludedProps>;
+  private readonly props: Array<keyof NetworkRequestsIncludeProps>;
   protected declare options: NetworkRequestSnapshotOptions;
   
   public constructor(filename: string, options?: NetworkRequestSnapshotOptions, not?: boolean) {

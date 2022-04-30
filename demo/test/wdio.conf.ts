@@ -1,20 +1,9 @@
 import "tsconfig-paths/register";
-import merge from "lodash/merge";
-import { base, Config, ConfigArgs } from "@iamkenos/hornet";
+import { configure } from "@iamkenos/hornet";
 
-const args: ConfigArgs = {
-  baseDir: __dirname,
-  snapshots: {
-    images: {
-      saveAboveTolerance: 0.15,
-      disableCSSAnimation: true,
-      hideScrollBars: true,
-    },
-  }
-};
-
-export const config = merge<Config, Config>(base(args), {
-  specs: ['demo/**/features/**/*.feature'],
+export const config = configure({
+  baseUrl: "http://localhost:8080/",
+  specs: ["features/**/*.feature"],
   capabilities: [
     {
       browserName: "chrome",
@@ -34,4 +23,11 @@ export const config = merge<Config, Config>(base(args), {
       }
     }
   ],
+  snapshots: {
+    images: {
+      saveAboveTolerance: 0.15,
+      disableCSSAnimation: true,
+      hideScrollBars: true
+    }
+  }
 });
