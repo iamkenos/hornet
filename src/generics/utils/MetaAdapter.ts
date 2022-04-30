@@ -88,8 +88,4 @@ export abstract class MetaAdapter {
  
     return selector;
   }
-
-  public static merge<T extends PageMetadata | ComponentMetadata, U, V, W, X, Y, Z>(m1: T, m2: U, m3?: V, m4?: W, m5?: X, m6?: Y, m7?: Z) {
-    return merge({}, m1, m2, m3, m4, m5, m6, m7) as T & U & V & W & X;
-  }
 }
