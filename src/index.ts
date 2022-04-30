@@ -1,8 +1,8 @@
 import type { MoveToOptions } from "webdriverio";
-import type { ClickPointerOrigin, ClickWith, Coordinates, HttpRequestOptions, HttpResponse } from "./core/commands";
-import type { KeyValuePair } from "./core/common";
-import type { BrowserConditions, ExpectedConditions } from "./core/conditions";
-import type { Config as Custom } from "./core/config";
+import type { ClickPointerOrigin, ClickWith, Coordinates, HttpRequestOptions, HttpResponse } from "./commands";
+import type { KeyValuePair } from "./common";
+import type { BrowserConditions, ExpectedConditions } from "./conditions";
+import type { Config as Custom } from "./config";
 
 declare global {
   // eslint-disable-next-line
@@ -47,9 +47,9 @@ declare global {
   }
 }
 
-export * from "@core/commands";
-export * from "@core/common";
-export * from "@core/conditions";
-export * from "@core/config";
-export * from "@core/generics";
-export * from "@core/gherkin";
+export * from "@commands";
+export * from "@common";
+export * from "@conditions";
+export * from "@config";
+export * from "@generics";
+export * from "@gherkin";

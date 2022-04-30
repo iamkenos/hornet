@@ -13,7 +13,7 @@
   - ~~convert meta utils to static class~~
 - ~~npm pack & install~~
 - ~~support config overrides / refactor for cleaner config~~
-- remove core
+- ~~remove core~~
 - gherkin tokens
 - fix commit linting
 - samples / cli?
