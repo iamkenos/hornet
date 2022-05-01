@@ -1,8 +1,9 @@
 import reporter from "@wdio/allure-reporter";
 import cli from "allure-commandline";
 import fs from "fs-extra";
+
+import * as string from "./string";
 import { BufferEncoding, MimeType } from "./enums";
-import { isJSON } from "./parsing";
 
 export abstract class AllureAdapter {
   public static async cli(args: string[]) {
@@ -27,7 +28,7 @@ export abstract class AllureAdapter {
   public static attachJson(title: string, filename: string) {
     if (fs.existsSync(filename)) {
       const content = fs.readFileSync(filename, BufferEncoding.UTF8);
-      this.attachFile(title, filename, isJSON(content) ? JSON.parse(content) : content, MimeType.APP_JSON);
+      this.attachFile(title, filename, string.isJSON(content) ? JSON.parse(content) : content, MimeType.APP_JSON);
     }
   }
 }

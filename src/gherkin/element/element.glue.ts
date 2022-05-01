@@ -14,7 +14,7 @@ import {
   SetValueAction,
   SizeContext
 } from "@commands";
-import { isURL } from "@common";
+import { string } from "@common";
 import { MetaAdapter, WebElement, XPathBuilder } from "@generics";
 import { GherkinAdapter } from "@gherkin";
 
@@ -286,7 +286,7 @@ export async function thenHrefPointsToPage(meta: string, index: number, key: str
     await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).toWebElement().conditions(index - 1) :
     await new WebElement(selector).conditions(index - 1);
   const target = MetaAdapter.getUrl(page);
-  const value = isURL(target) ? target : new URL(browser.config.baseUrl + target).href;
+  const value = string.isURL(target) ? target : new URL(browser.config.baseUrl + target).href;
 
   await then.attributeEquals(AnchorAttributes.HREF, new URL(value).pathname, not).expect();
 }

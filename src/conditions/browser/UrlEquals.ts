@@ -1,10 +1,10 @@
-import { isURL } from "@common";
+import { string } from "@common";
 import { ExpectedCondition } from "@conditions/expectedCondition";
 
 export class UrlEquals extends ExpectedCondition {
   public constructor(expected: string, not?: boolean) {
     super(not);
-    this.expected = this.expected = isURL(expected) ? expected : new URL(expected, browser.config.baseUrl).href || "";
+    this.expected = this.expected = string.isURL(expected) ? expected : new URL(expected, browser.config.baseUrl).href || "";
   }
 
   protected async getResult() {

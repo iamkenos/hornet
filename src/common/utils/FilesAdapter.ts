@@ -4,7 +4,7 @@ import path from "path";
 import { logger } from "@common";
 
 export abstract class FilesAdapter {
-  public static resolveGlob(fileGlob: string[], baseDir: string = process.cwd(), isStrict = false): string[] {
+  public static resolveGlob(baseDir: string, fileGlob: string[], isStrict = false): string[] {
     const resolved = new Set<string>();
 
     fileGlob.filter(Boolean).forEach((i: string): void => {

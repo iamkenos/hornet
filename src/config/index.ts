@@ -79,11 +79,11 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
   };
   // resolve all known custom config directories, relative to the implementing config's file path
   const resolved = merge({}, custom, overrides);
-  resolved.metadata = FilesAdapter.resolveGlob(resolved.metadata, resolved.baseDir);
+  resolved.metadata = FilesAdapter.resolveGlob(resolved.baseDir, resolved.metadata);
   resolved.reports.outDir = path.resolve(resolved.baseDir, resolved.reports.outDir);
-  resolved.specs = FilesAdapter.resolveGlob(resolved.specs, resolved.baseDir);
-  resolved.exclude = FilesAdapter.resolveGlob(resolved.exclude, resolved.baseDir);
-  resolved.steps = FilesAdapter.resolveGlob(resolved.steps, resolved.baseDir);
+  resolved.specs = FilesAdapter.resolveGlob(resolved.baseDir, resolved.specs);
+  resolved.exclude = FilesAdapter.resolveGlob(resolved.baseDir, resolved.exclude);
+  resolved.steps = FilesAdapter.resolveGlob(resolved.baseDir, resolved.steps);
   Object.keys(resolved.snapshots).forEach((key: keyof typeof resolved.snapshots) => {
     resolved.snapshots[key].outDir = path.resolve(resolved.baseDir, resolved.snapshots[key].outDir);
     resolved.snapshots[key].actualDir = path.resolve(resolved.snapshots[key].outDir, "actual");
@@ -272,7 +272,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
       // <string[]> (file/dir) require files before executing features
-      require: [...FilesAdapter.resolveGlob(["../gherkin/**/*.def.{ts,js}"], __dirname, true), ...resolved.steps],
+      require: [...FilesAdapter.resolveGlob(__dirname, ["../gherkin/**/*.def.{ts,js}"], true), ...resolved.steps],
       // <boolean> show full backtrace for errors
       backtrace: false,
       // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)

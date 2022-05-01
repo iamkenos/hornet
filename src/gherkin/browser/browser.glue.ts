@@ -9,7 +9,7 @@ import {
   WindowDirection,
   WindowNavigation
 } from "@commands";
-import { isJSON } from "@common";
+import { string } from "@common";
 import { MetaAdapter, WebElement } from "@generics";
 import { GherkinAdapter } from "@gherkin";
 
@@ -276,7 +276,7 @@ export async function thenGAEntriesSnapshotMatch(event: string, not: boolean, fi
 
 export async function thenHttpResponseSnapshotMatch(not: boolean, filename: string, request: HttpRequestOptions) {
   const response = await browser.sendRequest(request.url as string, request);
-  const comparable = { statusCode: response.statusCode, body: isJSON(response.body) ? JSON.parse(response.body) : response.body };
+  const comparable = { statusCode: response.statusCode, body: string.isJSON(response.body) ? JSON.parse(response.body) : response.body };
   const then = await browser.conditions();
 
   await then.jsonSnapshotMatch(filename, comparable, browser.config.snapshots.responses, not).expect();
