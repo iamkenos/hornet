@@ -1,5 +1,5 @@
 import merge from "lodash/merge";
-import { PageMetadata, WebPage, XPathBuilder } from "@iamkenos/hornet";
+import { PageMetadata, WebPage, XPathBuilder } from "@iamkenos/hornet/generics";
 import { NavigationBar } from "../components/navigation-bar.component";
 import meta from "./demo.meta";
 

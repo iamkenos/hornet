@@ -1,4 +1,4 @@
-import { ClickAction } from "@iamkenos/hornet";
+import { ClickAction } from "@iamkenos/hornet/commands";
 import { DemoPage } from "./demo.page";
 const demoPage = new DemoPage();
 

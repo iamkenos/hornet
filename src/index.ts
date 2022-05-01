@@ -46,10 +46,3 @@ declare global {
     }
   }
 }
-
-export * from "@commands";
-export * from "@common";
-export * from "@conditions";
-export * from "@config";
-export * from "@generics";
-export * from "@gherkin";

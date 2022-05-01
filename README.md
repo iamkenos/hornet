@@ -3,7 +3,7 @@
 
 ## About
 
-[WebdriverIO](https://webdriver.io/) that comes with the following presets and additional features:
+[WebdriverIO](https://webdriver.io/) that comes with presets and additional features:
 
 - write _**`async`**_ tests with [TypeScript](https://www.typescriptlang.org/docs/handbook/modules.html) and [Cucumber](https://cucumber.io/docs/guides/overview/)
 - gherkin statements that can be used out of the box
@@ -46,7 +46,6 @@ ISC
 
 - 1st release
 - increase UT coverage
-- explore limited exports?
 - api and usage documentation
 - ci build
 - TODOception

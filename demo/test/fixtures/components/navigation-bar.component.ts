@@ -1,4 +1,4 @@
-import { WebComponent, XPathBuilder } from "@iamkenos/hornet";
+import { WebComponent, XPathBuilder } from "@iamkenos/hornet/generics";
 import meta, { TAG } from "./navigation-bar.meta";
 export class NavigationBar extends WebComponent<typeof meta> {
   constructor() {

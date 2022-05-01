@@ -1,17 +1,25 @@
 {
   "name": "@iamkenos/hornet",
   "version": "0.0.1",
-  "description": "",
+  "description": "WebdriverIO that comes with presets and additional features",
   "author": "iamkenos",
   "license": "ISC",
-  "keywords": [],
+  "keywords": [
+    "webdriver",
+    "webdriverio",
+    "selenium",
+    "cucumber",
+    "bdd"
+  ],
   "scripts": {
     "prepare": "husky install",
     "release:first": "standard-version --first-release",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
     "release:major": "standard-version --release-as major",
-    "build": "tsc --build tsconfig.build.json && resolve-tspaths",
+    "prebuild": "rimraf build && rimraf *.tgz",
+    "build": "tsc --build tsconfig.build.json",
+    "postbuild": "resolve-tspaths",
     "lint": "eslint ./",
     "serve:demo": "http-server ./demo/app -s",
     "test:demo": "start-test serve:demo 8080 wdio:demo",
@@ -21,6 +29,58 @@
   },
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "commands": [
+        "./build/commands/index.d.ts"
+      ],
+      "common": [
+        "./build/common/index.d.ts"
+      ],
+      "conditions": [
+        "./build/conditions/index.d.ts"
+      ],
+      "config": [
+        "./build/config/index.d.ts"
+      ],
+      "generics": [
+        "./build/generics/index.d.ts"
+      ],
+      "gherkin": [
+        "./build/gherkin/index.d.ts"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./build/index.js"
+    },
+    "./commands": {
+      "import": "./src/commands/index.ts",
+      "require": "./build/commands/index.js"
+    },
+    "./common": {
+      "import": "./src/common/index.ts",
+      "require": "./build/common/index.js"
+    },
+    "./conditions": {
+      "import": "./src/conditions/index.ts",
+      "require": "./build/conditions/index.js"
+    },
+    "./config": {
+      "import": "./src/config/index.ts",
+      "require": "./build/config/index.js"
+    },
+    "./generics": {
+      "import": "./src/generics/index.ts",
+      "require": "./build/generics/index.js"
+    },
+    "./gherkin": {
+      "import": "./src/gherkin/index.ts",
+      "require": "./build/gherkin/index.js"
+    }
+  },
   "dependencies": {
     "@types/deep-diff": "1.0.1",
     "@types/jsonpath": "0.2.0",

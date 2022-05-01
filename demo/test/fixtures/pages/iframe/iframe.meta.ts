@@ -1,4 +1,4 @@
-import { PageMetadata } from "@iamkenos/hornet";
+import { PageMetadata } from "@iamkenos/hornet/generics";
 
 const meta: PageMetadata = {
   default: {

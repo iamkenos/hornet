@@ -1,5 +1,5 @@
 import "tsconfig-paths/register";
-import { configure } from "@iamkenos/hornet";
+import { configure } from "@iamkenos/hornet/config";
 
 export const config = configure({
   baseUrl: "http://localhost:8080/",
