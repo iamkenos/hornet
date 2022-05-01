@@ -1,4 +1,4 @@
-import * as string from "@iamkenos/hornet/common/utils/string";
+import * as string from "@common/utils/string";
 
 describe("@common: utils/string.isURL()", () => {
   it.each`
