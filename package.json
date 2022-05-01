@@ -1,6 +1,6 @@
 {
   "name": "@iamkenos/hornet",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "WebdriverIO that comes with presets and additional features",
   "author": "iamkenos",
   "license": "ISC",
