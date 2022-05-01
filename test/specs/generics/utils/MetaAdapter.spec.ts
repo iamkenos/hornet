@@ -56,7 +56,7 @@ describe("@generics: utils/MetaAdapter.getPropertyValue()", () => {
     expect(actual).toEqual(expected);
   });
 
-  it("S03: throw an error if metadata can't be resolved to a file", () => {
+  it("S03: should throw an error if metadata can't be resolved to a file", () => {
     const meta = "foo";
     let error: Error;
 
@@ -200,13 +200,24 @@ describe("@generics: utils/MetaAdapter.getSelector()", () => {
     { id: "F", meta: "", key: "#create", activeMeta: undefined, activeMetaSelectorKey: "section-header" },
     // When I click the "nonexisting" page's "nonexisting" button
     { id: "G", meta: "nonexisting", key: "nonexisting", activeMeta: undefined, activeMetaSelectorKey: undefined },
-    // When I click the "nonexisting" page's "nonexisting" button
-    { id: "H", meta: "nonexisting", key: "", activeMeta: undefined, activeMetaSelectorKey: "nonexisting" },
   ])("S01$id: should return the selector as-is - $key", ({ meta, key, activeMeta, activeMetaSelectorKey }) => {
     whenRuntimeMetadataIsSet({ activeMeta, activeMetaSelectorKey });
 
     const actual = MetaAdapter.getSelector(meta, key);
     const expected = key;
+    expect(actual).toEqual(expected);
+  });
+
+  it.each([
+    // Given I am on the "nonexisting" site
+    // When I start using the page's "nonexisting" element
+    //  And I click the "" button
+    { id: "H", meta: "nonexisting", key: "", activeMeta: undefined, activeMetaSelectorKey: "nonexisting" },
+  ])("S01$id: should return the selector as-is - $key", ({ meta, key, activeMeta, activeMetaSelectorKey }) => {
+    whenRuntimeMetadataIsSet({ activeMeta, activeMetaSelectorKey });
+
+    const actual = MetaAdapter.getSelector(meta, key);
+    const expected = activeMetaSelectorKey;
     expect(actual).toEqual(expected);
   });
 
