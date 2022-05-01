@@ -28,7 +28,93 @@
 
 ## Get Started
 
-TODO
+You'll need a working knowledge of WebdriverIO to be able to use this library. They have rich documentation so head on over the site and read on if you're not familiar with it yet.
+
+1. Create your WebdriverIO config file: `wdio.conf.ts`
+
+   ```ts
+   import { configure } from "@iamkenos/hornet/config";
+
+   // you can set most of the wdio config props from here, leave some that are restricted.
+   // e.g. the `framework` prop cannot be overriden as it's fixed to cucumber
+   export const config = configure({
+     baseUrl: "https://the-internet.herokuapp.com/"
+   });
+   ```
+
+2. Create your page metadata files:
+
+   ```ts
+   // fixtures/app.meta.ts
+   export default {
+     default: {
+       url: "/",
+       title: "The Internet",
+       selectors: {
+         flash: "#flash"
+       }
+     }
+   };
+
+   // fixtures/login.meta.ts
+   import merge from "lodash/merge";
+   import app from "./app.meta";
+
+   export default merge({}, app, {
+     default: {
+       url: "/login",
+       selectors: {
+         Username: "#username",
+         Password: "#password",
+         Login: "//button[@type='submit']"
+       }
+     }
+   });
+
+   // fixtures/secure.meta.ts
+   import merge from "lodash/merge";
+   import app from "./app.meta";
+
+   export default merge({}, app, {
+     default: {
+       url: "/login",
+       selectors: {
+         Username: "#username",
+         Password: "#password",
+         Login: "//button[@type='submit']"
+       }
+     }
+   });
+   ```
+
+3. Create your feature file: `features/login.feature`
+
+   ```gherkin
+   Feature: Login
+
+     Background:
+       Given I am on the "login" page
+
+     Scenario: S01: Login with valid credentials
+       When I type on the fields:
+         | Field    | Value                |
+         | Username | tomsmith             |
+         | Password | SuperSecretPassword! |
+         And I click the "Login" button
+       Then I expect to be on the "secure" page
+         And I expect the "flash" element text to contain "You logged into a secure area!"
+
+     Scenario: S02: Login with invalid credentials
+       When I type on the fields:
+         | Field    | Value  |
+         | Username | foobar |
+         | Password | barfoo |
+         And I click the "Login" button
+       Then I expect to still be on the "login" page
+         And I expect the "flash" element text to contain "Your username is invalid!"
+   ```
+
+4. Check the results: `npx allure open .reports/allure/html`
 
 ## Contribute
 
@@ -44,8 +130,7 @@ ISC
 
 ## TODO
 
-- 1st release
 - increase UT coverage
-- api and usage documentation
+- full api documentation
 - ci build
-- TODOception
+- other TODOs
