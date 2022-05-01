@@ -7,6 +7,7 @@ node_modules
 
 # Misc
 build
+.coverage
 **/.reports
 **/.snapshots/**/actual
 **/.snapshots/**/diff

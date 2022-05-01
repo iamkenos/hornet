@@ -6,6 +6,17 @@
   "configurations": [
     {
       "autoAttachChildProcesses": true,
+      "name": "hornet: debug @ spec",
+      "type": "node",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "program": "node_modules/.bin/jest",
+      "args": ["--config", ".jestrc.js", "${file}", "-t", "debug"],
+      "runtimeExecutable": "${env:HOME}/.nvm/versions/node/v16.13.0/bin/node"
+    },
+    {
+      "autoAttachChildProcesses": true,
       "name": "demo: debug @ spec",
       "type": "node",
       "request": "launch",

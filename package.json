@@ -7,7 +7,6 @@
   "keywords": [],
   "scripts": {
     "prepare": "husky install",
-    "release": "standard-version",
     "release:first": "standard-version --first-release",
     "release:minor": "standard-version --release-as minor",
     "release:patch": "standard-version --release-as patch",
@@ -16,6 +15,7 @@
     "lint": "eslint ./",
     "serve:demo": "http-server ./demo/app -s",
     "test:demo": "start-test serve:demo 8080 wdio:demo",
+    "test:unit": "jest --config .jestrc.js --coverage",
     "wdio:demo": "wdio run ./demo/test/wdio.conf.ts",
     "report:demo": "allure open ./demo/test/.reports/allure/html"
   },
@@ -51,6 +51,7 @@
     "@commitlint/cli": "16.2.3",
     "@commitlint/config-conventional": "16.2.1",
     "@types/glob": "7.2.0",
+    "@types/jest": "27.4.1",
     "@typescript-eslint/eslint-plugin": "5.19.0",
     "@typescript-eslint/parser": "5.19.0",
     "eslint": "7.32.0",
@@ -59,6 +60,7 @@
     "husky": "7.0.0",
     "resolve-tspaths": "0.3.0",
     "standard-version": "9.3.2",
-    "start-server-and-test": "1.14.0"
+    "start-server-and-test": "1.14.0",
+    "ts-jest": "27.1.4"
   }
 }

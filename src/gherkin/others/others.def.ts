@@ -12,6 +12,6 @@ When(
 );
 
 When(
-  /^I (start using|stop using) the (?:page|component|widget)'s "([^"]*)?"(?: child)? element$/, RETRY(),
+  /^I (start using|stop using) the (?:page|component|widget)'s "([^"]*)?" element$/, RETRY(),
   fn.whenSetActiveSelector
 );

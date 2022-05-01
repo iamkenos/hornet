@@ -16,7 +16,7 @@
 - ~~remove core~~
 - ~~fix commit linting~~
 - ~~gherkin tokens~~
+- UTs
 - docs
 - publish & install
-- UTs
 - samples / cli?

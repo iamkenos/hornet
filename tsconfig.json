@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "downlevelIteration": true,
     "declaration": true,
+    "downlevelIteration": true,
     "esModuleInterop": true,
+    "lib": ["ES2020", "DOM"],
     "moduleResolution": "node",
     "outDir": "build",
     "paths": {
       "@iamkenos/hornet": ["src/index"],
       "@iamkenos/hornet/*": ["src/*"],
+      "@demo/*": ["demo/*"],
+      "@test/*": ["test/*"],
       "@commands": ["src/commands/index"],
       "@commands/*": ["src/commands/*"],
       "@common": ["src/common/index"],
@@ -22,9 +25,9 @@
       "@gherkin": ["src/gherkin/index"],
       "@gherkin/*": ["src/gherkin/*"]
     },
+    "removeComments": false,
     "skipLibCheck": true,
     "sourceMap": true,
-    "removeComments": false,
     "target": "ES5",
     "types": [
       "@wdio/cucumber-framework",
@@ -33,6 +36,7 @@
       "@wdio/devtools-service",
       "wdio-intercept-service",
       "webdriverio/async",
+      "@types/jest",
       "node"
     ]
   },
