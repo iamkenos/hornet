@@ -77,12 +77,7 @@ You'll need a working knowledge of WebdriverIO to be able to use this library. T
 
    export default merge({}, app, {
      default: {
-       url: "/login",
-       selectors: {
-         Username: "#username",
-         Password: "#password",
-         Login: "//button[@type='submit']"
-       }
+       url: "/secure"
      }
    });
    ```
@@ -114,7 +109,11 @@ You'll need a working knowledge of WebdriverIO to be able to use this library. T
          And I expect the "flash" element text to contain "Your username is invalid!"
    ```
 
-4. Check the results: `npx allure open .reports/allure/html`
+4. Run it: `npx wdio wdio.conf.ts`
+
+5. Check the results: `npx allure open .reports/allure/html`
+
+6. You can view other gherkin steps available out-of-the-box [here](./demo/test/features).
 
 ## Contribute
 
