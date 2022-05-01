@@ -115,13 +115,13 @@ export async function whenSetValueMultiLine(action: SetValueAction, meta: string
   await whenSetValue(action, value, meta, index, key);
 }
 
-export async function whenSetValues(action: SetValueAction, meta: string, key: string, table: DataTable) {
-  const labels = GherkinAdapter.getDataTableRows(table, 1);
+export async function whenSetValues(action: SetValueAction, meta: string, table: DataTable) {
+  const fields = GherkinAdapter.getDataTableRows(table, 1);
   const values = GherkinAdapter.getDataTableRows(table, 2);
-  const indices = GherkinAdapter.getDataTableRows(table, 3) || Array(labels.length).fill(0);
+  const indices = GherkinAdapter.getDataTableRows(table, 3) || Array(fields.length).fill(0);
 
-  for (let i = 0; i < labels.length; i++) {
-    await whenSetValue(action, values[i], meta, indices[i], key);
+  for (let i = 0; i < fields.length; i++) {
+    await whenSetValue(action, values[i], meta, indices[i], fields[i]);
   }
 }
 

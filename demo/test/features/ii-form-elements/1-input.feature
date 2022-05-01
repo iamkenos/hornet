@@ -31,7 +31,7 @@ Feature: II. Form Elements - Input
       And I expect the "#input-password" field value to not be "*****"
 
   Scenario: S04: Text area
-    When I type on the "#input-text" fields:
+    When I type on the fields:
       | Field           | Value                 |
       | #input-text     | Sam Porter            |
       | #input-email    | samporter@bridges.com |

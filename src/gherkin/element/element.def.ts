@@ -54,7 +54,7 @@ When(
 );
 
 When(
-  /^I (type|append) on the(?: "([^"]*)?" (?:page|component)'s)? "([^"]*)?" (?:fields|elements):$/, RETRY(),
+  /^I (type|append) on the(?: "([^"]*)?" (?:page|component)'s)? (?:fields|elements):$/, RETRY(),
   fn.whenSetValues
 );
 
