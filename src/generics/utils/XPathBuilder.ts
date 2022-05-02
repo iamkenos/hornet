@@ -29,7 +29,7 @@ export class XPathBuilder {
       const sqIndices: any[] =
         Array.from(string.matchAll(this.ESCAPE_PATTERN))
           .map((i) => i.index)
-          .concat(string.length) || [];
+          .concat(string.length);
       const parts: string[] = [];
       let start = 0;
       sqIndices.forEach((i) => {
