@@ -5,8 +5,16 @@ declare let global: any;
 clean("./test/.coverage");
 
 // mock wdio browser
-global.browser = jest.fn();
-global.browser.config = {};
+(global.$ as typeof $) = jest.fn();
+(global.$$ as typeof $$) = jest.fn();
+// @ts-ignore
+(global.browser as typeof browser) = jest.fn();
+(global.browser as typeof browser).$ = jest.fn();
+(global.browser as typeof browser).$$ = jest.fn();
+(global.browser as typeof browser).execute = jest.fn();
+(global.browser as typeof browser).waitUntil = jest.fn();
+// @ts-ignore
+(global.browser as typeof browser).config = {};
 
 // disable console logging
 global.console = {
