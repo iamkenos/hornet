@@ -11,7 +11,9 @@ clean("./test/.coverage");
 (global.browser as typeof browser) = jest.fn();
 (global.browser as typeof browser).$ = jest.fn();
 (global.browser as typeof browser).$$ = jest.fn();
+(global.browser as typeof browser).conditions = jest.fn();
 (global.browser as typeof browser).execute = jest.fn();
+(global.browser as typeof browser).url = jest.fn();
 (global.browser as typeof browser).waitUntil = jest.fn();
 // @ts-ignore
 (global.browser as typeof browser).config = {};

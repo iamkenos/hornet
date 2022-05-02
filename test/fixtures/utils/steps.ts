@@ -24,6 +24,8 @@ export function givenBrowserConfig(config?: typeof browser.config) {
       path.resolve(__dirname, "../pages/demo.meta.ts"),
       path.resolve(__dirname, "../pages/iframe/iframe.meta.ts")
     ],
+    // defautls
+    baseUrl: "http://localhost:8080"
   };
   return merge({}, base, config);
 }

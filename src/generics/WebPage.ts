@@ -22,7 +22,7 @@ export abstract class WebPage<T extends PageMetadata> {
   }
 
   public async navigate() {
-    await driver.url(this.url);
+    await browser.url(this.url);
   }
 
   public getTitle() {
