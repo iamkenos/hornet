@@ -1,13 +1,14 @@
+import { AllureAdapter } from "@common/utils/AllureAdapter";
 
 import reporter from "@wdio/allure-reporter";
 import cli from "allure-commandline";
 import fs from "fs-extra";
 import path from "path";
-import * as string from "@common/utils/string";
-import { AllureAdapter } from "@common/utils/AllureAdapter";
-import { BufferEncoding, MimeType } from "@common/utils/enums";
-import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 
+import * as string from "@common/utils/string";
+import { BufferEncoding, MimeType } from "@common/utils/enums";
+
+import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 const data = { title: "foo" };
 
 jest.mock("@wdio/allure-reporter");
@@ -64,7 +65,7 @@ describe("@common: utils/AllureAdapter.attachImage()", () => {
   it("S01: should add image attachment to the allure report", () => {
     const filename = path.resolve(__dirname, "../../../fixtures/files/png.png");
     const content = Buffer.from(fs.readFileSync(filename) as any, BufferEncoding.BASE64);
-    
+
     AllureAdapter.attachFile = jest.fn();
     AllureAdapter.attachImage(data.title, filename);
     expect(AllureAdapter.attachFile).toHaveBeenCalledWith(data.title, filename, content, MimeType.IMG_PNG);
@@ -72,7 +73,7 @@ describe("@common: utils/AllureAdapter.attachImage()", () => {
 
   it("S02: should not add image attachment to the allure report if the file is non-existing", () => {
     const filename = path.resolve(__dirname, "../../../fixtures/files/foo.png");
-    
+
     AllureAdapter.attachFile = jest.fn();
     AllureAdapter.attachImage(data.title, filename);
     expect(AllureAdapter.attachFile).not.toHaveBeenCalled();
@@ -87,7 +88,7 @@ describe("@common: utils/AllureAdapter.attachJson()", () => {
   it("S01: debug should add json attachment to the allure report", () => {
     const filename = path.resolve(__dirname, "../../../fixtures/files/json.json");
     const content = fs.readFileSync(filename, BufferEncoding.UTF8);
-    
+
     AllureAdapter.attachFile = jest.fn();
     AllureAdapter.attachJson(data.title, filename);
     expect(AllureAdapter.attachFile).toHaveBeenCalledWith(data.title, filename, JSON.parse(content), MimeType.APP_JSON);
@@ -97,7 +98,7 @@ describe("@common: utils/AllureAdapter.attachJson()", () => {
     const stringIsJSONMock = givenMock(string.isJSON, true);
     const filename = path.resolve(__dirname, "../../../fixtures/files/json.json");
     const content = fs.readFileSync(filename, BufferEncoding.UTF8);
-    
+
     // @ts-ignore
     string.isJSON = jest.fn();
     stringIsJSONMock.mockReturnValue(true);
@@ -108,7 +109,7 @@ describe("@common: utils/AllureAdapter.attachJson()", () => {
 
   it("S03: should not add json attachment to the allure report if the file is non-existing", () => {
     const filename = path.resolve(__dirname, "../../../fixtures/files/fjson.json");
-    
+
     AllureAdapter.attachFile = jest.fn();
     AllureAdapter.attachJson(data.title, filename);
     expect(AllureAdapter.attachFile).not.toHaveBeenCalled();

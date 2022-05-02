@@ -1,8 +1,8 @@
-import path from "path";
+import { MetaAdapter } from "@generics/utils/MetaAdapter";
+
 import demo from "@test/fixtures/pages/demo.meta";
 import nav from "@test/fixtures/components/navigation-bar.meta";
-
-import { MetaAdapter } from "@generics/utils/MetaAdapter";
+import { givenBrowserConfig } from "@test/fixtures/utils/steps";
 let config: typeof browser.config;
 
 describe("@generics: utils/MetaAdapter.getProperties()", () => {
@@ -267,19 +267,13 @@ describe("@generics: utils/MetaAdapter.getSelector()", () => {
 });
 
 function givenBrowserConfigIsDefined() {
-  config = browser.config;
-  config.runtime = {};
-  config.locale = "default";
-  config.metadata = [
-    path.resolve(__dirname, "../../../fixtures/components/nonexisting.meta"),
-    path.resolve(__dirname, "../../../fixtures/components/navigation-bar.meta"),
-    path.resolve(__dirname, "../../../fixtures/pages/demo.meta.ts"),
-    path.resolve(__dirname, "../../../fixtures/pages/iframe/iframe.meta.ts")
-  ];
+  config = givenBrowserConfig();
+  browser.config = config;
 }
 
 function givenBrowserConfigIsUndefined() {
   config = undefined;
+  browser.config = config;
 }
 
 function whenRuntimeMetadataIsSet({ activeMeta, activeMetaSelectorKey }) {

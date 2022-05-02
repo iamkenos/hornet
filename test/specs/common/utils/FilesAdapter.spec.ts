@@ -1,6 +1,6 @@
+import { FilesAdapter } from "@common/utils/FilesAdapter";
 
 import path from "path";
-import { FilesAdapter } from "@common/utils/FilesAdapter";
 import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 
 jest.mock("path", () => ({ ...jest.requireActual("path") as any, resolve: jest.fn(), isAbsolute: jest.fn() }));
