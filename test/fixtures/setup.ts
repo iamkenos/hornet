@@ -11,8 +11,13 @@ clean("./test/.coverage");
 (global.browser as typeof browser) = jest.fn();
 (global.browser as typeof browser).$ = jest.fn();
 (global.browser as typeof browser).$$ = jest.fn();
+(global.browser as typeof browser).addCommand = jest.fn();
+(global.browser as typeof browser).clean = jest.fn();
 (global.browser as typeof browser).conditions = jest.fn();
 (global.browser as typeof browser).execute = jest.fn();
+(global.browser as typeof browser).restoreWindowSize = jest.fn();
+(global.browser as typeof browser).storeWindowSize = jest.fn();
+(global.browser as typeof browser).takeScreenshot = jest.fn();
 (global.browser as typeof browser).url = jest.fn();
 (global.browser as typeof browser).waitUntil = jest.fn();
 // @ts-ignore

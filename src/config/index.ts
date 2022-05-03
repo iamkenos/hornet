@@ -7,7 +7,7 @@ import merge from "lodash/merge";
 import path from "path";
 import commands from "@commands";
 
-import { AllureAdapter, FilesAdapter, logger } from "@common";
+import { AllureAdapter, FilesAdapter, logger, MimeType } from "@common";
 import { Config, CustomConfig, RestrictedCustomConfig } from "@config/types";
 
 export const configure = (overrides: RestrictedCustomConfig): Config => {
@@ -323,7 +323,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
         fs.mkdirsSync(snapshots[key].baselineDir);
       });
 
-      const { onPrepare } = resolved.hooks as any;
+      const { onPrepare } = this.hooks;
       await onPrepare(config, capabilities);
     },
     /**
@@ -350,7 +350,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
       config.cucumberOpts.tagExpression = config.tags;
       config.cucumberOpts.timeout = config.debug ? 24 * 60 * 60 * 1000 : config.stepTimeout * (config.stepRetries || 1);
 
-      const { beforeSession } = resolved.hooks as any;
+      const { beforeSession } = this.hooks;
       await beforeSession(config, capabilities, specs, cid);
     },
     /**
@@ -364,7 +364,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
       commands.addBrowserCommands();
       commands.addElementCommands();
 
-      const { before } = resolved.hooks as any;
+      const { before } = this.hooks;
       await before(capabilities, specs);
     },
     /**
@@ -373,7 +373,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
      * @param {Array}  args         arguments that command would receive
      */
     beforeCommand: async function(commandName, args) {
-      const { beforeCommand } = resolved.hooks as any;
+      const { beforeCommand } = this.hooks;
       await beforeCommand(commandName, args);
     },
     /**
@@ -386,7 +386,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
     beforeFeature: async function(uri, feature) {
       await browser.storeWindowSize();
 
-      const { beforeFeature } = resolved.hooks as any;
+      const { beforeFeature } = this.hooks;
       await beforeFeature(uri, feature);
     },
     /**
@@ -409,7 +409,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
         }
       });
 
-      const { beforeScenario } = resolved.hooks as any;
+      const { beforeScenario } = this.hooks;
       await beforeScenario(world, context);
     },
     /**
@@ -422,10 +422,10 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
       const { argument, keyword, text } = step as any;
       logger.debug(`${chalk.yellow("GHERKIN")} ${chalk.green.dim.bold(keyword)}${chalk.green.dim(text)}`);
       if (argument?.docString?.content) {
-        AllureAdapter.reporter().addAttachment("DocString", argument?.docString?.content, "text/plain");
+        AllureAdapter.reporter().addAttachment("DocString", argument.docString.content, MimeType.TEXT_PLAIN);
       }
 
-      const { beforeStep } = resolved.hooks as any;
+      const { beforeStep } = this.hooks;
       await beforeStep(step, scenario, context);
     },
     /**
@@ -443,7 +443,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
         await browser.takeScreenshot();
       }
 
-      const { afterStep } = resolved.hooks as any;
+      const { afterStep } = this.hooks;
       await afterStep(step, scenario, result, context);
     },
     /**
@@ -461,7 +461,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
       browser.config.runtime.activeMeta = undefined;
       browser.config.runtime.activeMetaSelectorKey = undefined;
 
-      const { afterScenario } = resolved.hooks as any;
+      const { afterScenario } = this.hooks;
       await afterScenario(world, result, context);
     },
     /**
@@ -470,7 +470,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
      * @param {GherkinDocument.IFeature} feature  Cucumber feature object
      */
     afterFeature: async function(uri, feature) {
-      const { afterFeature } = resolved.hooks as any;
+      const { afterFeature } = this.hooks;
       await afterFeature(uri, feature);
     },
 
@@ -482,7 +482,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
      * @param {Object} error       error object if any
      */
     afterCommand: async function(commandName, args, result, error) {
-      const { afterCommand } = resolved.hooks as any;
+      const { afterCommand } = this.hooks;
       await afterCommand(commandName, args, result, error);
     },
     /**
@@ -493,7 +493,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
      * @param {Array.<String>} specs        List of spec file paths that ran
      */
     after: async function(result, capabilities, specs) {
-      const { after } = resolved.hooks as any;
+      const { after } = this.hooks;
       await after(result, capabilities, specs);
     },
     /**
@@ -503,7 +503,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
      * @param {Array.<String>} specs        List of spec file paths that ran
      */
     afterSession: async function(config, capabilities, specs) {
-      const { afterSession } = resolved.hooks as any;
+      const { afterSession } = this.hooks;
       await afterSession(config, capabilities, specs);
     },
     /**
@@ -519,7 +519,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
       const html = path.join(raw, "html");
       await AllureAdapter.cli(["-q", "generate", raw, "-c", "-o", html]);
 
-      const { onComplete } = resolved.hooks as any;
+      const { onComplete } = this.hooks;
       await onComplete(exitCode, config, capabilities, results);
     },
     /**
@@ -528,7 +528,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
      * @param {String} newSessionId session ID of the new session
      */
     onReload: async function(oldSessionId, newSessionId) {
-      const { onReload } = resolved.hooks as any;
+      const { onReload } = this.hooks;
       await onReload(oldSessionId, newSessionId);
     }
   };
