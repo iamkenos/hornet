@@ -23,9 +23,10 @@
     "lint": "eslint ./",
     "serve:demo": "http-server ./demo/app -s",
     "test:demo": "start-test serve:demo 8080 wdio:demo",
-    "test:unit": "jest --config .jestrc.js --coverage  --maxWorkers=5",
+    "test:unit": "jest --config .jestrc.js --coverage --maxWorkers=5",
     "wdio:demo": "wdio run ./demo/test/wdio.conf.ts",
-    "report:demo": "allure open ./demo/test/.reports/allure/html"
+    "report:demo": "allure open ./demo/test/.reports/allure/html",
+    "report:unit": "http-server ./test/.coverage/lcov-report -s"
   },
   "main": "./build/index.js",
   "types": "./build/index.d.ts",

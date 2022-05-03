@@ -2,6 +2,7 @@ import { AttributeEquals } from "@conditions/element/AttributeEquals";
 
 import { givenJestMocksAreReset } from "@test/fixtures/utils/steps";
 const data = { any: "any", selector: "#selector", foo: "foo", bar: "bar" };
+
 describe("@conditions: element/AttributeEquals constructor", () => {
   afterEach(() => {
     givenJestMocksAreReset();
@@ -25,7 +26,7 @@ describe("@conditions: element/AttributeEquals constructor", () => {
   });
 });
 
-describe("@conditions: others/AttributeEquals.getResult()", () => {
+describe("@conditions: element/AttributeEquals.getResult()", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });

@@ -1,5 +1,4 @@
-import type { Axis } from "@commands";
-import type { SizeContext } from "@commands";
+import type { Axis, SizeContext } from "@commands";
 import type { ImageSnapshotContextOptions } from "@conditions";
 import { ImageCompareContext } from "@commands";
 import { SnapshotMatch } from "@conditions/browser/SnapshotMatch";

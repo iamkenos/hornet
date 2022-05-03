@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@conditions: element/Focused constructor S01: should set properties upon instantiation 1`] = `
+Array [
+  "Focused",
+  false,
+  undefined,
+  true,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+]
+`;
+
+exports[`@conditions: element/Focused.getResult() S01: should return a passed result 1`] = `
+Object {
+  "actual": true,
+  "expected": true,
+  "message": "
+  Condition: Focused 
+  Selector: #selector
+  Result: Success
+  Expected: true
+  Actual: true",
+  "name": "Focused",
+  "passed": true,
+}
+`;
+
+exports[`@conditions: element/Focused.getResult() S02: should return a passed result if not is true 1`] = `
+Object {
+  "actual": false,
+  "expected": true,
+  "message": "
+  Condition: Focused 
+  Selector: #selector
+  Result: Success
+  Expected (Not): true
+  Actual: false",
+  "name": "Focused",
+  "passed": true,
+}
+`;
+
+exports[`@conditions: element/Focused.getResult() S03: should return a failed result if condition is not met 1`] = `
+Object {
+  "actual": false,
+  "expected": true,
+  "message": "
+  Condition: Focused 
+  Selector: #selector
+  Result: Failed
+  Expected: true
+  Actual: false",
+  "name": "Focused",
+  "passed": false,
+}
+`;
+
+exports[`@conditions: element/Focused.getResult() S04: should return a failed result if an error is encountered 1`] = `
+Object {
+  "actual": "message",
+  "expected": true,
+  "message": "
+  Condition: Focused 
+  Selector: #selector
+  Result: Failed
+  Expected: true
+  Actual: message",
+  "name": "Focused",
+  "passed": false,
+}
+`;

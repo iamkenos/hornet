@@ -1,15 +1,15 @@
-import { AttributeContains } from "@conditions/element/AttributeContains";
+import { CountMoreThan } from "@conditions/element/CountMoreThan";
 
-import { givenJestMocksAreReset } from "@test/fixtures/utils/steps";
-const data = { any: "any", selector: "#selector", foo: "foo", bar: "bar" };
+import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
+const data = { any: "any", selector: "#selector", foo: 1 };
 
-describe("@conditions: element/AttributeContains constructor", () => {
+describe("@conditions: element/CountMoreThan constructor", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });
 
   it("S01: should set properties upon instantiation", async() => {
-    const condition = new AttributeContains(data.any, data.any);
+    const condition = new CountMoreThan(data.foo);
 
     const actual = [
       (condition as any).name,
@@ -26,25 +26,26 @@ describe("@conditions: element/AttributeContains constructor", () => {
   });
 });
 
-describe("@conditions: element/AttributeContains.getResult()", () => {
+describe("@conditions: element/CountMoreThan.getResult()", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });
 
   it("S01: should return a passed result", async() => {
-    const condition = new AttributeContains(data.foo, undefined);
-    const element: any = { ...data, getAttribute: () => data.bar };
-    const elementSpy = jest.spyOn(element, "getAttribute");
+    const $$Mock = givenElementCountMock();
+    const condition = new CountMoreThan(data.foo);
+    const element: any = data;
     condition.setElement(element);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();
-    expect(elementSpy).toHaveBeenCalledWith(data.foo);
+    expect($$Mock).toHaveBeenCalledWith(element.selector);
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new AttributeContains(data.foo, data.any, true);
-    const element: any = { ...data, getAttribute: () => data.bar };
+    givenElementCountMock(1);
+    const condition = new CountMoreThan(data.foo, true);
+    const element: any = data;
     condition.setElement(element);
 
     const actual = await (condition as any).getResult();
@@ -52,8 +53,9 @@ describe("@conditions: element/AttributeContains.getResult()", () => {
   });
 
   it("S03: should return a failed result if condition is not met", async() => {
-    const condition = new AttributeContains(data.foo, data.any);
-    const element: any = { ...data, getAttribute: () => data.bar };
+    givenElementCountMock(1);
+    const condition = new CountMoreThan(data.foo);
+    const element: any = data;
     condition.setElement(element);
 
     const actual = await (condition as any).getResult();
@@ -61,11 +63,24 @@ describe("@conditions: element/AttributeContains.getResult()", () => {
   });
 
   it("S04: should return a failed result if an error is encountered", async() => {
-    const condition = new AttributeContains(data.foo, data.any);
-    const element: any = { ...data, getAttribute: () => { throw new Error("message");} };
+    givenElementCountThrowsError();
+    const condition = new CountMoreThan(data.foo);
+    const element: any = data;
     condition.setElement(element);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();
   });
 });
+
+function givenElementCountMock(count = 2) {
+  const mock = givenMock($$);
+  mock.mockReturnValue(Array(count).fill(data));
+  return mock;
+}
+
+function givenElementCountThrowsError() {
+  const mock = givenMock($$);
+  mock.mockImplementation(() => { throw new Error("message");});
+  return mock;
+}

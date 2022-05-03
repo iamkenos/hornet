@@ -14,7 +14,7 @@ Array [
 ]
 `;
 
-exports[`@conditions: others/AttributeExists.getResult() S01: should return a passed result 1`] = `
+exports[`@conditions: element/AttributeExists.getResult() S01: should return a passed result 1`] = `
 Object {
   "actual": true,
   "expected": true,
@@ -29,7 +29,7 @@ Object {
 }
 `;
 
-exports[`@conditions: others/AttributeExists.getResult() S02: should return a passed result if not is true 1`] = `
+exports[`@conditions: element/AttributeExists.getResult() S02: should return a passed result if not is true 1`] = `
 Object {
   "actual": false,
   "expected": true,
@@ -44,7 +44,7 @@ Object {
 }
 `;
 
-exports[`@conditions: others/AttributeExists.getResult() S03: should return a failed result if condition is not met 1`] = `
+exports[`@conditions: element/AttributeExists.getResult() S03: should return a failed result if condition is not met 1`] = `
 Object {
   "actual": false,
   "expected": true,
@@ -59,7 +59,7 @@ Object {
 }
 `;
 
-exports[`@conditions: others/AttributeExists.getResult() S04: should return a failed result if an error is encountered 1`] = `
+exports[`@conditions: element/AttributeExists.getResult() S04: should return a failed result if an error is encountered 1`] = `
 Object {
   "actual": "message",
   "expected": true,

@@ -2,6 +2,7 @@ import { AttributeExists } from "@conditions/element/AttributeExists";
 
 import { givenJestMocksAreReset } from "@test/fixtures/utils/steps";
 const data = { any: "any", selector: "#selector", foo: "foo", bar: "bar" };
+
 describe("@conditions: element/AttributeExists constructor", () => {
   afterEach(() => {
     givenJestMocksAreReset();
@@ -25,7 +26,7 @@ describe("@conditions: element/AttributeExists constructor", () => {
   });
 });
 
-describe("@conditions: others/AttributeExists.getResult()", () => {
+describe("@conditions: element/AttributeExists.getResult()", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });
