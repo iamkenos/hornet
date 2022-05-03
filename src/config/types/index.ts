@@ -34,7 +34,7 @@ export type ImageSnapshotOptions = {
 } & SnapshotOptions &
   WdioImageCheckOptions;
 
-export type JsonSnapshotOptions = {
+export type JSONSnapshotOptions = {
   /** Conditional diffing based on [jsonpath](https://www.npmjs.com/package/jsonpath) and regex  */
   regex?: {
     paths: string[];
@@ -55,13 +55,13 @@ export type NetworkRequestSnapshotOptions = {
   include?: NetworkRequestsIncludeProps;
   /** Filter only the requests to following paths when doing the diff */
   paths?: string[];
-} & JsonSnapshotOptions;
+} & JSONSnapshotOptions;
 
 type Snapshots = {
   /** Options used for comparing intercepted network requests */
   requests?: NetworkRequestSnapshotOptions;
   /** Options used for comparing http responses */
-  responses?: JsonSnapshotOptions;
+  responses?: JSONSnapshotOptions;
   /** Options used for comparing images */
   images?: ImageSnapshotOptions;
 };
@@ -70,7 +70,7 @@ type RestrictedSnapshots = {
   /** Options used for comparing intercepted network requests */
   requests?: Omit<NetworkRequestSnapshotOptions, keyof SnapshotDirectories>;
   /** Options used for comparing http responses */
-  responses?: Omit<JsonSnapshotOptions, keyof SnapshotDirectories>;
+  responses?: Omit<JSONSnapshotOptions, keyof SnapshotDirectories>;
   /** Options used for comparing images */
   images?: Omit<ImageSnapshotOptions, keyof SnapshotDirectories>;
 };

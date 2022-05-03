@@ -1,5 +1,5 @@
 import type { PathComponent } from "jsonpath";
-import type { JsonSnapshotOptions } from "@config";
+import type { JSONSnapshotOptions } from "@config";
 
 import fs from "fs-extra";
 import path from "path";
@@ -11,11 +11,11 @@ import { ExpectedCondition } from "@conditions/expectedCondition";
 
 export class JSONSnapshotMatch extends ExpectedCondition {
   protected readonly filename: string;
-  protected options: JsonSnapshotOptions;
+  protected options: JSONSnapshotOptions;
   protected sortkey: string;
   private comparable: any;
 
-  public constructor(filename: string, comparable: any, options?: JsonSnapshotOptions, not?: boolean) {
+  public constructor(filename: string, comparable: any, options?: JSONSnapshotOptions, not?: boolean) {
     super(not);
     this.filename = filename + ".json";
     this.comparable = comparable;
@@ -34,7 +34,7 @@ export class JSONSnapshotMatch extends ExpectedCondition {
     return this;
   }
 
-  private getMatchingJsonPaths(expressions: string[], from: object) {
+  private getMatchingJSONPaths(expressions: string[], from: object) {
     // Get all the matching stringified json paths from an object given a list of json paths
     // see https://www.npmjs.com/package/jsonpath
     return (
@@ -49,26 +49,26 @@ export class JSONSnapshotMatch extends ExpectedCondition {
         .map((h: PathComponent[]) => jsonpath.stringify(h))
     );
   }
-  
-  private compare(filename: string, options: JsonSnapshotOptions, object: any, sortKey?: string) {
+
+  private compare(filename: string, options: JSONSnapshotOptions, object: any, sortKey?: string) {
     const { actualDir, baselineDir, diffDir, skipCompare, regex, prefilter } = options;
     const actualFile = path.join(actualDir, filename);
     const baselineFile = path.join(baselineDir, filename);
     const diffFile = path.join(diffDir, filename);
     let result: { differences: any; error?: any } = {} as any;
-  
+
     try {
       fs.outputFileSync(actualFile, JSON.stringify(object, null, 2));
       let actual = JSON.parse(fs.readFileSync(actualFile, BufferEncoding.UTF8));
       let baseline = JSON.parse(fs.readFileSync(baselineFile, BufferEncoding.UTF8));
-  
+
       if (sortKey) {
         actual = orderBy(actual, [sortKey]);
         baseline = orderBy(baseline, [sortKey]);
       }
-  
+
       if (regex) {
-        const paths = this.getMatchingJsonPaths(regex.paths, actual);
+        const paths = this.getMatchingJSONPaths(regex.paths, actual);
         result.differences = diff(baseline, actual, (filterPath, key) => {
           const filter = jsonpath.stringify(["$"].concat(filterPath.concat(key)));
           const index = paths.indexOf(filter);
@@ -95,9 +95,9 @@ export class JSONSnapshotMatch extends ExpectedCondition {
       result.error = e;
     } finally {
       result = { differences: "", ...result };
-      AllureAdapter.attachJson("Actual", actualFile);
-      !skipCompare && AllureAdapter.attachJson("Expected", baselineFile);
-      !skipCompare && AllureAdapter.attachJson("Differences", diffFile);
+      AllureAdapter.attachJSON("Actual", actualFile);
+      !skipCompare && AllureAdapter.attachJSON("Expected", baselineFile);
+      !skipCompare && AllureAdapter.attachJSON("Differences", diffFile);
       return result;
     }
   }

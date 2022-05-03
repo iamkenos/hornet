@@ -44,7 +44,7 @@ describe("@generics: utils/MetaAdapter.getPropertyValue()", () => {
     givenBrowserConfigIsUndefined();
   });
 
-  it("S01: should return a specific metadata property value", () => {
+  it("S01: debug should return a specific metadata property value", () => {
     const actual = MetaAdapter.getPropertyValue("demo", "url");
     const expected = demo.default.url;
     expect(actual).toEqual(expected);

@@ -3,7 +3,7 @@ import type { NetworkRequestSnapshotOptions } from "@config";
 import qs from "query-string";
 import merge from "lodash/merge";
 import { JS_WINDOW_PERF_GET_ENTRIES } from "@commands";
-import { JSONSnapshotMatch } from "@conditions/others/JSONSnapshotMatch";
+import { JSONSnapshotMatch } from "@iamkenos/hornet/conditions/others/JSONSnapshotMatch";
 
 type BrowserPerformanceEntry = {
   cancelable?: boolean;

@@ -80,7 +80,7 @@ describe("@common: utils/AllureAdapter.attachImage()", () => {
   });
 });
 
-describe("@common: utils/AllureAdapter.attachJson()", () => {
+describe("@common: utils/AllureAdapter.attachJSON()", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });
@@ -90,7 +90,7 @@ describe("@common: utils/AllureAdapter.attachJson()", () => {
     const content = fs.readFileSync(filename, BufferEncoding.UTF8);
 
     AllureAdapter.attachFile = jest.fn();
-    AllureAdapter.attachJson(data.title, filename);
+    AllureAdapter.attachJSON(data.title, filename);
     expect(AllureAdapter.attachFile).toHaveBeenCalledWith(data.title, filename, JSON.parse(content), MimeType.APP_JSON);
   });
 
@@ -103,15 +103,15 @@ describe("@common: utils/AllureAdapter.attachJson()", () => {
     string.isJSON = jest.fn();
     stringIsJSONMock.mockReturnValue(true);
     AllureAdapter.attachFile = jest.fn();
-    AllureAdapter.attachJson(data.title, filename);
+    AllureAdapter.attachJSON(data.title, filename);
     expect(AllureAdapter.attachFile).toHaveBeenCalledWith(data.title, filename, content, MimeType.APP_JSON);
   });
 
   it("S03: should not add json attachment to the allure report if the file is non-existing", () => {
-    const filename = path.resolve(__dirname, "../../../fixtures/files/fjson.json");
+    const filename = path.resolve(__dirname, "../../../fixtures/files/foo.json");
 
     AllureAdapter.attachFile = jest.fn();
-    AllureAdapter.attachJson(data.title, filename);
+    AllureAdapter.attachJSON(data.title, filename);
     expect(AllureAdapter.attachFile).not.toHaveBeenCalled();
   });
 });

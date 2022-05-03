@@ -1,12 +1,12 @@
 import type { NetworkRequestsIncludeProps, NetworkRequestSnapshotOptions } from "@config";
 
 import merge from "lodash/merge";
-import { JSONSnapshotMatch } from "@conditions/others/JSONSnapshotMatch";
+import { JSONSnapshotMatch } from "@iamkenos/hornet/conditions/others/JSONSnapshotMatch";
 
 export class NetworkRequestsMatch extends JSONSnapshotMatch {
   private readonly props: Array<keyof NetworkRequestsIncludeProps>;
   protected declare options: NetworkRequestSnapshotOptions;
-  
+
   public constructor(filename: string, options?: NetworkRequestSnapshotOptions, not?: boolean) {
     super(filename, undefined, options, not);
     this.options = this.buildOptions(options);

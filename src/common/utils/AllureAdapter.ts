@@ -25,7 +25,7 @@ export abstract class AllureAdapter {
     }
   }
 
-  public static attachJson(title: string, filename: string) {
+  public static attachJSON(title: string, filename: string) {
     if (fs.existsSync(filename)) {
       const content = fs.readFileSync(filename, BufferEncoding.UTF8);
       this.attachFile(title, filename, string.isJSON(content) ? JSON.parse(content) : content, MimeType.APP_JSON);

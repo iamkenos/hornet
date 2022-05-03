@@ -1,4 +1,4 @@
-import type { JsonSnapshotOptions } from "@config";
+import type { JSONSnapshotOptions } from "@config";
 
 import { ExpectedConditions } from "../ExpectedConditions";
 import { ArrayContains } from "./ArrayContains";
@@ -20,7 +20,7 @@ export class OtherConditions extends ExpectedConditions {
     return this.addCondition(new ArrayEquals(actual, expected, not));
   }
 
-  public jsonSnapshotMatch(filename: string, comparable: any, options?: JsonSnapshotOptions, not?: boolean) {
+  public jsonSnapshotMatch(filename: string, comparable: any, options?: JSONSnapshotOptions, not?: boolean) {
     return this.addCondition(new JSONSnapshotMatch(filename, comparable, options, not));
   }
 
