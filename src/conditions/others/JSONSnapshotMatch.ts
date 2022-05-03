@@ -108,7 +108,7 @@ export class JSONSnapshotMatch extends ExpectedCondition {
       const diff = this.compare(this.filename, this.options, this.comparable, this.sortkey);
       const same = diff.error ? false : !diff.differences;
       this.actual = diff.error || diff.differences || "Match";
-      this.expected = `Match${this.options?.regex || this.options?.prefilter ? " conditionally" : ""}`;
+      this.expected = `Match${this.options.regex || this.options.prefilter ? " conditionally" : ""}`;
       this.passed = skipCompare ? true : same;
       this.not = skipCompare ? false : this.not;
     } catch (e) {

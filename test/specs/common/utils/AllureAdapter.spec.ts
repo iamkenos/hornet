@@ -85,7 +85,7 @@ describe("@common: utils/AllureAdapter.attachJSON()", () => {
     givenJestMocksAreReset();
   });
 
-  it("S01: debug should add json attachment to the allure report", () => {
+  it("S01: should add json attachment to the allure report", () => {
     const filename = path.resolve(__dirname, "../../../fixtures/files/json.json");
     const content = fs.readFileSync(filename, BufferEncoding.UTF8);
 
@@ -94,7 +94,7 @@ describe("@common: utils/AllureAdapter.attachJSON()", () => {
     expect(AllureAdapter.attachFile).toHaveBeenCalledWith(data.title, filename, JSON.parse(content), MimeType.APP_JSON);
   });
 
-  it("S02: debug should add json attachment to the allure report: object", () => {
+  it("S02: should add json attachment to the allure report: object", () => {
     const stringIsJSONMock = givenMock(string.isJSON, true);
     const filename = path.resolve(__dirname, "../../../fixtures/files/json.json");
     const content = fs.readFileSync(filename, BufferEncoding.UTF8);
