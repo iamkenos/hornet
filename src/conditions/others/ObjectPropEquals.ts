@@ -1,7 +1,7 @@
 import { ExpectedCondition } from "@conditions/expectedCondition";
 
 export class ObjectPropEquals<T> extends ExpectedCondition {
-  public constructor(object: T, property: keyof T, expected: keyof T, not?: boolean) {
+  public constructor(object: T, property: keyof T, expected: any, not?: boolean) {
     super(not);
     this.actual = object[property];
     this.expected = expected;

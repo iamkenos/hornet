@@ -28,7 +28,7 @@ export class OtherConditions extends ExpectedConditions {
     return this.addCondition(new ObjectEquals(actual, expected, not));
   }
 
-  public objectPropEquals(object: any, property: string, expected: any, not?: boolean) {
-    return this.addCondition(new ObjectPropEquals(object, property, expected, not));
+  public objectPropEquals<T>(object: any, property: keyof T, expected: any, not?: boolean) {
+    return this.addCondition(new ObjectPropEquals<T>(object, property, expected, not));
   }
 }
