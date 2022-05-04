@@ -24,5 +24,11 @@ module.exports = {
   preset: "ts-jest",
   setupFilesAfterEnv: ["<rootDir>/test/fixtures/setup.ts"],
   /** changes default snapshot folder from `___snapshots___` to same folder as spec */
-  snapshotResolver: "./.jest-snapshot-resolver.js"
+  snapshotResolver: "./.jest-snapshot-resolver.js",
+  /**
+   * see:
+   * https://huafu.github.io/ts-jest/user/config/#ts-jest-options
+   * https://github.com/microsoft/TypeScript/issues/13029#issuecomment-287901266
+   */
+  globals: { 'ts-jest': { tsconfig: { target: "ES6", } } }
 };

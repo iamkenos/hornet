@@ -34,14 +34,14 @@ type BrowserPerformanceEntry = {
 
 export class GoogleAnalyticsMatch extends JSONSnapshotMatch {
   protected declare options: NetworkRequestSnapshotOptions;
-  private readonly url: string;
+  private readonly domains: string[];
   private readonly initiatorTypes: string[];
   private readonly event: string;
 
   public constructor(filename: string, event: string, options?: NetworkRequestSnapshotOptions, not?: boolean) {
     super(filename, undefined, options, not);
     this.options = this.buildOptions(options);
-    this.url = "www.google-analytics.com";
+    this.domains = ["google-analytics.com", "analytics.google.com"];
     this.initiatorTypes = ["xmlhttprequest", "img", "beacon"];
     this.event = event;
   }
@@ -52,7 +52,7 @@ export class GoogleAnalyticsMatch extends JSONSnapshotMatch {
 
   private filterGA(entries: BrowserPerformanceEntry[]) {
     const filtered = entries
-      .filter((e) => e.name.includes(this.url) && this.initiatorTypes.includes(e.initiatorType))
+      .filter((e) => this.domains.some(i => e.name.includes(i)) && this.initiatorTypes.includes(e.initiatorType))
       .map((e) => qs.parseUrl(e.name))
       .map((e: qs.ParsedUrl) => ({
         url: e.url,
