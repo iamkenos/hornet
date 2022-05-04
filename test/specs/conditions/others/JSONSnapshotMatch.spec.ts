@@ -1,4 +1,4 @@
-import { JSONSnapshotMatch } from "@iamkenos/hornet/conditions/others/JSONSnapshotMatch";
+import { JSONSnapshotMatch } from "@conditions/others/JSONSnapshotMatch";
 
 import fs from "fs-extra";
 import merge from "lodash/merge";

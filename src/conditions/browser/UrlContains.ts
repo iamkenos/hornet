@@ -4,7 +4,8 @@ import { ExpectedCondition } from "@conditions/expectedCondition";
 export class UrlContains extends ExpectedCondition {
   public constructor(expected: string, not?: boolean) {
     super(not);
-    this.expected = string.isURL(expected) ? expected : new URL(expected, browser.config.baseUrl).href || "";
+    this.expected = expected || "";
+    this.expected = string.isURL(this.expected) ? this.expected : new URL(this.expected, browser.config.baseUrl).href;
   }
 
   protected async getResult() {
