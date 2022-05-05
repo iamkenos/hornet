@@ -16,22 +16,20 @@ export class SnapshotMatch extends ExpectedCondition {
   public constructor(context: ImageCompareContext, filename: string, options?: ImageSnapshotOptions, not?: boolean) {
     super(not);
     this.context = context;
-    this.filename = this.buildFilename(filename);
     this.options = this.buildOptions(options);
+    this.filename = this.buildFilename(filename);
     this.expected = `Within ${this.options.saveAboveTolerance}% difference`;
     this.on = this.filename;
   }
 
   private buildFilename(filename: string) {
-    const { config } = browser;
-    const { locale, snapshots } = config;
-    const { images } = snapshots;
+    const { locale } = browser.config;
     const caps: Capabilities.DesiredCapabilities = browser.capabilities as any;
     const platform = (caps.platformName || caps.platform).slice(0, 3).toLowerCase();
     const name = caps.browserName.toLowerCase().replace(" ", "-");
     const ver = caps.version || caps.browserVersion;
     const device = caps.deviceName?.toLowerCase();
-    const baseDir = `${images.usePlatformDir ? `${locale}_${platform}` : locale}/${ver ? name : `${name}_${device}`}`;
+    const baseDir = `${this.options.usePlatformDir ? `${locale}_${platform}` : locale}/${ver ? name : `${name}_${device}`}`;
     return path.join(baseDir, filename + ".png");
   }
 
@@ -46,7 +44,7 @@ export class SnapshotMatch extends ExpectedCondition {
     const baselineFile = path.join(baselineDir, filename);
     const diffFile = path.join(diffDir, filename);
     let result: ImageCompareResult & { error?: any } = {} as any;
-  
+
     try {
       skipCompare && browser.pause(2000);
       switch (context) {
@@ -78,7 +76,7 @@ export class SnapshotMatch extends ExpectedCondition {
     try {
       const skipCompare = this.options.skipCompare;
       const diff = await this.compare(this.filename, this.options, this.context, this.element);
-      const same = diff.error ? false : this.options.saveAboveTolerance > diff.misMatchPercentage;
+      const same = diff.error ? false : diff.misMatchPercentage <= this.options.saveAboveTolerance;
       this.actual = diff.error || `${diff.misMatchPercentage}% difference`;
       this.passed = skipCompare ? true : same;
       this.not = skipCompare ? false : this.not;
