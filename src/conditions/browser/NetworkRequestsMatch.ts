@@ -20,8 +20,8 @@ export class NetworkRequestsMatch extends JSONSnapshotMatch {
 
   private buildIncludedProps() {
     return Object.entries(this.options.include)
-      .filter((entry) => entry[1])
-      .map((entry) => entry[0]) as typeof this.props;
+      .filter(([, include]) => include)
+      .map(([prop]) => prop) as typeof this.props;
   }
 
   public async getResult() {
