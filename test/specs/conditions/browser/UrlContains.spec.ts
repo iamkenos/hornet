@@ -4,7 +4,7 @@ import { givenBrowserConfig, givenJestMocksAreReset, givenMock } from "@test/fix
 const data = { any: "any", foo: "http://localhost:8080/login", bar: "/login", baz: "/logout", qux: "http://localhost:8080/logout" };
 let config: typeof browser.config;
 
-describe("@conditions: element/UrlContains constructor", () => {
+describe("@conditions: browser/UrlContains constructor", () => {
   beforeEach(() => {
     givenBrowserConfigIsDefined();
   });

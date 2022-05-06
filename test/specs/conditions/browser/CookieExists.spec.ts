@@ -3,7 +3,7 @@ import { CookieExists } from "@conditions/browser/CookieExists";
 import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 const data = { any: "any", foo: "foo", bar: "bar" };
 
-describe("@conditions: element/CookieExists constructor", () => {
+describe("@conditions: browser/CookieExists constructor", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });

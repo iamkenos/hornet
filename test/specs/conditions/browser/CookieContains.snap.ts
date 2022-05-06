@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@conditions: browser/CookieContains constructor S01: should set properties upon instantiation 1`] = `
+Array [
+  "CookieContains",
+  false,
+  undefined,
+  "any",
+  undefined,
+  undefined,
+  undefined,
+  "any",
+  undefined,
+]
+`;
+
 exports[`@conditions: browser/CookieContains.getResult() S01: should return a passed result 1`] = `
 Object {
   "actual": "foo",
@@ -68,18 +82,4 @@ Object {
   "name": "CookieContains",
   "passed": false,
 }
-`;
-
-exports[`@conditions: element/CookieContains constructor S01: should set properties upon instantiation 1`] = `
-Array [
-  "CookieContains",
-  false,
-  undefined,
-  "any",
-  undefined,
-  undefined,
-  undefined,
-  "any",
-  undefined,
-]
 `;

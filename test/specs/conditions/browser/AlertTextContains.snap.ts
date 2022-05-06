@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@conditions: browser/AlertTextContains constructor S01: should set properties upon instantiation 1`] = `
+Array [
+  "AlertTextContains",
+  false,
+  undefined,
+  "any",
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+]
+`;
+
 exports[`@conditions: browser/AlertTextContains.getResult() S01: should return a passed result 1`] = `
 Object {
   "actual": "foo",
@@ -54,18 +68,4 @@ Object {
   "name": "AlertTextContains",
   "passed": false,
 }
-`;
-
-exports[`@conditions: element/AlertTextContains constructor S01: should set properties upon instantiation 1`] = `
-Array [
-  "AlertTextContains",
-  false,
-  undefined,
-  "any",
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-]
 `;

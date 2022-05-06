@@ -3,7 +3,7 @@ import { WindowCountEquals } from "@conditions/browser/WindowCountEquals";
 import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 const data = { any: "any", foo: 1, bar: 2 };
 
-describe("@conditions: element/WindowCountEquals constructor", () => {
+describe("@conditions: browser/WindowCountEquals constructor", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });

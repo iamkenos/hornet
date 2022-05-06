@@ -14,6 +14,8 @@
 ((global as any).browser as typeof browser).execute = jest.fn();
 ((global as any).browser as typeof browser).getAlertText = jest.fn();
 ((global as any).browser as typeof browser).getCookies = jest.fn();
+((global as any).browser as typeof browser).getLocalStorageItem = jest.fn();
+((global as any).browser as typeof browser).getSessionStorageItem = jest.fn();
 ((global as any).browser as typeof browser).getRequests = jest.fn();
 ((global as any).browser as typeof browser).getTitle = jest.fn();
 ((global as any).browser as typeof browser).getUrl = jest.fn();

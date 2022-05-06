@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@conditions: browser/AlertExists constructor S01: should set properties upon instantiation 1`] = `
+Array [
+  "AlertExists",
+  false,
+  undefined,
+  true,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+]
+`;
+
 exports[`@conditions: browser/AlertExists.getResult() S01: should return a passed result 1`] = `
 Object {
   "actual": true,
@@ -54,18 +68,4 @@ Object {
   "name": "AlertExists",
   "passed": false,
 }
-`;
-
-exports[`@conditions: element/AlertExists constructor S01: should set properties upon instantiation 1`] = `
-Array [
-  "AlertExists",
-  false,
-  undefined,
-  true,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-]
 `;

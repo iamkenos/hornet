@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@conditions: browser/TitleContains constructor S01: should set properties upon instantiation 1`] = `
+Array [
+  "TitleContains",
+  false,
+  undefined,
+  "any",
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+]
+`;
+
 exports[`@conditions: browser/TitleContains.getResult() S01: should return a passed result 1`] = `
 Object {
   "actual": "foo",
@@ -54,18 +68,4 @@ Object {
   "name": "TitleContains",
   "passed": false,
 }
-`;
-
-exports[`@conditions: element/TitleContains constructor S01: should set properties upon instantiation 1`] = `
-Array [
-  "TitleContains",
-  false,
-  undefined,
-  "any",
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-]
 `;

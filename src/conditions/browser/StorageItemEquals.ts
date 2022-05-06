@@ -22,6 +22,6 @@ export class StorageItemEquals extends ExpectedCondition {
       this.passed = false;
     }
 
-    return this.getResult();
+    return super.getResult();
   }
 }

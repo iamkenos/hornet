@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@conditions: browser/UrlEquals constructor S01: should set properties upon instantiation 1`] = `
+Array [
+  "UrlEquals",
+  false,
+  5000,
+  "http://localhost:8080/any",
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+]
+`;
+
 exports[`@conditions: browser/UrlEquals.getResult() S01: should return a passed result 1`] = `
 Object {
   "actual": "http://localhost:8080/login",
@@ -68,18 +82,4 @@ Object {
   "name": "UrlEquals",
   "passed": false,
 }
-`;
-
-exports[`@conditions: element/UrlEquals constructor S01: should set properties upon instantiation 1`] = `
-Array [
-  "UrlEquals",
-  false,
-  5000,
-  "http://localhost:8080/any",
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-]
 `;

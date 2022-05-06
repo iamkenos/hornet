@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@conditions: browser/WindowCountEquals constructor S01: should set properties upon instantiation 1`] = `
+Array [
+  "WindowCountEquals",
+  false,
+  undefined,
+  1,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+]
+`;
+
 exports[`@conditions: browser/WindowCountEquals.getResult() S01: should return a passed result 1`] = `
 Object {
   "actual": 1,
@@ -54,18 +68,4 @@ Object {
   "name": "WindowCountEquals",
   "passed": false,
 }
-`;
-
-exports[`@conditions: element/WindowCountEquals constructor S01: should set properties upon instantiation 1`] = `
-Array [
-  "WindowCountEquals",
-  false,
-  undefined,
-  1,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-]
 `;

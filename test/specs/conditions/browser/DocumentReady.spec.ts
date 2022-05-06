@@ -5,7 +5,7 @@ import { JS_DOCUMENT_READY_STATE } from "@commands/utils/constants";
 import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 const data = { any: "any", foo: "foo", bar: "bar", complete: "complete" };
 
-describe("@conditions: element/DocumentReady constructor", () => {
+describe("@conditions: browser/DocumentReady constructor", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });

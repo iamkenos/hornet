@@ -3,7 +3,7 @@ import { AlertExists } from "@conditions/browser/AlertExists";
 import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 const data = { any: "any", foo: "foo", bar: "bar" };
 
-describe("@conditions: element/AlertExists constructor", () => {
+describe("@conditions: browser/AlertExists constructor", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });

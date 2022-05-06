@@ -22,6 +22,6 @@ export class StorageItemContains extends ExpectedCondition {
       this.passed = false;
     }
 
-    return this.getResult();
+    return super.getResult();
   }
 }

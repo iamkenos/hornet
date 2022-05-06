@@ -3,7 +3,7 @@ import { TitleContains } from "@conditions/browser/TitleContains";
 import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 const data = { any: "any", foo: "foo", bar: "bar" };
 
-describe("@conditions: element/TitleContains constructor", () => {
+describe("@conditions: browser/TitleContains constructor", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });

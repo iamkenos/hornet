@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@conditions: browser/WindowCountMoreThan constructor S01: should set properties upon instantiation 1`] = `
+Array [
+  "WindowCountMoreThan",
+  false,
+  undefined,
+  1,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+]
+`;
+
 exports[`@conditions: browser/WindowCountMoreThan.getResult() S01: should return a passed result 1`] = `
 Object {
   "actual": 2,
@@ -54,18 +68,4 @@ Object {
   "name": "WindowCountMoreThan",
   "passed": false,
 }
-`;
-
-exports[`@conditions: element/WindowCountMoreThan constructor S01: should set properties upon instantiation 1`] = `
-Array [
-  "WindowCountMoreThan",
-  false,
-  undefined,
-  1,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-]
 `;

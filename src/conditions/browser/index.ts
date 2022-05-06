@@ -59,11 +59,11 @@ export class BrowserConditions extends OtherConditions {
     return this.addCondition(new DocumentReady(not));
   }
 
-  public googleAnalyticsMatch(filename: string, event: string, options: NetworkRequestSnapshotOptions, not?: boolean) {
+  public googleAnalyticsMatch(filename: string, event: string, options?: NetworkRequestSnapshotOptions, not?: boolean) {
     return this.addCondition(new GoogleAnalyticsMatch(filename, event, options, not));
   }
 
-  public networkRequestsMatch(filename: string, options: NetworkRequestSnapshotOptions, not?: boolean) {
+  public networkRequestsMatch(filename: string, options?: NetworkRequestSnapshotOptions, not?: boolean) {
     return this.addCondition(new NetworkRequestsMatch(filename, options, not));
   }
 

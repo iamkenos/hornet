@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@conditions: browser/UrlPathContains constructor S01: should set properties upon instantiation 1`] = `
+Array [
+  "UrlPathContains",
+  false,
+  5000,
+  "any",
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+]
+`;
+
 exports[`@conditions: browser/UrlPathContains.getResult() S01: should return a passed result 1`] = `
 Object {
   "actual": "/login",
@@ -54,18 +68,4 @@ Object {
   "name": "UrlPathContains",
   "passed": false,
 }
-`;
-
-exports[`@conditions: element/UrlPathContains constructor S01: should set properties upon instantiation 1`] = `
-Array [
-  "UrlPathContains",
-  false,
-  5000,
-  "any",
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-]
 `;

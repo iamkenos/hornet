@@ -3,7 +3,7 @@ import { AlertTextEquals } from "@conditions/browser/AlertTextEquals";
 import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 const data = { any: "any", foo: "foo", bar: "bar" };
 
-describe("@conditions: element/AlertTextEquals constructor", () => {
+describe("@conditions: browser/AlertTextEquals constructor", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });

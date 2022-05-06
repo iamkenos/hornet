@@ -3,7 +3,7 @@ import { WindowCountMoreThan } from "@conditions/browser/WindowCountMoreThan";
 import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 const data = { any: "any", foo: 1 };
 
-describe("@conditions: element/WindowCountMoreThan constructor", () => {
+describe("@conditions: browser/WindowCountMoreThan constructor", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });

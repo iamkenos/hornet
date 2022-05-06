@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@conditions: browser/DocumentReady constructor S01: should set properties upon instantiation 1`] = `
+Array [
+  "DocumentReady",
+  false,
+  undefined,
+  "complete",
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+]
+`;
+
 exports[`@conditions: browser/DocumentReady.getResult() S01: should return a passed result 1`] = `
 Object {
   "actual": "complete",
@@ -54,18 +68,4 @@ Object {
   "name": "DocumentReady",
   "passed": false,
 }
-`;
-
-exports[`@conditions: element/DocumentReady constructor S01: should set properties upon instantiation 1`] = `
-Array [
-  "DocumentReady",
-  false,
-  undefined,
-  "complete",
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-]
 `;
