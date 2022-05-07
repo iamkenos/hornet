@@ -1,4 +1,4 @@
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class ObjectEquals extends ExpectedCondition {
   public constructor(actual: any, expected: any, not?: boolean) {

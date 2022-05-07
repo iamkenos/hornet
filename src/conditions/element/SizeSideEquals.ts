@@ -1,5 +1,5 @@
 import type { SizeContext } from "@commands";
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class SizeSideEquals extends ExpectedCondition {
   public constructor(side: SizeContext, expected: number, not?: boolean) {

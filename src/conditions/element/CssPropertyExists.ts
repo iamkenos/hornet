@@ -1,4 +1,4 @@
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class CssPropertyExists extends ExpectedCondition {
   public constructor(property: string, not?: boolean) {

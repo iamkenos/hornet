@@ -1,4 +1,4 @@
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class UrlPathContains extends ExpectedCondition {
   public constructor(expected: string, not?: boolean) {

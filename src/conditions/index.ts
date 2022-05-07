@@ -1,5 +1,5 @@
 export * from "./browser";
 export * from "./element";
-export * from "./expectedCondition";
-export * from "./expectedConditions";
+export * from "./ExpectedCondition";
+export * from "./ExpectedConditions";
 export * from "./types";

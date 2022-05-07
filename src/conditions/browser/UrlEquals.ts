@@ -1,5 +1,5 @@
 import { string } from "@common";
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class UrlEquals extends ExpectedCondition {
   public constructor(expected: string, not?: boolean) {

@@ -1,4 +1,4 @@
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class CookieContains extends ExpectedCondition {
   public constructor(cookie: string, expected: string, not?: boolean) {

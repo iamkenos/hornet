@@ -1,4 +1,4 @@
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class CountEquals extends ExpectedCondition {
   public constructor(expected: number, not?: boolean) {

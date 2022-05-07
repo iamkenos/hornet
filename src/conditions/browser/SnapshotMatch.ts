@@ -6,7 +6,7 @@ import path from "path";
 import merge from "lodash/merge";
 import { ImageCompareContext } from "@commands";
 import { AllureAdapter } from "@common";
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class SnapshotMatch extends ExpectedCondition {
   private readonly filename: string;

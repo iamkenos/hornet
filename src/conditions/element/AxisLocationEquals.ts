@@ -1,5 +1,5 @@
 import type { Axis } from "@commands";
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class AxisLocationEquals extends ExpectedCondition {
   public constructor(axis: Axis, expected: number, not?: boolean) {

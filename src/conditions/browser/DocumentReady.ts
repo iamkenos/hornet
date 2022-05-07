@@ -1,5 +1,5 @@
 import { JS_DOCUMENT_READY_STATE } from "@commands";
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class DocumentReady extends ExpectedCondition {
   public constructor(not?: boolean) {

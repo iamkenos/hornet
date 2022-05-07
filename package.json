@@ -23,7 +23,7 @@
     "lint": "eslint ./",
     "serve:demo": "http-server ./demo/app -s",
     "test:demo": "start-test serve:demo 8080 wdio:demo",
-    "pretest:unit": "rimraf ./test/.coverage",
+    "pretest:unit": "rimraf build && rimraf ./test/.coverage",
     "test:unit": "jest --config .jestrc.js --coverage --maxWorkers=5",
     "wdio:demo": "wdio run ./demo/test/wdio.conf.ts",
     "report:demo": "allure open ./demo/test/.reports/allure/html",

@@ -1,4 +1,4 @@
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class ObjectPropEquals<T> extends ExpectedCondition {
   public constructor(object: T, property: keyof T, expected: any, not?: boolean) {

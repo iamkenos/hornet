@@ -1,5 +1,5 @@
 import { BrowserStorage } from "@commands";
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class StorageItemEquals extends ExpectedCondition {
   private readonly key: string;

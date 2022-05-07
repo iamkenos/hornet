@@ -14,7 +14,7 @@ import { CountLessThan } from "./CountLessThan";
 import { CountMoreThan } from "./CountMoreThan";
 import { CssPropertyExists } from "./CssPropertyExists";
 import { Displayed } from "./Displayed";
-import { DisplayedInViewport } from "./DisplayedInViewPort";
+import { DisplayedInViewport } from "./DisplayedInViewport";
 import { Enabled } from "./Enabled";
 import { Exists } from "./Exists";
 import { Focused } from "./Focused";

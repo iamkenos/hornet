@@ -25,6 +25,7 @@
       "@gherkin": ["src/gherkin/index"],
       "@gherkin/*": ["src/gherkin/*"]
     },
+    "forceConsistentCasingInFileNames": true,
     "removeComments": false,
     "skipLibCheck": true,
     "sourceMap": true,
@@ -40,5 +41,6 @@
       "node"
     ]
   },
-  "include": ["./**/**.ts"]
+  "include": ["./**/**.ts"],
+  "exclude": ["node_modules"]
 }

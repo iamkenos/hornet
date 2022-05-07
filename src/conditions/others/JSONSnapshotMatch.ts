@@ -7,7 +7,7 @@ import jsonpath from "jsonpath";
 import orderBy from "lodash/orderBy";
 import { diff } from "deep-diff";
 import { AllureAdapter, BufferEncoding } from "@common";
-import { ExpectedCondition } from "@conditions/expectedCondition";
+import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class JSONSnapshotMatch extends ExpectedCondition {
   protected readonly filename: string;

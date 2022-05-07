@@ -1,4 +1,4 @@
-import type { ExpectedCondition } from "./expectedCondition";
+import type { ExpectedCondition } from "./ExpectedCondition";
 import type { ExpectedConditionResult, ExpectedConditionsResult } from "./types";
 
 export class ExpectedConditions {
