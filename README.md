@@ -1,6 +1,12 @@
 <!-- markdownlint-disable MD033 -->
 <h1 align="center">HORNET</h1>
 
+<p align="center">
+  <a href="https://github.com/iamkenos/hornet/actions/workflows/unit-tests.yml">
+      <img alt="Unit Tests" src="https://github.com/iamkenos/hornet/actions/workflows/unit-tests.yml/badge.svg">
+  </a>
+</p>
+
 ## About
 
 [WebdriverIO](https://webdriver.io/) that comes with presets and additional features:
@@ -130,5 +136,4 @@ ISC
 ## TODO
 
 - full api documentation
-- ci build
 - other TODOs
