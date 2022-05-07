@@ -129,7 +129,6 @@ ISC
 
 ## TODO
 
-- increase UT coverage
 - full api documentation
 - ci build
 - other TODOs

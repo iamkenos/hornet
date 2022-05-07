@@ -23,7 +23,7 @@ declare global {
       scrollTo: (target: Coordinates) => Promise<void>;
       scrollToBottom: () => Promise<void>;
       scrollToTop: () => Promise<void>;
-      sendRequest: (url: string, options?: HttpRequestOptions) => Promise<HttpResponse>;
+      sendRequest: (url: string, options?: HttpRequestOptions, delay?: { pre?: number; post?: number }) => Promise<HttpResponse>;
       setCookie: (name: string, value: string) => Promise<void>;
       setLocalStorageItem: (kvp: KeyValuePair) => Promise<void>;
       setSessionStorageItem: (kvp: KeyValuePair) => Promise<void>;

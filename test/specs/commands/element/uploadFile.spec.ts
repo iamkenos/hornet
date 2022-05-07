@@ -15,7 +15,7 @@ describe("@commands: element/uploadFile()", () => {
     givenJestMocksAreReset();
   });
 
-  it("S01: should send keyboard events to an element", async() => {
+  it("S01: should upload a file to an element", async() => {
     const element = givenElementMocks();
     const { setValue } = givenElementSpies(element);
 
