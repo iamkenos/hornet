@@ -2,7 +2,7 @@ import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 const data = { any: "any" };
 
-export class Condition extends ExpectedCondition {
+class Condition extends ExpectedCondition {
   public constructor(not?: boolean) {
     super(not);
   }

@@ -12,12 +12,7 @@ Array [
   "any.json",
   undefined,
   "any.json",
-  Object {
-    "any": "any",
-    "netfile1": "/Users/iamkenos/Workspace/iamkenos/hornet/test/fixtures/files/net-1.json",
-    "netfile2": "/Users/iamkenos/Workspace/iamkenos/hornet/test/fixtures/files/net-2.json",
-    "options": [Function],
-  },
+  Object {},
   Object {
     "actualDir": "ouput/actual",
     "baselineDir": "ouput/baseline",

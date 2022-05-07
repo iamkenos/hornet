@@ -34,7 +34,7 @@ describe("@conditions: others/JSONSnapshotMatch constructor", () => {
   });
 
   it("S01: should set properties upon instantiation", async() => {
-    const condition = new JSONSnapshotMatch(data.any, data, data.options());
+    const condition = new JSONSnapshotMatch(data.any, {}, data.options());
 
     const actual = [
       (condition as any).name,

@@ -1,4 +1,4 @@
-import { WebPage } from "@iamkenos/hornet/generics";
+import { WebPage } from "@generics";
 import meta from "./demo.meta";
 
 export class DemoPage extends WebPage<typeof meta> {

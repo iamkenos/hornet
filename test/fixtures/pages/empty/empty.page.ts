@@ -1,4 +1,4 @@
-import { WebPage } from "@iamkenos/hornet/generics";
+import { WebPage } from "@generics";
 import meta from "./empty.meta";
 
 export class EmptyPage extends WebPage<any> {

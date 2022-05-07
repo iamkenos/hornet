@@ -1,4 +1,4 @@
-import { WebComponent } from "@iamkenos/hornet/generics";
+import { WebComponent } from "@generics";
 import meta, { TAG } from "./navigation-bar.meta";
 
 export class NavigationBar extends WebComponent<typeof meta> {

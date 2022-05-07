@@ -20,6 +20,7 @@
 ((global as any).browser as typeof browser).getTitle = jest.fn();
 ((global as any).browser as typeof browser).getUrl = jest.fn();
 ((global as any).browser as typeof browser).getWindowHandles = jest.fn();
+((global as any).browser as typeof browser).keys = jest.fn();
 ((global as any).browser as typeof browser).pause = jest.fn();
 ((global as any).browser as typeof browser).restoreWindowSize = jest.fn();
 ((global as any).browser as typeof browser).storeWindowSize = jest.fn();
