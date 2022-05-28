@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "WebdriverIO that comes with presets and additional features",
   "author": "iamkenos",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:iamkenos/hornet.git"
+  },
   "license": "ISC",
   "keywords": [
     "webdriver",

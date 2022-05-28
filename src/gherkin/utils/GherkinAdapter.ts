@@ -14,7 +14,7 @@ export abstract class GherkinAdapter {
      *  - foo$CONF{baseUrl};bar    ------> foohttp://localhost:8080bar
      * ```
      **/
-    conf: /(?<conf>(?<conf_misc_start>.+)?\$CONF\{(?<conf_path>[a-zA-Z0-9_]+)};(?<conf_misc_end>.+)?)/,
+    conf: /(?<conf>(?<conf_misc_start>.+)?\$CONF\{(?<conf_path>[a-zA-Z0-9_.]+)};(?<conf_misc_end>.+)?)/,
     /**
      * Returns a string relative to the current date
      *
@@ -29,7 +29,7 @@ export abstract class GherkinAdapter {
      *  - foo$DATE{dd-M-yyyy};bar    ------> foo02-1-2021bar
      * ```
      **/
-    date: /(?<date>(?<date_misc_start>.+)?\$DATE\{(?<date_format>[^¦]+)(?<date_offset>¦(?<date_offset_val>-?\d+)¦(?<date_offset_on>.+))?};(?<date_misc_end>.+)?)/,
+    date: /(?<date>(?<date_misc_start>.+)?\$DATE\{(?<date_format>[^¦]+)(?<date_offset>¦(?<date_offset_val>-?\d+)((¦)?(?<date_offset_on>.+))?)?};(?<date_misc_end>.+)?)/,
     /**
      * Returns a string coming from environment variables
      *
@@ -52,7 +52,7 @@ export abstract class GherkinAdapter {
      *  - $RAND{10¦url-safe};        ------> YN-tqc8pOw
      *  - $RAND{10¦numeric};         ------> 8314659141
      *  - $RAND{10¦alphanumeric};    ------> DMuKL8YtE7
-     *  - foo$RAND{baseUrl|abc};bar  ------> fooabaaccabacbar
+     *  - foo$RAND{10¦abc};bar       ------> fooabaaccabacbar
      * ```
      **/
     rand: /(?<rand>(?<rand_misc_start>.+)?\$RAND\{(?<rand_length>[^¦]+)(?<rand_format>¦(?<rand_format_val>base64|url-safe|numeric|alphanumeric|.+))?};(?<rand_misc_end>.+)?)/
@@ -67,14 +67,14 @@ export abstract class GherkinAdapter {
     const regexp = new RegExp(
       this.GHERKIN_TOKENS.conf.source + "|" +
       this.GHERKIN_TOKENS.date.source + "|" +
-      this.GHERKIN_TOKENS.env.source + "|" + 
+      this.GHERKIN_TOKENS.env.source + "|" +
       this.GHERKIN_TOKENS.rand.source
     );
     const matches = regexp.exec(token);
     if (matches && matches.groups) {
       const { groups } = matches;
       if (groups.conf) {
-        const path = (groups.conf_path || "").split(".");
+        const path = (groups.conf_path).split(".");
         const prefix = groups.conf_misc_start || "";
         const content = path.reduce((i, j): object => (i && i[j] ? i[j] : null), browser.config);
         const suffix = groups.conf_misc_end || "";
@@ -89,14 +89,14 @@ export abstract class GherkinAdapter {
       }
       if (groups.env) {
         const prefix = groups.env_misc_start || "";
-        const content = process.env[groups.env_var] || "";
+        const content = process.env[groups.env_var] === "undefined" ? "" : process.env[groups.env_var];
         const suffix = groups.env_misc_end || "";
         return `${prefix}${content}${suffix}`;
       }
       if (groups.rand) {
         const format = groups.rand_format_val;
         const prefix = groups.rand_misc_start || "";
-        const type = ["base64", "url-safe", "numeric", "alphanumeric"].includes(format); 
+        const type = ["base64", "url-safe", "numeric", "alphanumeric"].includes(format);
         const content = crand({ length: +groups.rand_length, [type ? "type" : "characters"]: format });
         const suffix = groups.rand_misc_end || "";
         return `${prefix}${content}${suffix}`;
@@ -125,7 +125,7 @@ export abstract class GherkinAdapter {
     }
   }
 
-  public static getDataTableHashes(table: DataTable, toLower = true) {
+  public static getDataTableHashes(table: DataTable, toLower = false) {
     const lowercaseKeys = <T>(object: { [key: string]: T }): { [key: string]: T } => {
       const result: { [key: string]: T } = {};
       for (const [key, value] of Object.entries(object)) {
