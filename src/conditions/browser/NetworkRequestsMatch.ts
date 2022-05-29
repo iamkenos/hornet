@@ -1,7 +1,7 @@
 import type { NetworkRequestsIncludeProps, NetworkRequestSnapshotOptions } from "@config";
 
 import merge from "lodash/merge";
-import { JSONSnapshotMatch } from "@iamkenos/hornet/conditions/others/JSONSnapshotMatch";
+import { JSONSnapshotMatch } from "@conditions/others/JSONSnapshotMatch";
 
 export class NetworkRequestsMatch extends JSONSnapshotMatch {
   private readonly props: Array<keyof NetworkRequestsIncludeProps>;
