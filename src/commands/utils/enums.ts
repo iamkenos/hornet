@@ -92,6 +92,11 @@ export enum SizeContext {
   HEIGHT = "height"
 }
 
+export enum TextCompareContext {
+  EQUAL = "be",
+  CONTAIN = "contain"
+}
+
 export enum UseAction {
   START = "start",
   STOP = "stop",
