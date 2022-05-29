@@ -1,5 +1,5 @@
 import type { Selector } from "webdriverio";
-import { WebElement } from "@generics";
+import { WebElement } from "@generics/WebElement";
 
 export class XPathBuilder {
   private readonly ANY = "*";

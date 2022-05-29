@@ -1,6 +1,7 @@
 import { WebElement } from "@generics/WebElement";
 
 import { ElementConditions } from "@conditions/element";
+import { NavigationBar } from "@test/fixtures/components/navigation-bar.component";
 import { givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 const data = { any: "any", selector: "foo" };
 
@@ -63,7 +64,34 @@ describe("@generics: WebElement.$$()", () => {
   });
 });
 
-describe("@generics: WebElement.byAbsoluteXPath()", () => {
+describe("@generics: WebElement.getByIndexedXPath()", () => {
+  afterEach(() => {
+    givenJestMocksAreReset();
+  });
+
+  it("S01: should return a new element instance with the selector set as the element's indexed xpath", async() => {
+    const webelement = new WebElement(data.selector);
+
+    const actual = await webelement.getByIndexedXPath(2);
+    expect(actual).toMatchSnapshot();
+  });
+
+  it("S02: should return a new element instance of the given type with the selector set as the element's indexed xpath", async() => {
+    const webelement = new NavigationBar();
+
+    const actual = await webelement.getByIndexedXPath(2, NavigationBar);
+    expect(actual).toMatchSnapshot();
+  });
+
+  it("S03: should return a new element instance of the given type with the selector set as the element's indexed xpath, having a parent", async() => {
+    const webelement = new NavigationBar(data.selector);
+
+    const actual = await webelement.getByIndexedXPath(2, NavigationBar);
+    expect(actual).toMatchSnapshot();
+  });
+});
+
+describe("@generics: WebElement.getByAbsoluteXPath()", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });
@@ -75,9 +103,26 @@ describe("@generics: WebElement.byAbsoluteXPath()", () => {
 
     $Mock.mockReturnValue(data.any);
     browserExecuteMock.mockReturnValue(data.any);
-    const actual = await webelement.byAbsoluteXPath();
+    const actual = await webelement.getByAbsoluteXPath();
     const expected = new WebElement(data.any);
     expect(actual).toEqual(expected);
+  });
+});
+
+describe("@generics: WebElement.getTextArray()", () => {
+  afterEach(() => {
+    givenJestMocksAreReset();
+  });
+
+  it("S01: should return the text of all element instances as an array", async() => {
+    const $$Mock = givenMock($$);
+    const webelement = new WebElement(data.selector);
+
+    $$Mock.mockReturnValue(Array(2).fill({ getText: () => data.any }));
+    const actual = await webelement.getTextArray();
+    const expected = Array(2).fill(data.any);
+    expect(actual).toEqual(expected);
+    expect($$Mock).toHaveBeenCalledWith(data.selector);
   });
 });
 
@@ -97,19 +142,3 @@ describe("@generics: WebElement.conditions()", () => {
   });
 });
 
-describe("@generics: WebElement.toTextArray()", () => {
-  afterEach(() => {
-    givenJestMocksAreReset();
-  });
-
-  it("S01: should return the text of all element instances as an array", async() => {
-    const $$Mock = givenMock($$);
-    const webelement = new WebElement(data.selector);
-
-    $$Mock.mockReturnValue(Array(2).fill({ getText: () => data.any }));
-    const actual = await webelement.toTextArray();
-    const expected = Array(2).fill(data.any);
-    expect(actual).toEqual(expected);
-    expect($$Mock).toHaveBeenCalledWith(data.selector);
-  });
-});

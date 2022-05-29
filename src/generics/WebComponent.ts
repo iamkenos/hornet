@@ -1,5 +1,5 @@
 import { Intersect } from "@common";
-import { MetaAdapter } from "@generics";
+import { MetaAdapter } from "./utils/MetaAdapter";
 import { WebElement } from "./WebElement";
 import type { ComponentMetadata } from "./types";
 

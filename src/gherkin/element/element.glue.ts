@@ -300,7 +300,7 @@ export async function thenSnapshotMatch(meta: string, index: number, key: string
 
 export async function thenOptionSelected(optIndex: number, opt: string, context: SelectOptionContext, value: string, meta: string, ddlIndex: number, key: string, not: boolean) {
   const selector = MetaAdapter.getSelector(meta, key);
-  const dropdown = await new WebElement(selector).byAbsoluteXPath(ddlIndex - 1);
+  const dropdown = await new WebElement(selector).getByAbsoluteXPath(ddlIndex - 1);
   const option = new XPathBuilder(dropdown.selector).descendant(opt);
   let element: WebdriverIO.Element;
 
@@ -333,7 +333,7 @@ export async function thenOptionSelected(optIndex: number, opt: string, context:
 
 export async function thenTextArrayContains(meta: string, key: string, not: boolean, values: DataTable) {
   const selector = MetaAdapter.getSelector(meta, key);
-  const actual = await new WebElement(selector).toTextArray();
+  const actual = await new WebElement(selector).getTextArray();
   const expected = [].concat(...values.rows());
   const then = await browser.conditions();
 
@@ -342,7 +342,7 @@ export async function thenTextArrayContains(meta: string, key: string, not: bool
 
 export async function thenTextArrayEquals(meta: string, key: string, not: boolean, values: DataTable) {
   const selector = MetaAdapter.getSelector(meta, key);
-  const actual = await new WebElement(selector).toTextArray();
+  const actual = await new WebElement(selector).getTextArray();
   const expected = [].concat(...values.rows());
   const then = await browser.conditions();
 
