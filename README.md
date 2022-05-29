@@ -36,7 +36,32 @@
 
 You'll need a working knowledge of WebdriverIO to be able to use this library. They have rich documentation so head on over the site and read on if you're not familiar with it yet.
 
-1. Create your WebdriverIO config file: `wdio.conf.ts`
+1. Get it: `npm install @iamkenos/hornet`
+
+2. Create a `tsconfig.json` file:
+
+   ```json
+   {
+     "compilerOptions": {
+       "baseUrl": "./",
+       "downlevelIteration": true,
+       "esModuleInterop": true,
+       "types": [
+         "@wdio/cucumber-framework",
+         "@wdio/selenium-standalone-service",
+         "@wdio/browserstack-service",
+         "@wdio/devtools-service",
+         "wdio-intercept-service",
+         "webdriverio/async",
+         "@iamkenos/hornet",
+         "node"
+       ]
+     },
+     "include": ["./**/*.ts"]
+   }
+   ```
+
+3. Create your WebdriverIO config file: `wdio.conf.ts`
 
    ```ts
    import { configure } from "@iamkenos/hornet/config";
@@ -48,7 +73,7 @@ You'll need a working knowledge of WebdriverIO to be able to use this library. T
    });
    ```
 
-2. Create your page metadata files:
+4. Create your page metadata files:
 
    ```ts
    // fixtures/app.meta.ts
@@ -88,7 +113,7 @@ You'll need a working knowledge of WebdriverIO to be able to use this library. T
    });
    ```
 
-3. Create your feature file: `features/login.feature`
+5. Create your feature file: `features/login.feature`
 
    ```gherkin
    Feature: Login
@@ -115,11 +140,11 @@ You'll need a working knowledge of WebdriverIO to be able to use this library. T
          And I expect the "flash" element text to contain "Your username is invalid!"
    ```
 
-4. Run it: `npx wdio wdio.conf.ts`
+6. Run it: `npx wdio wdio.conf.ts`
 
-5. Check the results: `npx allure open .reports/allure/html`
+7. Check the results: `npx allure open .reports/allure/html`
 
-6. You can view other gherkin steps available out-of-the-box [here](./demo/test/features).
+8. You can view other gherkin steps available out-of-the-box [here](./demo/test/features).
 
 ## Contribute
 
