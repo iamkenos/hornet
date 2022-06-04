@@ -2,7 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-> _Gaps between versions are faulty, broken or test releases._
+## [0.2.0](https://github.com/iamkenos/hornet/compare/v0.1.2...v0.2.0) (2022-06-04)
+
+
+### Features
+
+* **commands:** text compare context enum ([93886ab](https://github.com/iamkenos/hornet/commit/93886abe086c6c3010e290c87ff3a957b1db52a7))
+* **generics:** getByIndexedXPath ([08c14c6](https://github.com/iamkenos/hornet/commit/08c14c6ff57988e18eeb1d1ba0c9cc46939a69fa))
+
+
+### Bug Fixes
+
+* **conditions:** import path on ga and request matchign expected conditions ([ba2c6b5](https://github.com/iamkenos/hornet/commit/ba2c6b5042d0d5a2ee702aaee2cb411906ce81cf))
+
+
+### Refactor
+
+* **conditions:** change not param to preferred to avoid confusion ([492c1f9](https://github.com/iamkenos/hornet/commit/492c1f9977863c605c242624074e6acbb09ee595))
+* **gherkin:** negate not condition for then steps ([f9fc00c](https://github.com/iamkenos/hornet/commit/f9fc00c75a6f40d82ff71b92b9d1e64df9f0629f))
 
 ### [0.1.2](https://github.com/iamkenos/hornet/compare/v0.1.1...v0.1.2) (2022-05-28)
 
