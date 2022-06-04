@@ -71,6 +71,13 @@ export enum ImageCompareContext {
   PAGE = "page"
 }
 
+export enum ScrollDirection {
+  UP = "up",
+  DOWN = "down",
+  LEFT = "left",
+  RIGHT = "right",
+}
+
 export enum SelectAction {
   SELECT = "select",
   DESELECT = "deselect"
