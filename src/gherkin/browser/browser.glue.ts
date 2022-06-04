@@ -213,43 +213,43 @@ export async function whenWindowSizeRestored() {
 export async function thenAlertExists(not: boolean) {
   const then = await browser.conditions();
 
-  await then.alertExists(not).expect();
+  await then.alertExists(!not).expect();
 }
 
 export async function thenAlertTextContains(not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.alertTextContains(GherkinAdapter.parseToken(value), not).expect();
+  await then.alertTextContains(GherkinAdapter.parseToken(value), !not).expect();
 }
 
 export async function thenAlertTextEquals(not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.alertTextEquals(GherkinAdapter.parseToken(value), not).expect();
+  await then.alertTextEquals(GherkinAdapter.parseToken(value), !not).expect();
 }
 
 export async function thenCookieContains(cookie: string, not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.cookieContains(GherkinAdapter.parseToken(cookie), GherkinAdapter.parseToken(value), not).expect();
+  await then.cookieContains(GherkinAdapter.parseToken(cookie), GherkinAdapter.parseToken(value), !not).expect();
 }
 
 export async function thenCookieEquals(cookie: string, not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.cookieEquals(GherkinAdapter.parseToken(cookie), GherkinAdapter.parseToken(value), not).expect();
+  await then.cookieEquals(GherkinAdapter.parseToken(cookie), GherkinAdapter.parseToken(value), !not).expect();
 }
 
 export async function thenCookieExists(cookie: string, not: boolean) {
   const then = await browser.conditions();
 
-  await then.cookieExists(GherkinAdapter.parseToken(cookie), not).expect();
+  await then.cookieExists(GherkinAdapter.parseToken(cookie), !not).expect();
 }
 
 export async function thenCountEquals(not: boolean, value: number) {
   const then = await browser.conditions();
 
-  await then.windowCountEquals(value, not).expect();
+  await then.windowCountEquals(value, !not).expect();
 }
 
 export async function thenCountLessOrMore(not: boolean, count: Count, value: number) {
@@ -257,11 +257,11 @@ export async function thenCountLessOrMore(not: boolean, count: Count, value: num
 
   switch (count) {
     case Count.LESS: {
-      await then.windowCountLessThan(value, not).expect();
+      await then.windowCountLessThan(value, !not).expect();
       break;
     }
     default: {
-      await then.windowCountMoreThan(value, not).expect();
+      await then.windowCountMoreThan(value, !not).expect();
       break;
     }
   }
@@ -271,7 +271,7 @@ export async function thenCountLessOrMore(not: boolean, count: Count, value: num
 export async function thenGAEntriesSnapshotMatch(event: string, not: boolean, filename: string) {
   const then = await browser.conditions();
 
-  await then.googleAnalyticsMatch(filename, event, undefined, not).expect();
+  await then.googleAnalyticsMatch(filename, event, undefined, !not).expect();
 }
 
 export async function thenHttpResponseSnapshotMatch(not: boolean, filename: string, request: HttpRequestOptions) {
@@ -279,7 +279,7 @@ export async function thenHttpResponseSnapshotMatch(not: boolean, filename: stri
   const comparable = { statusCode: response.statusCode, body: string.isJSON(response.body) ? JSON.parse(response.body) : response.body };
   const then = await browser.conditions();
 
-  await then.jsonSnapshotMatch(filename, comparable, browser.config.snapshots.responses, not).expect();
+  await then.jsonSnapshotMatch(filename, comparable, browser.config.snapshots.responses, !not).expect();
 }
 
 export async function thenOnPage(meta: string) {
@@ -294,7 +294,7 @@ export async function thenNetworkCallsSnapshotMatch(header: string, not: boolean
   const headers = !!header;
   const then = await browser.conditions();
 
-  await then.networkRequestsMatch(filename, { include: { headers } }, not).expect();
+  await then.networkRequestsMatch(filename, { include: { headers } }, !not).expect();
 }
 
 export async function thenNetworkCallsOnPathsSnapshotMatch(header: string, not: boolean, filename: string, table: DataTable) {
@@ -302,45 +302,45 @@ export async function thenNetworkCallsOnPathsSnapshotMatch(header: string, not: 
   const headers = !!header;
   const then = await browser.conditions();
 
-  await then.networkRequestsMatch(filename, { paths, include: { headers } }, not).expect();
+  await then.networkRequestsMatch(filename, { paths, include: { headers } }, !not).expect();
 }
 
 export async function thenNetworkCallsOnPathsSnapshotMatchExpressions(header: string, not: boolean, filename: string, table: DataTable) {
   const regex = { paths: GherkinAdapter.getDataTableRows(table, 1), expressions: GherkinAdapter.getDataTableRows(table, 2) };
   const headers = !!header;
   const then = await browser.conditions();
-  
-  await then.networkRequestsMatch(filename, { regex, include: { headers } }, not).expect();
+
+  await then.networkRequestsMatch(filename, { regex, include: { headers } }, !not).expect();
 }
 
 export async function thenSiteReady() {
   const then = await browser.conditions();
- 
+
   await then.ready().expect();
 }
 
 export async function thenSnapshotMatch(context: ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT, not: boolean, filename: string) {
   const then = await browser.conditions();
 
-  await then.snapshotMatch(context, filename, undefined, not).expect();
+  await then.snapshotMatch(context, filename, undefined, !not).expect();
 }
 
 export async function thenStorageItemContains(context: BrowserStorage, key: string, not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.storageItemContains(context, key, value, not).expect();
+  await then.storageItemContains(context, key, value, !not).expect();
 }
 
 export async function thenStorageItemEquals(context: BrowserStorage, key: string, not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.storageItemEquals(context, key, value, not).expect();
+  await then.storageItemEquals(context, key, value, !not).expect();
 }
 
 export async function thenStorageItemExists(context: BrowserStorage, key: string, not: boolean) {
   const then = await browser.conditions();
 
-  await then.storageItemExists(context, key, not).expect();
+  await then.storageItemExists(context, key, !not).expect();
 }
 
 export async function thenTitleContains(not: boolean, meta: string, value?: string) {
@@ -349,11 +349,11 @@ export async function thenTitleContains(not: boolean, meta: string, value?: stri
   switch (value) {
     case undefined:
     case null: {
-      await then.titleContains(MetaAdapter.getTitle(meta), not).expect();
+      await then.titleContains(MetaAdapter.getTitle(meta), !not).expect();
       break;
     }
     default: {
-      await then.titleContains(GherkinAdapter.parseToken(value), not).expect();
+      await then.titleContains(GherkinAdapter.parseToken(value), !not).expect();
       break;
     }
   }
@@ -365,11 +365,11 @@ export async function thenTitleEquals(not: boolean, meta: string, value?: string
   switch (value) {
     case undefined:
     case null: {
-      await then.titleEquals(MetaAdapter.getTitle(meta), not).expect();
+      await then.titleEquals(MetaAdapter.getTitle(meta), !not).expect();
       break;
     }
     default: {
-      await then.titleEquals(GherkinAdapter.parseToken(value), not).expect();
+      await then.titleEquals(GherkinAdapter.parseToken(value), !not).expect();
       break;
     }
   }
@@ -382,14 +382,14 @@ export async function thenUrlContains(not: boolean, meta: string, value?: string
     case undefined:
     case null: {
       if (meta) {
-        await then.urlContains(MetaAdapter.getUrl(meta), not).expect();
+        await then.urlContains(MetaAdapter.getUrl(meta), !not).expect();
       } else {
-        await then.urlContains(browser.config.baseUrl, not).expect();
+        await then.urlContains(browser.config.baseUrl, !not).expect();
       }
       break;
     }
     default: {
-      await then.urlContains(GherkinAdapter.parseToken(value), not).expect();
+      await then.urlContains(GherkinAdapter.parseToken(value), !not).expect();
     }
   }
 }
@@ -401,14 +401,14 @@ export async function thenUrlEquals(not: boolean, meta: string, value?: string) 
     case undefined:
     case null: {
       if (meta) {
-        await then.urlEquals(MetaAdapter.getUrl(meta), not).expect();
+        await then.urlEquals(MetaAdapter.getUrl(meta), !not).expect();
       } else {
-        await then.urlEquals(browser.config.baseUrl, not).expect();
+        await then.urlEquals(browser.config.baseUrl, !not).expect();
       }
       break;
     }
     default: {
-      await then.urlEquals(GherkinAdapter.parseToken(value), not).expect();
+      await then.urlEquals(GherkinAdapter.parseToken(value), !not).expect();
     }
   }
 }
@@ -416,11 +416,11 @@ export async function thenUrlEquals(not: boolean, meta: string, value?: string) 
 export async function thenUrlPathContains(not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.urlPathContains(GherkinAdapter.parseToken(value), not).expect();
+  await then.urlPathContains(GherkinAdapter.parseToken(value), !not).expect();
 }
 
 export async function thenUrlPathEquals(not: boolean, value: string) {
   const then = await browser.conditions();
 
-  await then.urlPathEquals(GherkinAdapter.parseToken(value), not).expect();
+  await then.urlPathEquals(GherkinAdapter.parseToken(value), !not).expect();
 }

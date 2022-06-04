@@ -13,12 +13,12 @@ export async function thenNavItemSelected(label: string, not: boolean) {
   const webelement = demoPage.navigationBar.getNavigationItem(label);
   const then = await webelement.conditions();
 
-  await then.attributeEquals("class", "active", not).expect();
+  await then.attributeEquals("class", "active", !not).expect();
 }
 
 export async function thenSectionHeaderExists(label: string, not: boolean) {
   const webelement = demoPage.getSectionHeader(label);
   const then = await webelement.conditions();
 
-  await then.exists(not).expect();
+  await then.exists(!not).expect();
 }

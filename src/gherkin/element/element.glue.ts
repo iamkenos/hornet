@@ -131,7 +131,7 @@ export async function whenToggle(action: SelectAction, meta: string, index: numb
   const element = await webelement.$(index - 1);
   const conditions = await webelement.conditions(index - 1);
 
-  await element.clickUntil(conditions.selected(action === SelectAction.DESELECT), { move: { xOffset: 0, yOffset: 0 } });
+  await element.clickUntil(conditions.selected(action === SelectAction.SELECT), { move: { xOffset: 0, yOffset: 0 } });
 }
 
 export async function thenAttributeContains(meta: string, index: number, key: string, attribute: string, not: boolean, value: string) {
@@ -139,7 +139,7 @@ export async function thenAttributeContains(meta: string, index: number, key: st
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.attributeContains(attribute, parsed, not).expect();
+  await then.attributeContains(attribute, parsed, !not).expect();
 }
 
 export async function thenAttributeEquals(meta: string, index: number, key: string, attribute: string, not: boolean, value: string) {
@@ -147,28 +147,28 @@ export async function thenAttributeEquals(meta: string, index: number, key: stri
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.attributeEquals(attribute, parsed, not).expect();
+  await then.attributeEquals(attribute, parsed, !not).expect();
 }
 
 export async function thenAttributeExists(meta: string, index: number, key: string, attribute: string, not: boolean) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.attributeExists(attribute, not).expect();
+  await then.attributeExists(attribute, !not).expect();
 }
 
 export async function thenAxisLocationEquals(meta: string, index: number, key: string, axis: Axis, not: boolean, value: string) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.axisLocationEquals(axis, parseFloat(value), not).expect();
+  await then.axisLocationEquals(axis, parseFloat(value), !not).expect();
 }
 
 export async function thenCountEquals(meta: string, index: number, key: string, not: boolean, value: number) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.countEquals(value, not).expect();
+  await then.countEquals(value, !not).expect();
 }
 
 export async function thenCountLessOrMore(meta: string, index: number, key: string, not: boolean, count: Count, value: number) {
@@ -177,11 +177,11 @@ export async function thenCountLessOrMore(meta: string, index: number, key: stri
 
   switch (count) {
     case Count.LESS: {
-      await then.countLessThan(value, not).expect();
+      await then.countLessThan(value, !not).expect();
       break;
     }
     default: {
-      await then.countMoreThan(value, not).expect();
+      await then.countMoreThan(value, !not).expect();
       break;
     }
   }
@@ -191,42 +191,42 @@ export async function thenCssPropertyExists(meta: string, index: number, key: st
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.cssPropertyExists(property, not).expect();
+  await then.cssPropertyExists(property, !not).expect();
 }
 
 export async function thenDisplayed(meta: string, index: number, key: string, not: boolean) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.displayed(not).expect();
+  await then.displayed(!not).expect();
 }
 
 export async function thenDisplayedInViewport(meta: string, index: number, key: string, not: boolean) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.displayedInViewport(not).expect();
+  await then.displayedInViewport(!not).expect();
 }
 
 export async function thenEnabled(meta: string, index: number, key: string, not: boolean) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.enabled(not).expect();
+  await then.enabled(!not).expect();
 }
 
 export async function thenExists(meta: string, index: number, key: string, not: boolean) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.exists(not).expect();
+  await then.exists(!not).expect();
 }
 
 export async function thenFocused(meta: string, index: number, key: string, not: boolean) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.focused(not).expect();
+  await then.focused(!not).expect();
 }
 
 export async function thenHrefOpensOn(meta: string, index: number, key: string, type: ElementType, not: boolean, target: HrefTargetContext) {
@@ -241,11 +241,11 @@ export async function thenHrefOpensOn(meta: string, index: number, key: string, 
     case HrefTargetContext.PARENT:
     case HrefTargetContext.TOP: {
       const member = Object.entries(HrefTargetContext).find(([, value]) => value === target)[0];
-      await then.attributeEquals(AnchorAttributes.TARGET, HrefTarget[member], not).expect();
+      await then.attributeEquals(AnchorAttributes.TARGET, HrefTarget[member], !not).expect();
       break;
     }
     default: {
-      await then.attributeExists(AnchorAttributes.TARGET, !not).expect();
+      await then.attributeExists(AnchorAttributes.TARGET, not).expect();
       break;
     }
   }
@@ -257,7 +257,7 @@ export async function thenHrefOpensOnNamedFrame(meta: string, index: number, key
     await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).toWebElement().conditions(index - 1) :
     await new WebElement(selector).conditions(index - 1);
 
-  await then.attributeEquals(AnchorAttributes.TARGET, target, not).expect();
+  await then.attributeEquals(AnchorAttributes.TARGET, target, !not).expect();
 }
 
 export async function thenHrefPointsTo(meta: string, index: number, key: string, type: ElementType, not: boolean, scheme: HrefSchemeContext, value: string) {
@@ -270,11 +270,11 @@ export async function thenHrefPointsTo(meta: string, index: number, key: string,
     case HrefSchemeContext.MAIL:
     case HrefSchemeContext.TEL: {
       const member = Object.entries(HrefSchemeContext).find(([, value]) => value === scheme)[0];
-      await then.attributeEquals(AnchorAttributes.HREF, `${HrefScheme[member]}${value}`, not).expect();
+      await then.attributeEquals(AnchorAttributes.HREF, `${HrefScheme[member]}${value}`, !not).expect();
       break;
     }
     default: {
-      await then.attributeEquals(AnchorAttributes.HREF, value, not).expect();
+      await then.attributeEquals(AnchorAttributes.HREF, value, !not).expect();
       break;
     }
   }
@@ -288,14 +288,14 @@ export async function thenHrefPointsToPage(meta: string, index: number, key: str
   const target = MetaAdapter.getUrl(page);
   const value = string.isURL(target) ? target : new URL(browser.config.baseUrl + target).href;
 
-  await then.attributeEquals(AnchorAttributes.HREF, new URL(value).pathname, not).expect();
+  await then.attributeEquals(AnchorAttributes.HREF, new URL(value).pathname, !not).expect();
 }
 
 export async function thenSnapshotMatch(meta: string, index: number, key: string, not: boolean, filename: string) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.snapshotMatch(filename, undefined, not).expect();
+  await then.snapshotMatch(filename, undefined, !not).expect();
 }
 
 export async function thenOptionSelected(optIndex: number, opt: string, context: SelectOptionContext, value: string, meta: string, ddlIndex: number, key: string, not: boolean) {
@@ -328,7 +328,7 @@ export async function thenOptionSelected(optIndex: number, opt: string, context:
   }
 
   const then = await new WebElement(element.selector).conditions(optIndex - 1);
-  await then.selected(not).expect();
+  await then.selected(!not).expect();
 }
 
 export async function thenTextArrayContains(meta: string, key: string, not: boolean, values: DataTable) {
@@ -337,7 +337,7 @@ export async function thenTextArrayContains(meta: string, key: string, not: bool
   const expected = [].concat(...values.rows());
   const then = await browser.conditions();
 
-  await then.arrayContains(actual, expected, not).expect();
+  await then.arrayContains(actual, expected, !not).expect();
 }
 
 export async function thenTextArrayEquals(meta: string, key: string, not: boolean, values: DataTable) {
@@ -346,28 +346,28 @@ export async function thenTextArrayEquals(meta: string, key: string, not: boolea
   const expected = [].concat(...values.rows());
   const then = await browser.conditions();
 
-  await then.arrayEquals(actual, expected, not).expect();
+  await then.arrayEquals(actual, expected, !not).expect();
 }
 
 export async function thenSelected(meta: string, index: number, key: string, not: boolean) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.selected(not).expect();
+  await then.selected(!not).expect();
 }
 
 export async function thenSizeEquals(meta: string, index: number, key: string, not: boolean, width: number, height: number) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.sizeEquals(width, height, not).expect();
+  await then.sizeEquals(width, height, !not).expect();
 }
 
 export async function thenSizeSideEquals(meta: string, index: number, key: string, not: boolean, size: number, side: SizeContext) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.sizeSideEquals(side, size, not).expect();
+  await then.sizeSideEquals(side, size, !not).expect();
 }
 
 export async function thenTextContains(meta: string, index: number, key: string, not: boolean, value: string) {
@@ -375,14 +375,14 @@ export async function thenTextContains(meta: string, index: number, key: string,
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.textContains(parsed, not).expect();
+  await then.textContains(parsed, !not).expect();
 }
 
 export async function thenTextEmpty(meta: string, index: number, key: string, not: boolean) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.textEquals("", not).expect();
+  await then.textEquals("", !not).expect();
 }
 
 export async function thenTextEquals(meta: string, index: number, key: string, not: boolean, value: string) {
@@ -390,7 +390,7 @@ export async function thenTextEquals(meta: string, index: number, key: string, n
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.textEquals(parsed, not).expect();
+  await then.textEquals(parsed, !not).expect();
 }
 
 export async function thenValueContains(meta: string, index: number, key: string, not: boolean, value: string) {
@@ -398,14 +398,14 @@ export async function thenValueContains(meta: string, index: number, key: string
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.valueContains(parsed, not).expect();
+  await then.valueContains(parsed, !not).expect();
 }
 
 export async function thenValueEmpty(meta: string, index: number, key: string, not: boolean) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.valueEquals("", not).expect();
+  await then.valueEquals("", !not).expect();
 }
 
 export async function thenValueEquals(meta: string, index: number, key: string, not: boolean, value: string) {
@@ -413,5 +413,5 @@ export async function thenValueEquals(meta: string, index: number, key: string, 
   const selector = MetaAdapter.getSelector(meta, key);
   const then = await new WebElement(selector).conditions(index - 1);
 
-  await then.valueEquals(parsed, not).expect();
+  await then.valueEquals(parsed, !not).expect();
 }
