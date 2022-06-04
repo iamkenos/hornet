@@ -69,3 +69,27 @@ Array [
   },
 ]
 `;
+
+exports[`@conditions: others/OtherConditions.stringContains() S01: should add the StringContains condition 1`] = `
+Array [
+  StringContains {
+    "actual": "any",
+    "expected": "any",
+    "name": "StringContains",
+    "not": false,
+    "timeout": undefined,
+  },
+]
+`;
+
+exports[`@conditions: others/OtherConditions.stringEquals() S01: should add the StringEquals condition 1`] = `
+Array [
+  StringEquals {
+    "actual": "any",
+    "expected": "any",
+    "name": "StringEquals",
+    "not": false,
+    "timeout": undefined,
+  },
+]
+`;

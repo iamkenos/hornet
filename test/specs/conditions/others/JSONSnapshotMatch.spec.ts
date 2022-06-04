@@ -143,7 +143,7 @@ describe("@conditions: others/JSONSnapshotMatch.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new JSONSnapshotMatch(data.any, data, data.options(), true);
+    const condition = new JSONSnapshotMatch(data.any, data, data.options(), false);
     const content = givenReadJSONFile();
     const fsReadFileSyncMock = givenMock(fs.readFileSync);
 

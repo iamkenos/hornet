@@ -44,7 +44,7 @@ describe("@conditions: element/CountLessThan.getResult()", () => {
 
   it("S02: should return a passed result if not is true", async() => {
     givenElementCountMock();
-    const condition = new CountLessThan(data.foo, true);
+    const condition = new CountLessThan(data.foo, false);
     const element: any = data;
     condition.setElement(element);
 

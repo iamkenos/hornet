@@ -43,7 +43,7 @@ describe("@conditions: element/Enabled.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new Enabled(true);
+    const condition = new Enabled(false);
     const element: any = { ...data, isEnabled: () => false, getAttribute: () => false };
     condition.setElement(element);
 

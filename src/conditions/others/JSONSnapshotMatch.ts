@@ -15,8 +15,8 @@ export class JSONSnapshotMatch extends ExpectedCondition {
   protected sortkey: string;
   private comparable: any;
 
-  public constructor(filename: string, comparable: any, options?: JSONSnapshotOptions, not?: boolean) {
-    super(not);
+  public constructor(filename: string, comparable: any, options?: JSONSnapshotOptions, preferred?: boolean) {
+    super(preferred);
     this.filename = filename + ".json";
     this.comparable = comparable;
     this.options = options;

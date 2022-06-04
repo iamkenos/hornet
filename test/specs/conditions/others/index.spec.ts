@@ -68,3 +68,29 @@ describe("@conditions: others/OtherConditions.objectPropEquals()", () => {
   });
 });
 
+describe("@conditions: others/OtherConditions.stringContains()", () => {
+  afterEach(() => {
+    givenJestMocksAreReset();
+  });
+
+  it("S01: should add the StringContains condition", async() => {
+    const conditions = new OtherConditions().stringContains(data.any, data.any);
+
+    const actual = (conditions as any).conditions;
+    expect(actual).toMatchSnapshot();
+  });
+});
+
+describe("@conditions: others/OtherConditions.stringEquals()", () => {
+  afterEach(() => {
+    givenJestMocksAreReset();
+  });
+
+  it("S01: should add the StringEquals condition", async() => {
+    const conditions = new OtherConditions().stringEquals(data.any, data.any);
+
+    const actual = (conditions as any).conditions;
+    expect(actual).toMatchSnapshot();
+  });
+});
+

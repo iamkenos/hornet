@@ -38,7 +38,7 @@ describe("@conditions: others/ArrayContains.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new ArrayContains(["1"], [1] as any, true);
+    const condition = new ArrayContains(["1"], [1] as any, false);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();

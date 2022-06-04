@@ -97,7 +97,7 @@ describe("@conditions: browser/NetworkRequestsMatch.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new NetworkRequestsMatch(data.any, data.options(), true);
+    const condition = new NetworkRequestsMatch(data.any, data.options(), false);
     const content = givenReadJSONFile();
     givenMock(browser.getRequests).mockReturnValue(JSON.parse(content));
     givenMock(fs.readFileSync).mockReturnValueOnce(content).mockReturnValueOnce("[]");

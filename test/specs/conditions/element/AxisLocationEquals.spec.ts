@@ -46,7 +46,7 @@ describe("@conditions: element/AxisLocationEquals.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new AxisLocationEquals(Axis.X, x, true);
+    const condition = new AxisLocationEquals(Axis.X, x, false);
     const element: any = { ...data, getLocation: () => y };
     condition.setElement(element);
 

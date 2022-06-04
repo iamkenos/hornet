@@ -43,7 +43,7 @@ describe("@conditions: element/TextEquals.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new TextEquals(data.foo, true);
+    const condition = new TextEquals(data.foo, false);
     const element: any = { ...data, getText: () => data.bar };
     condition.setElement(element);
 

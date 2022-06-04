@@ -56,7 +56,7 @@ describe("@conditions: browser/UrlEquals.getResult()", () => {
     { id: "B", expected: undefined, returned: data.foo },
   ])("S02$id: should return a passed result if not is true", async({ expected, returned }) => {
     givenMock(browser.getUrl).mockReturnValue(returned);
-    const condition = new UrlEquals(expected, true);
+    const condition = new UrlEquals(expected, false);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();

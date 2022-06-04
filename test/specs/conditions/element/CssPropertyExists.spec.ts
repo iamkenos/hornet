@@ -43,7 +43,7 @@ describe("@conditions: element/CssPropertyExists.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new CssPropertyExists(data.foo, true);
+    const condition = new CssPropertyExists(data.foo, false);
     const element: any = { ...data, getCSSProperty: () => ({ value: "", parsed: {} }) };
     condition.setElement(element);
 

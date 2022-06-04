@@ -42,7 +42,7 @@ describe("@conditions: browser/WindowCountLessThan.getResult()", () => {
 
   it("S02: should return a passed result if not is true", async() => {
     givenBrowserHandlesMock();
-    const condition = new WindowCountLessThan(data.foo, true);
+    const condition = new WindowCountLessThan(data.foo, false);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();

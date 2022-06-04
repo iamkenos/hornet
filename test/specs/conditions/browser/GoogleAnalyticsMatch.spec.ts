@@ -129,7 +129,7 @@ describe("@conditions: browser/GoogleAnalyticsMatch.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new GoogleAnalyticsMatch(data.any, data.event, data.options(), true);
+    const condition = new GoogleAnalyticsMatch(data.any, data.event, data.options(), false);
     const content = givenReadJSONFile();
     givenMock(browser.execute).mockReturnValue(data.perfentries);
     givenMock(fs.readFileSync).mockReturnValueOnce(content).mockReturnValueOnce("[]");

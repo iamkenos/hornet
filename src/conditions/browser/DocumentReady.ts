@@ -2,8 +2,8 @@ import { JS_DOCUMENT_READY_STATE } from "@commands";
 import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class DocumentReady extends ExpectedCondition {
-  public constructor(not?: boolean) {
-    super(not);
+  public constructor(preferred?: boolean) {
+    super(preferred);
     this.expected = "complete";
   }
 

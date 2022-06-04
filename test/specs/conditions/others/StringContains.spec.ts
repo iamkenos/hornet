@@ -1,15 +1,15 @@
-import { Focused } from "@conditions/element/Focused";
+import { StringContains } from "@conditions/others/StringContains";
 
 import { givenJestMocksAreReset } from "@test/fixtures/utils/steps";
-const data = { any: "any", selector: "#selector" };
+const data = { any: "any", an: "an" };
 
-describe("@conditions: element/Focused constructor", () => {
+describe("@conditions: others/StringContains constructor", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });
 
   it("S01: should set properties upon instantiation", async() => {
-    const condition = new Focused();
+    const condition = new StringContains(data.any, data.any);
 
     const actual = [
       (condition as any).name,
@@ -26,44 +26,27 @@ describe("@conditions: element/Focused constructor", () => {
   });
 });
 
-describe("@conditions: element/Focused.getResult()", () => {
+describe("@conditions: others/StringContains.getResult()", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });
 
   it("S01: should return a passed result", async() => {
-    const condition = new Focused();
-    const element: any = { ...data, isFocused: () => true };
-    const elementSpy = jest.spyOn(element, "isFocused");
-    condition.setElement(element);
+    const condition = new StringContains(data.an, data.any);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();
-    expect(elementSpy).toHaveBeenCalledTimes(1);
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new Focused(false);
-    const element: any = { ...data, isFocused: () => false };
-    condition.setElement(element);
+    const condition = new StringContains(data.any, data.an, false);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();
   });
 
   it("S03: should return a failed result if condition is not met", async() => {
-    const condition = new Focused();
-    const element: any = { ...data, isFocused: () => false };
-    condition.setElement(element);
-
-    const actual = await (condition as any).getResult();
-    expect(actual).toMatchSnapshot();
-  });
-
-  it("S04: should return a failed result if an error is encountered", async() => {
-    const condition = new Focused();
-    const element: any = { ...data, isFocused: () => { throw new Error("message");} };
-    condition.setElement(element);
+    const condition = new StringContains(data.any, data.an);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();

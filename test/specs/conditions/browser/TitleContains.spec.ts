@@ -42,7 +42,7 @@ describe("@conditions: browser/TitleContains.getResult()", () => {
 
   it("S02: should return a passed result if not is true", async() => {
     givenMock(browser.getTitle).mockReturnValue(data.bar);
-    const condition = new TitleContains(data.foo, true);
+    const condition = new TitleContains(data.foo, false);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();

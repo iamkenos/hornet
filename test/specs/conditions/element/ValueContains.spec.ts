@@ -43,7 +43,7 @@ describe("@conditions: element/ValueContains.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new ValueContains(data.foo, true);
+    const condition = new ValueContains(data.foo, false);
     const element: any = { ...data, getValue: () => data.bar };
     condition.setElement(element);
 

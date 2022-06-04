@@ -38,8 +38,8 @@ export class GoogleAnalyticsMatch extends JSONSnapshotMatch {
   private readonly initiatorTypes: string[];
   private readonly event: string;
 
-  public constructor(filename: string, event: string, options?: NetworkRequestSnapshotOptions, not?: boolean) {
-    super(filename, undefined, options, not);
+  public constructor(filename: string, event: string, options?: NetworkRequestSnapshotOptions, preferred?: boolean) {
+    super(filename, undefined, options, preferred);
     this.options = this.buildOptions(options);
     this.domains = ["google-analytics.com", "analytics.google.com"];
     this.initiatorTypes = ["xmlhttprequest", "img", "beacon"];

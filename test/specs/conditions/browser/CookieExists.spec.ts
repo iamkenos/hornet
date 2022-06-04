@@ -42,7 +42,7 @@ describe("@conditions: browser/CookieExists.getResult()", () => {
 
   it("S02: should return a passed result if not is true", async() => {
     givenMock(browser.getCookies).mockReturnValue([undefined]);
-    const condition = new CookieExists(data.foo, true);
+    const condition = new CookieExists(data.foo, false);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();

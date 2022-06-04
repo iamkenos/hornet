@@ -7,8 +7,8 @@ export class NetworkRequestsMatch extends JSONSnapshotMatch {
   private readonly props: Array<keyof NetworkRequestsIncludeProps>;
   protected declare options: NetworkRequestSnapshotOptions;
 
-  public constructor(filename: string, options?: NetworkRequestSnapshotOptions, not?: boolean) {
-    super(filename, undefined, options, not);
+  public constructor(filename: string, options?: NetworkRequestSnapshotOptions, preferred?: boolean) {
+    super(filename, undefined, options, preferred);
     this.options = this.buildOptions(options);
     this.sortkey = "url";
     this.props = this.buildIncludedProps();

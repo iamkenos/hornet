@@ -39,7 +39,7 @@ describe("@conditions: others/ObjectEquals.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new ObjectEquals(data, { ...data, foo: "foo" }, true);
+    const condition = new ObjectEquals(data, { ...data, foo: "foo" }, false);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();

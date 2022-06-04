@@ -2,8 +2,8 @@ import type { Axis } from "@commands";
 import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class AxisLocationEquals extends ExpectedCondition {
-  public constructor(axis: Axis, expected: number, not?: boolean) {
-    super(not);
+  public constructor(axis: Axis, expected: number, preferred?: boolean) {
+    super(preferred);
     this.expected = expected;
     this.on = axis;
   }

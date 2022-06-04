@@ -1,8 +1,8 @@
 import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class UrlPathContains extends ExpectedCondition {
-  public constructor(expected: string, not?: boolean) {
-    super(not);
+  public constructor(expected: string, preferred?: boolean) {
+    super(preferred);
     this.expected = expected || "";
   }
 

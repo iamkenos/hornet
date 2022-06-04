@@ -195,7 +195,7 @@ describe("@conditions: browser/SnapshotMatch.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new SnapshotMatch(ImageCompareContext.PAGE, data.any, data.options(), true);
+    const condition = new SnapshotMatch(ImageCompareContext.PAGE, data.any, data.options(), false);
     givenMock(browser.checkFullPageScreen).mockReturnValue({ misMatchPercentage: 0.1 });
 
     const actual = await (condition as any).getResult();

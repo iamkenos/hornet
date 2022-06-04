@@ -43,7 +43,7 @@ describe("@conditions: element/Displayed.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new Displayed(true);
+    const condition = new Displayed(false);
     const element: any = { ...data, isDisplayed: () => false };
     condition.setElement(element);
 

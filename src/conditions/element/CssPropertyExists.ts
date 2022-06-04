@@ -1,8 +1,8 @@
 import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class CssPropertyExists extends ExpectedCondition {
-  public constructor(property: string, not?: boolean) {
-    super(not);
+  public constructor(property: string, preferred?: boolean) {
+    super(preferred);
     this.expected = true;
     this.on = property;
   }

@@ -44,7 +44,7 @@ describe("@conditions: element/CountEquals.getResult()", () => {
 
   it("S02: should return a passed result if not is true", async() => {
     givenElementCountMock(2);
-    const condition = new CountEquals(data.foo, true);
+    const condition = new CountEquals(data.foo, false);
     const element: any = data;
     condition.setElement(element);
 

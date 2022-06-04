@@ -2,8 +2,8 @@ import type { SizeContext } from "@commands";
 import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class SizeSideEquals extends ExpectedCondition {
-  public constructor(side: SizeContext, expected: number, not?: boolean) {
-    super(not);
+  public constructor(side: SizeContext, expected: number, preferred?: boolean) {
+    super(preferred);
     this.on = side;
     this.expected = this.toString(expected);
   }

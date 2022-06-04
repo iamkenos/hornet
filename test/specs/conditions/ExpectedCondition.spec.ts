@@ -48,7 +48,7 @@ describe("@conditions: ExpectedCondition.evaluate() constructor", () => {
   });
 
   it("S02: should return a failed result", async() => {
-    const condition: any = new Condition(true);
+    const condition: any = new Condition(false);
     condition.on = data.any;
     condition.expected = [data.any];
     condition.actual = [data.any];

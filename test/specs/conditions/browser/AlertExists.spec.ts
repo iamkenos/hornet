@@ -42,7 +42,7 @@ describe("@conditions: browser/AlertExists.getResult()", () => {
 
   it("S02: should return a passed result if not is true", async() => {
     givenMock(browser.getAlertText).mockReturnValue(undefined);
-    const condition = new AlertExists(true);
+    const condition = new AlertExists(false);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();

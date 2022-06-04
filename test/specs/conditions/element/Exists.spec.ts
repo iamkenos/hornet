@@ -43,7 +43,7 @@ describe("@conditions: element/Exists.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new Exists(true);
+    const condition = new Exists(false);
     const element: any = { ...data, isExisting: () => false };
     condition.setElement(element);
 

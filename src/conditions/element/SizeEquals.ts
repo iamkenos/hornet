@@ -1,8 +1,8 @@
 import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class SizeEquals extends ExpectedCondition {
-  public constructor(width: number, height: number, not?: boolean) {
-    super(not);
+  public constructor(width: number, height: number, preferred?: boolean) {
+    super(preferred);
     this.expected = this.toString(width, height);
   }
 

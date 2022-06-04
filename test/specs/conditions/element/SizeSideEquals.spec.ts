@@ -46,7 +46,7 @@ describe("@conditions: element/SizeSideEquals.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new SizeSideEquals(SizeContext.WIDTH, data.width, true);
+    const condition = new SizeSideEquals(SizeContext.WIDTH, data.width, false);
     const element: any = { ...data, getSize: () => height };
     condition.setElement(element);
 

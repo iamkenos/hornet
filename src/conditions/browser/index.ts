@@ -31,91 +31,91 @@ export class BrowserConditions extends OtherConditions {
     super();
   }
 
-  public alertExists(not?: boolean) {
-    return this.addCondition(new AlertExists(not));
+  public alertExists(preferred?: boolean) {
+    return this.addCondition(new AlertExists(preferred));
   }
 
-  public alertTextContains(expected: string, not?: boolean) {
-    return this.addCondition(new AlertTextContains(expected, not));
+  public alertTextContains(expected: string, preferred?: boolean) {
+    return this.addCondition(new AlertTextContains(expected, preferred));
   }
 
-  public alertTextEquals(expected: string, not?: boolean) {
-    return this.addCondition(new AlertTextEquals(expected, not));
+  public alertTextEquals(expected: string, preferred?: boolean) {
+    return this.addCondition(new AlertTextEquals(expected, preferred));
   }
 
-  public cookieContains(cookie: string, expected: string, not?: boolean) {
-    return this.addCondition(new CookieContains(cookie, expected, not));
+  public cookieContains(cookie: string, expected: string, preferred?: boolean) {
+    return this.addCondition(new CookieContains(cookie, expected, preferred));
   }
 
-  public cookieEquals(cookie: string, expected: string, not?: boolean) {
-    return this.addCondition(new CookieEquals(cookie, expected, not));
+  public cookieEquals(cookie: string, expected: string, preferred?: boolean) {
+    return this.addCondition(new CookieEquals(cookie, expected, preferred));
   }
 
-  public cookieExists(cookie: string, not?: boolean) {
-    return this.addCondition(new CookieExists(cookie, not));
+  public cookieExists(cookie: string, preferred?: boolean) {
+    return this.addCondition(new CookieExists(cookie, preferred));
   }
 
-  public ready(not?: boolean) {
-    return this.addCondition(new DocumentReady(not));
+  public ready(preferred?: boolean) {
+    return this.addCondition(new DocumentReady(preferred));
   }
 
-  public googleAnalyticsMatch(filename: string, event: string, options?: NetworkRequestSnapshotOptions, not?: boolean) {
-    return this.addCondition(new GoogleAnalyticsMatch(filename, event, options, not));
+  public googleAnalyticsMatch(filename: string, event: string, options?: NetworkRequestSnapshotOptions, preferred?: boolean) {
+    return this.addCondition(new GoogleAnalyticsMatch(filename, event, options, preferred));
   }
 
-  public networkRequestsMatch(filename: string, options?: NetworkRequestSnapshotOptions, not?: boolean) {
-    return this.addCondition(new NetworkRequestsMatch(filename, options, not));
+  public networkRequestsMatch(filename: string, options?: NetworkRequestSnapshotOptions, preferred?: boolean) {
+    return this.addCondition(new NetworkRequestsMatch(filename, options, preferred));
   }
 
-  public snapshotMatch(context: ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT, filename: string, options?: ImageSnapshotContextOptions[ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT], not?: boolean) {
-    return this.addCondition(new DocumentReady()).addCondition(new SnapshotMatch(context, filename, options, not));
+  public snapshotMatch(context: ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT, filename: string, options?: ImageSnapshotContextOptions[ImageCompareContext.PAGE | ImageCompareContext.VIEWPORT], preferred?: boolean) {
+    return this.addCondition(new DocumentReady()).addCondition(new SnapshotMatch(context, filename, options, preferred));
   }
 
-  public storageItemContains(context: BrowserStorage, key: string, expected: string, not?: boolean) {
-    return this.addCondition(new StorageItemContains(context, key, expected, not));
+  public storageItemContains(context: BrowserStorage, key: string, expected: string, preferred?: boolean) {
+    return this.addCondition(new StorageItemContains(context, key, expected, preferred));
   }
 
-  public storageItemEquals(context: BrowserStorage, key: string, expected: string, not?: boolean) {
-    return this.addCondition(new StorageItemEquals(context, key, expected, not));
+  public storageItemEquals(context: BrowserStorage, key: string, expected: string, preferred?: boolean) {
+    return this.addCondition(new StorageItemEquals(context, key, expected, preferred));
   }
 
-  public storageItemExists(context: BrowserStorage, key: string, not?: boolean) {
-    return this.addCondition(new StorageItemExists(context, key, not));
+  public storageItemExists(context: BrowserStorage, key: string, preferred?: boolean) {
+    return this.addCondition(new StorageItemExists(context, key, preferred));
   }
 
-  public titleContains(expected: string, not?: boolean) {
-    return this.addCondition(new TitleContains(expected, not));
+  public titleContains(expected: string, preferred?: boolean) {
+    return this.addCondition(new TitleContains(expected, preferred));
   }
 
-  public titleEquals(expected: string, not?: boolean) {
-    return this.addCondition(new TitleEquals(expected, not));
+  public titleEquals(expected: string, preferred?: boolean) {
+    return this.addCondition(new TitleEquals(expected, preferred));
   }
 
-  public urlContains(expected: string, not?: boolean) {
-    return this.addCondition(new UrlContains(expected, not));
+  public urlContains(expected: string, preferred?: boolean) {
+    return this.addCondition(new UrlContains(expected, preferred));
   }
 
-  public urlEquals(expected: string, not?: boolean) {
-    return this.addCondition(new UrlEquals(expected, not));
+  public urlEquals(expected: string, preferred?: boolean) {
+    return this.addCondition(new UrlEquals(expected, preferred));
   }
 
-  public urlPathContains(expected: string, not?: boolean) {
-    return this.addCondition(new UrlPathContains(expected, not));
+  public urlPathContains(expected: string, preferred?: boolean) {
+    return this.addCondition(new UrlPathContains(expected, preferred));
   }
 
-  public urlPathEquals(expected: string, not?: boolean) {
-    return this.addCondition(new UrlPathEquals(expected, not));
+  public urlPathEquals(expected: string, preferred?: boolean) {
+    return this.addCondition(new UrlPathEquals(expected, preferred));
   }
 
-  public windowCountEquals(expected: number, not?: boolean) {
-    return this.addCondition(new WindowCountEquals(expected, not));
+  public windowCountEquals(expected: number, preferred?: boolean) {
+    return this.addCondition(new WindowCountEquals(expected, preferred));
   }
 
-  public windowCountLessThan(expected: number, not?: boolean) {
-    return this.addCondition(new WindowCountLessThan(expected, not));
+  public windowCountLessThan(expected: number, preferred?: boolean) {
+    return this.addCondition(new WindowCountLessThan(expected, preferred));
   }
 
-  public windowCountMoreThan(expected: number, not?: boolean) {
-    return this.addCondition(new WindowCountMoreThan(expected, not));
+  public windowCountMoreThan(expected: number, preferred?: boolean) {
+    return this.addCondition(new WindowCountMoreThan(expected, preferred));
   }
 }

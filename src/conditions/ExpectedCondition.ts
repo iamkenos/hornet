@@ -19,10 +19,10 @@ export abstract class ExpectedCondition {
 
   protected element?: WebdriverIO.Element;
 
-  protected constructor(not = false) {
+  protected constructor(preferred = true) {
     this.name = this.constructor.name;
     this.timeout = browser.config.waitforTimeout;
-    this.not = not;
+    this.not = !preferred;
   }
 
   public setElement(element: WebdriverIO.Element) {

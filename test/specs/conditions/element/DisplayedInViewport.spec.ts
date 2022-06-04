@@ -43,7 +43,7 @@ describe("@conditions: element/DisplayedInViewport.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new DisplayedInViewport(true);
+    const condition = new DisplayedInViewport(false);
     const element: any = { ...data, isDisplayedInViewport: () => false };
     condition.setElement(element);
 

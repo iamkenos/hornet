@@ -5,8 +5,8 @@ export class StorageItemContains extends ExpectedCondition {
   private readonly key: string;
   private readonly isLocal: boolean;
 
-  public constructor(context: BrowserStorage, key: string, expected: string, not?: boolean) {
-    super(not);
+  public constructor(context: BrowserStorage, key: string, expected: string, preferred?: boolean) {
+    super(preferred);
     this.expected = expected || "";
     this.key = key;
     this.isLocal = context === BrowserStorage.LOCAL;

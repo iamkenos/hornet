@@ -13,8 +13,8 @@ export class SnapshotMatch extends ExpectedCondition {
   private readonly options: ImageSnapshotOptions;
   private readonly context: ImageCompareContext;
 
-  public constructor(context: ImageCompareContext, filename: string, options?: ImageSnapshotOptions, not?: boolean) {
-    super(not);
+  public constructor(context: ImageCompareContext, filename: string, options?: ImageSnapshotOptions, preferred?: boolean) {
+    super(preferred);
     this.context = context;
     this.options = this.buildOptions(options);
     this.filename = this.buildFilename(filename);

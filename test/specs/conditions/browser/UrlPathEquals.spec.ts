@@ -53,7 +53,7 @@ describe("@conditions: browser/UrlPathEquals.getResult()", () => {
 
   it("S02: should return a passed result if not is true", async() => {
     givenMock(browser.getUrl).mockReturnValue(data.foo);
-    const condition = new UrlPathEquals(undefined, true);
+    const condition = new UrlPathEquals(undefined, false);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();

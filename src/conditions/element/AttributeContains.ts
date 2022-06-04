@@ -1,8 +1,8 @@
 import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class AttributeContains extends ExpectedCondition {
-  public constructor(attribute: string, expected: string, not?: boolean) {
-    super(not);
+  public constructor(attribute: string, expected: string, preferred?: boolean) {
+    super(preferred);
     this.expected = expected || "";
     this.on = attribute;
   }

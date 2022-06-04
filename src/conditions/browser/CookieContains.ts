@@ -1,8 +1,8 @@
 import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class CookieContains extends ExpectedCondition {
-  public constructor(cookie: string, expected: string, not?: boolean) {
-    super(not);
+  public constructor(cookie: string, expected: string, preferred?: boolean) {
+    super(preferred);
     this.expected = expected || "";
     this.on = cookie;
   }

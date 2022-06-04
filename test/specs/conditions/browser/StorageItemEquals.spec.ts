@@ -45,7 +45,7 @@ describe("@conditions: browser/StorageItemEquals.getResult()", () => {
 
   it("S02: should return a passed result if not is true", async() => {
     givenMock(browser.getSessionStorageItem).mockReturnValue(data.foo);
-    const condition = new StorageItemEquals(BrowserStorage.SESSION, data.any, undefined, true);
+    const condition = new StorageItemEquals(BrowserStorage.SESSION, data.any, undefined, false);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();

@@ -44,7 +44,7 @@ describe("@conditions: browser/DocumentReady.getResult()", () => {
 
   it("S02: should return a passed result if not is true", async() => {
     givenMock(browser.execute).mockReturnValue(data.foo);
-    const condition = new DocumentReady(true);
+    const condition = new DocumentReady(false);
 
     const actual = await (condition as any).getResult();
     expect(actual).toMatchSnapshot();

@@ -43,7 +43,7 @@ describe("@conditions: element/Clickable.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new Clickable(true);
+    const condition = new Clickable(false);
     const element: any = { ...data, isClickable: () => false };
     condition.setElement(element);
 

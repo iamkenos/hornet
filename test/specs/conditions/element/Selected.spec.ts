@@ -43,7 +43,7 @@ describe("@conditions: element/Selected.getResult()", () => {
   });
 
   it("S02: should return a passed result if not is true", async() => {
-    const condition = new Selected(true);
+    const condition = new Selected(false);
     const element: any = { ...data, isSelected: () => false };
     condition.setElement(element);
 

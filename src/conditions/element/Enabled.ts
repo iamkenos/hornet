@@ -1,8 +1,8 @@
 import { ExpectedCondition } from "@conditions/ExpectedCondition";
 
 export class Enabled extends ExpectedCondition {
-  public constructor(not?: boolean) {
-    super(not);
+  public constructor(preferred?: boolean) {
+    super(preferred);
     this.expected = true;
   }
 
