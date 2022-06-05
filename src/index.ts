@@ -39,6 +39,7 @@ declare global {
       executeAsync: (name: string) => Promise<void>;
       focus: () => Promise<void>;
       getProperty: <T = string>(key: string) => Promise<T>; // type override
+      getTextAll: () => Promise<string[]>;
       moveIntoView: (options?: MoveToOptions) => Promise<void>;
       sendKeys: (keys: string | string[]) => Promise<void>;
       setAttribute: (kvp: KeyValuePair) => Promise<void>;

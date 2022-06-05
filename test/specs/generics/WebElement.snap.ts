@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`@generics: WebElement.getByAbsoluteXPathAll() S01: should return an array of new webelement instance instance with the selectors set as the absolute xpath 1`] = `
+Array [
+  WebElement {
+    "parent": "",
+    "selector": "foo",
+  },
+  WebElement {
+    "parent": "",
+    "selector": "any",
+  },
+]
+`;
+
 exports[`@generics: WebElement.getByIndexedXPath() S01: should return a new element instance with the selector set as the element's indexed xpath 1`] = `
 WebElement {
   "parent": "",

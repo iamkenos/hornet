@@ -70,7 +70,7 @@ export async function whenScrollTo(meta: string, index: number, key: string) {
   const selector = MetaAdapter.getSelector(meta, key);
   const element = await new WebElement(selector).$(index - 1);
 
-  await element.moveIntoView({ xOffset: 0, yOffset: 0 });
+  await element.moveIntoView();
 }
 
 export async function whenSelectDropdownOption(optIndex: number, context: SelectOptionContext, value: string, meta: string, ddlIndex: number, key: string) {
@@ -131,7 +131,7 @@ export async function whenToggle(action: SelectAction, meta: string, index: numb
   const element = await webelement.$(index - 1);
   const conditions = await webelement.conditions(index - 1);
 
-  await element.clickUntil(conditions.selected(action === SelectAction.SELECT), { move: { xOffset: 0, yOffset: 0 } });
+  await element.clickUntil(conditions.selected(action === SelectAction.SELECT), { move: true });
 }
 
 export async function thenAttributeContains(meta: string, index: number, key: string, attribute: string, not: boolean, value: string) {
@@ -333,7 +333,8 @@ export async function thenOptionSelected(optIndex: number, opt: string, context:
 
 export async function thenTextArrayContains(meta: string, key: string, not: boolean, values: DataTable) {
   const selector = MetaAdapter.getSelector(meta, key);
-  const actual = await new WebElement(selector).getTextArray();
+  const element = await new WebElement(selector).$();
+  const actual = await element.getTextAll();
   const expected = [].concat(...values.rows());
   const then = await browser.conditions();
 
@@ -342,7 +343,8 @@ export async function thenTextArrayContains(meta: string, key: string, not: bool
 
 export async function thenTextArrayEquals(meta: string, key: string, not: boolean, values: DataTable) {
   const selector = MetaAdapter.getSelector(meta, key);
-  const actual = await new WebElement(selector).getTextArray();
+  const element = await new WebElement(selector).$();
+  const actual = await element.getTextAll();
   const expected = [].concat(...values.rows());
   const then = await browser.conditions();
 

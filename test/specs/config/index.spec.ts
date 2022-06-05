@@ -86,7 +86,7 @@ describe("@config: configure().before()", () => {
     expect(hookSpy).toHaveBeenCalledWith(data.foo, data.bar);
     expect(commandsAddBrowserCommandsSpy).toHaveBeenCalledTimes(1);
     expect(commandsAddElementCommandsSpy).toHaveBeenCalledTimes(1);
-    expect(browserAddCommandSpy).toHaveBeenCalledTimes(30);
+    expect(browserAddCommandSpy).toHaveBeenCalledTimes(31);
   });
 });
 

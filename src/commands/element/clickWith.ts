@@ -2,7 +2,7 @@ import { ClickAction, ClickWith, JS_MOUSE_CLICK } from "@commands";
 
 export async function clickWith(this: WebdriverIO.Element, options?: ClickWith) {
   if (options?.move) {
-    await this.moveIntoView(options.move);
+    await this.moveIntoView(options.move as any);
   }
 
   switch (options?.button) {

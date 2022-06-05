@@ -31,17 +31,16 @@ export class WebElement {
     return instance as T;
   }
 
-  public async getByAbsoluteXPath(index?: number) {
-    await (await this.conditions(index)).exists().expect();
-    const element = await this.$(index);
-    const xpath = await browser.execute<string, any>(JS_GET_ABSOLUTE_XPATH, element);
-    return new WebElement(xpath);
+  public async getByAbsoluteXPathAll() {
+    const elements = await this.$$();
+    const getXPath = async(element: WebdriverIO.Element) => await browser.execute<string, any>(JS_GET_ABSOLUTE_XPATH, element);
+    const selectors = await Promise.all(elements.map((element) => getXPath(element)));
+    return selectors.map(selector => new WebElement(selector));
   }
 
-  public async getTextArray() {
-    const elements = await this.$$();
-    const getText = async(element: WebdriverIO.Element) => await element.getText();
-    return await Promise.all(elements.map((element) => getText(element)));
+  public async getByAbsoluteXPath(index?: number) {
+    const webelements = await this.getByAbsoluteXPathAll();
+    return webelements[index > 0 ? index : 0];
   }
 
   public async conditions(index?: number) {

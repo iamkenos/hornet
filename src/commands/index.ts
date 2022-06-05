@@ -35,6 +35,7 @@ export default {
     browser.addCommand(e.clickWith.name, e.clickWith, true);
     browser.addCommand(e.moveIntoView.name, e.moveIntoView, true);
     browser.addCommand(e.focus.name, e.focus, true);
+    browser.addCommand(e.getTextAll.name, e.getTextAll, true);
     browser.addCommand(e.execute.name, e.execute, true);
     browser.addCommand(e.executeAsync.name, e.executeAsync, true);
     browser.addCommand(e.sendKeys.name, e.sendKeys, true);

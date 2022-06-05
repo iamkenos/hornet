@@ -91,38 +91,54 @@ describe("@generics: WebElement.getByIndexedXPath()", () => {
   });
 });
 
+describe("@generics: WebElement.getByAbsoluteXPathAll()", () => {
+  afterEach(() => {
+    givenJestMocksAreReset();
+  });
+
+  it("S01: should return an array of new webelement instance instance with the selectors set as the absolute xpath", async() => {
+    const $$Mock = givenMock($$);
+    const browserExecuteMock = givenMock(browser.execute);
+    const webelement = new WebElement(data.selector);
+
+    $$Mock.mockReturnValue([data.any, data.selector]);
+    browserExecuteMock.mockReturnValueOnce(data.selector);
+    browserExecuteMock.mockReturnValueOnce(data.any);
+    const actual = await webelement.getByAbsoluteXPathAll();
+    expect(actual).toMatchSnapshot();
+    expect(browserExecuteMock).toHaveBeenCalledTimes(2);
+  });
+});
+
 describe("@generics: WebElement.getByAbsoluteXPath()", () => {
   afterEach(() => {
     givenJestMocksAreReset();
   });
 
   it("S01: should return a new element instance with the selector set as the absolute xpath", async() => {
-    const $Mock = givenMock($);
+    const $$Mock = givenMock($$);
     const browserExecuteMock = givenMock(browser.execute);
     const webelement = new WebElement(data.selector);
 
-    $Mock.mockReturnValue(data.any);
-    browserExecuteMock.mockReturnValue(data.any);
+    $$Mock.mockReturnValue([data.any, data.selector]);
+    browserExecuteMock.mockReturnValueOnce(data.selector);
+    browserExecuteMock.mockReturnValueOnce(data.any);
     const actual = await webelement.getByAbsoluteXPath();
-    const expected = new WebElement(data.any);
+    const expected = new WebElement(data.selector);
     expect(actual).toEqual(expected);
   });
-});
 
-describe("@generics: WebElement.getTextArray()", () => {
-  afterEach(() => {
-    givenJestMocksAreReset();
-  });
-
-  it("S01: should return the text of all element instances as an array", async() => {
+  it("S02: should return a new element instance with the selector set as the absolute xpath while providing an index", async() => {
     const $$Mock = givenMock($$);
+    const browserExecuteMock = givenMock(browser.execute);
     const webelement = new WebElement(data.selector);
 
-    $$Mock.mockReturnValue(Array(2).fill({ getText: () => data.any }));
-    const actual = await webelement.getTextArray();
-    const expected = Array(2).fill(data.any);
+    $$Mock.mockReturnValue([data.any, data.selector]);
+    browserExecuteMock.mockReturnValueOnce(data.selector);
+    browserExecuteMock.mockReturnValueOnce(data.any);
+    const actual = await webelement.getByAbsoluteXPath(1);
+    const expected = new WebElement(data.any);
     expect(actual).toEqual(expected);
-    expect($$Mock).toHaveBeenCalledWith(data.selector);
   });
 });
 

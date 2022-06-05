@@ -8,7 +8,7 @@ export type { DragAndDropCoordinate as Coordinates } from "webdriverio";
 
 export type ClickPointerOrigin = "pointer" | "viewport" | WebdriverIO.Element;
 
-export type ClickWith = ClickOptions & { button?: ClickAction; move?: MoveToOptions };
+export type ClickWith = ClickOptions & { button?: ClickAction; move?: MoveToOptions | boolean };
 
 export type Size = { width: number; height: number; };
 
