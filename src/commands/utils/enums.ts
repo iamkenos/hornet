@@ -41,6 +41,11 @@ export enum ElementType {
   WIDGET = "widget"
 }
 
+export enum ExpandAction {
+  EXPAND = "expand",
+  COLLAPSE = "collapse",
+}
+
 export enum HrefScheme {
   MAIL = "mailto:",
   TEL = "tel:"
