@@ -37,7 +37,7 @@ Feature: I. Mouse Actions - Click
     When I click the "#enable" button
     Then I expect the "#enable-result" element to be enabled
       But I click the "#enable" button again
-    Then I expect the "#enable-result" element to not be enabled
+    Then I expect the "#enable-result" element "disabled" attribute to be "true"
 
   Scenario: S06: Resize element
     When I click the "#resize" button

@@ -33,7 +33,7 @@ describe("@conditions: element/Enabled.getResult()", () => {
 
   it("S01: should return a passed result", async() => {
     const condition = new Enabled();
-    const element: any = { ...data, isEnabled: () => true, getAttribute: () => false };
+    const element: any = { ...data, isEnabled: () => true };
     const elementSpy = jest.spyOn(element, "isEnabled");
     condition.setElement(element);
 
@@ -44,7 +44,7 @@ describe("@conditions: element/Enabled.getResult()", () => {
 
   it("S02: should return a passed result if not is true", async() => {
     const condition = new Enabled(false);
-    const element: any = { ...data, isEnabled: () => false, getAttribute: () => false };
+    const element: any = { ...data, isEnabled: () => false };
     condition.setElement(element);
 
     const actual = await (condition as any).getResult();
@@ -53,7 +53,7 @@ describe("@conditions: element/Enabled.getResult()", () => {
 
   it("S03: should return a failed result if condition is not met", async() => {
     const condition = new Enabled();
-    const element: any = { ...data, isEnabled: () => false, getAttribute: () => false };
+    const element: any = { ...data, isEnabled: () => false };
     condition.setElement(element);
 
     const actual = await (condition as any).getResult();

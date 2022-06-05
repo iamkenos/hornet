@@ -8,7 +8,7 @@ export class Enabled extends ExpectedCondition {
 
   protected async getResult() {
     try {
-      this.actual = await this.element.isEnabled() && !(await this.element.getAttribute("disabled"));
+      this.actual = await this.element.isEnabled();
       this.passed = this.actual === this.expected;
     } catch (e) {
       this.actual = e.message;
