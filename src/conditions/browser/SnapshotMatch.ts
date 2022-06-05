@@ -46,7 +46,7 @@ export class SnapshotMatch extends ExpectedCondition {
     let result: ImageCompareResult & { error?: any } = {} as any;
 
     try {
-      skipCompare && browser.pause(2000);
+      skipCompare && await browser.pause(2000);
       switch (context) {
         case ImageCompareContext.PAGE: {
           result = await browser.checkFullPageScreen(tag, options) as any;
