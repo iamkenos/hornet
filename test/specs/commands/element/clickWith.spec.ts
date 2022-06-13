@@ -54,6 +54,16 @@ describe("@commands: element/clickWith()", () => {
     await element.clickWith({ move, button });
     expect(click).toHaveBeenCalledWith({ move, button: ClickAction.LEFT });
   });
+
+  it("S06: should move element into view if specified", async() => {
+    const element = givenElementMocks();
+    const { click, pause } = givenElementSpies(element);
+    const delay = 1000;
+
+    await element.clickWith({ delay });
+    expect(click).toHaveBeenCalledWith({ delay });
+    expect(pause).toHaveBeenCalledWith(delay);
+  });
 });
 
 function givenElementMocks() {
@@ -70,8 +80,9 @@ function givenElementSpies(element: WebdriverIO.Element) {
   const doubleClick = jest.spyOn(element, "doubleClick");
   const click = jest.spyOn(element, "click");
   const execute = jest.spyOn(browser, "execute");
+  const pause = jest.spyOn(browser, "pause");
 
-  return { moveIntoView, doubleClick, click, execute };
+  return { moveIntoView, doubleClick, click, execute, pause };
 }
 
 

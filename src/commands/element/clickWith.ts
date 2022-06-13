@@ -23,4 +23,8 @@ export async function clickWith(this: WebdriverIO.Element, options?: ClickWith) 
       break;
     }
   }
+
+  if (options?.delay) {
+    await browser.pause(options.delay);
+  }
 }
