@@ -8,7 +8,7 @@ export class StringContains extends ExpectedCondition {
   }
 
   protected async getResult() {
-    this.passed = this.expected.includes(this.actual);
+    this.passed = this.actual.includes(this.expected);
     return super.getResult();
   }
 }

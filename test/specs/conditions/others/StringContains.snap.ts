@@ -16,13 +16,13 @@ Array [
 
 exports[`@conditions: others/StringContains.getResult() S01: should return a passed result 1`] = `
 Object {
-  "actual": "an",
-  "expected": "any",
+  "actual": "any",
+  "expected": "an",
   "message": "
   Condition: StringContains 
   Result: Success
-  Expected: any
-  Actual: an",
+  Expected: an
+  Actual: any",
   "name": "StringContains",
   "passed": true,
 }
@@ -30,13 +30,13 @@ Object {
 
 exports[`@conditions: others/StringContains.getResult() S02: should return a passed result if not is true 1`] = `
 Object {
-  "actual": "any",
-  "expected": "an",
+  "actual": "an",
+  "expected": "any",
   "message": "
   Condition: StringContains 
   Result: Success
-  Expected (Not): an
-  Actual: any",
+  Expected (Not): any
+  Actual: an",
   "name": "StringContains",
   "passed": true,
 }
@@ -44,13 +44,13 @@ Object {
 
 exports[`@conditions: others/StringContains.getResult() S03: should return a failed result if condition is not met 1`] = `
 Object {
-  "actual": "any",
-  "expected": "an",
+  "actual": "an",
+  "expected": "any",
   "message": "
   Condition: StringContains 
   Result: Failed
-  Expected: an
-  Actual: any",
+  Expected: any
+  Actual: an",
   "name": "StringContains",
   "passed": false,
 }
