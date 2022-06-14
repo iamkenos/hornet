@@ -32,12 +32,12 @@ Object {
 exports[`@conditions: element/AttributeEquals.getResult() S02: should return a passed result if not is true 1`] = `
 Object {
   "actual": "bar",
-  "expected": "",
+  "expected": undefined,
   "message": "
   Condition: AttributeEquals [foo] 
   Selector: #selector
   Result: Success
-  Expected (Not): 
+  Expected (Not): undefined
   Actual: bar",
   "name": "AttributeEquals",
   "passed": true,

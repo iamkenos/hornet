@@ -32,7 +32,7 @@ describe("@conditions: element/AttributeContains.getResult()", () => {
   });
 
   it("S01: should return a passed result", async() => {
-    const condition = new AttributeContains(data.foo, undefined);
+    const condition = new AttributeContains(data.foo, "");
     const element: any = { ...data, getAttribute: () => data.bar };
     const elementSpy = jest.spyOn(element, "getAttribute");
     condition.setElement(element);

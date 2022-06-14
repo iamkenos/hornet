@@ -3,7 +3,7 @@ import { ExpectedCondition } from "@conditions/ExpectedCondition";
 export class AttributeEquals extends ExpectedCondition {
   public constructor(attribute: string, expected: string, preferred?: boolean) {
     super(preferred);
-    this.expected = expected || "";
+    this.expected = expected;
     this.on = attribute;
   }
 
