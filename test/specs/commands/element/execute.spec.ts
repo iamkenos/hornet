@@ -21,7 +21,7 @@ describe("@commands: element/execute()", () => {
 
 function givenElementMocks() {
   const element: WebdriverIO.Element = jest.fn() as any;
-  element.execute = execute;
+  element.execute = execute as any;
   return element as WebdriverIO.Element;
 }
 

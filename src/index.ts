@@ -35,8 +35,8 @@ declare global {
     interface Element {
       clickUntil: (conditions: ExpectedConditions, options?: ClickWith) => Promise<void>;
       clickWith: (options?: ClickWith) => Promise<void>;
-      execute: (name: string) => Promise<void>;
-      executeAsync: (name: string) => Promise<void>;
+      execute: <T = void>(name: string) => Promise<T>;
+      executeAsync: <T = void>(name: string) => Promise<T>;
       focus: () => Promise<void>;
       getProperty: <T = string>(key: string) => Promise<T>; // type override
       getTextAll: () => Promise<string[]>;

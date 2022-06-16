@@ -21,7 +21,7 @@ describe("@commands: element/executeAsync()", () => {
 
 function givenElementMocks() {
   const element: WebdriverIO.Element = jest.fn() as any;
-  element.executeAsync = executeAsync;
+  element.executeAsync = executeAsync as any;
   return element as WebdriverIO.Element;
 }
 
