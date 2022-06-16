@@ -57,6 +57,7 @@ export class SnapshotMatch extends ExpectedCondition {
           break;
         }
         default: {
+          await element.scrollIntoView();
           result = await browser.checkElement(element, tag, options) as any;
           break;
         }

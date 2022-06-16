@@ -8,7 +8,7 @@ import { ImageCompareContext } from "@commands/utils/enums";
 import { givenBrowserConfig, givenJestMocksAreReset, givenMock } from "@test/fixtures/utils/steps";
 const data = {
   any: "any",
-  element: { selector: "#selector" },
+  element: { selector: "#selector", scrollIntoView: () => true },
   options: () => {
     const options = merge({}, browser.config.snapshots.images);
     options.outDir = "ouput";

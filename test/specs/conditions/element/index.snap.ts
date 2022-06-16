@@ -331,6 +331,20 @@ Array [
 
 exports[`@conditions: element/ElementConditions.snapshotMatch() S01: should add the SnapshotMatch condition 1`] = `
 Array [
+  Displayed {
+    "element": Object {
+      "any": "any",
+      "bar": "bar",
+      "foo": "foo",
+      "selector": "#selector",
+      "x": 1,
+      "y": 2,
+    },
+    "expected": true,
+    "name": "Displayed",
+    "not": false,
+    "timeout": undefined,
+  },
   [MockFunction] {
     "calls": Array [
       Array [

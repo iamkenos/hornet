@@ -103,7 +103,7 @@ export class ElementConditions extends ExpectedConditions {
   }
 
   public snapshotMatch(filename: string, options?: ImageSnapshotContextOptions[ImageCompareContext.ELEMENT], preferred?: boolean) {
-    return this.addCondition(new SnapshotMatch(ImageCompareContext.ELEMENT, filename, options, preferred).setElement(this.element));
+    return this.displayed().addCondition(new SnapshotMatch(ImageCompareContext.ELEMENT, filename, options, preferred).setElement(this.element));
   }
 
   public textContains(expected: string, preferred?: boolean) {
