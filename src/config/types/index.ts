@@ -110,6 +110,7 @@ export type CustomConfig = {
   };
   /** Custom: The selenium standalone service install and runtime arguments */
   selenium: {
+    version?: string,
     /** Use driver version that fits your current browser version;
      * @see [W3C Capabilities](https://www.browserstack.com/automate/capabilities?tag=selenium-4)
      * */

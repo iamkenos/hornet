@@ -22,7 +22,7 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
       reportIssueLink: undefined
     },
     runtime: {},
-    selenium: { drivers: { chrome: { version: "latest" } } },
+    selenium: { version: "3.141.59", drivers: { chrome: { version: process.env.CHROME_DRIVER || "latest" } } },
     snapshots: {
       requests: {
         outDir: ".snapshots/json",
@@ -96,7 +96,10 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
     // ====================
     // Runner Configuration
     // ====================
-    //
+    runner: "local",
+    hostname: "localhost",
+    port: 4444,
+    path: "/wd/hub",
     //
     // ==================
     // Specify Test Files
@@ -237,13 +240,13 @@ export const configure = (overrides: RestrictedCustomConfig): Config => {
     framework: "cucumber",
     //
     // The number of times to retry the entire specfile when it fails as a whole
-    // specFileRetries: 1,
+    specFileRetries: 0,
     //
     // Delay in seconds between the spec file retry attempts
-    // specFileRetriesDelay: 0,
+    specFileRetriesDelay: 0,
     //
     // Whether or not retried specfiles should be retried immediately or deferred to the end of the queue
-    // specFileRetriesDeferred: false,
+    specFileRetriesDeferred: true,
     //
     // Test reporter for stdout.
     // The only one supported by default is 'dot'

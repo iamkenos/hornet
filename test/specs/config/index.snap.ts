@@ -80,6 +80,7 @@ Object {
     "onPrepare": [Function],
     "onReload": [Function],
   },
+  "hostname": "localhost",
   "locale": "default",
   "logLevel": "error",
   "maxInstances": 10,
@@ -89,6 +90,8 @@ Object {
   "onComplete": [Function],
   "onPrepare": [Function],
   "onReload": [Function],
+  "path": "/wd/hub",
+  "port": 4444,
   "reporters": Array [
     "spec",
     Array [
@@ -113,6 +116,7 @@ Object {
     "outDir": ".reports",
     "reportIssueLink": undefined,
   },
+  "runner": "local",
   "runtime": Object {},
   "selenium": Object {
     "drivers": Object {
@@ -120,6 +124,7 @@ Object {
         "version": "latest",
       },
     },
+    "version": "3.141.59",
   },
   "services": Array [
     "devtools",
@@ -133,6 +138,7 @@ Object {
               "version": "latest",
             },
           },
+          "version": "3.141.59",
         },
         "installArgs": Object {
           "drivers": Object {
@@ -140,6 +146,7 @@ Object {
               "version": "latest",
             },
           },
+          "version": "3.141.59",
         },
       },
     ],
@@ -193,6 +200,9 @@ Object {
       "skipCompare": false,
     },
   },
+  "specFileRetries": 0,
+  "specFileRetriesDeferred": true,
+  "specFileRetriesDelay": 0,
   "specs": Array [
     "any./features/**/*.feature",
   ],
