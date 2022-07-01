@@ -105,6 +105,10 @@ export async function whenRefresh() {
   await browser.refresh();
 }
 
+export async function whenReloadSession() {
+  await browser.reloadSession();
+}
+
 export async function whenScrollTo(direction: WindowDirection) {
   switch (direction) {
     case WindowDirection.TOP: {

@@ -74,6 +74,11 @@ When(
 );
 
 When(
+  /^I (?:start a new browser session|reload the browser session)$/, RETRY(),
+  fn.whenReloadSession
+);
+
+When(
   /^I scroll to the (top|bottom) of the page$/, RETRY(),
   fn.whenScrollTo
 );
