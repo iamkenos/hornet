@@ -169,6 +169,7 @@ describe("@conditions: ExpectedConditions.expect()", () => {
 
     const actual = await conditions.expect();
     expect(actual).toMatchSnapshot();
+    expect(conditions.conditions).toEqual([]);
   });
 
   it("S02: should return the result on expect if result is passed with actions set", async() => {
@@ -191,6 +192,7 @@ describe("@conditions: ExpectedConditions.expect()", () => {
     } finally {
       expect(error).toBeDefined();
       expect(error.message).toEqual(data.any);
+      expect(conditions.conditions).toEqual([]);
     }
   });
 
