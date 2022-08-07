@@ -329,19 +329,19 @@ export async function thenSnapshotMatch(context: ImageCompareContext.PAGE | Imag
   await then.snapshotMatch(context, filename, undefined, !not).expect();
 }
 
-export async function thenStorageItemContains(context: BrowserStorage, key: string, not: boolean, value: string) {
+export async function thenStorageItemContains(key: string, context: BrowserStorage, not: boolean, value: string) {
   const then = await browser.conditions();
 
   await then.storageItemContains(context, key, value, !not).expect();
 }
 
-export async function thenStorageItemEquals(context: BrowserStorage, key: string, not: boolean, value: string) {
+export async function thenStorageItemEquals(key: string, context: BrowserStorage, not: boolean, value: string) {
   const then = await browser.conditions();
 
   await then.storageItemEquals(context, key, value, !not).expect();
 }
 
-export async function thenStorageItemExists(context: BrowserStorage, key: string, not: boolean) {
+export async function thenStorageItemExists(key: string, context: BrowserStorage, not: boolean) {
   const then = await browser.conditions();
 
   await then.storageItemExists(context, key, !not).expect();

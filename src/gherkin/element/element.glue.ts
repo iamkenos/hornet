@@ -28,7 +28,7 @@ export async function whenClear(meta: string, index: number, key: string) {
 export async function whenClick(button: ClickAction, meta: string, index: number, key: string, type: string) {
   const selector = MetaAdapter.getSelector(meta, key);
   const element = type === ElementType.LINK ?
-    await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).toWebElement().$(index - 1) :
+    await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).hasExactAttribute(AnchorAttributes.HREF).toWebElement().$(index - 1) :
     await new WebElement(selector).$(index - 1);
 
   await element.clickWith({ button });
@@ -232,7 +232,7 @@ export async function thenFocused(meta: string, index: number, key: string, not:
 export async function thenHrefOpensOn(meta: string, index: number, key: string, type: ElementType, not: boolean, target: HrefTargetContext) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = type === ElementType.LINK ?
-    await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).toWebElement().conditions(index - 1) :
+    await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).hasExactAttribute(AnchorAttributes.HREF).toWebElement().conditions(index - 1) :
     await new WebElement(selector).conditions(index - 1);
 
   switch (target) {
@@ -254,7 +254,7 @@ export async function thenHrefOpensOn(meta: string, index: number, key: string, 
 export async function thenHrefOpensOnNamedFrame(meta: string, index: number, key: string, type: ElementType, not: boolean, target: string) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = type === ElementType.LINK ?
-    await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).toWebElement().conditions(index - 1) :
+    await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).hasExactAttribute(AnchorAttributes.HREF).toWebElement().conditions(index - 1) :
     await new WebElement(selector).conditions(index - 1);
 
   await then.attributeEquals(AnchorAttributes.TARGET, target, !not).expect();
@@ -263,7 +263,7 @@ export async function thenHrefOpensOnNamedFrame(meta: string, index: number, key
 export async function thenHrefPointsTo(meta: string, index: number, key: string, type: ElementType, not: boolean, scheme: HrefSchemeContext, value: string) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = type === ElementType.LINK ?
-    await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).toWebElement().conditions(index - 1) :
+    await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).hasExactAttribute(AnchorAttributes.HREF).toWebElement().conditions(index - 1) :
     await new WebElement(selector).conditions(index - 1);
 
   switch (scheme) {
@@ -283,7 +283,7 @@ export async function thenHrefPointsTo(meta: string, index: number, key: string,
 export async function thenHrefPointsToPage(meta: string, index: number, key: string, type: ElementType, not: boolean, page: string) {
   const selector = MetaAdapter.getSelector(meta, key);
   const then = type === ElementType.LINK ?
-    await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).toWebElement().conditions(index - 1) :
+    await new XPathBuilder().textEquals(MetaAdapter.getLabel(meta, key)).hasExactAttribute(AnchorAttributes.HREF).toWebElement().conditions(index - 1) :
     await new WebElement(selector).conditions(index - 1);
   const target = MetaAdapter.getUrl(page);
   const value = string.isURL(target) ? target : new URL(browser.config.baseUrl + target).href;
