@@ -82,6 +82,8 @@ ${evaluations.map((result) => result.message).join("\n  ------------------------
       return this.result;
     } catch (e) {
       throw new Error(this.result?.message || e.message);
+    } finally {
+      this.conditions = [];
     }
   }
 }
