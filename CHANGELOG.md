@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/iamkenos/hornet/compare/v0.2.0...v0.3.0) (2022-12-20)
+
+
+### Features
+
+* **commands:** click with delay option ([8098aa3](https://github.com/iamkenos/hornet/commit/8098aa3dcb34c6a2534dac472d818e8a0628f276))
+* **commands:** scroll direction enum ([a30d391](https://github.com/iamkenos/hornet/commit/a30d3912b3f6f5dca211aabfe94451803d1da658))
+* expand action enum ([a08b170](https://github.com/iamkenos/hornet/commit/a08b1701a9332c2ef228ae0c1a4413fc60f264ae))
+* **gherkin:** reload session ([898424a](https://github.com/iamkenos/hornet/commit/898424a9a0b0aadd85b2562ccb22cccba46f7a87))
+
+
+### Bug Fixes
+
+* **commands:** add a soft wait for element to be clickable before doing a click action ([fd00322](https://github.com/iamkenos/hornet/commit/fd00322c9d3a8f074b610162e21728b697c39399))
+* **commands:** return execute function result ([88e0b53](https://github.com/iamkenos/hornet/commit/88e0b536b9328b2f8a369db75b93f2a6efbd6c99))
+* **conditions:** add displayed condition on element snapshot checking ([a9f6575](https://github.com/iamkenos/hornet/commit/a9f6575494a912040509ed3aea84cbb5ae4b3b86))
+* **conditions:** allow nullish on getAttribute ([367f2aa](https://github.com/iamkenos/hornet/commit/367f2aa4984d1115395727a13108c16bd3067e79))
+* **conditions:** clear conditions upon calling expect ([98de6d4](https://github.com/iamkenos/hornet/commit/98de6d4ca6181312ff89c04abfd1a877b30dfa5e))
+* **conditions:** enabled condition ([969515b](https://github.com/iamkenos/hornet/commit/969515b8c1aeeffc0b4e6766cfcd1e2d7b4c2179))
+* **conditions:** missing await on snapshot match condition ([b83d129](https://github.com/iamkenos/hornet/commit/b83d129aea08eee151eace4f8e29f8a8e6b3ecdd))
+* **conditions:** string contains ([dbb7bdb](https://github.com/iamkenos/hornet/commit/dbb7bdbb15a9ca527a5afb237fa584b743ebf719))
+* **config:** add runner and selenium default configurations ([6ab518a](https://github.com/iamkenos/hornet/commit/6ab518a0f689314d702f7e58b1ca9ebf492d9ff3))
+* **gherkin:** add href attribute for locating links ([b8567dc](https://github.com/iamkenos/hornet/commit/b8567dc72cb5d7a195f020a5dc948d2057cccb92))
+
+
+### Refactor
+
+* **generics:** removed toTextArray ([91e31fe](https://github.com/iamkenos/hornet/commit/91e31fe357dff1327f3b8f059f7aea22ebe3659f))
+
+
+### Chore
+
+* shrinkwrap ([69cef27](https://github.com/iamkenos/hornet/commit/69cef270d09e2057b809c9e31156c93e82f37155))
+
 ## [0.2.0](https://github.com/iamkenos/hornet/compare/v0.1.2...v0.2.0) (2022-06-04)
 
 
